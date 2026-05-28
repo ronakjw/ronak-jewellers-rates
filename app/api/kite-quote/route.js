@@ -2,7 +2,7 @@ export async function GET() {
   const apiKey = process.env.KITE_API_KEY;
   const accessToken = process.env.KITE_ACCESS_TOKEN;
 
-  const instrument = "MCX:SILVER24JUNFUT"; // temporary test symbol
+  const instrument = "MCX:SILVER26JULFUT"; // temporary test symbol
 
   const response = await fetch(
     `https://api.kite.trade/quote?i=${encodeURIComponent(instrument)}`,
