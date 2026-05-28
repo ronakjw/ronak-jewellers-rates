@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
+import { useEffect, useMemo, useState } from "react";
+import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -14,16 +14,35 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const app =
+  getApps().length === 0
+    ? initializeApp(firebaseConfig)
+    : getApps()[0];
+
 const db = getFirestore(app);
 
-function formatPrice(price) {
-  return new Intl.NumberFormat("en-IN").format(price);
+function formatPrice(value) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "--";
+  }
+
+  return new Intl.NumberFormat("en-IN").format(value);
+}
+
+function formatPremium(value) {
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return "--";
+  }
+
+  const sign = value > 0 ? "+" : "";
+  return `${sign}₹${formatPrice(value)}`;
 }
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
+  const [fetchError, setFetchError] = useState("");
+  const [now, setNow] = useState(new Date());
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -37,210 +56,467 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const clock = setInterval(() => {
+      setNow(new Date());
+    }, 1000);
+
+    return () => clearInterval(clock);
+  }, []);
+
+  const marketState = useMemo(() => {
+    if (!settings) {
+      return {
+        withinMarketHours: false,
+        shouldShowRates: false,
+        refreshMs: 7000,
+      };
+    }
+
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+
+    const currentMinutes = hour * 60 + minute;
+    const startMinutes = (settings.marketStartHour ?? 12) * 60;
+    const endMinutes = (settings.marketEndHour ?? 21) * 60;
+
+    const after530 = currentMinutes >= 17 * 60 + 30;
+
+    return {
+      withinMarketHours:
+        currentMinutes >= startMinutes &&
+        currentMinutes < endMinutes,
+      shouldShowRates:
+        Boolean(settings.showRates) &&
+        currentMinutes >= startMinutes &&
+        currentMinutes < endMinutes,
+      refreshMs:
+        after530
+          ? (settings.refreshAfter530 || 2) * 1000
+          : (settings.refreshBefore530 || 7) * 1000,
+    };
+  }, [settings, now]);
+
+  useEffect(() => {
+    if (!settings || !marketState.shouldShowRates) {
+      return;
+    }
+
     async function fetchQuote() {
       try {
-        const res = await fetch("/api/kite-quote");
+        setFetchError("");
+
+        const res = await fetch("/api/kite-quote", {
+          cache: "no-store",
+        });
+
         const data = await res.json();
+
+        if (!data.success) {
+          setFetchError(data.message || "Unable to fetch MCX rate");
+          return;
+        }
+
         setQuote(data);
       } catch (err) {
-        console.error(err);
+        setFetchError("Unable to connect to live rate server");
       }
     }
 
     fetchQuote();
 
-    const interval = setInterval(fetchQuote, 7000);
+    const interval = setInterval(fetchQuote, marketState.refreshMs);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [settings, marketState.shouldShowRates, marketState.refreshMs]);
 
-  if (!settings || !quote) {
-    return (
-      <main
-        style={{
-          minHeight: "100vh",
-          background: "#0d0d0d",
-          color: "#d4af37",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Arial",
-        }}
-      >
-        Loading...
-      </main>
-    );
+  if (!settings) {
+    return <LoadingScreen />;
   }
 
-  if (!settings.showRates) {
-    return (
-      <main
-        style={{
-          minHeight: "100vh",
-          background: "#0d0d0d",
-          color: "#d4af37",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Arial",
-          textAlign: "center",
-          padding: 20,
-        }}
-      >
-        <h1>Ronak Jewellers</h1>
-
-        <p>
-          Please call for current bullion rates.
-        </p>
-
-        <a href="tel:9479893898">
-          📞 9479893898
-        </a>
-
-        <br />
-        <br />
-
-        <a href="tel:9300053012">
-          📞 9300053012
-        </a>
-      </main>
-    );
+  if (!marketState.shouldShowRates) {
+    return <ClosedScreen />;
   }
 
-  const finalBuying =
-    quote.mcxBuyPrice + settings.buyingPremium;
+  if (!quote) {
+    return <LoadingScreen />;
+  }
 
-  const finalSelling =
-    quote.mcxSellPrice + settings.sellingPremium;
+  const buyingPremium = Number(settings.buyingPremium || 0);
+  const sellingPremium = Number(settings.sellingPremium || 0);
+
+  const finalBuying = quote.mcxBuyPrice + buyingPremium;
+  const finalSelling = quote.mcxSellPrice + sellingPremium;
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#0d0d0d",
-        color: "#d4af37",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: 20,
-        fontFamily: "Arial",
-      }}
-    >
-      <h1
-        style={{
-          marginTop: 40,
-          fontSize: 42,
-        }}
-      >
-        Ronak Jewellers
-      </h1>
+    <main style={styles.page}>
+      <section style={styles.hero}>
+        <div style={styles.brandMark}>RJ</div>
 
-      <div
-        style={{
-          background: "#1b1b1b",
-          border: "1px solid #444",
-          borderRadius: 20,
-          padding: 25,
-          width: "100%",
-          maxWidth: 500,
-          marginTop: 30,
-        }}
-      >
-        <h2
-          style={{
-            textAlign: "center",
-            marginBottom: 30,
-          }}
-        >
-          {quote.contract}
-        </h2>
+        <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
-        <p>
-          MCX Buy Price:
-        </p>
+        <div style={styles.statusRow}>
+          <span style={styles.liveDot} />
+          <span>LIVE MCX SILVER FUTURES</span>
+        </div>
+      </section>
 
-        <h2>
-          ₹{formatPrice(quote.mcxBuyPrice)} / kg
-        </h2>
+      <section style={styles.mainCard}>
+        <div style={styles.cardTop}>
+          <div>
+            <p style={styles.label}>Contract</p>
+            <h2 style={styles.contract}>{quote.contract}</h2>
+          </div>
 
-        <p>
-          Buying Premium:
-        </p>
+          <div style={styles.badge}>
+            {marketState.refreshMs / 1000}s Refresh
+          </div>
+        </div>
 
-        <h3>
-          ₹{formatPrice(settings.buyingPremium)}
-        </h3>
+        {fetchError ? (
+          <div style={styles.errorBox}>{fetchError}</div>
+        ) : null}
 
-        <p>
-          Final Buying Rate:
-        </p>
+        <div style={styles.rateGrid}>
+          <div style={styles.sideCard}>
+            <p style={styles.label}>MCX Buy Price</p>
+            <h2 style={styles.mcxPrice}>
+              ₹{formatPrice(quote.mcxBuyPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
 
-        <h1>
-          ₹{formatPrice(finalBuying)} / kg
-        </h1>
+            <div style={styles.premiumBox}>
+              <span>Buying Premium</span>
+              <strong>{formatPremium(buyingPremium)}</strong>
+            </div>
 
-        <hr
-          style={{
-            margin: "30px 0",
-            borderColor: "#333",
-          }}
-        />
+            <p style={styles.finalLabel}>Final Buying Rate</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(finalBuying)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
 
-        <p>
-          MCX Sell Price:
-        </p>
+          <div style={styles.sideCard}>
+            <p style={styles.label}>MCX Sell Price</p>
+            <h2 style={styles.mcxPrice}>
+              ₹{formatPrice(quote.mcxSellPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
 
-        <h2>
-          ₹{formatPrice(quote.mcxSellPrice)} / kg
-        </h2>
+            <div style={styles.premiumBox}>
+              <span>Selling Premium</span>
+              <strong>{formatPremium(sellingPremium)}</strong>
+            </div>
 
-        <p>
-          Selling Premium:
-        </p>
+            <p style={styles.finalLabel}>Final Selling Rate</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(finalSelling)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
+        </div>
 
-        <h3>
-          ₹{formatPrice(settings.sellingPremium)}
-        </h3>
+        <div style={styles.metaRow}>
+          <span>Last Updated: {quote.timestamp}</span>
+          <span>Source: Kite Connect</span>
+        </div>
+      </section>
 
-        <p>
-          Final Selling Rate:
-        </p>
-
-        <h1>
-          ₹{formatPrice(finalSelling)} / kg
-        </h1>
-
-        <p
-          style={{
-            marginTop: 30,
-            color: "#888",
-            fontSize: 14,
-          }}
-        >
-          Last Updated:
-          {" "}
-          {quote.timestamp}
-        </p>
-      </div>
-
-      <div
-        style={{
-          marginTop: 40,
-          textAlign: "center",
-        }}
-      >
-        <a href="tel:9479893898">
+      <section style={styles.contactWrap}>
+        <a href="tel:9479893898" style={styles.callButton}>
           📞 9479893898
         </a>
 
-        <br />
-        <br />
-
-        <a href="tel:9300053012">
+        <a href="tel:9300053012" style={styles.callButton}>
           📞 9300053012
         </a>
+      </section>
+    </main>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <main style={styles.pageCenter}>
+      <div style={styles.brandMark}>RJ</div>
+      <h1 style={styles.brandName}>Ronak Jewellers</h1>
+      <p style={styles.muted}>Loading live bullion rates...</p>
+    </main>
+  );
+}
+
+function ClosedScreen() {
+  return (
+    <main style={styles.pageCenter}>
+      <div style={styles.brandMark}>RJ</div>
+
+      <h1 style={styles.brandName}>Ronak Jewellers</h1>
+
+      <div style={styles.closedCard}>
+        <h2 style={styles.closedTitle}>
+          Please call for current bullion rates.
+        </h2>
+
+        <p style={styles.muted}>
+          Live rates are currently unavailable.
+        </p>
+
+        <div style={styles.contactWrap}>
+          <a href="tel:9479893898" style={styles.callButton}>
+            📞 9479893898
+          </a>
+
+          <a href="tel:9300053012" style={styles.callButton}>
+            📞 9300053012
+          </a>
+        </div>
       </div>
     </main>
   );
 }
+
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background:
+      "radial-gradient(circle at top, #2b2414 0%, #0d0d0d 38%, #050505 100%)",
+    color: "#d6b45c",
+    fontFamily:
+      "Arial, Helvetica, sans-serif",
+    padding: "28px 18px 40px",
+    boxSizing: "border-box",
+  },
+
+  pageCenter: {
+    minHeight: "100vh",
+    background:
+      "radial-gradient(circle at top, #2b2414 0%, #0d0d0d 38%, #050505 100%)",
+    color: "#d6b45c",
+    fontFamily:
+      "Arial, Helvetica, sans-serif",
+    padding: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    textAlign: "center",
+    boxSizing: "border-box",
+  },
+
+  hero: {
+    textAlign: "center",
+    marginBottom: 28,
+  },
+
+  brandMark: {
+    width: 58,
+    height: 58,
+    borderRadius: "50%",
+    border: "1px solid rgba(214,180,92,0.65)",
+    background:
+      "linear-gradient(145deg, #1f1f1f, #060606)",
+    boxShadow:
+      "0 0 30px rgba(214,180,92,0.18), inset 0 0 12px rgba(214,180,92,0.12)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "0 auto 16px",
+    fontWeight: 800,
+    letterSpacing: 1,
+    color: "#f3d98b",
+  },
+
+  brandName: {
+    margin: 0,
+    fontSize: "clamp(34px, 7vw, 58px)",
+    letterSpacing: "0.04em",
+    color: "#f3d98b",
+    textShadow: "0 0 22px rgba(214,180,92,0.16)",
+  },
+
+  statusRow: {
+    marginTop: 14,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    color: "#9f9f9f",
+    fontSize: 12,
+    letterSpacing: "0.18em",
+  },
+
+  liveDot: {
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    background: "#d6b45c",
+    boxShadow: "0 0 12px #d6b45c",
+  },
+
+  mainCard: {
+    width: "100%",
+    maxWidth: 920,
+    margin: "0 auto",
+    background:
+      "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
+    border: "1px solid rgba(214,180,92,0.32)",
+    borderRadius: 26,
+    padding: "24px",
+    boxShadow:
+      "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
+    boxSizing: "border-box",
+  },
+
+  cardTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 18,
+    alignItems: "flex-start",
+    marginBottom: 22,
+  },
+
+  label: {
+    margin: "0 0 7px",
+    color: "#9b9b9b",
+    fontSize: 13,
+    letterSpacing: "0.11em",
+    textTransform: "uppercase",
+  },
+
+  contract: {
+    margin: 0,
+    color: "#f3d98b",
+    fontSize: 22,
+  },
+
+  badge: {
+    border: "1px solid rgba(214,180,92,0.34)",
+    background: "rgba(214,180,92,0.08)",
+    color: "#f3d98b",
+    padding: "8px 12px",
+    borderRadius: 999,
+    fontSize: 13,
+    whiteSpace: "nowrap",
+  },
+
+  rateGrid: {
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: 18,
+  },
+
+  sideCard: {
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: 22,
+    padding: 20,
+  },
+
+  mcxPrice: {
+    margin: "0 0 18px",
+    color: "#e8e8e8",
+    fontSize: "clamp(28px, 6vw, 42px)",
+  },
+
+  unit: {
+    fontSize: 15,
+    color: "#9f9f9f",
+    fontWeight: 400,
+  },
+
+  premiumBox: {
+    margin: "18px 0 22px",
+    border: "1px solid rgba(214,180,92,0.26)",
+    background:
+      "linear-gradient(90deg, rgba(214,180,92,0.12), rgba(214,180,92,0.035))",
+    color: "#dcdcdc",
+    borderRadius: 16,
+    padding: "13px 15px",
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  finalLabel: {
+    color: "#9b9b9b",
+    margin: "0 0 8px",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    fontSize: 13,
+  },
+
+  finalPrice: {
+    margin: 0,
+    color: "#f3d98b",
+    fontSize: "clamp(34px, 8vw, 54px)",
+    lineHeight: 1,
+  },
+
+  metaRow: {
+    marginTop: 22,
+    borderTop: "1px solid rgba(255,255,255,0.08)",
+    paddingTop: 16,
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 12,
+    flexWrap: "wrap",
+    color: "#858585",
+    fontSize: 13,
+  },
+
+  contactWrap: {
+    marginTop: 28,
+    display: "flex",
+    justifyContent: "center",
+    gap: 14,
+    flexWrap: "wrap",
+  },
+
+  callButton: {
+    textDecoration: "none",
+    color: "#f3d98b",
+    border: "1px solid rgba(214,180,92,0.45)",
+    background:
+      "linear-gradient(145deg, rgba(214,180,92,0.18), rgba(35,35,35,0.92))",
+    boxShadow:
+      "0 12px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)",
+    padding: "14px 22px",
+    borderRadius: 14,
+    minWidth: 170,
+    textAlign: "center",
+    fontSize: 17,
+    fontWeight: 700,
+    letterSpacing: "0.03em",
+  },
+
+  closedCard: {
+    width: "100%",
+    maxWidth: 520,
+    marginTop: 22,
+    background:
+      "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
+    border: "1px solid rgba(214,180,92,0.32)",
+    borderRadius: 24,
+    padding: 24,
+    boxSizing: "border-box",
+  },
+
+  closedTitle: {
+    color: "#f3d98b",
+    marginTop: 0,
+  },
+
+  muted: {
+    color: "#9f9f9f",
+  },
+
+  errorBox: {
+    marginBottom: 18,
+    padding: 14,
+    borderRadius: 14,
+    color: "#ffd6d6",
+    background: "rgba(120, 20, 20, 0.35)",
+    border: "1px solid rgba(255, 120, 120, 0.25)",
+  },
+};
