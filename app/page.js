@@ -17,8 +17,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+function formatPrice(price) {
+  return new Intl.NumberFormat("en-IN").format(price);
+}
+
 export default function Home() {
   const [settings, setSettings] = useState(null);
+  const [quote, setQuote] = useState(null);
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -31,7 +36,25 @@ export default function Home() {
     return () => unsub();
   }, []);
 
-  if (!settings) {
+  useEffect(() => {
+    async function fetchQuote() {
+      try {
+        const res = await fetch("/api/kite-quote");
+        const data = await res.json();
+        setQuote(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchQuote();
+
+    const interval = setInterval(fetchQuote, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!settings || !quote) {
     return (
       <main
         style={{
@@ -61,19 +84,35 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "center",
           fontFamily: "Arial",
-          padding: 20,
           textAlign: "center",
+          padding: 20,
         }}
       >
         <h1>Ronak Jewellers</h1>
-        <p>Live rates are currently unavailable.</p>
 
-        <a href="tel:9479893898">📞 9479893898</a>
+        <p>
+          Please call for current bullion rates.
+        </p>
+
+        <a href="tel:9479893898">
+          📞 9479893898
+        </a>
+
         <br />
-        <a href="tel:9300053012">📞 9300053012</a>
+        <br />
+
+        <a href="tel:9300053012">
+          📞 9300053012
+        </a>
       </main>
     );
   }
+
+  const finalBuying =
+    quote.mcxBuyPrice + settings.buyingPremium;
+
+  const finalSelling =
+    quote.mcxSellPrice + settings.sellingPremium;
 
   return (
     <main
@@ -84,44 +123,113 @@ export default function Home() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "Arial",
         padding: 20,
+        fontFamily: "Arial",
       }}
     >
-      <h1 style={{ fontSize: 42 }}>
+      <h1
+        style={{
+          marginTop: 40,
+          fontSize: 42,
+        }}
+      >
         Ronak Jewellers
       </h1>
 
       <div
         style={{
           background: "#1b1b1b",
-          border: "1px solid #555",
-          borderRadius: 18,
+          border: "1px solid #444",
+          borderRadius: 20,
           padding: 25,
           width: "100%",
-          maxWidth: 450,
-          textAlign: "center",
-          marginTop: 20,
+          maxWidth: 500,
+          marginTop: 30,
         }}
       >
-        <p>MCX Silver Rate</p>
-        <h2>₹1,08,500 / kg</h2>
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: 30,
+          }}
+        >
+          {quote.contract}
+        </h2>
+
+        <p>
+          MCX Buy Price:
+        </p>
+
+        <h2>
+          ₹{formatPrice(quote.mcxBuyPrice)} / kg
+        </h2>
 
         <p>
           Buying Premium:
-          {" "}
-          {settings.buyingPremium}
         </p>
+
+        <h3>
+          ₹{formatPrice(settings.buyingPremium)}
+        </h3>
+
+        <p>
+          Final Buying Rate:
+        </p>
+
+        <h1>
+          ₹{formatPrice(finalBuying)} / kg
+        </h1>
+
+        <hr
+          style={{
+            margin: "30px 0",
+            borderColor: "#333",
+          }}
+        />
+
+        <p>
+          MCX Sell Price:
+        </p>
+
+        <h2>
+          ₹{formatPrice(quote.mcxSellPrice)} / kg
+        </h2>
 
         <p>
           Selling Premium:
+        </p>
+
+        <h3>
+          ₹{formatPrice(settings.sellingPremium)}
+        </h3>
+
+        <p>
+          Final Selling Rate:
+        </p>
+
+        <h1>
+          ₹{formatPrice(finalSelling)} / kg
+        </h1>
+
+        <p
+          style={{
+            marginTop: 30,
+            color: "#888",
+            fontSize: 14,
+          }}
+        >
+          Last Updated:
           {" "}
-          {settings.sellingPremium}
+          {quote.timestamp}
         </p>
       </div>
 
-      <div style={{ marginTop: 30 }}>
+      <div
+        style={{
+          marginTop: 40,
+          textAlign: "center",
+        }}
+      >
         <a href="tel:9479893898">
           📞 9479893898
         </a>
