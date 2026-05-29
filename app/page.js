@@ -345,24 +345,6 @@ const styles = {
     marginBottom: 28,
   },
 
-  brandMark: {
-    width: 58,
-    height: 58,
-    borderRadius: "50%",
-    border: "1px solid rgba(214,180,92,0.65)",
-    background:
-      "linear-gradient(145deg, #1f1f1f, #060606)",
-    boxShadow:
-      "0 0 30px rgba(214,180,92,0.18), inset 0 0 12px rgba(214,180,92,0.12)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "0 auto 16px",
-    fontWeight: 800,
-    letterSpacing: 1,
-    color: "#f3d98b",
-  },
-
   brandName: {
     margin: 0,
     fontSize: "clamp(34px, 7vw, 58px)",
