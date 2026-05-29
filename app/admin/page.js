@@ -243,7 +243,7 @@ await addDoc(collection(db, "changeLogs"), {
 
           {message ? <p style={styles.message}>{message}</p> : null}
        
-            <div style={styles.logSection}>
+<div style={styles.logSection}>
   <button
     type="button"
     style={styles.logToggle}
@@ -299,10 +299,7 @@ await addDoc(collection(db, "changeLogs"), {
       )}
     </>
   ) : null}
-</div>
-    ))
-  )}
-</div>
+</div>        
         </section>
       </main>
     );
