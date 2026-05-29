@@ -199,10 +199,9 @@ export default function Home() {
 
       <section style={styles.mainCard}>
         <div style={styles.cardTop}>
-          <div>
             <p style={styles.label}>Contract</p>
             <h2 style={styles.contract}>{quote.contract}</h2>
-          </div>
+        </div>
 
         {fetchError ? (
           <div style={styles.errorBox}>{fetchError}</div>
