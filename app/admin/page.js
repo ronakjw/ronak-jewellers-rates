@@ -176,7 +176,10 @@ export default function AdminPage() {
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
           <div>
-            <div style={styles.brandMarkSmall}>RJ</div>
+            <Image
+                src="/logo.png"
+                alt="Ronak Jewellers"
+                width={50} height={50} />
             <h1 style={styles.title}>Admin Panel</h1>
             <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
           </div>
@@ -376,36 +379,6 @@ const styles = {
     gap: 16,
     alignItems: "flex-start",
     marginBottom: 24,
-  },
-
-  brandMark: {
-    width: 58,
-    height: 58,
-    borderRadius: "50%",
-    border: "1px solid rgba(214,180,92,0.65)",
-    background: "linear-gradient(145deg, #1f1f1f, #060606)",
-    boxShadow:
-      "0 0 30px rgba(214,180,92,0.18), inset 0 0 12px rgba(214,180,92,0.12)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "0 auto 16px",
-    fontWeight: 800,
-    color: "#f3d98b",
-  },
-
-  brandMarkSmall: {
-    width: 44,
-    height: 44,
-    borderRadius: "50%",
-    border: "1px solid rgba(214,180,92,0.65)",
-    background: "linear-gradient(145deg, #1f1f1f, #060606)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: 800,
-    color: "#f3d98b",
-    marginBottom: 12,
   },
 
   title: {
