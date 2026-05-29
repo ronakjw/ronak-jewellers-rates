@@ -268,6 +268,23 @@ export default function Home() {
           📞 9300053012
         </a>
       </section>
+                <p
+    style={{
+    marginTop: 26,
+    color: "#8f8f8f",
+    fontSize: 13,
+    textAlign: "center",
+    maxWidth: 800,
+    lineHeight: 1.7,
+    marginLeft: "auto",
+    marginRight: "auto",
+    padding: "0 12px",
+  }}
+>
+  Rates displayed are based on live MCX market prices and
+  applicable premiums. Final rates may vary depending on
+  market conditions and confirmation at the time of enquiry.
+</p>
     </main>
   );
 }
