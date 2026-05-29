@@ -168,8 +168,7 @@ export default function AdminPage() {
 
           <h1 style={styles.title}>Ronak Jewellers</h1>
           <p style={styles.subtitle}>Admin Login</p>
-          <hr style="opacity:0">
-          <form onSubmit={login} style={styles.form}>
+           <form onSubmit={login} style={styles.form}>
             <label style={styles.label}>Email</label>
             <input
               style={styles.input}
@@ -177,7 +176,7 @@ export default function AdminPage() {
               onChange={(e) => setEmail(e.target.value)}
               type="email"
             />
-            <p>         </p>
+            <p>  --------------   </p>
             <label style={styles.label}>Password</label>
             <input
               style={styles.input}
