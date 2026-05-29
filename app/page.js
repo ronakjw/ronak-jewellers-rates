@@ -204,11 +204,6 @@ export default function Home() {
             <h2 style={styles.contract}>{quote.contract}</h2>
           </div>
 
-          <div style={styles.badge}>
-            {marketState.refreshMs / 1000}s Refresh
-          </div>
-        </div>
-
         {fetchError ? (
           <div style={styles.errorBox}>{fetchError}</div>
         ) : null}
@@ -255,7 +250,6 @@ export default function Home() {
 
         <div style={styles.metaRow}>
           <span>Last Updated: {quote.timestamp}</span>
-          <span>Source: Kite Connect</span>
         </div>
       </section>
  {settings.kachhiBadlaEnabled ? (
