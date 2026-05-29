@@ -267,7 +267,17 @@ export default function Home() {
         <a href="tel:9300053012" style={styles.callButton}>
           📞 9300053012
         </a>
-      </section>
+            </section>
+ {settings.kachhiBadlaEnabled ? (
+  <div style={styles.kachhiBox}>
+    <span>Kachhi Badla Rate</span>
+    <strong>
+      {settings.kachhiBadlaUnit === "Rs/kg"
+        ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
+        : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
+    </strong>
+  </div>
+) : null}               
                 <p
     style={{
     marginTop: 26,
@@ -379,7 +389,22 @@ const styles = {
     fontSize: 12,
     letterSpacing: "0.18em",
   },
-
+kachhiBox: {
+  margin: "28px auto 0",
+  maxWidth: 520,
+  border: "1px solid rgba(214,180,92,0.38)",
+  background:
+    "linear-gradient(145deg, rgba(214,180,92,0.16), rgba(35,35,35,0.92))",
+  color: "#f3d98b",
+  borderRadius: 16,
+  padding: "15px 22px",
+  display: "flex",
+  justifyContent: "space-between",
+  gap: 14,
+  alignItems: "center",
+  fontSize: 16,
+  fontWeight: 700,
+},
   liveDot: {
     width: 8,
     height: 8,
