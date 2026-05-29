@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { initializeApp, getApps } from "firebase/app";
-import Image from "next/image";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -27,9 +27,7 @@ const firebaseConfig = {
 };
 
 const app =
-  getApps().length === 0
-    ? initializeApp(firebaseConfig)
-    : getApps()[0];
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -39,31 +37,52 @@ const ADMIN_EMAIL = "rrmctexim@gmail.com";
 export default function AdminPage() {
   const [user, setUser] = useState(null);
   const [settings, setSettings] = useState(null);
+  const [systemStatus, setSystemStatus] = useState(null);
   const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    const unsubAuth = onAuthStateChanged(auth, (currentUser) => {
+    return onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-
-    return () => unsubAuth();
   }, []);
 
   useEffect(() => {
     if (!user) return;
 
-    const unsub = onSnapshot(
-      doc(db, "settings", "bullion"),
-      (snapshot) => {
-        setSettings(snapshot.data());
-      }
-    );
-
-    return () => unsub();
+    return onSnapshot(doc(db, "settings", "bullion"), (snapshot) => {
+      setSettings(snapshot.data());
+    });
   }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    loadSystemStatus();
+
+    const interval = setInterval(loadSystemStatus, 30000);
+
+    return () => clearInterval(interval);
+  }, [user]);
+
+  async function loadSystemStatus() {
+    try {
+      const res = await fetch("/api/health", {
+        cache: "no-store",
+      });
+
+      const data = await res.json();
+      setSystemStatus(data);
+    } catch (err) {
+      setSystemStatus({
+        website: "online",
+        kite: false,
+        error: err.message,
+      });
+    }
+  }
 
   async function login(e) {
     e.preventDefault();
@@ -83,7 +102,7 @@ export default function AdminPage() {
       }
 
       setMessage("Login successful.");
-    } catch (err) {
+    } catch {
       setMessage("Login failed. Check email/password.");
     }
   }
@@ -93,16 +112,34 @@ export default function AdminPage() {
 
     if (!settings) return;
 
+    const buyingPremium = Number(settings.buyingPremium || 0);
+    const sellingPremium = Number(settings.sellingPremium || 0);
+
+    if (
+      buyingPremium < -10000 ||
+      buyingPremium > 10000 ||
+      sellingPremium < -10000 ||
+      sellingPremium > 10000
+    ) {
+      setMessage("Premium must be between -10000 and +10000.");
+      return;
+    }
+
+    if (!settings.autoContract && !settings.manualContract) {
+      setMessage("Manual contract cannot be empty.");
+      return;
+    }
+
     setSaving(true);
     setMessage("");
 
     try {
       await updateDoc(doc(db, "settings", "bullion"), {
-        buyingPremium: Number(settings.buyingPremium || 0),
-        sellingPremium: Number(settings.sellingPremium || 0),
+        buyingPremium,
+        sellingPremium,
         showRates: Boolean(settings.showRates),
         autoContract: Boolean(settings.autoContract),
-        manualContract: String(settings.manualContract || ""),
+        manualContract: String(settings.manualContract || "").trim(),
         marketStartHour: Number(settings.marketStartHour || 12),
         marketEndHour: Number(settings.marketEndHour || 21),
         refreshBefore530: Number(settings.refreshBefore530 || 7),
@@ -110,7 +147,8 @@ export default function AdminPage() {
       });
 
       setMessage("Settings saved successfully.");
-    } catch (err) {
+      loadSystemStatus();
+    } catch {
       setMessage("Save failed. Check Firestore rules.");
     } finally {
       setSaving(false);
@@ -127,8 +165,14 @@ export default function AdminPage() {
   if (!user) {
     return (
       <main style={styles.page}>
-        <section style={styles.card}>
-          <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={115}   style={{     marginBottom: 20,   }} />
+        <section style={styles.loginCard}>
+          <Image
+            src="/logo.png"
+            alt="Ronak Jewellers"
+            width={110}
+            height={127}
+            style={styles.logoCenter}
+          />
 
           <h1 style={styles.title}>Ronak Jewellers</h1>
           <p style={styles.subtitle}>Admin Login</p>
@@ -140,7 +184,7 @@ export default function AdminPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-            /><br/>
+            />
 
             <label style={styles.label}>Password</label>
             <input
@@ -165,7 +209,12 @@ export default function AdminPage() {
   if (!settings) {
     return (
       <main style={styles.pageCenter}>
-        <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={115}   style={{     marginBottom: 20,   }} />
+        <Image
+          src="/logo.png"
+          alt="Ronak Jewellers"
+          width={110}
+          height={127}
+        />
         <h1 style={styles.title}>Loading admin...</h1>
       </main>
     );
@@ -175,22 +224,60 @@ export default function AdminPage() {
     <main style={styles.page}>
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
-          <div>
+          <div style={styles.headerBrand}>
             <Image
-                src="/logo.png"
-                alt="Ronak Jewellers"
-                width={50} height={50} />
-            <h1 style={styles.title}>Admin Panel</h1>
-            <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
+              src="/logo.png"
+              alt="Ronak Jewellers"
+              width={70}
+              height={81}
+            />
+
+            <div>
+              <h1 style={styles.title}>Admin Panel</h1>
+              <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
+            </div>
           </div>
 
-          <button
-            style={styles.logoutButton}
-            onClick={() => signOut(auth)}
-          >
+          <button style={styles.logoutButton} onClick={() => signOut(auth)}>
             Logout
           </button>
         </div>
+
+        <div style={styles.systemCard}>
+          <StatusItem
+            label="Website"
+            ok={systemStatus?.website === "online"}
+            value={systemStatus?.website === "online" ? "Online" : "Issue"}
+          />
+
+          <StatusItem
+            label="Kite"
+            ok={Boolean(systemStatus?.kite)}
+            value={systemStatus?.kite ? "Connected" : "Disconnected"}
+          />
+
+          <StatusItem
+            label="Contract"
+            ok={Boolean(systemStatus?.contract)}
+            value={systemStatus?.contract || "--"}
+          />
+
+          <button
+            type="button"
+            style={styles.smallButton}
+            onClick={loadSystemStatus}
+          >
+            Refresh Status
+          </button>
+
+          <a href="/api/login" style={styles.reconnectButton}>
+            Reconnect Kite
+          </a>
+        </div>
+
+        {systemStatus?.error ? (
+          <div style={styles.errorBox}>{systemStatus.error}</div>
+        ) : null}
 
         <form onSubmit={saveSettings} style={styles.grid}>
           <div style={styles.controlCard}>
@@ -251,7 +338,7 @@ export default function AdminPage() {
               style={styles.input}
               value={settings.manualContract || ""}
               onChange={(e) =>
-                updateField("manualContract", e.target.value)
+                updateField("manualContract", e.target.value.toUpperCase())
               }
               placeholder="SILVER26JULFUT"
             />
@@ -282,9 +369,7 @@ export default function AdminPage() {
           </div>
 
           <div style={styles.controlCard}>
-            <label style={styles.label}>
-              Refresh Before 5:30 PM / sec
-            </label>
+            <label style={styles.label}>Refresh Before 5:30 PM / sec</label>
             <input
               style={styles.input}
               type="number"
@@ -296,9 +381,7 @@ export default function AdminPage() {
           </div>
 
           <div style={styles.controlCard}>
-            <label style={styles.label}>
-              Refresh After 5:30 PM / sec
-            </label>
+            <label style={styles.label}>Refresh After 5:30 PM / sec</label>
             <input
               style={styles.input}
               type="number"
@@ -321,6 +404,22 @@ export default function AdminPage() {
         {message ? <p style={styles.message}>{message}</p> : null}
       </section>
     </main>
+  );
+}
+
+function StatusItem({ label, ok, value }) {
+  return (
+    <div style={styles.systemItem}>
+      <span
+        style={{
+          ...styles.systemDot,
+          background: ok ? "#d6b45c" : "#9b2c2c",
+        }}
+      />
+      <span>
+        {label}: <strong>{value}</strong>
+      </span>
+    </div>
   );
 }
 
@@ -347,10 +446,10 @@ const styles = {
     fontFamily: "Arial, Helvetica, sans-serif",
   },
 
-  card: {
+  loginCard: {
     width: "100%",
     maxWidth: 430,
-    margin: "80px auto",
+    margin: "70px auto",
     background:
       "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
     border: "1px solid rgba(214,180,92,0.32)",
@@ -358,11 +457,17 @@ const styles = {
     padding: 24,
     boxShadow: "0 26px 80px rgba(0,0,0,0.55)",
     boxSizing: "border-box",
+    textAlign: "center",
+  },
+
+  logoCenter: {
+    display: "block",
+    margin: "0 auto 18px",
   },
 
   adminShell: {
     width: "100%",
-    maxWidth: 980,
+    maxWidth: 1060,
     margin: "0 auto",
     background:
       "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
@@ -378,7 +483,13 @@ const styles = {
     justifyContent: "space-between",
     gap: 16,
     alignItems: "flex-start",
-    marginBottom: 24,
+    marginBottom: 22,
+  },
+
+  headerBrand: {
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
   },
 
   title: {
@@ -432,6 +543,35 @@ const styles = {
     outline: "none",
   },
 
+  systemCard: {
+    marginBottom: 22,
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+    border: "1px solid rgba(214,180,92,0.22)",
+    borderRadius: 18,
+    padding: 16,
+    display: "flex",
+    gap: 14,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
+
+  systemItem: {
+    color: "#f3d98b",
+    fontSize: 15,
+    display: "flex",
+    alignItems: "center",
+    gap: 8,
+  },
+
+  systemDot: {
+    width: 9,
+    height: 9,
+    borderRadius: "50%",
+    boxShadow: "0 0 10px rgba(214,180,92,0.8)",
+  },
+
   primaryButton: {
     width: "100%",
     marginTop: 18,
@@ -459,6 +599,26 @@ const styles = {
     cursor: "pointer",
   },
 
+  smallButton: {
+    border: "1px solid rgba(214,180,92,0.35)",
+    background: "rgba(214,180,92,0.08)",
+    color: "#f3d98b",
+    borderRadius: 12,
+    padding: "9px 13px",
+    cursor: "pointer",
+  },
+
+  reconnectButton: {
+    textDecoration: "none",
+    border: "1px solid rgba(214,180,92,0.55)",
+    background:
+      "linear-gradient(145deg, rgba(214,180,92,0.24), rgba(35,35,35,0.92))",
+    color: "#f3d98b",
+    borderRadius: 12,
+    padding: "9px 13px",
+    fontWeight: 800,
+  },
+
   logoutButton: {
     border: "1px solid rgba(214,180,92,0.35)",
     background: "rgba(214,180,92,0.08)",
@@ -472,5 +632,14 @@ const styles = {
     marginTop: 18,
     color: "#f3d98b",
     textAlign: "center",
+  },
+
+  errorBox: {
+    marginBottom: 18,
+    padding: 14,
+    borderRadius: 14,
+    color: "#ffd6d6",
+    background: "rgba(120, 20, 20, 0.35)",
+    border: "1px solid rgba(255, 120, 120, 0.25)",
   },
 };
