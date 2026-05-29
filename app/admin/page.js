@@ -156,6 +156,9 @@ const newSettings = {
   marketEndHour: Number(settings.marketEndHour || 21),
   refreshBefore530: Number(settings.refreshBefore530 || 7),
   refreshAfter530: Number(settings.refreshAfter530 || 2),
+  kachhiBadlaEnabled: Boolean(settings.kachhiBadlaEnabled),
+  kachhiBadlaValue: parseInt(settings.kachhiBadlaValue || 0, 10),
+  kachhiBadlaUnit: String(settings.kachhiBadlaUnit || "Rs/kg"),
 };
   
 
@@ -479,7 +482,45 @@ await addDoc(collection(db, "changeLogs"), {
               }
             />
           </div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>Kachhi Badla</label>
+  <select
+    style={styles.input}
+    value={settings.kachhiBadlaEnabled ? "yes" : "no"}
+    onChange={(e) =>
+      updateField("kachhiBadlaEnabled", e.target.value === "yes")
+    }
+  >
+    <option value="yes">Show</option>
+    <option value="no">Hide</option>
+  </select>
+</div>
 
+<div style={styles.controlCard}>
+  <label style={styles.label}>Kachhi Badla Value</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.kachhiBadlaValue || 0}
+    onChange={(e) =>
+      updateField("kachhiBadlaValue", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Kachhi Badla Unit</label>
+  <select
+    style={styles.input}
+    value={settings.kachhiBadlaUnit || "Rs/kg"}
+    onChange={(e) =>
+      updateField("kachhiBadlaUnit", e.target.value)
+    }
+  >
+    <option value="Rs/kg">Rs/kg</option>
+    <option value="gm/kg">gm/kg</option>
+  </select>
+</div>
           <div style={styles.controlCard}>
             <label style={styles.label}>Refresh After 5:30 PM / sec</label>
             <input
