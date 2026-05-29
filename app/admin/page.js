@@ -115,15 +115,7 @@ export default function AdminPage() {
     const buyingPremium = Number(settings.buyingPremium || 0);
     const sellingPremium = Number(settings.sellingPremium || 0);
 
-    if (
-      buyingPremium < -10000 ||
-      buyingPremium > 10000 ||
-      sellingPremium < -10000 ||
-      sellingPremium > 10000
-    ) {
-      setMessage("Premium must be between -10000 and +10000.");
-      return;
-    }
+  
 
     if (!settings.autoContract && !settings.manualContract) {
       setMessage("Manual contract cannot be empty.");
