@@ -137,9 +137,43 @@ export default function Home() {
     return <ClosedScreen />;
   }
 
-  if (!quote) {
-    return <LoadingScreen />;
-  }
+ if (!quote) {
+  return (
+    <main style={styles.pageCenter}>
+      <div style={styles.brandMark}>RJ</div>
+
+      <h1 style={styles.brandName}>
+        Ronak Jewellers
+      </h1>
+
+      <div style={styles.closedCard}>
+        <h2 style={styles.closedTitle}>
+          Live rates temporarily unavailable
+        </h2>
+
+        <p style={styles.muted}>
+          Please call for current bullion rates.
+        </p>
+
+        <div style={styles.contactWrap}>
+          <a
+            href="tel:9479893898"
+            style={styles.callButton}
+          >
+            📞 9479893898
+          </a>
+
+          <a
+            href="tel:9300053012"
+            style={styles.callButton}
+          >
+            📞 9300053012
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+}
 
   const buyingPremium = Number(settings.buyingPremium || 0);
   const sellingPremium = Number(settings.sellingPremium || 0);
