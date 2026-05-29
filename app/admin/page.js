@@ -38,7 +38,7 @@ const app =
 
 const auth = getAuth(app);
 const db = getFirestore(app);
-const [changeLogs, setChangeLogs] = useState([]);
+
 const ADMIN_EMAIL = "rrmctexim@gmail.com";
 
 export default function AdminPage() {
@@ -49,13 +49,8 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    return onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
-  useEffect(() => {
+  const [changeLogs, setChangeLogs] = useState([]);
+    useEffect(() => {
   if (!user) return;
 
   const cutoff = new Date();
@@ -77,6 +72,12 @@ export default function AdminPage() {
     );
   });
 }, [user]);
+  useEffect(() => {
+    return onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+ 
   useEffect(() => {
     if (!user) return;
 
