@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
+import Image from "next/image";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -142,7 +143,7 @@ export default function Home() {
  if (!quote) {
   return (
     <main style={styles.pageCenter}>
-      <div style={styles.brandMark}>RJ</div>
+      <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>
         Ronak Jewellers
@@ -186,7 +187,7 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <div style={styles.brandMark}>RJ</div>
+        <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
 
         <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
@@ -274,7 +275,7 @@ export default function Home() {
 function LoadingScreen() {
   return (
     <main style={styles.pageCenter}>
-      <div style={styles.brandMark}>RJ</div>
+      <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
       <p style={styles.muted}>Loading live bullion rates...</p>
     </main>
@@ -284,7 +285,7 @@ function LoadingScreen() {
 function ClosedScreen() {
   return (
     <main style={styles.pageCenter}>
-      <div style={styles.brandMark}>RJ</div>
+      <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
