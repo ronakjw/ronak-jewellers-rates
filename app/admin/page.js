@@ -128,7 +128,7 @@ export default function AdminPage() {
     return (
       <main style={styles.page}>
         <section style={styles.card}>
-          <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={100}   style={{     marginBottom: 20,   }} />
+          <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={115}   style={{     marginBottom: 20,   }} />
 
           <h1 style={styles.title}>Ronak Jewellers</h1>
           <p style={styles.subtitle}>Admin Login</p>
@@ -140,7 +140,7 @@ export default function AdminPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-            />
+            /><br/>
 
             <label style={styles.label}>Password</label>
             <input
