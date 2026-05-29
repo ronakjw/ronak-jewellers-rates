@@ -226,7 +226,7 @@ await addDoc(collection(db, "changeLogs"), {
               onChange={(e) => setEmail(e.target.value)}
               type="email"
             />
-            <p>  --------------   </p>
+            <p>  ----------------------------------------   </p>
             <label style={styles.label}>Password</label>
             <input
               style={styles.input}
@@ -242,46 +242,64 @@ await addDoc(collection(db, "changeLogs"), {
           </form>
 
           {message ? <p style={styles.message}>{message}</p> : null}
+       
             <div style={styles.logSection}>
-  <h2 style={styles.logTitle}>Change Log</h2>
+  <button
+    type="button"
+    style={styles.logToggle}
+    onClick={() => setShowLogs(!showLogs)}
+  >
+    {showLogs ? "Hide Change Log" : "Show Change Log"}
+  </button>
 
-  {changeLogs.length === 0 ? (
-    <p style={styles.subtitle}>No changes recorded in the last 90 days.</p>
-  ) : (
-    changeLogs.map((log) => (
-      <div key={log.id} style={styles.logCard}>
-        <p style={styles.logTime}>
-          {log.createdAt?.toDate
-            ? log.createdAt.toDate().toLocaleString("en-IN")
-            : "Just now"}
-        </p>
+  {showLogs ? (
+    <>
+      <h2 style={styles.logTitle}>Change Log</h2>
 
-        <p style={styles.logText}>
-          Buying Premium: {log.previous?.buyingPremium} →{" "}
-          {log.current?.buyingPremium}
+      {changeLogs.length === 0 ? (
+        <p style={styles.subtitle}>
+          No changes recorded in the last 90 days.
         </p>
+      ) : (
+        changeLogs.map((log) => (
+          <div key={log.id} style={styles.logCard}>
+            <p style={styles.logTime}>
+              {log.createdAt?.toDate
+                ? log.createdAt.toDate().toLocaleString("en-IN")
+                : "Just now"}
+            </p>
 
-        <p style={styles.logText}>
-          Selling Premium: {log.previous?.sellingPremium} →{" "}
-          {log.current?.sellingPremium}
-        </p>
+            <p style={styles.logText}>
+              Buying Premium: {log.previous?.buyingPremium} →{" "}
+              {log.current?.buyingPremium}
+            </p>
 
-        <p style={styles.logText}>
-          Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
-          {log.current?.showRates ? "Show" : "Hide"}
-        </p>
+            <p style={styles.logText}>
+              Selling Premium: {log.previous?.sellingPremium} →{" "}
+              {log.current?.sellingPremium}
+            </p>
 
-        <p style={styles.logText}>
-          Contract:{" "}
-          {log.previous?.autoContract
-            ? "Auto"
-            : log.previous?.manualContract}{" "}
-          →{" "}
-          {log.current?.autoContract
-            ? "Auto"
-            : log.current?.manualContract}
-        </p>
-      </div>
+            <p style={styles.logText}>
+              Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
+              {log.current?.showRates ? "Show" : "Hide"}
+            </p>
+
+            <p style={styles.logText}>
+              Contract:{" "}
+              {log.previous?.autoContract
+                ? "Auto"
+                : log.previous?.manualContract}{" "}
+              →{" "}
+              {log.current?.autoContract
+                ? "Auto"
+                : log.current?.manualContract}
+            </p>
+          </div>
+        ))
+      )}
+    </>
+  ) : null}
+</div>
     ))
   )}
 </div>
@@ -312,12 +330,12 @@ await addDoc(collection(db, "changeLogs"), {
             <Image
               src="/logo.png"
               alt="Ronak Jewellers"
-              width={70}
-              height={81}
+              width={100}
+              height={115}
             />
 
             <div>
-              <h1 style={styles.title}>Admin Panel</h1>
+              <h3 style={styles.title}>Admin Panel</h3>
               <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
             </div>
           </div>
@@ -751,7 +769,17 @@ logTime: {
   fontSize: 13,
   marginTop: 0,
 },
-
+logToggle: {
+  width: "100%",
+  border: "1px solid rgba(214,180,92,0.35)",
+  background: "rgba(214,180,92,0.08)",
+  color: "#f3d98b",
+  borderRadius: 14,
+  padding: "13px 16px",
+  fontSize: 16,
+  fontWeight: 800,
+  cursor: "pointer",
+},
 logText: {
   color: "#f3d98b",
   margin: "6px 0",
