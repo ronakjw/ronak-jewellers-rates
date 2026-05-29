@@ -165,7 +165,7 @@ export default function AdminPage() {
   if (!settings) {
     return (
       <main style={styles.pageCenter}>
-        <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={100}   style={{     marginBottom: 20,   }} />
+        <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={100}   height={115}   style={{     marginBottom: 20,   }} />
         <h1 style={styles.title}>Loading admin...</h1>
       </main>
     );
