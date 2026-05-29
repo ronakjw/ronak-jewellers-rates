@@ -1,3 +1,5 @@
+import { adminDb } from "../../../lib/firebaseAdmin";
+
 function parseCsvLine(line) {
   const result = [];
   let current = "";
@@ -88,7 +90,8 @@ async function getActiveSilverContract() {
 
 export async function GET() {
   const apiKey = process.env.KITE_API_KEY;
-  const accessToken = process.env.KITE_ACCESS_TOKEN;
+  const kiteDoc = await adminDb.collection("system").doc("kite").get();
+  const accessToken = kiteDoc.data()?.accessToken || process.env.KITE_ACCESS_TOKEN;
 
   try {
     const settings = await getSettings();
