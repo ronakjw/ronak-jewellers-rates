@@ -143,7 +143,7 @@ export default function Home() {
  if (!quote) {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={200}   height={231}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>
         Ronak Jewellers
@@ -151,11 +151,11 @@ export default function Home() {
 
       <div style={styles.closedCard}>
         <h2 style={styles.closedTitle}>
-          Live rates temporarily unavailable
+          Live rates are loading...
         </h2>
 
         <p style={styles.muted}>
-          Please call for current bullion rates.
+         You can also call for current bullion rates.
         </p>
 
         <div style={styles.contactWrap}>
@@ -187,7 +187,7 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
+        <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={150}   height={173}   style={{     marginBottom: 20,   }} />
 
         <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
