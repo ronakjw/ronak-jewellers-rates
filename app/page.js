@@ -261,11 +261,11 @@ export default function Home() {
  {settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
     <h2><span>Kachhi Badla Rate</span></h2>
-    <strong>
+    <strong><h1>
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
         : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-    </strong>
+</h1></strong>
   </div>
 ) : null}               
 
