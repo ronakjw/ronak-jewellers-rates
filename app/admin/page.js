@@ -14,6 +14,13 @@ import {
   doc,
   onSnapshot,
   updateDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  query,
+  orderBy,
+  limit,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -31,7 +38,7 @@ const app =
 
 const auth = getAuth(app);
 const db = getFirestore(app);
-
+const [changeLogs, setChangeLogs] = useState([]);
 const ADMIN_EMAIL = "rrmctexim@gmail.com";
 
 export default function AdminPage() {
@@ -48,7 +55,28 @@ export default function AdminPage() {
       setUser(currentUser);
     });
   }, []);
+  useEffect(() => {
+  if (!user) return;
 
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 90);
+
+  const q = query(
+    collection(db, "changeLogs"),
+    where("createdAt", ">=", cutoff),
+    orderBy("createdAt", "desc"),
+    limit(50)
+  );
+
+  return onSnapshot(q, (snapshot) => {
+    setChangeLogs(
+      snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+    );
+  });
+}, [user]);
   useEffect(() => {
     if (!user) return;
 
@@ -114,7 +142,19 @@ export default function AdminPage() {
 
     const buyingPremium = parseInt(settings.buyingPremium || 0, 10);
     const sellingPremium = parseInt(settings.sellingPremium || 0, 10);
+    const oldSettings = settings;
 
+const newSettings = {
+  buyingPremium,
+  sellingPremium,
+  showRates: Boolean(settings.showRates),
+  autoContract: Boolean(settings.autoContract),
+  manualContract: String(settings.manualContract || "").trim(),
+  marketStartHour: Number(settings.marketStartHour || 12),
+  marketEndHour: Number(settings.marketEndHour || 21),
+  refreshBefore530: Number(settings.refreshBefore530 || 7),
+  refreshAfter530: Number(settings.refreshAfter530 || 2),
+};
   
 
     if (!settings.autoContract && !settings.manualContract) {
@@ -126,17 +166,26 @@ export default function AdminPage() {
     setMessage("");
 
     try {
-      await updateDoc(doc(db, "settings", "bullion"), {
-        buyingPremium,
-        sellingPremium,
-        showRates: Boolean(settings.showRates),
-        autoContract: Boolean(settings.autoContract),
-        manualContract: String(settings.manualContract || "").trim(),
-        marketStartHour: Number(settings.marketStartHour || 12),
-        marketEndHour: Number(settings.marketEndHour || 21),
-        refreshBefore530: Number(settings.refreshBefore530 || 7),
-        refreshAfter530: Number(settings.refreshAfter530 || 2),
-      });
+     await updateDoc(doc(db, "settings", "bullion"), newSettings);
+
+await addDoc(collection(db, "changeLogs"), {
+  createdAt: serverTimestamp(),
+  updatedBy: user.email,
+  previous: {
+    buyingPremium: Number(oldSettings.buyingPremium || 0),
+    sellingPremium: Number(oldSettings.sellingPremium || 0),
+    showRates: Boolean(oldSettings.showRates),
+    autoContract: Boolean(oldSettings.autoContract),
+    manualContract: String(oldSettings.manualContract || ""),
+  },
+  current: {
+    buyingPremium: newSettings.buyingPremium,
+    sellingPremium: newSettings.sellingPremium,
+    showRates: newSettings.showRates,
+    autoContract: newSettings.autoContract,
+    manualContract: newSettings.manualContract,
+  },
+});
 
       setMessage("Settings saved successfully.");
       loadSystemStatus();
@@ -192,6 +241,49 @@ export default function AdminPage() {
           </form>
 
           {message ? <p style={styles.message}>{message}</p> : null}
+            <div style={styles.logSection}>
+  <h2 style={styles.logTitle}>Change Log</h2>
+
+  {changeLogs.length === 0 ? (
+    <p style={styles.subtitle}>No changes recorded in the last 90 days.</p>
+  ) : (
+    changeLogs.map((log) => (
+      <div key={log.id} style={styles.logCard}>
+        <p style={styles.logTime}>
+          {log.createdAt?.toDate
+            ? log.createdAt.toDate().toLocaleString("en-IN")
+            : "Just now"}
+        </p>
+
+        <p style={styles.logText}>
+          Buying Premium: {log.previous?.buyingPremium} →{" "}
+          {log.current?.buyingPremium}
+        </p>
+
+        <p style={styles.logText}>
+          Selling Premium: {log.previous?.sellingPremium} →{" "}
+          {log.current?.sellingPremium}
+        </p>
+
+        <p style={styles.logText}>
+          Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
+          {log.current?.showRates ? "Show" : "Hide"}
+        </p>
+
+        <p style={styles.logText}>
+          Contract:{" "}
+          {log.previous?.autoContract
+            ? "Auto"
+            : log.previous?.manualContract}{" "}
+          →{" "}
+          {log.current?.autoContract
+            ? "Auto"
+            : log.current?.manualContract}
+        </p>
+      </div>
+    ))
+  )}
+</div>
         </section>
       </main>
     );
@@ -633,4 +725,35 @@ const styles = {
     background: "rgba(120, 20, 20, 0.35)",
     border: "1px solid rgba(255, 120, 120, 0.25)",
   },
+  logSection: {
+  marginTop: 28,
+  borderTop: "1px solid rgba(214,180,92,0.22)",
+  paddingTop: 22,
+},
+
+logTitle: {
+  color: "#f3d98b",
+  marginBottom: 14,
+},
+
+logCard: {
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 16,
+  padding: 14,
+  marginBottom: 12,
+},
+
+logTime: {
+  color: "#9f9f9f",
+  fontSize: 13,
+  marginTop: 0,
+},
+
+logText: {
+  color: "#f3d98b",
+  margin: "6px 0",
+  fontSize: 14,
+},
 };
