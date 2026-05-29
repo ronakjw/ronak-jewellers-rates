@@ -258,6 +258,16 @@ export default function Home() {
           <span>Source: Kite Connect</span>
         </div>
       </section>
+ {settings.kachhiBadlaEnabled ? (
+  <div style={styles.kachhiBox}>
+    <h2><span>Kachhi Badla Rate</span></h2>
+    <strong>
+      {settings.kachhiBadlaUnit === "Rs/kg"
+        ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
+        : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
+    </strong>
+  </div>
+) : null}               
 
       <section style={styles.contactWrap}>
         <a href="tel:9479893898" style={styles.callButton}>
@@ -268,16 +278,6 @@ export default function Home() {
           📞 9300053012
         </a>
             </section>
- {settings.kachhiBadlaEnabled ? (
-  <div style={styles.kachhiBox}>
-    <span>Kachhi Badla Rate</span>
-    <strong>
-      {settings.kachhiBadlaUnit === "Rs/kg"
-        ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
-        : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-    </strong>
-  </div>
-) : null}               
                 <p
     style={{
     marginTop: 26,
