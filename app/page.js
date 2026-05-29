@@ -275,7 +275,7 @@ export default function Home() {
 function LoadingScreen() {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={289}   style={{     marginBottom: 20,   }} />
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
       <p style={styles.muted}>Loading live bullion rates...</p>
     </main>
@@ -285,7 +285,7 @@ function LoadingScreen() {
 function ClosedScreen() {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={139}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
