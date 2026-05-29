@@ -112,8 +112,8 @@ export default function AdminPage() {
 
     if (!settings) return;
 
-    const buyingPremium = Number(settings.buyingPremium || 0);
-    const sellingPremium = Number(settings.sellingPremium || 0);
+    const buyingPremium = parseInt(settings.buyingPremium || 0, 10);
+    const sellingPremium = parseInt(settings.sellingPremium || 0, 10);
 
   
 
