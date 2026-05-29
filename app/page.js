@@ -187,7 +187,7 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={150}   height={173}   style={{     marginBottom: 20,   }} />
+        <Image   src="/logoo.png"   alt="Ronak Jewellers"   width={188}   height={217}   style={{     marginBottom: 20,   }} />
 
         <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
