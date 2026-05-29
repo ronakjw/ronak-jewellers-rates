@@ -118,7 +118,9 @@ export default function Home() {
 
         setQuote(data);
       } catch (err) {
-        setFetchError("Unable to connect to live rate server");
+        setFetchError(
+        err?.message ||
+        "Unable to connect to live rate server");
       }
     }
 
