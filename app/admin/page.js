@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { initializeApp, getApps } from "firebase/app";
+import Image from "next/image";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -127,7 +128,7 @@ export default function AdminPage() {
     return (
       <main style={styles.page}>
         <section style={styles.card}>
-          <div style={styles.brandMark}>RJ</div>
+          <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={100}   height={100}   style={{     marginBottom: 20,   }} />
 
           <h1 style={styles.title}>Ronak Jewellers</h1>
           <p style={styles.subtitle}>Admin Login</p>
@@ -164,7 +165,7 @@ export default function AdminPage() {
   if (!settings) {
     return (
       <main style={styles.pageCenter}>
-        <div style={styles.brandMark}>RJ</div>
+        <Image   src="/logo.jpg"   alt="Ronak Jewellers"   width={100}   height={100}   style={{     marginBottom: 20,   }} />
         <h1 style={styles.title}>Loading admin...</h1>
       </main>
     );
