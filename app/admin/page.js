@@ -49,6 +49,7 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
+  const [showLogs, setShowLogs] = useState(false);
   const [changeLogs, setChangeLogs] = useState([]);
     useEffect(() => {
   if (!user) return;
