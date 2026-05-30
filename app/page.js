@@ -185,20 +185,23 @@ export default function Home() {
           📞 9300053012
         </a>
       </section>
- {settings.kachhiBadlaEnabled ? (
+{settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
-    <h2><span>Kachhi Badla Rate</span></h2>
-    <strong><h1>
+    <span>Kachhi Badla Rate</span>
+    <strong>
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
         : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-      <p style={styles.disclaimer}>
-        Rates displayed are based on market conditions and applicable
-        premiums. Final rates may vary depending on confirmation at the
-        time of enquiry.
-      </p>
-    </main>
-  );
+    </strong>
+  </div>
+) : null}
+<p style={styles.disclaimer}>
+  Rates displayed are based on market conditions and applicable
+  premiums. Final rates may vary depending on confirmation at the
+  time of enquiry.
+</p>
+</main>
+);
 }
 
   if (!marketState.shouldShowRates) {
