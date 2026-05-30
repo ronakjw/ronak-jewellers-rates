@@ -143,7 +143,7 @@ export default function Home() {
           src="/logo.png"
           alt="Ronak Jewellers"
           width={150}
-          height={170}
+          height={150}
           style={{ marginBottom: 20 }}
         />
 
@@ -202,7 +202,7 @@ export default function Home() {
  if (!quote) {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={220}   height={255}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={220}   height={220}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>
         Ronak Jewellers
@@ -246,7 +246,7 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={289}   style={{     marginBottom: 20,   }} />
+        <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
 
         <h2 style={styles.brandName}>- Ronak Jewellers -</h2>
 
@@ -342,7 +342,7 @@ export default function Home() {
 function LoadingScreen() {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={289}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
       <p style={styles.muted}>Loading live bullion rates...</p>
     </main>
@@ -352,7 +352,7 @@ function LoadingScreen() {
 function ClosedScreen() {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={139}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
 
