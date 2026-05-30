@@ -330,19 +330,7 @@ export default function Home() {
           📞 9300053012
         </a>
             </section>
-                <p
-    style={{
-    marginTop: 26,
-    color: "#8f8f8f",
-    fontSize: 13,
-    textAlign: "center",
-    maxWidth: 800,
-    lineHeight: 1.7,
-    marginLeft: "auto",
-    marginRight: "auto",
-    padding: "0 12px",
-  }}
->
+<p style={styles.disclaimer}>
   Rates displayed are based on live MCX market prices and
   applicable premiums. Final rates may vary depending on
   market conditions and confirmation at the time of enquiry.
@@ -477,6 +465,18 @@ kachhiBox: {
     boxShadow:
       "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
     boxSizing: "border-box",
+  },
+  
+disclaimer: {
+    marginTop: 26,
+    color: "#8f8f8f",
+    fontSize: 13,
+    textAlign: "center",
+    maxWidth: 800,
+    lineHeight: 1.7,
+    marginLeft: "auto",
+    marginRight: "auto",
+    padding: "0 12px",
   },
 
   cardTop: {
