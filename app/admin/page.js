@@ -159,6 +159,9 @@ const newSettings = {
   kachhiBadlaEnabled: Boolean(settings.kachhiBadlaEnabled),
   kachhiBadlaValue: parseInt(settings.kachhiBadlaValue || 0, 10),
   kachhiBadlaUnit: String(settings.kachhiBadlaUnit || "Rs/kg"),
+  holidayMode: Boolean(settings.holidayMode),
+  holidayBuyingRate: parseInt(settings.holidayBuyingRate || 0, 10),
+  holidaySellingRate: parseInt(settings.holidaySellingRate || 0, 10),
 };
   
 
@@ -482,6 +485,45 @@ await addDoc(collection(db, "changeLogs"), {
               }
             />
           </div>
+    
+    <div style={styles.controlCard}>
+  <label style={styles.label}>Holiday Mode</label>
+  <select
+    style={styles.input}
+    value={settings.holidayMode ? "yes" : "no"}
+    onChange={(e) =>
+      updateField("holidayMode", e.target.value === "yes")
+    }
+  >
+    <option value="no">Off</option>
+    <option value="yes">On</option>
+  </select>
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Holiday Buying Rate</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.holidayBuyingRate || 0}
+    onChange={(e) =>
+      updateField("holidayBuyingRate", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Holiday Selling Rate</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.holidaySellingRate || 0}
+    onChange={(e) =>
+      updateField("holidaySellingRate", e.target.value)
+    }
+  />
+</div>
+    
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla</label>
   <select
