@@ -151,8 +151,8 @@ export default function Home() {
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
-          <span> MCX market rates are closed today. </span>
-          <span> Please refer the rates shown below </span>
+          <span> NOTE : MCX market is closed today. </span>
+          <span> Please refer the rates shown below. </span>
         </div>
       </section>
 
@@ -178,7 +178,7 @@ export default function Home() {
 
  {settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
-    <h2><span>Kachhi Badla Rate</span></h2>
+    <span>Kachhi Badla Rate</span>
     <strong><h1>
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
@@ -322,7 +322,7 @@ export default function Home() {
       </section>
  {settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
-    <h2><span>Kachhi Badla Rate</span></h2>
+    <span>Kachhi Badla Rate</span>
     <strong><h1>
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
