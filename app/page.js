@@ -133,6 +133,65 @@ export default function Home() {
   }, [settings, marketState.shouldShowRates, marketState.refreshMs]);
 
   if (!settings) {
+    if (settings.holidayMode) {
+  return (
+    <main style={styles.page}>
+      <section style={styles.hero}>
+        <Image
+          src="/logo.png"
+          alt="Ronak Jewellers"
+          width={150}
+          height={170}
+          style={{ marginBottom: 20 }}
+        />
+
+        <h1 style={styles.brandName}>Ronak Jewellers</h1>
+
+        <div style={styles.statusRow}>
+          <span style={styles.liveDot} />
+          <span> MCX market rates are closed today. </span>
+          <span> Please refer the rates shown below </span>
+        </div>
+      </section>
+
+      <section style={styles.mainCard}>
+        <div style={styles.rateGrid}>
+          <div style={styles.sideCard}>
+            <p style={styles.finalLabel}>Final Buying Rate</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(settings.holidayBuyingRate)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
+
+          <div style={styles.sideCard}>
+            <p style={styles.finalLabel}>Final Selling Rate</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(settings.holidaySellingRate)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      <section style={styles.contactWrap}>
+        <a href="tel:9479893898" style={styles.callButton}>
+          📞 9479893898
+        </a>
+
+        <a href="tel:9300053012" style={styles.callButton}>
+          📞 9300053012
+        </a>
+      </section>
+
+      <p style={styles.disclaimer}>
+        Rates displayed are based on market conditions and applicable
+        premiums. Final rates may vary depending on confirmation at the
+        time of enquiry.
+      </p>
+    </main>
+  );
+}
     return <LoadingScreen />;
   }
 
