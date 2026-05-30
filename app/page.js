@@ -133,7 +133,9 @@ export default function Home() {
   }, [settings, marketState.shouldShowRates, marketState.refreshMs]);
 
   if (!settings) {
-    if (settings.holidayMode) {
+      return <LoadingScreen />;
+  }
+  if (settings?.holidayMode) {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
@@ -192,8 +194,6 @@ export default function Home() {
     </main>
   );
 }
-    return <LoadingScreen />;
-  }
 
   if (!marketState.shouldShowRates) {
     return <ClosedScreen />;
