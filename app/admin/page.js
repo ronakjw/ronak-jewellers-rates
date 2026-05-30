@@ -219,7 +219,7 @@ await addDoc(collection(db, "changeLogs"), {
             src="/logo.png"
             alt="Ronak Jewellers"
             width={110}
-            height={127}
+            height={110}
             style={styles.logoCenter}
           />
 
@@ -233,7 +233,7 @@ await addDoc(collection(db, "changeLogs"), {
               onChange={(e) => setEmail(e.target.value)}
               type="email"
             />
-            <p>  ----------------------------------------   </p>
+            <p>  -                                       -   </p>
             <label style={styles.label}>Password</label>
             <input
               style={styles.input}
@@ -319,7 +319,7 @@ await addDoc(collection(db, "changeLogs"), {
           src="/logo.png"
           alt="Ronak Jewellers"
           width={110}
-          height={127}
+          height={110}
         />
         <h1 style={styles.title}>Loading admin...</h1>
       </main>
@@ -335,7 +335,7 @@ await addDoc(collection(db, "changeLogs"), {
               src="/logo.png"
               alt="Ronak Jewellers"
               width={100}
-              height={115}
+              height={100}
             />
 
             <div>
