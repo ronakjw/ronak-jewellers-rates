@@ -176,15 +176,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={styles.contactWrap}>
-        <a href="tel:9479893898" style={styles.callButton}>
-          📞 9479893898
-        </a>
-
-        <a href="tel:9300053012" style={styles.callButton}>
-          📞 9300053012
-        </a>
-      </section>
 {settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
     <span>Kachhi Badla Rate</span>
@@ -195,6 +186,16 @@ export default function Home() {
     </strong>
   </div>
 ) : null}
+      <section style={styles.contactWrap}>
+        <a href="tel:9479893898" style={styles.callButton}>
+          📞 9479893898
+        </a>
+
+        <a href="tel:9300053012" style={styles.callButton}>
+          📞 9300053012
+        </a>
+      </section>
+
 <p style={styles.disclaimer}>
   Rates displayed are based on market conditions and applicable
   premiums. Final rates may vary depending on confirmation at the
