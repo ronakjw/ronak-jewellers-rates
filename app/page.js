@@ -176,16 +176,16 @@ export default function Home() {
         </div>
       </section>
 
-{settings.kachhiBadlaEnabled ? (
+ {settings.kachhiBadlaEnabled ? (
   <div style={styles.kachhiBox}>
-    <span>Kachhi Badla Rate</span>
-    <strong>
+    <h2><span>Kachhi Badla Rate</span></h2>
+    <strong><h1>
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
         : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-    </strong>
+  </h1> </strong>
   </div>
-) : null}
+) : null}  
       <section style={styles.contactWrap}>
         <a href="tel:9479893898" style={styles.callButton}>
           📞 9479893898
@@ -327,7 +327,7 @@ export default function Home() {
       {settings.kachhiBadlaUnit === "Rs/kg"
         ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
         : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-</h1></strong>
+  </h1> </strong>
   </div>
 ) : null}               
 
