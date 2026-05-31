@@ -274,8 +274,8 @@ await addDoc(collection(db, "changeLogs"), {
             <Image
               src="/logo.png"
               alt="Ronak Jewellers"
-              width={170}
-              height={170}
+              width={150}
+              height={150}
             />
 
             <div>
