@@ -279,7 +279,7 @@ await addDoc(collection(db, "changeLogs"), {
             />
 
             <div>
-              <h3>RJ - Admin Panel</h3>
+              <h1>RJ - Admin Panel</h1>
               <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
             </div>
           </div>
