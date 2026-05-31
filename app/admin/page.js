@@ -61,7 +61,7 @@ export default function AdminPage() {
     collection(db, "changeLogs"),
     where("createdAt", ">=", cutoff),
     orderBy("createdAt", "desc"),
-    limit(50)
+    limit(25)
   );
 
   return onSnapshot(q, (snapshot) => {
@@ -163,13 +163,10 @@ const newSettings = {
   holidayBuyingRate: parseInt(settings.holidayBuyingRate || 0, 10),
   holidaySellingRate: parseInt(settings.holidaySellingRate || 0, 10),
 };
-  
-
-    if (!settings.autoContract && !settings.manualContract) {
-      setMessage("Manual contract cannot be empty.");
-      return;
-    }
-
+ if (!settings.autoContract && !String(settings.manualContract || "").trim()) 
+ {  setMessage("Manual contract cannot be empty.");
+    return;
+  }
     setSaving(true);
     setMessage("");
 
@@ -218,8 +215,8 @@ await addDoc(collection(db, "changeLogs"), {
           <Image
             src="/logo.png"
             alt="Ronak Jewellers"
-            width={110}
-            height={110}
+            width={200}
+            height={200}
             style={styles.logoCenter}
           />
 
@@ -233,7 +230,7 @@ await addDoc(collection(db, "changeLogs"), {
               onChange={(e) => setEmail(e.target.value)}
               type="email"
             />
-            <p>  -                                       -   </p>
+           <div style={{ height: 14 }} />
             <label style={styles.label}>Password</label>
             <input
               style={styles.input}
@@ -249,64 +246,7 @@ await addDoc(collection(db, "changeLogs"), {
           </form>
 
           {message ? <p style={styles.message}>{message}</p> : null}
-       
-<div style={styles.logSection}>
-  <button
-    type="button"
-    style={styles.logToggle}
-    onClick={() => setShowLogs(!showLogs)}
-  >
-    {showLogs ? "Hide Change Log" : "Show Change Log"}
-  </button>
-
-  {showLogs ? (
-    <>
-      <h2 style={styles.logTitle}>Change Log</h2>
-
-      {changeLogs.length === 0 ? (
-        <p style={styles.subtitle}>
-          No changes recorded in the last 90 days.
-        </p>
-      ) : (
-        changeLogs.map((log) => (
-          <div key={log.id} style={styles.logCard}>
-            <p style={styles.logTime}>
-              {log.createdAt?.toDate
-                ? log.createdAt.toDate().toLocaleString("en-IN")
-                : "Just now"}
-            </p>
-
-            <p style={styles.logText}>
-              Buying Premium: {log.previous?.buyingPremium} →{" "}
-              {log.current?.buyingPremium}
-            </p>
-
-            <p style={styles.logText}>
-              Selling Premium: {log.previous?.sellingPremium} →{" "}
-              {log.current?.sellingPremium}
-            </p>
-
-            <p style={styles.logText}>
-              Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
-              {log.current?.showRates ? "Show" : "Hide"}
-            </p>
-
-            <p style={styles.logText}>
-              Contract:{" "}
-              {log.previous?.autoContract
-                ? "Auto"
-                : log.previous?.manualContract}{" "}
-              →{" "}
-              {log.current?.autoContract
-                ? "Auto"
-                : log.current?.manualContract}
-            </p>
-          </div>
-        ))
-      )}
-    </>
-  ) : null}
-</div>        
+              
         </section>
       </main>
     );
@@ -585,6 +525,64 @@ await addDoc(collection(db, "changeLogs"), {
         </form>
 
         {message ? <p style={styles.message}>{message}</p> : null}
+        
+<div style={styles.logSection}>
+  <button
+    type="button"
+    style={styles.logToggle}
+    onClick={() => setShowLogs(!showLogs)}
+  >
+    {showLogs ? "Hide Change Log" : "Show Change Log"}
+  </button>
+
+  {showLogs ? (
+    <>
+      <h2 style={styles.logTitle}>Change Log</h2>
+
+      {changeLogs.length === 0 ? (
+        <p style={styles.subtitle}>
+          No changes recorded in the last 90 days.
+        </p>
+      ) : (
+        changeLogs.map((log) => (
+          <div key={log.id} style={styles.logCard}>
+            <p style={styles.logTime}>
+              {log.createdAt?.toDate
+                ? log.createdAt.toDate().toLocaleString("en-IN")
+                : "Just now"}
+            </p>
+
+            <p style={styles.logText}>
+              Buying Premium: {log.previous?.buyingPremium} →{" "}
+              {log.current?.buyingPremium}
+            </p>
+
+            <p style={styles.logText}>
+              Selling Premium: {log.previous?.sellingPremium} →{" "}
+              {log.current?.sellingPremium}
+            </p>
+
+            <p style={styles.logText}>
+              Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
+              {log.current?.showRates ? "Show" : "Hide"}
+            </p>
+
+            <p style={styles.logText}>
+              Contract:{" "}
+              {log.previous?.autoContract
+                ? "Auto"
+                : log.previous?.manualContract}{" "}
+              →{" "}
+              {log.current?.autoContract
+                ? "Auto"
+                : log.current?.manualContract}
+            </p>
+          </div>
+        ))
+      )}
+    </>
+  ) : null}
+</div> 
       </section>
     </main>
   );
