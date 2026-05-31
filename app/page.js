@@ -183,9 +183,8 @@ export default function Home() {
 <KachhiBadla settings={settings} />
 <ContactButtons />
 
-  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
-  premiums. <br>  Final rates may vary depending on confirmation at the
-  time of enquiry. </p>
+  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable premiums. 
+                Final rates may vary depending on confirmation at the time of enquiry. </p>
 </main>
 );
 }
@@ -299,9 +298,8 @@ const finalSelling =
 <KachhiBadla settings={settings} />
  <ContactButtons />
                 
-  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
-  premiums. <br> Final rates may vary depending on confirmation at the
-  time of enquiry. </p>
+  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable premiums.
+                Final rates may vary depending on confirmation at the time of enquiry. </p>
     </main>
   );
 }
@@ -334,7 +332,7 @@ function LoadingScreen() {
 function ClosedScreen() {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
       <div style={styles.closedCard}>
         <h2 style={styles.closedTitle}>
