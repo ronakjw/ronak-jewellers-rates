@@ -284,9 +284,33 @@ await addDoc(collection(db, "changeLogs"), {
             </div>
           </div>
 
-          <button style={styles.logoutButton} onClick={() => signOut(auth)}>
-            Logout
-          </button>
+          <div style={styles.quickActions}>
+  <button
+    type="button"
+    style={styles.saveTopButton}
+    onClick={saveSettings}
+    disabled={saving}
+  >
+    {saving ? "Saving..." : "Save"}
+  </button>
+
+  <a
+    href="/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={styles.openSiteButton}
+  >
+    Open Site
+  </a>
+
+  <button
+    type="button"
+    style={styles.logoutButton}
+    onClick={() => signOut(auth)}
+  >
+    Logout
+  </button>
+</div>
         </div>
 
         <div style={styles.systemCard}>
@@ -723,7 +747,34 @@ const styles = {
     fontSize: 16,
     outline: "none",
   },
+  quickActions: {
+  display: "flex",
+  gap: 10,
+  alignItems: "center",
+  flexWrap: "wrap",
+  justifyContent: "flex-end",
+},
 
+saveTopButton: {
+  border: "1px solid rgba(214,180,92,0.55)",
+  background:
+    "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.92))",
+  color: "#f3d98b",
+  borderRadius: 12,
+  padding: "10px 14px",
+  fontWeight: 800,
+  cursor: "pointer",
+},
+
+openSiteButton: {
+  textDecoration: "none",
+  border: "1px solid rgba(214,180,92,0.35)",
+  background: "rgba(214,180,92,0.08)",
+  color: "#f3d98b",
+  borderRadius: 12,
+  padding: "10px 14px",
+  fontWeight: 800,
+},
   systemCard: {
     marginBottom: 22,
     background:
