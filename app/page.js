@@ -21,7 +21,18 @@ const app =
     : getApps()[0];
 
 const db = getFirestore(app);
-
+function ContactButtons() {
+  return (
+    <section style={styles.contactWrap}>
+      <a href="tel:9479893898" style={styles.callButton}>
+        📞 9479893898
+      </a>
+      <a href="tel:9300053012" style={styles.callButton}>
+        📞 9300053012
+      </a>
+    </section>
+  );
+}
 function formatPrice(value) {
   if (value === null || value === undefined || Number.isNaN(value)) {
     return "--";
@@ -139,15 +150,9 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image
-          src="/logo.png"
-          alt="Ronak Jewellers"
-          width={150}
-          height={150}
-          style={{ marginBottom: 20 }}
-        />
+        <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 20 }} />
 
-        <h1 style={styles.brandName}>Ronak Jewellers</h1>
+        <h1 style={styles.brandName}>- Ronak Jewellers -</h1>
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
@@ -176,16 +181,7 @@ export default function Home() {
       </section>
  
 <KachhiBadla settings={settings} />
-
-      <section style={styles.contactWrap}>
-        <a href="tel:9479893898" style={styles.callButton}>
-          📞 9479893898
-        </a>
-
-        <a href="tel:9300053012" style={styles.callButton}>
-          📞 9300053012
-        </a>
-      </section>
+<ContactButtons />
 
   <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
   premiums. </p>
@@ -202,10 +198,10 @@ export default function Home() {
  if (!quote) {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={220}   height={220}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
 
       <h1 style={styles.brandName}>
-        Ronak Jewellers
+       - Ronak Jewellers -
       </h1>
 
       <div style={styles.closedCard}>
@@ -216,23 +212,8 @@ export default function Home() {
         <p style={styles.muted}>
          Please Wait for the Rates
         </p>
-
-        <div style={styles.contactWrap}>
-          <a
-            href="tel:9479893898"
-            style={styles.callButton}
-          >
-            📞 9479893898
-          </a>
-
-          <a
-            href="tel:9300053012"
-            style={styles.callButton}
-          >
-            📞 9300053012
-          </a>
-        </div>
-      </div>
+<ContactButtons />
+   </div>
     </main>
   );
 }
@@ -317,21 +298,12 @@ const finalSelling =
       </section>
 
 <KachhiBadla settings={settings} />
-  
-      <section style={styles.contactWrap}>
-        <a href="tel:9479893898" style={styles.callButton}>
-          📞 9479893898
-        </a>
-
-        <a href="tel:9300053012" style={styles.callButton}>
-          📞 9300053012
-        </a>
-            </section>
-<p style={styles.disclaimer}>
-  Rates displayed are based on live MCX market prices and
-  applicable premiums. Final rates may vary depending on
-  market conditions and confirmation at the time of enquiry.
-</p>
+ <ContactButtons />
+                
+  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
+  premiums. </p>
+  <p style={styles.disclaimer}>  Final rates may vary depending on confirmation at the
+  time of enquiry. </p>
     </main>
   );
 }
@@ -373,14 +345,7 @@ function ClosedScreen() {
         <p style={styles.muted}>
           Live rates are currently unavailable.
         </p>
-        <div style={styles.contactWrap}>
-          <a href="tel:9479893898" style={styles.callButton}>
-            📞 9479893898
-          </a>
-          <a href="tel:9300053012" style={styles.callButton}>
-            📞 9300053012
-          </a>
-        </div>
+       <ContactButtons />
       </div>
     </main>
   );
