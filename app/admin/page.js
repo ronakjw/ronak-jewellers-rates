@@ -284,10 +284,10 @@ await addDoc(collection(db, "changeLogs"), {
             </div>
           </div>
 
-          <div style={styles.quickActions}>
+ <div style={styles.adminButtonRows}>
   <button
     type="button"
-    style={styles.saveTopButton}
+    style={styles.topButton}
     onClick={saveSettings}
     disabled={saving}
   >
@@ -298,14 +298,14 @@ await addDoc(collection(db, "changeLogs"), {
     href="/"
     target="_blank"
     rel="noopener noreferrer"
-    style={styles.openSiteButton}
+    style={styles.topButton}
   >
     Open Site
   </a>
 
   <button
     type="button"
-    style={styles.logoutButton}
+    style={styles.topButton}
     onClick={() => signOut(auth)}
   >
     Logout
@@ -639,6 +639,37 @@ const styles = {
     boxSizing: "border-box",
   },
 
+  headerRow: {
+  display: "flex",
+  flexDirection: "column",
+  gap: 18,
+  alignItems: "stretch",
+  marginBottom: 22,
+},
+  headerBrand: {
+  display: "flex",
+  alignItems: "center",
+  gap: 14,
+  flexWrap: "wrap",
+},
+  adminButtonRow: {
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: 10,
+  width: "100%",
+},
+  topButton: {
+  textDecoration: "none",
+  border: "1px solid rgba(214,180,92,0.35)",
+  background: "rgba(214,180,92,0.08)",
+  color: "#f3d98b",
+  borderRadius: 12,
+  padding: "12px 10px",
+  textAlign: "center",
+  fontWeight: 800,
+  fontSize: 14,
+  cursor: "pointer",
+},
   pageCenter: {
     minHeight: "100vh",
     background:
@@ -681,20 +712,6 @@ const styles = {
     padding: 24,
     boxShadow: "0 26px 80px rgba(0,0,0,0.55)",
     boxSizing: "border-box",
-  },
-
-  headerRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 16,
-    alignItems: "flex-start",
-    marginBottom: 22,
-  },
-
-  headerBrand: {
-    display: "flex",
-    alignItems: "center",
-    gap: 14,
   },
 
   title: {
