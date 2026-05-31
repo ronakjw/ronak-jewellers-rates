@@ -258,8 +258,8 @@ await addDoc(collection(db, "changeLogs"), {
         <Image
           src="/logo.png"
           alt="Ronak Jewellers"
-          width={110}
-          height={110}
+          width={200}
+          height={200}
         />
         <h1 style={styles.title}>Loading admin...</h1>
       </main>
@@ -274,12 +274,12 @@ await addDoc(collection(db, "changeLogs"), {
             <Image
               src="/logo.png"
               alt="Ronak Jewellers"
-              width={100}
-              height={100}
+              width={170}
+              height={170}
             />
 
             <div>
-              <h3 style={styles.title}>Admin Panel</h3>
+              <h3>RJ - Admin Panel</h3>
               <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
             </div>
           </div>
