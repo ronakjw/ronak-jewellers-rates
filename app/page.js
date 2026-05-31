@@ -184,8 +184,7 @@ export default function Home() {
 <ContactButtons />
 
   <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
-  premiums. </p>
-  <p style={styles.disclaimer}>  Final rates may vary depending on confirmation at the
+  premiums. <br>  Final rates may vary depending on confirmation at the
   time of enquiry. </p>
 </main>
 );
@@ -301,8 +300,7 @@ const finalSelling =
  <ContactButtons />
                 
   <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
-  premiums. </p>
-  <p style={styles.disclaimer}>  Final rates may vary depending on confirmation at the
+  premiums. <br> Final rates may vary depending on confirmation at the
   time of enquiry. </p>
     </main>
   );
