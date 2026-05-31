@@ -151,8 +151,7 @@ export default function Home() {
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
-          <span> NOTE : MCX market is closed today. </span>
-          <span> Please refer the rates shown below. </span>
+          <span> NOTE : MCX Market Closed. Today's applicable bullion rates are shown below. </span>
         </div>
       </section>
 
@@ -175,17 +174,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+ 
+<KachhiBadla settings={settings} />
 
- {settings.kachhiBadlaEnabled ? (
-  <div style={styles.kachhiBox}>
-    <span>Kachhi Badla Rate</span>
-    <strong><h1>
-      {settings.kachhiBadlaUnit === "Rs/kg"
-        ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
-        : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-  </h1> </strong>
-  </div>
-) : null}  
       <section style={styles.contactWrap}>
         <a href="tel:9479893898" style={styles.callButton}>
           📞 9479893898
@@ -196,11 +187,10 @@ export default function Home() {
         </a>
       </section>
 
-<p style={styles.disclaimer}>
-  Rates displayed are based on market conditions and applicable
-  premiums. Final rates may vary depending on confirmation at the
-  time of enquiry.
-</p>
+  <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable
+  premiums. </p>
+  <p style={styles.disclaimer}>  Final rates may vary depending on confirmation at the
+  time of enquiry. </p>
 </main>
 );
 }
@@ -250,8 +240,13 @@ export default function Home() {
   const buyingPremium = Number(settings.buyingPremium || 0);
   const sellingPremium = Number(settings.sellingPremium || 0);
 
-  const finalBuying = quote.mcxBuyPrice + buyingPremium;
-  const finalSelling = quote.mcxSellPrice + sellingPremium;
+ const finalBuying =
+  Number(quote?.mcxBuyPrice || 0) +
+  Number(buyingPremium);
+
+const finalSelling =
+  Number(quote?.mcxSellPrice || 0) +
+  Number(sellingPremium);
 
   return (
     <main style={styles.page}>
@@ -320,17 +315,9 @@ export default function Home() {
           <span>Last Updated: {quote.timestamp}</span>
         </div>
       </section>
- {settings.kachhiBadlaEnabled ? (
-  <div style={styles.kachhiBox}>
-    <span>Kachhi Badla Rate</span>
-    <strong><h1>
-      {settings.kachhiBadlaUnit === "Rs/kg"
-        ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
-        : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
-  </h1> </strong>
-  </div>
-) : null}               
 
+<KachhiBadla settings={settings} />
+  
       <section style={styles.contactWrap}>
         <a href="tel:9479893898" style={styles.callButton}>
           📞 9479893898
@@ -349,6 +336,21 @@ export default function Home() {
   );
 }
 
+function KachhiBadla({ settings }) {
+  if (!settings.kachhiBadlaEnabled) return null;
+  return (
+    <div style={styles.kachhiBox}>
+      <span>Kachhi Badla Rate : </span>
+
+      <div style={styles.kachhiValue}>
+        {settings.kachhiBadlaUnit === "Rs/kg"
+          ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
+          : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
+      </div>
+    </div>
+  );
+}
+
 function LoadingScreen() {
   return (
     <main style={styles.pageCenter}>
@@ -363,23 +365,18 @@ function ClosedScreen() {
   return (
     <main style={styles.pageCenter}>
       <Image   src="/logo.png"   alt="Ronak Jewellers"   width={120}   height={120}   style={{     marginBottom: 20,   }} />
-
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
-
       <div style={styles.closedCard}>
         <h2 style={styles.closedTitle}>
           Please call for current bullion rates.
         </h2>
-
         <p style={styles.muted}>
           Live rates are currently unavailable.
         </p>
-
         <div style={styles.contactWrap}>
           <a href="tel:9479893898" style={styles.callButton}>
             📞 9479893898
           </a>
-
           <a href="tel:9300053012" style={styles.callButton}>
             📞 9300053012
           </a>
@@ -388,7 +385,6 @@ function ClosedScreen() {
     </main>
   );
 }
-
 const styles = {
   page: {
     minHeight: "100vh",
@@ -400,7 +396,10 @@ const styles = {
     padding: "28px 18px 40px",
     boxSizing: "border-box",
   },
-
+  kachhiValue: {
+    fontSize: 32,
+    fontWeight: 700,
+   },
   pageCenter: {
     minHeight: "100vh",
     background:
