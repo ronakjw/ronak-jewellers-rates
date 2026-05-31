@@ -156,7 +156,7 @@ export default function Home() {
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
-          <span> NOTE : MCX Market Closed. Today's applicable bullion rates are shown below. </span>
+          <span> NOTE : MCX Market Closed. Today's applicable silver rates are shown below. </span>
         </div>
       </section>
 
@@ -358,8 +358,8 @@ const styles = {
     boxSizing: "border-box",
   },
   kachhiValue: {
-    fontSize: 30,
-    fontWeight: 650,
+    fontSize: 29,
+    fontWeight: 600,
    },
   pageCenter: {
     minHeight: "100vh",
