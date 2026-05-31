@@ -358,8 +358,8 @@ const styles = {
     boxSizing: "border-box",
   },
   kachhiValue: {
-    fontSize: 32,
-    fontWeight: 700,
+    fontSize: 30,
+    fontWeight: 650,
    },
   pageCenter: {
     minHeight: "100vh",
