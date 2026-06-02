@@ -424,6 +424,8 @@ const styles = {
 },
   
 statusRow: {
+  marginTop: 16,
+  color: "#9a9a9a",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
