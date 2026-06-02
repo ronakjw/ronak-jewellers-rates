@@ -166,9 +166,9 @@ function CustomNotice({ message }) {
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
-          <CustomNotice message={settings.noticeMessage} />
           </div>
-      </section>
+       <CustomNotice message={settings.noticeMessage} />
+    </section>
 
       <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
