@@ -423,17 +423,12 @@ const styles = {
   fontWeight: 700,
 },
   
-  statusRow: {
-  marginTop: 16,
+statusRow: {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
-  color: "#9f9f9f",
-  fontSize: 13,
-  textAlign: "center",
-  flexWrap: "wrap",
-},
+}
 
 liveDot: {
   width: 8,
@@ -442,7 +437,8 @@ liveDot: {
   background: "#d6b45c",
   boxShadow: "0 0 12px #d6b45c",
   display: "inline-block",
-  flexShrink: 0,
+  verticalAlign: "middle",
+
 },
   mainCard: {
     width: "100%",
