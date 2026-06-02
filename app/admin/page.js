@@ -162,6 +162,7 @@ const newSettings = {
   holidayMode: Boolean(settings.holidayMode),
   holidayBuyingRate: parseInt(settings.holidayBuyingRate || 0, 10),
   holidaySellingRate: parseInt(settings.holidaySellingRate || 0, 10),
+  noticeMessage: String(settings.noticeMessage || "").trim(),
 };
  if (!settings.autoContract && !String(settings.manualContract || "").trim()) 
  {  setMessage("Manual contract cannot be empty.");
@@ -539,7 +540,7 @@ await addDoc(collection(db, "changeLogs"), {
   </select>
 </div>
  
-    //LAST BLOCK            
+                
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
 
@@ -549,7 +550,7 @@ await addDoc(collection(db, "changeLogs"), {
     onChange={(e) =>
       updateField("noticeMessage", e.target.value)
     }
-    placeholder="Leave empty to hide the note from homepage"
+    placeholder="Leave empty to hide"
     rows={4}
   />
 </div>
