@@ -433,6 +433,7 @@ statusRow: {
 },
 
 liveDot: {
+  top: "2px",
   width: 8,
   height: 8,
   borderRadius: "50%",
