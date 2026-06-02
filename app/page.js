@@ -428,7 +428,7 @@ statusRow: {
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
-}
+},
 
 liveDot: {
   width: 8,
