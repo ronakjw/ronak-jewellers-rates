@@ -49,6 +49,11 @@ function formatPremium(value) {
   const sign = value > 0 ? "+" : "";
   return `${sign}₹${formatPrice(value)}`;
 }
+export default function Home() {
+  const [settings, setSettings] = useState(null);
+  const [quote, setQuote] = useState(null);
+  const [fetchError, setFetchError] = useState("");
+  const [now, setNow] = useState(new Date());
 function CustomNotice({ message }) {
   if (!message?.trim()) {
     return null;
@@ -60,11 +65,6 @@ function CustomNotice({ message }) {
     </div>
   );
 }
-export default function Home() {
-  const [settings, setSettings] = useState(null);
-  const [quote, setQuote] = useState(null);
-  const [fetchError, setFetchError] = useState("");
-  const [now, setNow] = useState(new Date());
 
   useEffect(() => {
     const unsub = onSnapshot(
