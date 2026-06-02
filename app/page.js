@@ -59,8 +59,8 @@ function CustomNotice({ message }) {
     return null;
   }
   return (
-    <div style={styles.noticeBox}>
-      <strong>Note:</strong>{" "}
+    <div style={styles.statusRow}>
+      {" "}
       <span>{message.trim()}</span>
     </div>
   );
@@ -218,7 +218,7 @@ function CustomNotice({ message }) {
         </h2>
 
         <p style={styles.muted}>
-         Please Wait for the Rates
+        Loading Rates... Please Wait...
         </p>
 <ContactButtons />
    </div>
@@ -372,20 +372,8 @@ const styles = {
     fontSize: 29,
     fontWeight: 600,
    },
-  noticeBox: {
-  margin: "16px auto 0",
-  maxWidth: 760,
-  border: "1px solid rgba(214,180,92,0.34)",
-  background:
-    "linear-gradient(145deg, rgba(214,180,92,0.12), rgba(35,35,35,0.92))",
-  color: "#f3d98b",
-  borderRadius: 16,
-  padding: "14px 18px",
-  fontSize: 15,
-  lineHeight: 1.6,
-  textAlign: "center",
-},
-  pageCenter: {
+
+    pageCenter: {
     minHeight: "100vh",
     background:
       "radial-gradient(circle at top, #2b2414 0%, #0d0d0d 38%, #050505 100%)",
