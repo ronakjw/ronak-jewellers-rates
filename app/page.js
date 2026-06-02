@@ -166,8 +166,8 @@ function CustomNotice({ message }) {
 
    {settings.noticeMessage?.trim() ? (
   <div style={styles.statusRow}>
-    <span style={styles.liveDot} />
-    <CustomNotice message={settings.noticeMessage} />
+  <div style={{ marginTop: 16 }}>  <span style={styles.liveDot} />
+     </div> <CustomNotice message={settings.noticeMessage} />
   </div>
 ) : null}
 
@@ -433,9 +433,7 @@ statusRow: {
 },
 
 liveDot: {
-  top: "2px",
   width: 8,
-  marginTop: 16,
   height: 8,
   borderRadius: "50%",
   background: "#d6b45c",
