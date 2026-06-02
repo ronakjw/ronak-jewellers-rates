@@ -435,6 +435,7 @@ statusRow: {
 liveDot: {
   top: "2px",
   width: 8,
+  marginTop: 16,
   height: 8,
   borderRadius: "50%",
   background: "#d6b45c",
