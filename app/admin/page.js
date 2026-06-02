@@ -487,7 +487,18 @@ await addDoc(collection(db, "changeLogs"), {
     }
   />
 </div>
-    
+          <div style={styles.controlCard}>
+            <label style={styles.label}>Refresh After 5:30 PM / sec</label>
+            <input
+              style={styles.input}
+              type="number"
+              value={settings.refreshAfter530}
+              onChange={(e) =>
+                updateField("refreshAfter530", e.target.value)
+              }
+            />
+          </div>
+   
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla</label>
   <select
@@ -527,18 +538,21 @@ await addDoc(collection(db, "changeLogs"), {
     <option value="gm/kg">gm/kg</option>
   </select>
 </div>
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Refresh After 5:30 PM / sec</label>
-            <input
-              style={styles.input}
-              type="number"
-              value={settings.refreshAfter530}
-              onChange={(e) =>
-                updateField("refreshAfter530", e.target.value)
-              }
-            />
-          </div>
+ 
+    //LAST BLOCK            
+    <div style={styles.controlCardWide}>
+  <label style={styles.label}>Note / Message</label>
 
+  <textarea
+    style={styles.textarea}
+    value={settings.noticeMessage || ""}
+    onChange={(e) =>
+      updateField("noticeMessage", e.target.value)
+    }
+    placeholder="Leave empty to hide the note from homepage"
+    rows={4}
+  />
+</div>
           <button
             style={styles.primaryButtonWide}
             type="submit"
