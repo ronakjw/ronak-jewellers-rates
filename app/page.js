@@ -49,7 +49,17 @@ function formatPremium(value) {
   const sign = value > 0 ? "+" : "";
   return `${sign}₹${formatPrice(value)}`;
 }
-
+function CustomNotice({ message }) {
+  if (!message?.trim()) {
+    return null;
+  }
+  return (
+    <div style={styles.noticeBox}>
+      <strong>Note:</strong>{" "}
+      <span>{message.trim()}</span>
+    </div>
+  );
+}
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -156,8 +166,8 @@ export default function Home() {
 
         <div style={styles.statusRow}>
           <span style={styles.liveDot} />
-          <span> NOTE : MCX Market Closed. Today's applicable silver rates are shown below. </span>
-        </div>
+          <CustomNotice message={settings.noticeMessage} />
+          </div>
       </section>
 
       <section style={styles.mainCard}>
@@ -238,7 +248,8 @@ const finalSelling =
           <span style={styles.liveDot} />
           <span>LIVE MCX SILVER FUTURES</span>
         </div>
-      </section>
+       <CustomNotice message={settings.noticeMessage} />
+    </section>
 
       <section style={styles.mainCard}>
         <div style={styles.cardTop}>
@@ -361,6 +372,19 @@ const styles = {
     fontSize: 29,
     fontWeight: 600,
    },
+  noticeBox: {
+  margin: "16px auto 0",
+  maxWidth: 760,
+  border: "1px solid rgba(214,180,92,0.34)",
+  background:
+    "linear-gradient(145deg, rgba(214,180,92,0.12), rgba(35,35,35,0.92))",
+  color: "#f3d98b",
+  borderRadius: 16,
+  padding: "14px 18px",
+  fontSize: 15,
+  lineHeight: 1.6,
+  textAlign: "center",
+},
   pageCenter: {
     minHeight: "100vh",
     background:
