@@ -165,7 +165,7 @@ function CustomNotice({ message }) {
         <h1 style={styles.brandName}>- Ronak Jewellers -</h1>
 
         <div style={styles.statusRow}>
-        <p>  <span style={styles.liveDot} />" "<CustomNotice message={settings.noticeMessage} /> </p>
+        <p><span style={styles.liveDot} /> <CustomNotice message={settings.noticeMessage} /></p>
           </div>      
     </section>
 
