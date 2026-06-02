@@ -405,16 +405,8 @@ const styles = {
     textShadow: "0 0 22px rgba(214,180,92,0.16)",
   },
 
-  statusRow: {
-    marginTop: 14,
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 8,
-    color: "#9f9f9f",
-    fontSize: 15,
-    letterSpacing: "0.18em",
-  },
-kachhiBox: {
+  
+  kachhiBox: {
   margin: "28px auto 0",
   maxWidth: 520,
   border: "1px solid rgba(214,180,92,0.38)",
@@ -430,14 +422,28 @@ kachhiBox: {
   fontSize: 16,
   fontWeight: 700,
 },
-  liveDot: {
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    background: "#d6b45c",
-    boxShadow: "0 0 12px #d6b45c",
-  },
+  
+  statusRow: {
+  marginTop: 16,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  color: "#9f9f9f",
+  fontSize: 13,
+  textAlign: "center",
+  flexWrap: "wrap",
+},
 
+liveDot: {
+  width: 8,
+  height: 8,
+  borderRadius: "50%",
+  background: "#d6b45c",
+  boxShadow: "0 0 12px #d6b45c",
+  display: "inline-block",
+  flexShrink: 0,
+},
   mainCard: {
     width: "100%",
     maxWidth: 920,
