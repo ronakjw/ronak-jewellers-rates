@@ -408,7 +408,7 @@ const styles = {
     alignItems: "center",
     gap: 8,
     color: "#9f9f9f",
-    fontSize: 12,
+    fontSize: 15,
     letterSpacing: "0.18em",
   },
 kachhiBox: {
