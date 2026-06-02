@@ -248,7 +248,7 @@ const finalSelling =
           <span style={styles.liveDot} />
           <span>LIVE MCX SILVER FUTURES</span>
         </div>
-       <CustomNotice message={settings.noticeMessage} />
+     <p>  <CustomNotice message={settings.noticeMessage} /> </p>
     </section>
 
       <section style={styles.mainCard}>
