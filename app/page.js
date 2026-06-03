@@ -57,12 +57,7 @@ function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
   const stepSize = Number(settings.premiumStepSize || 1000);
   const adjustment = Number(settings.premiumStepAdjustment || 500);
   const difference = currentMcx - openingMcx;
-
-  // Only reduce premium when MCX rises
-  const steps = Math.max(
-    0,
-    Math.floor(difference / stepSize)
-  );
+  const steps = Math.trunc(difference / stepSize);
   return Number(basePremium || 0) - steps * adjustment;
 }
 export default function Home() {
