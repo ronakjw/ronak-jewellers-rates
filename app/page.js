@@ -196,9 +196,9 @@ function CustomNotice({ message }) {
   <p style={styles.finalLabel}>
     Previous Closing </p>
 
-  <h2 style={styles.finalPrice}>
-    ₹{formatPrice(quote.mcxClosingRate)}
-    <span style={styles.unit}> / kg</span>
+  <h2 style={styles.mcxPrice}>
+    ₹{formatPrice(quote?.mcxClosingRate || 0)}}
+    <span style={styles.unit}> /kg </span>
   </h2>
 </div>
       </section>
@@ -299,7 +299,7 @@ const finalSelling =
           </div>
 
           <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Sell Price</p>
+            <p style={styles.label}>MCX Sell</p>
             <h2 style={styles.mcxPrice}>
               ₹{formatPrice(quote.mcxSellPrice)}
               <span style={styles.unit}> / kg</span>
@@ -310,7 +310,7 @@ const finalSelling =
               <strong>{formatPremium(sellingPremium)}</strong>
             </div>
 
-            <p style={styles.finalLabel}>Final Selling Rate</p>
+            <p style={styles.finalLabel}>Final Selling</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(finalSelling)}
               <span style={styles.unit}> / kg</span>
@@ -534,7 +534,6 @@ disclaimer: {
     border: "1px solid rgba(255,255,255,0.08)",
     borderRadius: 22,
     padding: 20,
-    textAlign: "center",
   },
 
   mcxPrice: {
