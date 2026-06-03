@@ -139,6 +139,8 @@ export async function GET() {
       mcxBuyPrice: quote.depth?.buy?.[0]?.price ?? null,
       mcxSellPrice: quote.depth?.sell?.[0]?.price ?? null,
       lastPrice: quote.last_price,
+      mcxOpeningRate: quote.ohlc?.open ?? null,
+      mcxClosingRate: quote.ohlc?.close ?? null,
       timestamp: quote.timestamp,
       lastTradeTime: quote.last_trade_time,
     });
