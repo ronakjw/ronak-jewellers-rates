@@ -585,7 +585,7 @@ await addDoc(collection(db, "changeLogs"), {
 </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>Premium Reduction</label>
+  <label style={styles.label}>Premium Adj.</label>
   <input
     style={styles.input}
     type="number"
