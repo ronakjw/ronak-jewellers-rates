@@ -191,16 +191,17 @@ function CustomNotice({ message }) {
             </h1>
           </div>
         </div>
-
-  <div style={styles.holidayClosingBox}>
+ <div style={styles.holidayClosingBox}>
   <p style={styles.finalLabel}>
-    Previous Closing </p>
+    MCX Closing Rate
+  </p>
 
-  <h2 style={styles.mcxPrice}>
-    ₹{formatPrice(quote?.mcxClosingRate || 0)}}
-    <span style={styles.unit}> /kg </span>
+  <h2 style={styles.finalPrice}>
+    ₹{formatPrice(quote.mcxClosingRate)}
+    <span style={styles.unit}> / kg</span>
   </h2>
-</div>
+</div>      
+      
       </section>
 
 
