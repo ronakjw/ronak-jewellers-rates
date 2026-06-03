@@ -191,12 +191,7 @@ function CustomNotice({ message }) {
             </h1>
           </div>
         </div>
- <div style={styles.holidayClosingBox}>
-  <p style={styles.finalLabel}>
-    MCX Closing Rate
-  </p>
 
-  <h2 style={styles.finalPrice}>
 {quote?.mcxClosingRate ? (
   <div style={styles.holidayClosingBox}>
     <p style={styles.finalLabel}>
@@ -209,8 +204,6 @@ function CustomNotice({ message }) {
     </h2>
   </div>
 ) : null}
-<span style={styles.unit}> / kg</span>
-  </h2>
 </div>      
       
       </section>
