@@ -403,12 +403,11 @@ function ClosedScreen() {
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
       <div style={styles.closedCard}>
         <h2 style={styles.closedTitle}>
-          Please call for current bullion rates.
+          Live rates are CLOSED!
         </h2>
         <p style={styles.muted}>
-          Live rates are currently unavailable.
+         Please Visit Tomorrow 
         </p>
-       <ContactButtons />
       </div>
     </main>
   );
