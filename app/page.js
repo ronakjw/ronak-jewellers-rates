@@ -197,7 +197,7 @@ function CustomNotice({ message }) {
   </p>
 
   <h2 style={styles.finalPrice}>
-    ₹{formatPrice(quote.mcxClosingRate)}
+   ₹{formatPrice(quote?.mcxClosingRate || 0)}
     <span style={styles.unit}> / kg</span>
   </h2>
 </div>      
