@@ -204,9 +204,7 @@ function CustomNotice({ message }) {
     </h2>
   </div>
 ) : null}
-</div>      
-      
-      </section>
+  </section>
 
 
       
