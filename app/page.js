@@ -317,16 +317,14 @@ const finalSelling =
         </div>
                 
   <div style={styles.mcxReference}>
-  <span>
-    MCX Open: ₹{formatPrice(quote.mcxOpeningRate)} / kg
+  <span>Opening: {formatPrice(quote.mcxOpeningRate)} 
   </span>
 
   <span style={styles.referenceDivider}>|</span>
 
-  <span>
-    MCX Close: ₹{formatPrice(quote.mcxClosingRate)} / kg
+  <span>Closing: {formatPrice(quote.mcxClosingRate)}
   </span>
-</div>
+  </div>
         
       </section>
 
@@ -577,9 +575,10 @@ disclaimer: {
   },
 
   metaRow: {
-    marginTop: 22,
-    borderTop: "1px solid rgba(255,255,255,0.08)",
-    paddingTop: 16,
+    marginTop: 11,
+    marginBottom: 16,
+    borderBottom: "1px solid rgba(255,255,255,0.08)",
+    paddingBottom: 10,
     display: "flex",
     justifyContent: "space-between",
     gap: 12,
