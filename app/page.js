@@ -191,6 +191,16 @@ function CustomNotice({ message }) {
             </h1>
           </div>
         </div>
+   <div style={styles.holidayClosingBox}>
+  <p style={styles.finalLabel}>
+    MCX Closing Rate
+  </p>
+
+  <h2 style={styles.finalPrice}>
+    ₹{formatPrice(quote.mcxClosingRate)}
+    <span style={styles.unit}> / kg</span>
+  </h2>
+</div>
       </section>
  
 <KachhiBadla settings={settings} />
@@ -255,8 +265,10 @@ const finalSelling =
     </section>
 
       <section style={styles.mainCard}>
-        <div style={styles.cardTop}>
-            
+    <div style={styles.metaRow}>
+          <span>Last Updated: {quote.timestamp}</span>
+    </div>
+        <div style={styles.cardTop}>  
             <h2 style={styles.contract}>{quote.contract}</h2>
         </div>
 
@@ -303,10 +315,19 @@ const finalSelling =
             </h1>
           </div>
         </div>
+                
+  <div style={styles.mcxReference}>
+  <span>
+    MCX Open: ₹{formatPrice(quote.mcxOpeningRate)} / kg
+  </span>
 
-        <div style={styles.metaRow}>
-          <span>Last Updated: {quote.timestamp}</span>
-        </div>
+  <span style={styles.referenceDivider}>|</span>
+
+  <span>
+    MCX Close: ₹{formatPrice(quote.mcxClosingRate)} / kg
+  </span>
+</div>
+        
       </section>
 
 <KachhiBadla settings={settings} />
@@ -612,7 +633,33 @@ disclaimer: {
   muted: {
     color: "#9f9f9f",
   },
+mcxReference: {
+  margin: "18px auto 0",
+  color: "#8f8f8f",
+  fontSize: 13,
+  textAlign: "center",
+  display: "flex",
+  justifyContent: "center",
+  gap: 10,
+  flexWrap: "wrap",
+},
 
+referenceDivider: {
+  color: "#555",
+},
+
+holidayClosingBox: {
+  margin: "22px auto 0",
+  width: "100%",
+  maxWidth: 500,
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+  border: "1px solid rgba(214,180,92,0.32)",
+  borderRadius: 22,
+  padding: 20,
+  textAlign: "center",
+  boxSizing: "border-box",
+},
   errorBox: {
     marginBottom: 18,
     padding: 14,
