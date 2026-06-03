@@ -191,18 +191,18 @@ function CustomNotice({ message }) {
             </h1>
           </div>
         </div>
-   <div style={styles.holidayClosingBox}>
-  <p style={styles.finalLabel}>
-    MCX Closing Rate
-  </p>
+      </section>
 
-  <h2 style={styles.finalPrice}>
+<div style={styles.holidayClosingBox}>
+  <p style={styles.finalLabel}>
+    Previous Closing </p>
+
+  <h3 style={styles.finalPrice}>
     ₹{formatPrice(quote.mcxClosingRate)}
     <span style={styles.unit}> / kg</span>
-  </h2>
+  </h3>
 </div>
-      </section>
- 
+      
 <KachhiBadla settings={settings} />
 <ContactButtons />
 
@@ -532,6 +532,7 @@ disclaimer: {
     border: "1px solid rgba(255,255,255,0.08)",
     borderRadius: 22,
     padding: 20,
+    textAlign: "center",
   },
 
   mcxPrice: {
@@ -575,7 +576,6 @@ disclaimer: {
   },
 
   metaRow: {
-    marginTop: 11,
     marginBottom: 16,
     borderBottom: "1px solid rgba(255,255,255,0.08)",
     paddingBottom: 10,
