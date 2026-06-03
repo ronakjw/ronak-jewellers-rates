@@ -308,18 +308,20 @@ const finalSelling =
 
         <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Buy Price</p>
+            <p style={styles.label}>MCX Buy</p>
             <h2 style={styles.mcxPrice}>
               ₹{formatPrice(quote.mcxBuyPrice)}
               <span style={styles.unit}> / kg</span>
             </h2>
 
+          {settings.showPremium ? (
             <div style={styles.premiumBox}>
               <span>Buying Premium</span>
               <strong>{formatPremium(buyingPremium)}</strong>
             </div>
+            ) : null}
 
-            <p style={styles.finalLabel}>Final Buying Rate</p>
+            <p style={styles.finalLabel}>We Buy at :</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(finalBuying)}
               <span style={styles.unit}> / kg</span>
@@ -333,12 +335,14 @@ const finalSelling =
               <span style={styles.unit}> / kg</span>
             </h2>
 
-            <div style={styles.premiumBox}>
+            {settings.showPremium ? (
+                <div style={styles.premiumBox}>
               <span>Selling Premium</span>
               <strong>{formatPremium(sellingPremium)}</strong>
             </div>
+            ) : null}
 
-            <p style={styles.finalLabel}>Final Selling</p>
+            <p style={styles.finalLabel}>We Sell at :</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(finalSelling)}
               <span style={styles.unit}> / kg</span>
