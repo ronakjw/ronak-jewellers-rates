@@ -163,6 +163,10 @@ const newSettings = {
   holidayBuyingRate: parseInt(settings.holidayBuyingRate || 0, 10),
   holidaySellingRate: parseInt(settings.holidaySellingRate || 0, 10),
   noticeMessage: String(settings.noticeMessage || "").trim(),
+  autoPremiumEnabled: Boolean(settings.autoPremiumEnabled),
+  showPremium: Boolean(settings.showPremium),
+  premiumStepSize: parseInt(settings.premiumStepSize || 1000, 10),
+  premiumStepAdjustment: parseInt(settings.premiumStepAdjustment || 500, 10),
 };
  if (!settings.autoContract && !String(settings.manualContract || "").trim()) 
  {  setMessage("Manual contract cannot be empty.");
@@ -539,7 +543,58 @@ await addDoc(collection(db, "changeLogs"), {
     <option value="gm/kg">gm/kg</option>
   </select>
 </div>
- 
+
+    <div style={styles.controlCard}>
+  <label style={styles.label}>Auto Premium</label>
+  <select
+    style={styles.input}
+    value={settings.autoPremiumEnabled ? "yes" : "no"}
+    onChange={(e) =>
+      updateField("autoPremiumEnabled", e.target.value === "yes")
+    }
+  >
+    <option value="no">Off</option>
+    <option value="yes">On</option>
+  </select>
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Show Premium</label>
+  <select
+    style={styles.input}
+    value={settings.showPremium ? "yes" : "no"}
+    onChange={(e) =>
+      updateField("showPremium", e.target.value === "yes")
+    }
+  >
+    <option value="yes">Show</option>
+    <option value="no">Hide</option>
+  </select>
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>MCX Step Size</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.premiumStepSize || 1000}
+    onChange={(e) =>
+      updateField("premiumStepSize", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Premium Reduction</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.premiumStepAdjustment || 500}
+    onChange={(e) =>
+      updateField("premiumStepAdjustment", e.target.value)
+    }
+  />
+</div>
                 
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
