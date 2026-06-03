@@ -49,6 +49,22 @@ function formatPremium(value) {
   const sign = value > 0 ? "+" : "";
   return `${sign}₹${formatPrice(value)}`;
 }
+// Auto premium function starts
+function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
+  if (!settings.autoPremiumEnabled) {
+    return Number(basePremium || 0);
+  }
+  const stepSize = Number(settings.premiumStepSize || 1000);
+  const adjustment = Number(settings.premiumStepAdjustment || 500);
+  const difference = currentMcx - openingMcx;
+
+  // Only reduce premium when MCX rises
+  const steps = Math.max(
+    0,
+    Math.floor(difference / stepSize)
+  );
+  return Number(basePremium || 0) - steps * adjustment;
+}
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -244,8 +260,17 @@ function CustomNotice({ message }) {
   );
 }
 
-  const buyingPremium = Number(settings.buyingPremium || 0);
-  const sellingPremium = Number(settings.sellingPremium || 0);
+const buyingPremium = getAutoPremium(
+  settings.buyingPremium,
+  quote.mcxBuyPrice,
+  quote.mcxOpeningRate,
+  settings );
+
+const sellingPremium = getAutoPremium(
+  settings.sellingPremium,
+  quote.mcxSellPrice,
+  quote.mcxOpeningRate,
+  settings );
 
  const finalBuying =
   Number(quote?.mcxBuyPrice || 0) +
