@@ -191,17 +191,19 @@ function CustomNotice({ message }) {
             </h1>
           </div>
         </div>
-      </section>
 
-<div style={styles.holidayClosingBox}>
+  <div style={styles.holidayClosingBox}>
   <p style={styles.finalLabel}>
     Previous Closing </p>
 
-  <h3 style={styles.finalPrice}>
+  <h2 style={styles.finalPrice}>
     ₹{formatPrice(quote.mcxClosingRate)}
     <span style={styles.unit}> / kg</span>
-  </h3>
+  </h2>
 </div>
+      </section>
+
+
       
 <KachhiBadla settings={settings} />
 <ContactButtons />
