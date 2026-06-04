@@ -60,6 +60,9 @@ function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
   const steps = Math.trunc(difference / stepSize);
   return Number(basePremium || 0) - steps * adjustment;
 }
+function roundToNearest500(value) {
+  return Math.floor((value + 249) / 500) * 500;
+}
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -267,13 +270,16 @@ const sellingPremium = getAutoPremium(
   quote.mcxOpeningRate,
   settings );
 
- const finalBuying =
-  Number(quote?.mcxBuyPrice || 0) +
-  Number(buyingPremium);
+const rawFinalBuying = quote.mcxBuyPrice + buyingPremium;
+const rawFinalSelling = quote.mcxSellPrice + sellingPremium;
 
-const finalSelling =
-  Number(quote?.mcxSellPrice || 0) +
-  Number(sellingPremium);
+const finalBuying = settings.showPremium
+  ? rawFinalBuying
+  : roundToNearest500(rawFinalBuying);
+
+const finalSelling = settings.showPremium
+  ? rawFinalSelling
+  : roundToNearest500(rawFinalSelling);
 
   return (
     <main style={styles.page}>
