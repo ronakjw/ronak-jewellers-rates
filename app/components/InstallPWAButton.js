@@ -56,7 +56,7 @@ export default function InstallPWAButton() {
         cursor: "pointer",
       }}
     >
-      Install RJ Bullion App
+      📲 Install App
     </button>
   );
 }
