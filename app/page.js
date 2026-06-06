@@ -676,11 +676,11 @@ volatilityWarning: {
   background:
     "linear-gradient(145deg, rgba(255,193,7,0.16), rgba(35,35,35,0.92))",
   color: "#f3d98b",
-  borderRadius: 16,
-  padding: "15px 18px",
+  borderRadius: 11,
+  padding: "10px 12px",
   textAlign: "center",
-  fontSize: 15,
-  lineHeight: 1.6,
+  fontSize: 11,
+  lineHeight: 1.2,
 },
   contactWrap: {
     marginTop: 28,
