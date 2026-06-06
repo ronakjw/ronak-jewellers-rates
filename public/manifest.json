@@ -1,6 +1,6 @@
 {
-  "name": "RJ Bullion",
-  "short_name": "RJ Bullion",
+  "name": "RJ-Rates",
+  "short_name": "RJ",
   "description": "Live bullion rates by Ronak Jewellers",
   "start_url": "/",
   "scope": "/",
