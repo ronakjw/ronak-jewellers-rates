@@ -108,7 +108,8 @@ function CustomNotice({ message }) {
         refreshMs: 7000,
       };
     }
-
+    const [priceHistory, setPriceHistory] = useState([]);
+    const [volatilityUntil, setVolatilityUntil] = useState(null);
     const hour = now.getHours();
     const minute = now.getMinutes();
 
@@ -154,7 +155,38 @@ function CustomNotice({ message }) {
         }
 
         setQuote(data);
-      } catch (err) {
+        const currentBuyPrice = Number(data.mcxBuyPrice || 0);
+
+if (currentBuyPrice) {
+  setPriceHistory((prev) => {
+    const now = Date.now();
+
+    const updated = [
+      ...prev,
+      {
+        price: currentBuyPrice,
+        time: now,
+      },
+    ].filter((item) => now - item.time <= 40000);
+
+    if (updated.length > 1) {
+      const prices = updated.map((item) => item.price);
+
+      const highest = Math.max(...prices);
+      const lowest = Math.min(...prices);
+
+      const isVolatile = highest - lowest >= 1100;
+
+      if (isVolatile) {
+        setVolatilityUntil(now + 10 * 60 * 1000);
+      }
+    }
+
+    return updated;
+  });
+}
+      } 
+      catch (err) {
         setFetchError(
         err?.message ||
         "Unable to connect to live rate server");
@@ -220,9 +252,6 @@ function CustomNotice({ message }) {
   </div>
 ) : null}
   </section>
-
-
-      
 <KachhiBadla settings={settings} />
 <ContactButtons />
 <InstallPWAButton />
@@ -281,8 +310,12 @@ const finalBuying = settings.showPremium
 const finalSelling = settings.showPremium
   ? rawFinalSelling
   : roundToNearest500(rawFinalSelling);
-
-  return (
+const showVolatilityWarning =
+  settings.volatilityWarningEnabled &&
+  volatilityUntil &&
+  Date.now() < volatilityUntil;
+  
+return (
     <main style={styles.page}>
       <section style={styles.hero}>
         <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
@@ -295,6 +328,15 @@ const finalSelling = settings.showPremium
         </div>
      <p>  <CustomNotice message={settings.noticeMessage} /> </p>
     </section>
+
+{showVolatilityWarning ? (
+  <div style={styles.volatilityWarning}>
+    <strong>Market is volatile right now.</strong>
+    <br />
+    Rates shown below may be for reference purpose only.
+    Please call us before making any buying or selling decision.
+  </div>
+) : null}
 
       <section style={styles.mainCard}>
     <div style={styles.metaRow}>
@@ -621,7 +663,19 @@ disclaimer: {
     color: "#858585",
     fontSize: 13,
   },
-
+volatilityWarning: {
+  maxWidth: 760,
+  margin: "0 auto 22px",
+  border: "1px solid rgba(255, 193, 7, 0.45)",
+  background:
+    "linear-gradient(145deg, rgba(255,193,7,0.16), rgba(35,35,35,0.92))",
+  color: "#f3d98b",
+  borderRadius: 16,
+  padding: "15px 18px",
+  textAlign: "center",
+  fontSize: 15,
+  lineHeight: 1.6,
+},
   contactWrap: {
     marginTop: 28,
     display: "flex",
