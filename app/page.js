@@ -177,7 +177,7 @@ if (currentBuyPrice) {
       const highest = Math.max(...prices);
       const lowest = Math.min(...prices);
 
-      const isVolatile = highest - lowest >= 1100;
+      const isVolatile = highest - lowest >= 500;
 
       if (isVolatile) {
         setVolatilityUntil(now + 10 * 60 * 1000);
