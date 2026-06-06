@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
+import InstallPWAButton from "./components/InstallPWAButton";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -224,7 +225,7 @@ function CustomNotice({ message }) {
       
 <KachhiBadla settings={settings} />
 <ContactButtons />
-
+<InstallPWAButton />
   <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable premiums. 
                 Final rates may vary depending on confirmation at the time of enquiry. </p>
 </main>
@@ -365,7 +366,7 @@ const finalSelling = settings.showPremium
 
 <KachhiBadla settings={settings} />
  <ContactButtons />
-                
+ <InstallPWAButton />               
   <p style={styles.disclaimer}> Rates displayed are based on market conditions and applicable premiums.
                 Final rates may vary depending on confirmation at the time of enquiry. </p>
     </main>
@@ -410,6 +411,7 @@ function ClosedScreen() {
          Please Visit Tomorrow 
         </p>
       </div>
+  <InstallPWAButton />
     </main>
   );
 }
