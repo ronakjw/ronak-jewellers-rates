@@ -223,7 +223,7 @@ if (currentBuyPrice) {
     </section>
 
   <div style={styles.volatilityWarning}>
-    <strong>⚠️ MARKET VOLATILITY ALERT! ⚠️ </strong>
+    <strong>⚠️  MARKET VOLATILITY ALERT!  ⚠️ </strong>
     <br />
     Please call us before making any Trade.
   </div>
@@ -676,11 +676,11 @@ volatilityWarning: {
   background:
     "linear-gradient(145deg, rgba(255,193,7,0.16), rgba(35,35,35,0.92))",
   color: "#f3d98b",
-  borderRadius: 4,
+  borderRadius: 5,
   padding: "9px 11px",
   textAlign: "center",
-  fontSize: 12,
-  lineHeight: 1.3,
+  fontSize: 14,
+  lineHeight: 1.5,
 },
   contactWrap: {
     marginTop: 28,
