@@ -1,6 +1,6 @@
 {
   "name": "RJ-Rates",
-  "short_name": "RJ",
+  "short_name": "RJ App",
   "description": "Live bullion rates by Ronak Jewellers",
   "start_url": "/",
   "scope": "/",
