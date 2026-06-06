@@ -310,10 +310,7 @@ const finalBuying = settings.showPremium
 const finalSelling = settings.showPremium
   ? rawFinalSelling
   : roundToNearest500(rawFinalSelling);
-const showVolatilityWarning =
-  settings.volatilityWarningEnabled &&
-  volatilityUntil &&
-  Date.now() < volatilityUntil;
+
   
 return (
     <main style={styles.page}>
@@ -329,11 +326,12 @@ return (
      <p>  <CustomNotice message={settings.noticeMessage} /> </p>
     </section>
 
-{showVolatilityWarning ? (
+{settings.volatilityWarningEnabled &&
+volatilityUntil &&
+Date.now() < volatilityUntil ? (
   <div style={styles.volatilityWarning}>
-    <strong>Market is volatile right now.</strong>
+    <strong>MARKET VOLATILITY ALERT!</strong>
     <br />
-    Rates shown below may be for reference purpose only.
     Please call us before making any buying or selling decision.
   </div>
 ) : null}
