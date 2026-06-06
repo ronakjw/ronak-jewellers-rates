@@ -222,11 +222,6 @@ if (currentBuyPrice) {
 
     </section>
 
-  <div style={styles.volatilityWarning}>
-    <strong>⚠️  MARKET VOLATILITY ALERT!  ⚠️ </strong>
-    <br />
-    Please call us before making any Trade.
-  </div>
 
       <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
@@ -338,9 +333,9 @@ return (
 volatilityUntil &&
 Date.now() < volatilityUntil ? (
   <div style={styles.volatilityWarning}>
-    <strong>MARKET VOLATILITY ALERT!</strong>
+    <strong>⚠️  MARKET VOLATILITY ALERT!  ⚠️ </strong>
     <br />
-    Please call us before making any buying or selling decision.
+    Please call us before making any Trade.
   </div>
 ) : null}
 
