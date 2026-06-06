@@ -167,6 +167,7 @@ const newSettings = {
   showPremium: Boolean(settings.showPremium),
   premiumStepSize: parseInt(settings.premiumStepSize || 1000, 10),
   premiumStepAdjustment: parseInt(settings.premiumStepAdjustment || 500, 10),
+  volatilityWarningEnabled: Boolean(settings.volatilityWarningEnabled),
 };
  if (!settings.autoContract && !String(settings.manualContract || "").trim()) 
  {  setMessage("Manual contract cannot be empty.");
@@ -595,7 +596,18 @@ await addDoc(collection(db, "changeLogs"), {
     }
   />
 </div>
-                
+<div style={styles.controlCard}>
+  <label style={styles.label}>Volatility Warning</label>
+  <select
+    style={styles.input}
+    value={settings.volatilityWarningEnabled ? "yes" : "no"}
+    onChange={(e) => updateField("volatilityWarningEnabled", e.target.value === "yes") }
+  >
+    <option value="yes">On</option>
+    <option value="no">Off</option>
+  </select>
+</div>
+    
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
 
