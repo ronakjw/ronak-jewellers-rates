@@ -69,6 +69,8 @@ export default function Home() {
   const [quote, setQuote] = useState(null);
   const [fetchError, setFetchError] = useState("");
   const [now, setNow] = useState(new Date());
+  const [priceHistory, setPriceHistory] = useState([]);
+  const [volatilityUntil, setVolatilityUntil] = useState(null);
 function CustomNotice({ message }) {
   if (!message?.trim()) {
     return null;
@@ -101,6 +103,7 @@ function CustomNotice({ message }) {
   }, []);
 
   const marketState = useMemo(() => {
+   
     if (!settings) {
       return {
         withinMarketHours: false,
@@ -108,8 +111,7 @@ function CustomNotice({ message }) {
         refreshMs: 7000,
       };
     }
-    const [priceHistory, setPriceHistory] = useState([]);
-    const [volatilityUntil, setVolatilityUntil] = useState(null);
+   
     const hour = now.getHours();
     const minute = now.getMinutes();
 
