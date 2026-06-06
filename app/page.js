@@ -222,6 +222,12 @@ if (currentBuyPrice) {
 
     </section>
 
+  <div style={styles.volatilityWarning}>
+    <strong>MARKET VOLATILITY ALERT!</strong>
+    <br />
+    Please call us before making any buying or selling decision.
+  </div>
+
       <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
