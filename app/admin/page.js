@@ -51,6 +51,8 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const [changeLogs, setChangeLogs] = useState([]);
+  const [assistantCommand, setAssistantCommand] = useState("");
+  const [assistantPreview, setAssistantPreview] = useState(null);
     useEffect(() => {
   if (!user) return;
 
@@ -113,7 +115,20 @@ export default function AdminPage() {
       });
     }
   }
+  
+function confirmAssistantChanges() {
+  if (!assistantPreview) return;
 
+  setSettings((prev) => ({
+    ...prev,
+    ...assistantPreview,
+  }));
+
+  setAssistantPreview(null);
+  setAssistantCommand("");
+  setMessage("RJ Assistant changes applied. Click Save to update website.");
+}
+  
   async function login(e) {
     e.preventDefault();
     setMessage("");
@@ -136,7 +151,64 @@ export default function AdminPage() {
       setMessage("Login failed. Check email/password.");
     }
   }
+function runAssistantCommand() {
+  const text = assistantCommand.toLowerCase().trim();
+  const changes = {};
 
+  const number = text.match(/\d+/)?.[0];
+
+  if (text.includes("buying premium") || text.includes("buy premium")) {
+    if (number) changes.buyingPremium = number;
+  }
+
+  if (text.includes("selling premium") || text.includes("sell premium")) {
+    if (number) changes.sellingPremium = number;
+  }
+
+  if (text.includes("rates hide") || text.includes("hide rates")) {
+    changes.showRates = false;
+  }
+
+  if (text.includes("rates show") || text.includes("show rates")) {
+    changes.showRates = true;
+  }
+
+  if (text.includes("holiday mode on")) {
+    changes.holidayMode = true;
+  }
+
+  if (text.includes("holiday mode off")) {
+    changes.holidayMode = false;
+  }
+
+  if (text.includes("kachhi") || text.includes("badla")) {
+    if (number) changes.kachhiBadlaValue = number;
+  }
+
+  if (text.includes("volatility on")) {
+    changes.volatilityWarningEnabled = true;
+  }
+
+  if (text.includes("volatility off")) {
+    changes.volatilityWarningEnabled = false;
+  }
+
+  if (text.includes("note hata") || text.includes("remove note")) {
+    changes.noticeMessage = "";
+  }
+
+  if (text.includes("note")) {
+    const noteText = assistantCommand.split(":")[1];
+    if (noteText) changes.noticeMessage = noteText.trim();
+  }
+
+  if (Object.keys(changes).length === 0) {
+    setMessage("RJ Assistant could not understand this command.");
+    return;
+  }
+
+  setAssistantPreview(changes);
+}
   async function saveSettings(e) {
     e.preventDefault();
 
@@ -355,6 +427,45 @@ await addDoc(collection(db, "changeLogs"), {
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
 
+<div style={styles.assistantCard}>
+  <h2 style={styles.assistantTitle}>🤖 RJ Assistant</h2>
+
+  <input
+    style={styles.input}
+    value={assistantCommand}
+    onChange={(e) => setAssistantCommand(e.target.value)}
+    placeholder="Example: buying premium 5000 kar do"
+  />
+
+  <button
+    type="button"
+    style={styles.primaryButton}
+    onClick={runAssistantCommand}
+  >
+    Understand Command
+  </button>
+
+  {assistantPreview ? (
+    <div style={styles.assistantPreview}>
+      <p>Detected changes:</p>
+
+      {Object.entries(assistantPreview).map(([key, value]) => (
+        <p key={key}>
+          {key}: <strong>{String(value)}</strong>
+        </p>
+      ))}
+
+      <button
+        type="button"
+        style={styles.primaryButton}
+        onClick={confirmAssistantChanges}
+      >
+        Apply Changes
+      </button>
+    </div>
+  ) : null}
+</div>
+    
         <form onSubmit={saveSettings} style={styles.grid}>
           <div style={styles.controlCard}>
             <label style={styles.label}>Buying Premium</label>
@@ -983,7 +1094,24 @@ logTitle: {
   color: "#f3d98b",
   marginBottom: 14,
 },
+assistantCard: {
+  marginBottom: 22,
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+  border: "1px solid rgba(214,180,92,0.22)",
+  borderRadius: 18,
+  padding: 16,
+},
 
+assistantTitle: {
+  color: "#f3d98b",
+  marginTop: 0,
+},
+
+assistantPreview: {
+  marginTop: 14,
+  color: "#f3d98b",
+},
 logCard: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
