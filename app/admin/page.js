@@ -162,8 +162,11 @@ function runAssistantCommand() {
   .replace("चालू", "on")
   .replace("बंद", "off");
   const changes = {};
-
-  const number = text.match(/\d+/)?.[0];
+  const number = text.match(/-?\d+/)?.[0];
+  let text = assistantCommand.toLowerCase().trim();
+  text = text
+  .replace("minus ", "-")
+  .replace("negative ", "-");
 
   if (text.includes("buying premium") || text.includes("buy premium")) {
     if (number) changes.buyingPremium = number;
