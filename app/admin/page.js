@@ -229,7 +229,7 @@ function runAssistantCommand() {
 
   const recognition = new SpeechRecognition();
 
-  recognition.lang = "hi-IN";
+  recognition.lang = "en-IN";
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
