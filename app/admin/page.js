@@ -53,6 +53,7 @@ export default function AdminPage() {
   const [changeLogs, setChangeLogs] = useState([]);
   const [assistantCommand, setAssistantCommand] = useState("");
   const [assistantPreview, setAssistantPreview] = useState(null);
+  const [showAssistant, setShowAssistant] = useState(false);
     useEffect(() => {
   if (!user) return;
 
@@ -427,45 +428,7 @@ await addDoc(collection(db, "changeLogs"), {
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
 
-<div style={styles.assistantCard}>
-  <h2 style={styles.assistantTitle}>🤖 RJ Assistant</h2>
 
-  <input
-    style={styles.input}
-    value={assistantCommand}
-    onChange={(e) => setAssistantCommand(e.target.value)}
-    placeholder="Example: buying premium 5000 kar do"
-  />
-
-  <button
-    type="button"
-    style={styles.primaryButton}
-    onClick={runAssistantCommand}
-  >
-    Understand Command
-  </button>
-
-  {assistantPreview ? (
-    <div style={styles.assistantPreview}>
-      <p>Detected changes:</p>
-
-      {Object.entries(assistantPreview).map(([key, value]) => (
-        <p key={key}>
-          {key}: <strong>{String(value)}</strong>
-        </p>
-      ))}
-
-      <button
-        type="button"
-        style={styles.primaryButton}
-        onClick={confirmAssistantChanges}
-      >
-        Apply Changes
-      </button>
-    </div>
-  ) : null}
-</div>
-    
         <form onSubmit={saveSettings} style={styles.grid}>
           <div style={styles.controlCard}>
             <label style={styles.label}>Buying Premium</label>
@@ -800,6 +763,58 @@ await addDoc(collection(db, "changeLogs"), {
     </>
   ) : null}
 </div> 
+{showAssistant ? (
+  <div style={styles.assistantPopup}>
+    <h3 style={styles.assistantTitle}>
+      RJ Assistant
+    </h3>
+
+    <input
+      style={styles.input}
+      value={assistantCommand}
+      onChange={(e) =>
+        setAssistantCommand(e.target.value)
+      }
+      placeholder="Type command..."
+    />
+
+    <button
+      type="button"
+      style={styles.primaryButton}
+      onClick={runAssistantCommand}
+    >
+      Understand Command
+    </button>
+
+    {assistantPreview ? (
+      <div style={styles.assistantPreview}>
+        <p>Detected changes:</p>
+
+        {Object.entries(
+          assistantPreview
+        ).map(([key, value]) => (
+          <p key={key}>
+            {key}:{" "}
+            <strong>
+              {String(value)}
+            </strong>
+          </p>
+        ))}
+
+        <button
+          type="button"
+          style={styles.primaryButton}
+          onClick={confirmAssistantChanges}
+        >
+          Apply Changes
+        </button>
+      </div>
+    ) : null}
+  </div>
+) : null}
+<button type="button" style={styles.assistantFab} onClick={() => setShowAssistant(!showAssistant)}>
+    🤖
+</button>
       </section>
     </main>
   );
@@ -1094,25 +1109,38 @@ logTitle: {
   color: "#f3d98b",
   marginBottom: 14,
 },
-assistantCard: {
-  marginBottom: 22,
+assistantFab: {
+  position: "fixed",
+  right: 20,
+  bottom: 20,
+  width: 64,
+  height: 64,
+  borderRadius: "50%",
+  border: "1px solid rgba(214,180,92,0.55)",
   background:
-    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
-  border: "1px solid rgba(214,180,92,0.22)",
+    "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.95))",
+  color: "#f3d98b",
+  fontSize: 30,
+  cursor: "pointer",
+  zIndex: 9999,
+  boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
+},
+
+assistantPopup: {
+  position: "fixed",
+  right: 20,
+  bottom: 95,
+  width: 340,
+  maxWidth: "calc(100vw - 40px)",
+  background:
+    "linear-gradient(145deg, rgba(31,31,31,0.98), rgba(10,10,10,0.98))",
+  border: "1px solid rgba(214,180,92,0.32)",
   borderRadius: 18,
   padding: 16,
+  zIndex: 9999,
+  boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
 },
-
-assistantTitle: {
-  color: "#f3d98b",
-  marginTop: 0,
-},
-
-assistantPreview: {
-  marginTop: 14,
-  color: "#f3d98b",
-},
-logCard: {
+  logCard: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
