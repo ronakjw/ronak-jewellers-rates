@@ -51,10 +51,6 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const [changeLogs, setChangeLogs] = useState([]);
-  const [listening, setListening] = useState(false);
-  const [assistantCommand, setAssistantCommand] = useState("");
-  const [assistantPreview, setAssistantPreview] = useState(null);
-  const [showAssistant, setShowAssistant] = useState(false);
     useEffect(() => {
   if (!user) return;
 
@@ -117,20 +113,7 @@ export default function AdminPage() {
       });
     }
   }
-  
-function confirmAssistantChanges() {
-  if (!assistantPreview) return;
 
-  setSettings((prev) => ({
-    ...prev,
-    ...assistantPreview,
-  }));
-
-  setAssistantPreview(null);
-  setAssistantCommand("");
-  setMessage("RJ Assistant changes applied. Click Save to update website.");
-}
-  
   async function login(e) {
     e.preventDefault();
     setMessage("");
@@ -153,110 +136,7 @@ function confirmAssistantChanges() {
       setMessage("Login failed. Check email/password.");
     }
   }
-function runAssistantCommand() {
-let text = assistantCommand
-  .toLowerCase()
-  .trim()
-  .replaceAll("कर दो", "kar do")
-  .replaceAll("चालू", "on")
-  .replaceAll("बंद", "off")
-  .replaceAll("माइनस", "minus");
 
-text = text.replace(/\b(minus|negative)\s*/g, "-");
-
-const changes = {};
-
-const number = text.match(/-?\d+/)?.[0];
-
-  if (text.includes("buying premium") || text.includes("buy premium")) {
-    if (number) changes.buyingPremium = number;
-  }
-
-  if (text.includes("selling premium") || text.includes("sell premium")) {
-    if (number) changes.sellingPremium = number;
-  }
-
-  if (text.includes("rates hide") || text.includes("hide rates")) {
-    changes.showRates = false;
-  }
-
-  if (text.includes("rates show") || text.includes("show rates")) {
-    changes.showRates = true;
-  }
-
-  if (text.includes("holiday mode on")) {
-    changes.holidayMode = true;
-  }
-
-  if (text.includes("holiday mode off")) {
-    changes.holidayMode = false;
-  }
-
-  if (text.includes("kachhi") || text.includes("badla")) {
-    if (number) changes.kachhiBadlaValue = number;
-  }
-
-  if (text.includes("volatility on")) {
-    changes.volatilityWarningEnabled = true;
-  }
-
-  if (text.includes("volatility off")) {
-    changes.volatilityWarningEnabled = false;
-  }
-
-  if (text.includes("note hata") || text.includes("remove note")) {
-    changes.noticeMessage = "";
-  }
-
-  if (text.includes("note")) {
-    const noteText = assistantCommand.split(":")[1];
-    if (noteText) changes.noticeMessage = noteText.trim();
-  }
-
-  if (Object.keys(changes).length === 0) {
-    setMessage("RJ Assistant could not understand this command.");
-    return;
-  }
-
-  setAssistantPreview(changes);
-}
-  function startVoiceAssistant() {
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    alert("Speech recognition not supported.");
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-
-  recognition.lang = "en-IN";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  setListening(true);
-
-  recognition.start();
-
-  recognition.onresult = (event) => {
-    const transcript =
-      event.results[0][0].transcript;
-
-    setAssistantCommand(transcript);
-
-    setListening(false);
-  };
-
-  recognition.onerror = () => {
-    setListening(false);
-  };
-
-  recognition.onend = () => {
-    setListening(false);
-  };
-}
   async function saveSettings(e) {
     e.preventDefault();
 
@@ -474,7 +354,6 @@ await addDoc(collection(db, "changeLogs"), {
         {systemStatus?.error ? (
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
-
 
         <form onSubmit={saveSettings} style={styles.grid}>
           <div style={styles.controlCard}>
@@ -810,66 +689,6 @@ await addDoc(collection(db, "changeLogs"), {
     </>
   ) : null}
 </div> 
-{showAssistant ? (
-  <div style={styles.assistantPopup}>
-    <h3 style={styles.assistantTitle}>
-      RJ Assistant
-    </h3>
-
-    <input
-      style={styles.input}
-      value={assistantCommand}
-      onChange={(e) =>
-        setAssistantCommand(e.target.value)
-      }
-      placeholder="Type command..."
-    />
-<button
-  type="button"
-  style={styles.voiceButton}
-  onClick={startVoiceAssistant}
->
-  {listening
-    ? "🎙️ Listening..."
-    : "🎤 Speak"}
-</button>
-    <button
-      type="button"
-      style={styles.primaryButton}
-      onClick={runAssistantCommand}
-    >
-      Understand Command
-    </button>
-
-    {assistantPreview ? (
-      <div style={styles.assistantPreview}>
-        <p>Detected changes:</p>
-
-        {Object.entries(
-          assistantPreview
-        ).map(([key, value]) => (
-          <p key={key}>
-            {key}:{" "}
-            <strong>
-              {String(value)}
-            </strong>
-          </p>
-        ))}
-
-        <button
-          type="button"
-          style={styles.primaryButton}
-          onClick={confirmAssistantChanges}
-        >
-          Apply Changes
-        </button>
-      </div>
-    ) : null}
-  </div>
-) : null}
-<button type="button" style={styles.assistantFab} onClick={() => setShowAssistant(!showAssistant)}>
-    🤖
-</button>
       </section>
     </main>
   );
@@ -976,18 +795,7 @@ const styles = {
     boxShadow: "0 26px 80px rgba(0,0,0,0.55)",
     boxSizing: "border-box",
   },
-voiceButton: {
-  width: "100%",
-  marginTop: 10,
-  marginBottom: 10,
-  border: "1px solid rgba(214,180,92,0.35)",
-  background: "rgba(214,180,92,0.08)",
-  color: "#f3d98b",
-  borderRadius: 12,
-  padding: "12px 14px",
-  fontWeight: 700,
-  cursor: "pointer",
-},
+
   title: {
     margin: 0,
     color: "#f3d98b",
@@ -1175,38 +983,8 @@ logTitle: {
   color: "#f3d98b",
   marginBottom: 14,
 },
-assistantFab: {
-  position: "fixed",
-  right: 20,
-  bottom: 20,
-  width: 64,
-  height: 64,
-  borderRadius: "50%",
-  border: "1px solid rgba(214,180,92,0.55)",
-  background:
-    "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.95))",
-  color: "#f3d98b",
-  fontSize: 30,
-  cursor: "pointer",
-  zIndex: 9999,
-  boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
-},
 
-assistantPopup: {
-  position: "fixed",
-  right: 20,
-  bottom: 95,
-  width: 340,
-  maxWidth: "calc(100vw - 40px)",
-  background:
-    "linear-gradient(145deg, rgba(31,31,31,0.98), rgba(10,10,10,0.98))",
-  border: "1px solid rgba(214,180,92,0.32)",
-  borderRadius: 18,
-  padding: 16,
-  zIndex: 9999,
-  boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-},
-  logCard: {
+logCard: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
