@@ -51,6 +51,7 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const [changeLogs, setChangeLogs] = useState([]);
+  const [listening, setListening] = useState(false);
   const [assistantCommand, setAssistantCommand] = useState("");
   const [assistantPreview, setAssistantPreview] = useState(null);
   const [showAssistant, setShowAssistant] = useState(false);
@@ -153,7 +154,13 @@ function confirmAssistantChanges() {
     }
   }
 function runAssistantCommand() {
-  const text = assistantCommand.toLowerCase().trim();
+ 
+  const text = assistantCommand
+  .toLowerCase()
+  .trim()
+  .replace("कर दो", "kar do")
+  .replace("चालू", "on")
+  .replace("बंद", "off");
   const changes = {};
 
   const number = text.match(/\d+/)?.[0];
@@ -209,6 +216,43 @@ function runAssistantCommand() {
   }
 
   setAssistantPreview(changes);
+}
+  function startVoiceAssistant() {
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Speech recognition not supported.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "hi-IN";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  setListening(true);
+
+  recognition.start();
+
+  recognition.onresult = (event) => {
+    const transcript =
+      event.results[0][0].transcript;
+
+    setAssistantCommand(transcript);
+
+    setListening(false);
+  };
+
+  recognition.onerror = () => {
+    setListening(false);
+  };
+
+  recognition.onend = () => {
+    setListening(false);
+  };
 }
   async function saveSettings(e) {
     e.preventDefault();
@@ -777,7 +821,15 @@ await addDoc(collection(db, "changeLogs"), {
       }
       placeholder="Type command..."
     />
-
+<button
+  type="button"
+  style={styles.voiceButton}
+  onClick={startVoiceAssistant}
+>
+  {listening
+    ? "🎙️ Listening..."
+    : "🎤 Speak"}
+</button>
     <button
       type="button"
       style={styles.primaryButton}
@@ -921,7 +973,18 @@ const styles = {
     boxShadow: "0 26px 80px rgba(0,0,0,0.55)",
     boxSizing: "border-box",
   },
-
+voiceButton: {
+  width: "100%",
+  marginTop: 10,
+  marginBottom: 10,
+  border: "1px solid rgba(214,180,92,0.35)",
+  background: "rgba(214,180,92,0.08)",
+  color: "#f3d98b",
+  borderRadius: 12,
+  padding: "12px 14px",
+  fontWeight: 700,
+  cursor: "pointer",
+},
   title: {
     margin: 0,
     color: "#f3d98b",
