@@ -154,18 +154,17 @@ function confirmAssistantChanges() {
     }
   }
 function runAssistantCommand() {
-  let text = assistantCommand.toLowerCase().trim();
-  text = text
-  .replace("minus ", "-")
-  .replace("negative ", "-");
-  const text = assistantCommand
+let text = assistantCommand
   .toLowerCase()
   .trim()
   .replace("कर दो", "kar do")
   .replace("चालू", "on")
   .replace("बंद", "off");
-  const changes = {};
-  const number = text.match(/-?\d+/)?.[0];
+text = text
+  .replaceAll("minus ", "-")
+  .replaceAll("negative ", "-");
+const changes = {};
+const number = text.match(/-?\d+/)?.[0];
 
   if (text.includes("buying premium") || text.includes("buy premium")) {
     if (number) changes.buyingPremium = number;
