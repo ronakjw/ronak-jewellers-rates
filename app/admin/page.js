@@ -154,7 +154,10 @@ function confirmAssistantChanges() {
     }
   }
 function runAssistantCommand() {
- 
+  let text = assistantCommand.toLowerCase().trim();
+  text = text
+  .replace("minus ", "-")
+  .replace("negative ", "-");
   const text = assistantCommand
   .toLowerCase()
   .trim()
@@ -163,10 +166,6 @@ function runAssistantCommand() {
   .replace("बंद", "off");
   const changes = {};
   const number = text.match(/-?\d+/)?.[0];
-  let text = assistantCommand.toLowerCase().trim();
-  text = text
-  .replace("minus ", "-")
-  .replace("negative ", "-");
 
   if (text.includes("buying premium") || text.includes("buy premium")) {
     if (number) changes.buyingPremium = number;
