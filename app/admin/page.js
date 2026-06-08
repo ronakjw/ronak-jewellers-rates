@@ -51,6 +51,10 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const [changeLogs, setChangeLogs] = useState([]);
+  const [assistantOpen, setAssistantOpen] = useState(false);
+  const [assistantCommand, setAssistantCommand] = useState("");
+  const [assistantPreview, setAssistantPreview] = useState(null);
+  const [assistantLoading, setAssistantLoading] = useState(false);
     useEffect(() => {
   if (!user) return;
 
@@ -96,7 +100,18 @@ export default function AdminPage() {
 
     return () => clearInterval(interval);
   }, [user]);
+function applyAssistantChanges() {
+  if (!assistantPreview) return;
 
+  setSettings((prev) => ({
+    ...prev,
+    ...assistantPreview,
+  }));
+
+  setAssistantPreview(null);
+  setAssistantCommand("");
+  setMessage("AI changes applied. Click Save Settings to update website.");
+}
   async function loadSystemStatus() {
     try {
       const res = await fetch("/api/health", {
@@ -136,7 +151,43 @@ export default function AdminPage() {
       setMessage("Login failed. Check email/password.");
     }
   }
+async function runAssistantCommand() {
+  if (!assistantCommand.trim()) {
+    setMessage("Please enter a command.");
+    return;
+  }
 
+  setMessage("RJ Assistant is understanding your command...");
+
+  try {
+    const res = await fetch("/api/assistant-command", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        command: assistantCommand,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      setMessage(data.message || "Assistant failed.");
+      return;
+    }
+
+    if (!data.changes || Object.keys(data.changes).length === 0) {
+      setMessage("RJ Assistant could not understand this command.");
+      return;
+    }
+
+    setAssistantPreview(data.changes);
+    setMessage("");
+  } catch (err) {
+    setMessage(err.message || "Assistant failed.");
+  }
+}
   async function saveSettings(e) {
     e.preventDefault();
 
