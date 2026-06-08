@@ -152,40 +152,40 @@ function applyAssistantChanges() {
     }
   }
 async function runAssistantCommand() {
-  if (!assistantCommand.trim()) {
-    setMessage("Please enter a command.");
-    return;
-  }
+  if (!assistantCommand.trim()) return;
 
-  setMessage("RJ Assistant is understanding your command...");
+  setAssistantLoading(true);
 
   try {
-    const res = await fetch("/api/assistant-command", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        command: assistantCommand,
-      }),
-    });
+    const res = await fetch(
+      "/api/assistant-command",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          command: assistantCommand,
+        }),
+      }
+    );
 
     const data = await res.json();
 
     if (!data.success) {
-      setMessage(data.message || "Assistant failed.");
+      setMessage(
+        data.message || "Gemini failed."
+      );
       return;
     }
 
-    if (!data.changes || Object.keys(data.changes).length === 0) {
-      setMessage("RJ Assistant could not understand this command.");
-      return;
-    }
-
-    setAssistantPreview(data.changes);
-    setMessage("");
+    setAssistantPreview(
+      data.changes || {}
+    );
   } catch (err) {
-    setMessage(err.message || "Assistant failed.");
+    setMessage(err.message);
+  } finally {
+    setAssistantLoading(false);
   }
 }
   async function saveSettings(e) {
