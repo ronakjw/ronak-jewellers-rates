@@ -157,13 +157,15 @@ function runAssistantCommand() {
 let text = assistantCommand
   .toLowerCase()
   .trim()
-  .replace("कर दो", "kar do")
-  .replace("चालू", "on")
-  .replace("बंद", "off");
-text = text
-  .replaceAll("minus ", "-")
-  .replaceAll("negative ", "-");
+  .replaceAll("कर दो", "kar do")
+  .replaceAll("चालू", "on")
+  .replaceAll("बंद", "off")
+  .replaceAll("माइनस", "minus");
+
+text = text.replace(/\b(minus|negative)\s*/g, "-");
+
 const changes = {};
+
 const number = text.match(/-?\d+/)?.[0];
 
   if (text.includes("buying premium") || text.includes("buy premium")) {
