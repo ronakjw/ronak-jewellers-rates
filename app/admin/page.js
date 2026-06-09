@@ -849,15 +849,25 @@ await addDoc(collection(db, "changeLogs"), {
     Advice
   </button>
 </div>
-    <textarea
-      style={styles.textarea}
-      value={assistantCommand}
-      onChange={(e) =>
-        setAssistantCommand(e.target.value)
-      }
-      placeholder="Type your command..."
-      rows={4}
-    />
+   <div style={styles.textareaWrapper}>
+  <textarea
+    style={styles.assistantTextarea}
+    value={assistantCommand}
+    onChange={(e) =>
+      setAssistantCommand(e.target.value)
+    }
+  />
+
+  {assistantCommand && (
+    <button
+      type="button"
+      style={styles.textareaClear}
+      onClick={() => setAssistantCommand("")}
+    >
+      ✕
+    </button>
+  )}
+</div>
 <button
   type="button"
   style={styles.voiceButton}
@@ -958,7 +968,22 @@ const styles = {
   gap: 8,
   marginBottom: 12,
 },
+textareaWrapper: {
+  position: "relative",
+},
 
+textareaClear: {
+  position: "absolute",
+  top: 10,
+  right: 10,
+  width: 28,
+  height: 28,
+  borderRadius: "50%",
+  border: "none",
+  background: "rgba(255,255,255,0.1)",
+  color: "#f3d98b",
+  cursor: "pointer",
+},
 assistantTab: {
   border: "1px solid rgba(214,180,92,0.25)",
   background: "rgba(214,180,92,0.05)",
@@ -967,7 +992,6 @@ assistantTab: {
   padding: "10px",
   cursor: "pointer",
 },
-
 assistantTabActive: {
   border: "1px solid rgba(214,180,92,0.55)",
   background: "rgba(214,180,92,0.18)",
@@ -977,7 +1001,7 @@ assistantTabActive: {
   fontWeight: 800,
   cursor: "pointer",
 },
-  voiceButton: {
+voiceButton: {
   width: "100%",
   marginTop: 10,
   marginBottom: 10,
@@ -997,28 +1021,37 @@ assistantFab: {
   height: 64,
   borderRadius: "50%",
   border: "1px solid rgba(214,180,92,0.55)",
-  background:
-    "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.95))",
+  background: "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.95))",
   color: "#f3d98b",
   fontSize: 30,
   cursor: "pointer",
   zIndex: 9999,
 },
-
 assistantPopup: {
   position: "fixed",
-  right: 20,
-  bottom: 95,
-  width: 360,
-  maxWidth: "calc(100vw - 40px)",
-  background:
-    "linear-gradient(145deg, rgba(31,31,31,0.98), rgba(10,10,10,0.98))",
+  left: 12,
+  right: 12,
+  bottom: 90,
+  maxHeight: "75vh",
+  overflowY: "auto",
+  background: "linear-gradient(145deg, rgba(31,31,31,0.98), rgba(10,10,10,0.98))",
   border: "1px solid rgba(214,180,92,0.32)",
   borderRadius: 18,
   padding: 16,
   zIndex: 9999,
+  boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
 },
-
+assistantTextarea: {
+  width: "100%",
+  minHeight: 120,
+  resize: "vertical",
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(214,180,92,0.2)",
+  borderRadius: 12,
+  color: "#fff",
+  padding: 12,
+  boxSizing: "border-box",
+},
 assistantTitle: {
   color: "#f3d98b",
   marginTop: 0,
