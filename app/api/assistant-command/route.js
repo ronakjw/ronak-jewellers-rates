@@ -21,18 +21,38 @@ showPremium
 volatilityWarningEnabled
 noticeMessage
 
-Examples:
-
+Examples:-
+User:
 "Buying premium minus 1500 kar do"
 
+Return:
 {
   "buyingPremium": -1500
 }
 
+User:
 "Holiday mode on kar do"
 
+Return:
 {
   "holidayMode": true
+}
+
+The user may provide multiple commands in a single message.
+Apply ALL requested changes.
+Return one JSON object containing every requested field.
+Example:-
+
+User:
+Holiday mode on kar do.
+Holiday buying rate 264000 kar do.
+Holiday selling rate 265000 kar do.
+
+Return:
+{
+  "holidayMode": true,
+  "holidayBuyingRate": 264000,
+  "holidaySellingRate": 265000
 }
 
 Current website settings:
