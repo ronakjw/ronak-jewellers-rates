@@ -742,7 +742,7 @@ await addDoc(collection(db, "changeLogs"), {
   <label style={styles.label}>Note / Message</label>
 
   <textarea
-    style={styles.textarea}
+    style={styles.assistantTextarea}
     value={settings.noticeMessage || ""}
     onChange={(e) =>
       updateField("noticeMessage", e.target.value)
@@ -1046,10 +1046,10 @@ assistantTextarea: {
   minHeight: 120,
   resize: "vertical",
   background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(214,180,92,0.2)",
-  borderRadius: 12,
+  border: "1px",
+  borderRadius: 4,
   color: "#fff",
-  padding: 12,
+  padding: 7,
   boxSizing: "border-box",
 },
 assistantTitle: {
