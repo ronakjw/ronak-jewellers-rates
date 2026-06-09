@@ -343,7 +343,33 @@ await addDoc(collection(db, "changeLogs"), {
       [field]: value,
     }));
   }
+function ToggleRow({ label, checked, onChange }) {
+  return (
+    <div style={styles.toggleRow}>
+      <span style={styles.toggleLabel}>{label}</span>
 
+      <button
+        type="button"
+        style={{
+          ...styles.toggleSwitch,
+          background: checked
+            ? "rgba(214,180,92,0.85)"
+            : "rgba(255,255,255,0.12)",
+        }}
+        onClick={() => onChange(!checked)}
+      >
+        <span
+          style={{
+            ...styles.toggleKnob,
+            transform: checked
+              ? "translateX(22px)"
+              : "translateX(0)",
+          }}
+        />
+      </button>
+    </div>
+  );
+}
   if (!user) {
     return (
       <main style={styles.page}>
@@ -375,7 +401,6 @@ await addDoc(collection(db, "changeLogs"), {
               type="password"
               placeholder="Enter admin password"
             />
-
             <button style={styles.primaryButton} type="submit">
               Login
             </button>
@@ -486,6 +511,13 @@ await addDoc(collection(db, "changeLogs"), {
         ) : null}
 
         <form onSubmit={saveSettings} style={styles.grid}>
+  
+  <ToggleRow
+  label="Show Premium"
+  checked={Boolean(settings.showPremium)}
+  onChange={(value) => updateField("showPremium", value)}
+  />
+  
           <div style={styles.controlCard}>
             <label style={styles.label}>Buying Premium</label>
             <input
@@ -509,34 +541,26 @@ await addDoc(collection(db, "changeLogs"), {
               }
             />
           </div>
+  <ToggleRow
+  label="Show Rates"
+  checked={Boolean(settings.showRates)}
+  onChange={(value) => updateField("showRates", value)}
+/>
 
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Show Rates</label>
-            <select
-              style={styles.input}
-              value={settings.showRates ? "yes" : "no"}
-              onChange={(e) =>
-                updateField("showRates", e.target.value === "yes")
-              }
-            >
-              <option value="yes">Show</option>
-              <option value="no">Hide</option>
-            </select>
-          </div>
-
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Contract Mode</label>
-            <select
-              style={styles.input}
-              value={settings.autoContract ? "auto" : "manual"}
-              onChange={(e) =>
-                updateField("autoContract", e.target.value === "auto")
-              }
-            >
-              <option value="auto">Auto Active Contract</option>
-              <option value="manual">Manual Contract</option>
-            </select>
-          </div>
+        <ToggleRow
+  label={`Contract Mode: ${
+    settings.contractMode === "auto"
+      ? "AUTO"
+      : "MANUAL"
+  }`}
+  checked={settings.contractMode === "auto"}
+  onChange={(value) =>
+    updateField(
+      "contractMode",
+      value ? "auto" : "manual"
+    )
+  }
+/>
 
           <div style={styles.controlCard}>
             <label style={styles.label}>Manual Contract</label>
@@ -586,19 +610,11 @@ await addDoc(collection(db, "changeLogs"), {
             />
           </div>
     
-    <div style={styles.controlCard}>
-  <label style={styles.label}>Holiday Mode</label>
-  <select
-    style={styles.input}
-    value={settings.holidayMode ? "yes" : "no"}
-    onChange={(e) =>
-      updateField("holidayMode", e.target.value === "yes")
-    }
-  >
-    <option value="no">Off</option>
-    <option value="yes">On</option>
-  </select>
-</div>
+<ToggleRow
+  label="Holiday Mode"
+  checked={Boolean(settings.holidayMode)}
+  onChange={(value) => updateField("holidayMode", value)}
+/>
 
 <div style={styles.controlCard}>
   <label style={styles.label}>Holiday Buying Rate</label>
@@ -634,20 +650,11 @@ await addDoc(collection(db, "changeLogs"), {
               }
             />
           </div>
-   
-<div style={styles.controlCard}>
-  <label style={styles.label}>Kachhi Badla</label>
-  <select
-    style={styles.input}
-    value={settings.kachhiBadlaEnabled ? "yes" : "no"}
-    onChange={(e) =>
-      updateField("kachhiBadlaEnabled", e.target.value === "yes")
-    }
-  >
-    <option value="yes">Show</option>
-    <option value="no">Hide</option>
-  </select>
-</div>
+<ToggleRow
+  label="Kachhi Badla"
+  checked={Boolean(settings.kachhiBadlaEnabled)}
+  onChange={(value) => updateField("kachhiBadlaEnabled", value)}
+/>
 
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla Value</label>
@@ -661,47 +668,26 @@ await addDoc(collection(db, "changeLogs"), {
   />
 </div>
 
-<div style={styles.controlCard}>
-  <label style={styles.label}>Kachhi Badla Unit</label>
-  <select
-    style={styles.input}
-    value={settings.kachhiBadlaUnit || "Rs/kg"}
-    onChange={(e) =>
-      updateField("kachhiBadlaUnit", e.target.value)
-    }
-  >
-    <option value="Rs/kg">Rs/kg</option>
-    <option value="gm/kg">gm/kg</option>
-  </select>
-</div>
+<ToggleRow
+  label={`Kachhi Badla Unit: ${
+    settings.kachhiBadlaUnit === "Rs/kg"
+      ? "Rs/kg"
+      : "gm/kg"
+  }`}
+  checked={settings.kachhiBadlaUnit === "Rs/kg"}
+  onChange={(value) =>
+    updateField(
+      "kachhiBadlaUnit",
+      value ? "Rs/kg" : "gm/kg"
+    )
+  }
+/>
 
-    <div style={styles.controlCard}>
-  <label style={styles.label}>Auto Premium</label>
-  <select
-    style={styles.input}
-    value={settings.autoPremiumEnabled ? "yes" : "no"}
-    onChange={(e) =>
-      updateField("autoPremiumEnabled", e.target.value === "yes")
-    }
-  >
-    <option value="no">Off</option>
-    <option value="yes">On</option>
-  </select>
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Show Premium</label>
-  <select
-    style={styles.input}
-    value={settings.showPremium ? "yes" : "no"}
-    onChange={(e) =>
-      updateField("showPremium", e.target.value === "yes")
-    }
-  >
-    <option value="yes">Show</option>
-    <option value="no">Hide</option>
-  </select>
-</div>
+  <ToggleRow
+  label="Auto Premium"
+  checked={Boolean(settings.autoPremiumEnabled)}
+  onChange={(value) => updateField("autoPremiumEnabled", value)}
+  />
 
 <div style={styles.controlCard}>
   <label style={styles.label}>MCX Step Size</label>
@@ -726,17 +712,12 @@ await addDoc(collection(db, "changeLogs"), {
     }
   />
 </div>
-<div style={styles.controlCard}>
-  <label style={styles.label}>Volatility Warning</label>
-  <select
-    style={styles.input}
-    value={settings.volatilityWarningEnabled ? "yes" : "no"}
-    onChange={(e) => updateField("volatilityWarningEnabled", e.target.value === "yes") }
-  >
-    <option value="yes">On</option>
-    <option value="no">Off</option>
-  </select>
-</div>
+    
+<ToggleRow
+  label="Volatility Warning"
+  checked={Boolean(settings.volatilityWarningEnabled)}
+  onChange={(value) => updateField("volatilityWarningEnabled", value)}
+/>
     
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
@@ -1060,6 +1041,45 @@ assistantTitle: {
 assistantPreview: {
   marginTop: 14,
   color: "#f3d98b",
+},
+
+  toggleRow: {
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 18,
+  padding: "16px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: 14,
+},
+
+toggleLabel: {
+  color: "#c6c6c6",
+  fontSize: 14,
+  letterSpacing: "0.06em",
+  textTransform: "uppercase",
+},
+
+toggleSwitch: {
+  width: 52,
+  height: 28,
+  borderRadius: 999,
+  border: "1px solid rgba(214,180,92,0.35)",
+  padding: 3,
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+  transition: "0.2s ease",
+},
+
+toggleKnob: {
+  width: 20,
+  height: 20,
+  borderRadius: "50%",
+  background: "#080808",
+  transition: "0.2s ease",
 },
   headerRow: {
   display: "flex",
