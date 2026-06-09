@@ -1,7 +1,7 @@
 export async function POST(req) {
   try {
-    const { command } = await req.json();
-
+const { command, currentSettings } = await req.json();
+    
     const prompt = `
 You are an admin assistant for Ronak Jewellers.
 
@@ -34,6 +34,14 @@ Examples:
 {
   "holidayMode": true
 }
+
+Current website settings:
+${JSON.stringify(currentSettings, null, 2)}
+
+Important:
+- If user says "increase", "decrease", "reduce", "add", or "minus", calculate using currentSettings.
+- Example: if current buyingPremium is 5000 and user says "reduce buying premium by 500", return {"buyingPremium":4500}.
+- Example: if current buyingPremium is -1500 and user says "reduce buying premium by 500", return {"buyingPremium":-2000}.
 
 User command:
 ${command}
