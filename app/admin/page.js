@@ -55,6 +55,7 @@ export default function AdminPage() {
   const [assistantCommand, setAssistantCommand] = useState("");
   const [assistantPreview, setAssistantPreview] = useState(null);
   const [assistantLoading, setAssistantLoading] = useState(false);
+  const [assistantListening, setAssistantListening] = useState(false);
     useEffect(() => {
   if (!user) return;
 
@@ -128,7 +129,47 @@ function applyAssistantChanges() {
       });
     }
   }
+  
+function startGeminiVoice() {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  if (!SpeechRecognition) {
+    setMessage("Voice recognition is not supported in this browser.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-IN";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  setAssistantListening(true);
+
+  recognition.start();
+
+  recognition.onresult = async (event) => {
+    const transcript = event.results[0][0].transcript;
+
+    setAssistantCommand(transcript);
+    setAssistantListening(false);
+
+    setTimeout(() => {
+      runAssistantCommand();
+    }, 300);
+  };
+
+  recognition.onerror = () => {
+    setAssistantListening(false);
+    setMessage("Voice recognition failed.");
+  };
+
+  recognition.onend = () => {
+    setAssistantListening(false);
+  };
+}
+  
   async function login(e) {
     e.preventDefault();
     setMessage("");
@@ -755,7 +796,13 @@ await addDoc(collection(db, "changeLogs"), {
       placeholder="Type your command..."
       rows={4}
     />
-
+<button
+  type="button"
+  style={styles.voiceButton}
+  onClick={startGeminiVoice}
+>
+  {assistantListening ? "🎙️ Listening..." : "🎤 Speak to Gemini"}
+</button>
     <button
       type="button"
       style={styles.primaryButton}
@@ -830,6 +877,18 @@ const styles = {
     padding: "24px 16px",
     boxSizing: "border-box",
   },
+  voiceButton: {
+  width: "100%",
+  marginTop: 10,
+  marginBottom: 10,
+  border: "1px solid rgba(214,180,92,0.35)",
+  background: "rgba(214,180,92,0.08)",
+  color: "#f3d98b",
+  borderRadius: 12,
+  padding: "12px 14px",
+  fontWeight: 800,
+  cursor: "pointer",
+},
 assistantFab: {
   position: "fixed",
   right: 20,
