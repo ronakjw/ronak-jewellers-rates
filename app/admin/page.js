@@ -1037,31 +1037,24 @@ assistantTitle: {
   color: "#f3d98b",
   marginTop: 0,
 },
-
 assistantPreview: {
   marginTop: 14,
   color: "#f3d98b",
 },
-
   toggleRow: {
-  background:
-    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 18,
-  padding: "16px",
+  border: "1px",
+  padding: "6px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   gap: 14,
 },
-
 toggleLabel: {
   color: "#c6c6c6",
   fontSize: 14,
   letterSpacing: "0.06em",
   textTransform: "uppercase",
 },
-
 toggleSwitch: {
   width: 52,
   height: 28,
@@ -1071,15 +1064,14 @@ toggleSwitch: {
   cursor: "pointer",
   display: "flex",
   alignItems: "center",
-  transition: "0.2s ease",
+  transition: "0.6s ease",
 },
-
 toggleKnob: {
   width: 20,
   height: 20,
   borderRadius: "50%",
   background: "#080808",
-  transition: "0.2s ease",
+  transition: "0.6s ease",
 },
   headerRow: {
   display: "flex",
@@ -1182,8 +1174,8 @@ toggleKnob: {
     background:
       "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
     border: "1px solid rgba(255,255,255,0.08)",
-    borderRadius: 18,
-    padding: 16,
+    borderRadius: 12,
+    padding: 8,
   },
 
   label: {
