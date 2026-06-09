@@ -157,16 +157,16 @@ async function runAssistantCommand() {
   setAssistantLoading(true);
 
   try {
-    const res = await fetch(
-      "/api/assistant-command",
+    const res = await fetch("/api/assistant-command",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          command: assistantCommand,
-        }),
+      body: JSON.stringify({
+      command: assistantCommand,
+      currentSettings: settings,
+     }),    
       }
     );
 
