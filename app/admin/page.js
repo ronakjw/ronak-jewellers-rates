@@ -56,6 +56,9 @@ export default function AdminPage() {
   const [assistantPreview, setAssistantPreview] = useState(null);
   const [assistantLoading, setAssistantLoading] = useState(false);
   const [assistantListening, setAssistantListening] = useState(false);
+  const [assistantMode, setAssistantMode] = useState("command");
+  const [assistantAdvice, setAssistantAdvice] = useState("");
+  
     useEffect(() => {
   if (!user) return;
 
@@ -129,7 +132,42 @@ function applyAssistantChanges() {
       });
     }
   }
-  
+async function askGeminiAdvice() {
+  if (!assistantCommand.trim()) {
+    setMessage("Please enter a question.");
+    return;
+  }
+
+  setAssistantLoading(true);
+  setAssistantAdvice("");
+
+  try {
+    const res = await fetch("/api/assistant-advice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: assistantCommand,
+        currentSettings: settings,
+        systemStatus,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      setMessage(data.message || "Gemini advice failed.");
+      return;
+    }
+
+    setAssistantAdvice(data.advice);
+  } catch (err) {
+    setMessage(err.message || "Gemini advice failed.");
+  } finally {
+    setAssistantLoading(false);
+  }
+}  
 function startGeminiVoice() {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -786,7 +824,31 @@ await addDoc(collection(db, "changeLogs"), {
     <h3 style={styles.assistantTitle}>
       🤖 Gemini Assistant
     </h3>
+<div style={styles.assistantTabs}>
+  <button
+    type="button"
+    style={
+      assistantMode === "command"
+        ? styles.assistantTabActive
+        : styles.assistantTab
+    }
+    onClick={() => setAssistantMode("command")}
+  >
+    Command
+  </button>
 
+  <button
+    type="button"
+    style={
+      assistantMode === "advice"
+        ? styles.assistantTabActive
+        : styles.assistantTab
+    }
+    onClick={() => setAssistantMode("advice")}
+  >
+    Advice
+  </button>
+</div>
     <textarea
       style={styles.textarea}
       value={assistantCommand}
@@ -803,16 +865,23 @@ await addDoc(collection(db, "changeLogs"), {
 >
   {assistantListening ? "🎙️ Listening..." : "🎤 Speak to Gemini"}
 </button>
-    <button
-      type="button"
-      style={styles.primaryButton}
-      onClick={runAssistantCommand}
-      disabled={assistantLoading}
-    >
-      {assistantLoading
-        ? "Thinking..."
-        : "Ask Gemini"}
-    </button>
+   
+  <button
+  type="button"
+  style={styles.primaryButton}
+  onClick={
+    assistantMode === "command"
+      ? runAssistantCommand
+      : askGeminiAdvice
+  }
+  disabled={assistantLoading}
+>
+  {assistantLoading
+    ? "Thinking..."
+    : assistantMode === "command"
+    ? "Ask Gemini"
+    : "Ask Advice"}
+</button>
 
     {assistantPreview && (
       <div style={styles.assistantPreview}>
@@ -835,6 +904,12 @@ await addDoc(collection(db, "changeLogs"), {
         </button>
       </div>
     )}
+      {assistantAdvice ? (
+  <div style={styles.assistantPreview}>
+    <h4>Gemini Advice</h4>
+    <p style={{ whiteSpace: "pre-wrap" }}>{assistantAdvice}</p>
+  </div>
+) : null}
   </div>
 )}
   <button
@@ -877,6 +952,31 @@ const styles = {
     padding: "24px 16px",
     boxSizing: "border-box",
   },
+  assistantTabs: {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: 8,
+  marginBottom: 12,
+},
+
+assistantTab: {
+  border: "1px solid rgba(214,180,92,0.25)",
+  background: "rgba(214,180,92,0.05)",
+  color: "#9f9f9f",
+  borderRadius: 10,
+  padding: "10px",
+  cursor: "pointer",
+},
+
+assistantTabActive: {
+  border: "1px solid rgba(214,180,92,0.55)",
+  background: "rgba(214,180,92,0.18)",
+  color: "#f3d98b",
+  borderRadius: 10,
+  padding: "10px",
+  fontWeight: 800,
+  cursor: "pointer",
+},
   voiceButton: {
   width: "100%",
   marginTop: 10,
