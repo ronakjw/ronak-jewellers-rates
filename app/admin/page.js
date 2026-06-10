@@ -799,111 +799,40 @@ function ToggleRow({ label, checked, onChange }) {
   </div>
 
   <div style={styles.logChangesCol}>
-    {[
-      log.previous?.buyingPremium !== log.current?.buyingPremium && (
-        <p style={styles.logText} key="buyingPremium">
-          Buying Premium: {log.previous?.buyingPremium} →{" "}
-          {log.current?.buyingPremium}
-        </p>
-      ),
+  {Object.entries({
+    buyingPremium: "Buying Premium",
+    sellingPremium: "Selling Premium",
+    showRates: "Rates",
+    holidayMode: "Holiday Mode",
+    holidayBuyingRate: "Holiday Buying Rate",
+    holidaySellingRate: "Holiday Selling Rate",
+    kachhiBadlaEnabled: "Kachhi Badla",
+    kachhiBadlaValue: "Kachhi Badla Value",
+    kachhiBadlaUnit: "Kachhi Badla Unit",
+    autoPremiumEnabled: "Auto Premium",
+    showPremium: "Show Premium",
+    premiumStepSize: "Premium Step Size",
+    premiumStepAdjustment: "Premium Adjustment",
+    volatilityWarningEnabled: "Volatility Warning",
+    noticeMessage: "Note",
+  })
+    .filter(([key]) => log.previous?.[key] !== log.current?.[key])
+    .map(([key, label]) => (
+      <p style={styles.logText} key={key}>
+        {label}: {formatLogValue(key, log.previous?.[key])} →{" "}
+        {formatLogValue(key, log.current?.[key])}
+      </p>
+    ))}
 
-      log.previous?.sellingPremium !== log.current?.sellingPremium && (
-        <p style={styles.logText} key="sellingPremium">
-          Selling Premium: {log.previous?.sellingPremium} →{" "}
-          {log.current?.sellingPremium}
-        </p>
-      ),
-
-      {log.previous?.showRates !== log.current?.showRates && (
-        <p style={styles.logText} key="showRates">
-          Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
-          {log.current?.showRates ? "Show" : "Hide"}
-        </p>
-      ) : null}
-        
-        {log.previous?.holidayMode !== log.current?.holidayMode ? (
-  <p style={styles.logText}>
-    Holiday Mode: {log.previous?.holidayMode ? "On" : "Off"} →{" "}
-    {log.current?.holidayMode ? "On" : "Off"}
-  </p>
-) : null}
-
-{log.previous?.holidayBuyingRate !== log.current?.holidayBuyingRate ? (
-  <p style={styles.logText}>
-    Holiday Buying Rate: {log.previous?.holidayBuyingRate} →{" "}
-    {log.current?.holidayBuyingRate}
-  </p>
-) : null}
-
-{log.previous?.holidaySellingRate !== log.current?.holidaySellingRate ? (
-  <p style={styles.logText}>
-    Holiday Selling Rate: {log.previous?.holidaySellingRate} →{" "}
-    {log.current?.holidaySellingRate}
-  </p>
-) : null}
-
-{log.previous?.kachhiBadlaEnabled !== log.current?.kachhiBadlaEnabled ? (
-  <p style={styles.logText}>
-    Kachhi Badla: {log.previous?.kachhiBadlaEnabled ? "Show" : "Hide"} →{" "}
-    {log.current?.kachhiBadlaEnabled ? "Show" : "Hide"}
-  </p>
-) : null}
-
-{log.previous?.kachhiBadlaValue !== log.current?.kachhiBadlaValue ? (
-  <p style={styles.logText}>
-    Kachhi Badla Value: {log.previous?.kachhiBadlaValue} →{" "}
-    {log.current?.kachhiBadlaValue}
-  </p>
-) : null}
-
-{log.previous?.autoPremiumEnabled !== log.current?.autoPremiumEnabled ? (
-  <p style={styles.logText}>
-    Auto Premium: {log.previous?.autoPremiumEnabled ? "On" : "Off"} →{" "}
-    {log.current?.autoPremiumEnabled ? "On" : "Off"}
-  </p>
-) : null}
-
-{log.previous?.showPremium !== log.current?.showPremium ? (
-  <p style={styles.logText}>
-    Show Premium: {log.previous?.showPremium ? "Show" : "Hide"} →{" "}
-    {log.current?.showPremium ? "Show" : "Hide"}
-  </p>
-) : null}
-
-{log.previous?.volatilityWarningEnabled !==
-log.current?.volatilityWarningEnabled ? (
-  <p style={styles.logText}>
-    Volatility Warning:{" "}
-    {log.previous?.volatilityWarningEnabled ? "On" : "Off"} →{" "}
-    {log.current?.volatilityWarningEnabled ? "On" : "Off"}
-  </p>
-) : null}
-
-      log.previous?.autoContract !== log.current?.autoContract ||
-      log.previous?.manualContract !== log.current?.manualContract ? (
-        <p style={styles.logText} key="contract">
-          Contract:{" "}
-          {log.previous?.autoContract
-            ? "Auto"
-            : log.previous?.manualContract}{" "}
-          →{" "}
-          {log.current?.autoContract
-            ? "Auto"
-            : log.current?.manualContract}
-        </p>
-      ) : null,
-    ].filter(Boolean)}
-
-    {[
-      log.previous?.buyingPremium !== log.current?.buyingPremium,
-      log.previous?.sellingPremium !== log.current?.sellingPremium,
-      log.previous?.showRates !== log.current?.showRates,
-      log.previous?.autoContract !== log.current?.autoContract ||
-        log.previous?.manualContract !== log.current?.manualContract,
-    ].every((item) => !item) ? (
-      <p style={styles.logText}>No visible setting change.</p>
-    ) : null}
-  </div>
+  {log.previous?.autoContract !== log.current?.autoContract ||
+  log.previous?.manualContract !== log.current?.manualContract ? (
+    <p style={styles.logText}>
+      Contract:{" "}
+      {log.previous?.autoContract ? "Auto" : log.previous?.manualContract} →{" "}
+      {log.current?.autoContract ? "Auto" : log.current?.manualContract}
+    </p>
+  ) : null}
+</div>
 </div>
         )))}
     </>
@@ -1025,7 +954,33 @@ log.current?.volatilityWarningEnabled ? (
     </main>
   );
 }
+function formatLogValue(key, value) {
+  if (
+    [
+      "showRates",
+      "kachhiBadlaEnabled",
+      "showPremium",
+    ].includes(key)
+  ) {
+    return value ? "Show" : "Hide";
+  }
 
+  if (
+    [
+      "holidayMode",
+      "autoPremiumEnabled",
+      "volatilityWarningEnabled",
+    ].includes(key)
+  ) {
+    return value ? "On" : "Off";
+  }
+
+  if (value === "" || value === undefined || value === null) {
+    return "--";
+  }
+
+  return String(value);
+}
 function StatusItem({ label, ok, value }) {
   return (
     <div style={styles.systemItem}>
