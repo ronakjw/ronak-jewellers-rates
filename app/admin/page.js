@@ -746,7 +746,7 @@ function ToggleRow({ label, checked, onChange }) {
 
   {showLogs ? (
     <>
-      <h2 style={styles.logTitle}>Change Log</h2>
+      <h2> Change Log</h2>
 
       {changeLogs.length === 0 ? (
         <p style={styles.subtitle}>
@@ -754,41 +754,63 @@ function ToggleRow({ label, checked, onChange }) {
         </p>
       ) : (
         changeLogs.map((log) => (
-          <div key={log.id} style={styles.logCard}>
-            <p style={styles.logTime}>
-              {log.createdAt?.toDate
-                ? log.createdAt.toDate().toLocaleString("en-IN")
-                : "Just now"}
-            </p>
+  <div key={log.id} style={styles.logCardNew}>
+  <div style={styles.logDateCol}>
+    {log.createdAt?.toDate
+      ? log.createdAt.toDate().toLocaleString("en-IN")
+      : "Just now"}
+  </div>
 
-            <p style={styles.logText}>
-              Buying Premium: {log.previous?.buyingPremium} →{" "}
-              {log.current?.buyingPremium}
-            </p>
+  <div style={styles.logChangesCol}>
+    {[
+      log.previous?.buyingPremium !== log.current?.buyingPremium && (
+        <p style={styles.logText} key="buyingPremium">
+          Buying Premium: {log.previous?.buyingPremium} →{" "}
+          {log.current?.buyingPremium}
+        </p>
+      ),
 
-            <p style={styles.logText}>
-              Selling Premium: {log.previous?.sellingPremium} →{" "}
-              {log.current?.sellingPremium}
-            </p>
+      log.previous?.sellingPremium !== log.current?.sellingPremium && (
+        <p style={styles.logText} key="sellingPremium">
+          Selling Premium: {log.previous?.sellingPremium} →{" "}
+          {log.current?.sellingPremium}
+        </p>
+      ),
 
-            <p style={styles.logText}>
-              Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
-              {log.current?.showRates ? "Show" : "Hide"}
-            </p>
+      log.previous?.showRates !== log.current?.showRates && (
+        <p style={styles.logText} key="showRates">
+          Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
+          {log.current?.showRates ? "Show" : "Hide"}
+        </p>
+      ),
 
-            <p style={styles.logText}>
-              Contract:{" "}
-              {log.previous?.autoContract
-                ? "Auto"
-                : log.previous?.manualContract}{" "}
-              →{" "}
-              {log.current?.autoContract
-                ? "Auto"
-                : log.current?.manualContract}
-            </p>
-          </div>
-        ))
-      )}
+      log.previous?.autoContract !== log.current?.autoContract ||
+      log.previous?.manualContract !== log.current?.manualContract ? (
+        <p style={styles.logText} key="contract">
+          Contract:{" "}
+          {log.previous?.autoContract
+            ? "Auto"
+            : log.previous?.manualContract}{" "}
+          →{" "}
+          {log.current?.autoContract
+            ? "Auto"
+            : log.current?.manualContract}
+        </p>
+      ) : null,
+    ].filter(Boolean)}
+
+    {[
+      log.previous?.buyingPremium !== log.current?.buyingPremium,
+      log.previous?.sellingPremium !== log.current?.sellingPremium,
+      log.previous?.showRates !== log.current?.showRates,
+      log.previous?.autoContract !== log.current?.autoContract ||
+        log.previous?.manualContract !== log.current?.manualContract,
+    ].every((item) => !item) ? (
+      <p style={styles.logText}>No visible setting change.</p>
+    ) : null}
+  </div>
+</div>
+        )))}
     </>
   ) : null}
 </div> 
@@ -944,7 +966,24 @@ const styles = {
 textareaWrapper: {
   position: "relative",
 },
-
+logCardNew: {
+  background:
+    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: 16,
+  padding: 14,
+  marginBottom: 12,
+  display: "grid",
+  gridTemplateColumns: "180px 1fr",
+  gap: 18,
+},
+logDateCol: {
+  color: "#9f9f9f",
+  fontSize: 13,
+},
+logChangesCol: {
+  color: "#f3d98b",
+},
 textareaClear: {
   position: "absolute",
   top: 10,
@@ -1322,26 +1361,7 @@ openSiteButton: {
   borderTop: "1px solid rgba(214,180,92,0.22)",
   paddingTop: 22,
 },
-
-logTitle: {
-  color: "#f3d98b",
-  marginBottom: 14,
-},
-
-logCard: {
-  background:
-    "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 16,
-  padding: 14,
-  marginBottom: 12,
-},
-
-logTime: {
-  color: "#9f9f9f",
-  fontSize: 13,
-  marginTop: 0,
-},
+  
 logToggle: {
   width: "100%",
   border: "1px solid rgba(214,180,92,0.35)",
