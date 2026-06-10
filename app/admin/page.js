@@ -309,24 +309,58 @@ const newSettings = {
     try {
      await updateDoc(doc(db, "settings", "bullion"), newSettings);
 
-await addDoc(collection(db, "changeLogs"), {
-  createdAt: serverTimestamp(),
-  updatedBy: user.email,
-  previous: {
-    buyingPremium: Number(oldSettings.buyingPremium || 0),
-    sellingPremium: Number(oldSettings.sellingPremium || 0),
-    showRates: Boolean(oldSettings.showRates),
-    autoContract: Boolean(oldSettings.autoContract),
-    manualContract: String(oldSettings.manualContract || ""),
-  },
-  current: {
-    buyingPremium: newSettings.buyingPremium,
-    sellingPremium: newSettings.sellingPremium,
-    showRates: newSettings.showRates,
-    autoContract: newSettings.autoContract,
-    manualContract: newSettings.manualContract,
-  },
-});
+const previousLog = {
+  buyingPremium: Number(oldSettings.buyingPremium || 0),
+  sellingPremium: Number(oldSettings.sellingPremium || 0),
+  showRates: Boolean(oldSettings.showRates),
+  autoContract: Boolean(oldSettings.autoContract),
+  manualContract: String(oldSettings.manualContract || ""),
+  holidayMode: Boolean(oldSettings.holidayMode),
+  holidayBuyingRate: Number(oldSettings.holidayBuyingRate || 0),
+  holidaySellingRate: Number(oldSettings.holidaySellingRate || 0),
+  kachhiBadlaEnabled: Boolean(oldSettings.kachhiBadlaEnabled),
+  kachhiBadlaValue: Number(oldSettings.kachhiBadlaValue || 0),
+  kachhiBadlaUnit: String(oldSettings.kachhiBadlaUnit || "Rs/kg"),
+  autoPremiumEnabled: Boolean(oldSettings.autoPremiumEnabled),
+  showPremium: Boolean(oldSettings.showPremium),
+  premiumStepSize: Number(oldSettings.premiumStepSize || 1000),
+  premiumStepAdjustment: Number(oldSettings.premiumStepAdjustment || 500),
+  volatilityWarningEnabled: Boolean(oldSettings.volatilityWarningEnabled),
+  noticeMessage: String(oldSettings.noticeMessage || ""),
+};
+
+const currentLog = {
+  buyingPremium: newSettings.buyingPremium,
+  sellingPremium: newSettings.sellingPremium,
+  showRates: newSettings.showRates,
+  autoContract: newSettings.autoContract,
+  manualContract: newSettings.manualContract,
+  holidayMode: newSettings.holidayMode,
+  holidayBuyingRate: newSettings.holidayBuyingRate,
+  holidaySellingRate: newSettings.holidaySellingRate,
+  kachhiBadlaEnabled: newSettings.kachhiBadlaEnabled,
+  kachhiBadlaValue: newSettings.kachhiBadlaValue,
+  kachhiBadlaUnit: newSettings.kachhiBadlaUnit,
+  autoPremiumEnabled: newSettings.autoPremiumEnabled,
+  showPremium: newSettings.showPremium,
+  premiumStepSize: newSettings.premiumStepSize,
+  premiumStepAdjustment: newSettings.premiumStepAdjustment,
+  volatilityWarningEnabled: newSettings.volatilityWarningEnabled,
+  noticeMessage: newSettings.noticeMessage,
+};
+
+const hasChanges = Object.keys(currentLog).some(
+  (key) => previousLog[key] !== currentLog[key]
+);
+
+if (hasChanges) {
+  await addDoc(collection(db, "changeLogs"), {
+    createdAt: serverTimestamp(),
+    updatedBy: user.email,
+    previous: previousLog,
+    current: currentLog,
+  });
+}
 
       setMessage("Settings saved successfully.");
       loadSystemStatus();
