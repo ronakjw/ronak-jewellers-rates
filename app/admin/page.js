@@ -814,12 +814,70 @@ function ToggleRow({ label, checked, onChange }) {
         </p>
       ),
 
-      log.previous?.showRates !== log.current?.showRates && (
+      {log.previous?.showRates !== log.current?.showRates && (
         <p style={styles.logText} key="showRates">
           Rates: {log.previous?.showRates ? "Show" : "Hide"} →{" "}
           {log.current?.showRates ? "Show" : "Hide"}
         </p>
-      ),
+      ) : null}
+        
+        {log.previous?.holidayMode !== log.current?.holidayMode ? (
+  <p style={styles.logText}>
+    Holiday Mode: {log.previous?.holidayMode ? "On" : "Off"} →{" "}
+    {log.current?.holidayMode ? "On" : "Off"}
+  </p>
+) : null}
+
+{log.previous?.holidayBuyingRate !== log.current?.holidayBuyingRate ? (
+  <p style={styles.logText}>
+    Holiday Buying Rate: {log.previous?.holidayBuyingRate} →{" "}
+    {log.current?.holidayBuyingRate}
+  </p>
+) : null}
+
+{log.previous?.holidaySellingRate !== log.current?.holidaySellingRate ? (
+  <p style={styles.logText}>
+    Holiday Selling Rate: {log.previous?.holidaySellingRate} →{" "}
+    {log.current?.holidaySellingRate}
+  </p>
+) : null}
+
+{log.previous?.kachhiBadlaEnabled !== log.current?.kachhiBadlaEnabled ? (
+  <p style={styles.logText}>
+    Kachhi Badla: {log.previous?.kachhiBadlaEnabled ? "Show" : "Hide"} →{" "}
+    {log.current?.kachhiBadlaEnabled ? "Show" : "Hide"}
+  </p>
+) : null}
+
+{log.previous?.kachhiBadlaValue !== log.current?.kachhiBadlaValue ? (
+  <p style={styles.logText}>
+    Kachhi Badla Value: {log.previous?.kachhiBadlaValue} →{" "}
+    {log.current?.kachhiBadlaValue}
+  </p>
+) : null}
+
+{log.previous?.autoPremiumEnabled !== log.current?.autoPremiumEnabled ? (
+  <p style={styles.logText}>
+    Auto Premium: {log.previous?.autoPremiumEnabled ? "On" : "Off"} →{" "}
+    {log.current?.autoPremiumEnabled ? "On" : "Off"}
+  </p>
+) : null}
+
+{log.previous?.showPremium !== log.current?.showPremium ? (
+  <p style={styles.logText}>
+    Show Premium: {log.previous?.showPremium ? "Show" : "Hide"} →{" "}
+    {log.current?.showPremium ? "Show" : "Hide"}
+  </p>
+) : null}
+
+{log.previous?.volatilityWarningEnabled !==
+log.current?.volatilityWarningEnabled ? (
+  <p style={styles.logText}>
+    Volatility Warning:{" "}
+    {log.previous?.volatilityWarningEnabled ? "On" : "Off"} →{" "}
+    {log.current?.volatilityWarningEnabled ? "On" : "Off"}
+  </p>
+) : null}
 
       log.previous?.autoContract !== log.current?.autoContract ||
       log.previous?.manualContract !== log.current?.manualContract ? (
