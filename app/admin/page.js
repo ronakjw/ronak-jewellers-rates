@@ -666,13 +666,24 @@ function ToggleRow({ label, checked, onChange }) {
           </div>
 
           <div style={styles.controlCard}>
-            <label style={styles.label}>Refresh Before 5:30 PM / sec</label>
+            <label style={styles.label}>Refresh Before 5:30PM</label>
             <input
               style={styles.input}
               type="number"
               value={settings.refreshBefore530}
               onChange={(e) =>
                 updateField("refreshBefore530", e.target.value)
+              }
+            />
+          </div>
+ <div style={styles.controlCard}>
+            <label style={styles.label}>Refresh After 5:30PM</label>
+            <input
+              style={styles.input}
+              type="number"
+              value={settings.refreshAfter530}
+              onChange={(e) =>
+                updateField("refreshAfter530", e.target.value)
               }
             />
           </div>
@@ -700,18 +711,7 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Refresh After 5:30 PM / sec</label>
-            <input
-              style={styles.input}
-              type="number"
-              value={settings.refreshAfter530}
-              onChange={(e) =>
-                updateField("refreshAfter530", e.target.value)
-              }
-            />
-          </div>
-
+         
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla Value</label>
   <input
@@ -1021,11 +1021,11 @@ logCardNew: {
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
   borderRadius: 16,
-  padding: 14,
-  marginBottom: 12,
+  padding: 11,
+  marginBottom: 8,
   display: "grid",
   gridTemplateColumns: "180px 1fr",
-  gap: 18,
+  gap: 11,
 },
 logDateCol: {
   color: "#9f9f9f",
@@ -1425,7 +1425,7 @@ logToggle: {
 },
 logText: {
   color: "#f3d98b",
-  margin: "6px 0",
-  fontSize: 14,
+  margin: "2px 0",
+  fontSize: 11,
 },
 };
