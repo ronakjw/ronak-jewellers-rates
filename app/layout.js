@@ -1,8 +1,8 @@
 import Script from "next/script";
 
 export const metadata = {
-  title: "RJ Bullion",
-  description: "Live bullion rates by Ronak Jewellers",
+  title: "Ronak Jewellers",
+  description: "Live rates by Ronak Jewellers",
   manifest: "/manifest.json",
   themeColor: "#000000",
   appleWebApp: {
