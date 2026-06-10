@@ -58,6 +58,7 @@ export default function AdminPage() {
   const [assistantListening, setAssistantListening] = useState(false);
   const [assistantMode, setAssistantMode] = useState("command");
   const [assistantAdvice, setAssistantAdvice] = useState("");
+  const [savedSettings, setSavedSettings] = useState(null);
   
     useEffect(() => {
   if (!user) return;
@@ -91,7 +92,9 @@ export default function AdminPage() {
     if (!user) return;
 
     return onSnapshot(doc(db, "settings", "bullion"), (snapshot) => {
-      setSettings(snapshot.data());
+     const data = snapshot.data();
+     setSettings(data);
+     setSavedSettings(data);
     });
   }, [user]);
 
@@ -274,7 +277,7 @@ async function runAssistantCommand() {
 
     const buyingPremium = parseInt(settings.buyingPremium || 0, 10);
     const sellingPremium = parseInt(settings.sellingPremium || 0, 10);
-    const oldSettings = settings;
+    const oldSettings = savedSettings || settings;
 
 const newSettings = {
   buyingPremium,
@@ -308,7 +311,7 @@ const newSettings = {
 
     try {
      await updateDoc(doc(db, "settings", "bullion"), newSettings);
-
+setSavedSettings(newSettings);
 const previousLog = {
   buyingPremium: Number(oldSettings.buyingPremium || 0),
   sellingPremium: Number(oldSettings.sellingPremium || 0),
