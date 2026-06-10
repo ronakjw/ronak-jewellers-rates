@@ -515,10 +515,60 @@ function ToggleRow({ label, checked, onChange }) {
   <ToggleRow
   label="Show Premium"
   checked={Boolean(settings.showPremium)}
-  onChange={(value) => updateField("showPremium", value)}
+  onChange={(value) => updateField("showPremium", value)}/>
+ 
+  <ToggleRow
+  label="Show Rates"
+  checked={Boolean(settings.showRates)}
+  onChange={(value) => updateField("showRates", value)}/>
+
+  <ToggleRow
+  label={`Contract Mode: ${
+    settings.contractMode === "auto"
+      ? "AUTO" : "MANUAL" }`}
+  checked={settings.contractMode === "auto"}
+  onChange={(value) =>
+    updateField(
+      "contractMode",
+      value ? "auto" : "manual"
+    )}/>
+
+  <ToggleRow
+  label="Holiday Mode"
+  checked={Boolean(settings.holidayMode)}
+  onChange={(value) => updateField("holidayMode", value)}/>
+
+  <ToggleRow
+  label="Kachhi Badla"
+  checked={Boolean(settings.kachhiBadlaEnabled)}
+  onChange={(value) => updateField("kachhiBadlaEnabled", value)} />
+
+<ToggleRow
+  label={`Kachhi Badla Unit: ${
+    settings.kachhiBadlaUnit === "Rs/kg"
+      ? "Rs/kg"
+      : "gm/kg"
+  }`}
+  checked={settings.kachhiBadlaUnit === "Rs/kg"}
+  onChange={(value) =>
+    updateField(
+      "kachhiBadlaUnit",
+      value ? "Rs/kg" : "gm/kg"
+    )
+  }
+/>
+
+  <ToggleRow
+  label="Auto Premium"
+  checked={Boolean(settings.autoPremiumEnabled)}
+  onChange={(value) => updateField("autoPremiumEnabled", value)}
   />
-  
-          <div style={styles.controlCard}>
+ <ToggleRow
+  label="Volatility Warning"
+  checked={Boolean(settings.volatilityWarningEnabled)}
+  onChange={(value) => updateField("volatilityWarningEnabled", value)}
+/>   
+    <div style={styles.controlCard}>
             <label style={styles.label}>Buying Premium</label>
             <input
               style={styles.input}
@@ -541,26 +591,6 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-  <ToggleRow
-  label="Show Rates"
-  checked={Boolean(settings.showRates)}
-  onChange={(value) => updateField("showRates", value)}
-/>
-
-        <ToggleRow
-  label={`Contract Mode: ${
-    settings.contractMode === "auto"
-      ? "AUTO"
-      : "MANUAL"
-  }`}
-  checked={settings.contractMode === "auto"}
-  onChange={(value) =>
-    updateField(
-      "contractMode",
-      value ? "auto" : "manual"
-    )
-  }
-/>
 
           <div style={styles.controlCard}>
             <label style={styles.label}>Manual Contract</label>
@@ -609,12 +639,6 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-    
-<ToggleRow
-  label="Holiday Mode"
-  checked={Boolean(settings.holidayMode)}
-  onChange={(value) => updateField("holidayMode", value)}
-/>
 
 <div style={styles.controlCard}>
   <label style={styles.label}>Holiday Buying Rate</label>
@@ -650,11 +674,6 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-<ToggleRow
-  label="Kachhi Badla"
-  checked={Boolean(settings.kachhiBadlaEnabled)}
-  onChange={(value) => updateField("kachhiBadlaEnabled", value)}
-/>
 
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla Value</label>
@@ -667,27 +686,6 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
-
-<ToggleRow
-  label={`Kachhi Badla Unit: ${
-    settings.kachhiBadlaUnit === "Rs/kg"
-      ? "Rs/kg"
-      : "gm/kg"
-  }`}
-  checked={settings.kachhiBadlaUnit === "Rs/kg"}
-  onChange={(value) =>
-    updateField(
-      "kachhiBadlaUnit",
-      value ? "Rs/kg" : "gm/kg"
-    )
-  }
-/>
-
-  <ToggleRow
-  label="Auto Premium"
-  checked={Boolean(settings.autoPremiumEnabled)}
-  onChange={(value) => updateField("autoPremiumEnabled", value)}
-  />
 
 <div style={styles.controlCard}>
   <label style={styles.label}>MCX Step Size</label>
@@ -712,12 +710,6 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
-    
-<ToggleRow
-  label="Volatility Warning"
-  checked={Boolean(settings.volatilityWarningEnabled)}
-  onChange={(value) => updateField("volatilityWarningEnabled", value)}
-/>
     
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
