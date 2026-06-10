@@ -41,14 +41,12 @@ function formatPrice(value) {
 
   return new Intl.NumberFormat("en-IN").format(value);
 }
-
 function formatPremium(value) {
   if (value === null || value === undefined || Number.isNaN(value)) {
     return "--";
   }
-
   const sign = value > 0 ? "+" : "";
-  return `{formatPrice(value)}`;
+  return `${sign}${formatPrice(value)}`;
 }
 // Auto premium function starts
 function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
