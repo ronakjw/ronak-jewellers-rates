@@ -48,7 +48,7 @@ function formatPremium(value) {
   }
 
   const sign = value > 0 ? "+" : "";
-  return `${sign}₹${formatPrice(value)}`;
+  return `{formatPrice(value)}`;
 }
 // Auto premium function starts
 function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
