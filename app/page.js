@@ -207,7 +207,7 @@ if (currentBuyPrice) {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 20 }} />
+        <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 12 }} />
 
         <h1 style={styles.brandName}>- Ronak Jewellers -</h1>
 
@@ -269,7 +269,7 @@ if (currentBuyPrice) {
  if (!quote) {
   return (
     <main style={styles.pageCenter}>
-      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
+      <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 12,   }} />
 
       <h1 style={styles.brandName}>
        - Ronak Jewellers -
@@ -316,7 +316,7 @@ const finalSelling = settings.showPremium
 return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 20,   }} />
+        <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 12,   }} />
 
         <h2 style={styles.brandName}>- Ronak Jewellers -</h2>
 
@@ -624,16 +624,16 @@ disclaimer: {
   },
 
   premiumBox: {
-    margin: "18px 0 22px",
+    margin: "11px 0 15px",
     border: "1px solid rgba(214,180,92,0.26)",
     background:
       "linear-gradient(90deg, rgba(214,180,92,0.12), rgba(214,180,92,0.035))",
     color: "#dcdcdc",
-    borderRadius: 16,
-    padding: "13px 15px",
+    borderRadius: 7,
+    padding: "9px 11px",
     display: "flex",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 8,
   },
 
   finalLabel: {
