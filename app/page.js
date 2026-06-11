@@ -90,15 +90,24 @@ function ProductPanel({
           }))
         }
       >
-        <span>{title}</span>
-        <span>{isOpen ? "−" : "+"}</span>
+<span
+  style={{
+    transition: "transform 0.25s ease",
+    transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+  }}>
+  {isOpen ? "−" : "+"}
+</span>
       </button>
 
-      {isOpen ? (
-        <div style={styles.productPanelBody}>
-          {children}
-        </div>
-      ) : null}
+ <div
+  style={{
+    ...styles.productPanelBody,
+    maxHeight: isOpen ? 600 : 0,
+    opacity: isOpen ? 1 : 0,
+    padding: isOpen ? 18 : "0 18px",
+  }}>
+  {children}
+</div>
     </section>
   );
 }
@@ -373,7 +382,7 @@ return (
         <h2 style={styles.brandName}>- Ronak Jewellers -</h2>
 
         <div style={styles.statusRow}>
-          <span style={styles.liveDot} />
+          <span style={styles.liveDoot} />
           <span>LIVE MCX SILVER FUTURES</span>
         </div>
      <p>  <CustomNotice message={settings.noticeMessage} /> </p>
@@ -625,6 +634,7 @@ productToggle: {
 },
 productPanelBody: {
   padding: 14,
+  transition: "max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease",
 },
   kachhiBox: {
   margin: "28px auto 0",
@@ -651,7 +661,15 @@ statusRow: {
   justifyContent: "center",
   gap: 8,
 },
-
+liveDoot: {
+  width: 8,
+  height: 8,
+  borderRadius: "50%",
+  background: "#d6b45c",
+  boxShadow: "0 0 12px #d6b45c",
+  display: "inline-block",
+  animation: "pulse 1.4s infinite",
+},
 liveDot: {
   width: 8,
   height: 8,
@@ -732,6 +750,7 @@ disclaimer: {
     background:
       "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
     border: "1px solid rgba(255,255,255,0.08)",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease",
     borderRadius: 22,
     padding: 20,
   },
