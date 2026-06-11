@@ -301,6 +301,9 @@ const newSettings = {
   premiumStepSize: parseInt(settings.premiumStepSize || 1000, 10),
   premiumStepAdjustment: parseInt(settings.premiumStepAdjustment || 500, 10),
   volatilityWarningEnabled: Boolean(settings.volatilityWarningEnabled),
+  silver100rate: Boolean(settings.silver100rate),
+  silver100buy: parseInt(settings.silver100buy || 0, 10),
+  silver100sell: parseInt(settings.silver100sell || 0, 10),
 };
  if (!settings.autoContract && !String(settings.manualContract || "").trim()) 
  {  setMessage("Manual contract cannot be empty.");
@@ -560,6 +563,11 @@ function ToggleRow({ label, checked, onChange }) {
   onChange={(value) => updateField("showRates", value)}/>
 
   <ToggleRow
+  label="Show 999 Rates"
+  checked={Boolean(settings.silver100rate)}
+  onChange={(value) => updateField("silver100rate", value)}/>
+    
+  <ToggleRow
   label={`Contract Mode: ${
     settings.contractMode === "auto"
       ? "AUTO" : "MANUAL" }`}
@@ -652,7 +660,25 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver100 BuyPremium</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.silver100buy || 0}
+    onChange={(e) => updateField("silver100buy", e.target.value)}
+  />
+</div>
 
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver100 SellPremium</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.silver100sell || 0}
+    onChange={(e) => updateField("silver100sell", e.target.value)}
+  />
+</div>
           <div style={styles.controlCard}>
             <label style={styles.label}>Market End Hour</label>
             <input
