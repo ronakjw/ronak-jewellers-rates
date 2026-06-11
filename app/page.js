@@ -267,7 +267,7 @@ if (currentBuyPrice) {
       <section style={styles.hero}>
         <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 12 }} />
 
-        <h1 style={styles.brandName}>○ Ronak Jewellers ○</h1>
+        <h1 style={styles.brandName}>◇Ronak Jewellers◇</h1>
 
    {settings.noticeMessage?.trim() ? (
   <div style={styles.statusRow}>
@@ -382,7 +382,7 @@ return (
       <section style={styles.hero}>
         <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 12,   }} />
 
-        <h2 style={styles.brandName}>◇ Ronak Jewellers ◇</h2>
+        <h2 style={styles.brandName}>◇Ronak Jewellers◇</h2>
 
         <div style={styles.statusRow}>
           <span style={styles.live} />
