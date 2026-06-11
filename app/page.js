@@ -430,9 +430,9 @@ Date.now() < volatilityUntil ? (
     {openProduct === "silver100" ? (
       <section style={styles.mainCard}>
         {
-         <section style={styles.mainCard}>
-        <p style={styles.sectionLabel}>Silver999 Rates</p>
-
+         <div style={styles.cardTop}>  
+            <h2 style={styles.contract}>{quote.contract}</h2>
+        </div>
        <div style={styles.rateGrid}>
          <div style={styles.sideCard}>
         <p style={styles.finalLabel}>WE BUY AT:</p>
@@ -448,8 +448,7 @@ Date.now() < volatilityUntil ? (
           <span style={styles.unit}> / kg</span>
         </h1>
       </div>
-    </div>
-  </section> 
+    </div> 
         }
       </section>
     ) : null}
