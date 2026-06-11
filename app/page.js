@@ -470,9 +470,7 @@ Date.now() < volatilityUntil ? (
       <h2 style={styles.mcxPrice}>
         ₹{formatPrice(quote.mcxBuyPrice)}
         <span style={styles.unit}> /kg</span>
-      </h2>
-
-      
+      </h2>   
 
       <p style={styles.finalLabel}>WE BUY AT:</p>
       <h1 style={styles.finalPrice}>
@@ -488,8 +486,6 @@ Date.now() < volatilityUntil ? (
         <span style={styles.unit}> /kg</span>
       </h2>
 
-     
-
       <p style={styles.finalLabel}>WE SELL AT:</p>
       <h1 style={styles.finalPrice}>
         ₹{formatPrice(silver100Selling)}
@@ -500,7 +496,7 @@ Date.now() < volatilityUntil ? (
 </ProductPanel>
   </>
 ) : null}
-
+/*
 <ProductPanel
   id="gold995"
   title="GOLD 995"
@@ -508,7 +504,7 @@ Date.now() < volatilityUntil ? (
   setOpenProducts={setOpenProducts}>
     <p style={styles.metaRows}>GOLD 995 RATES COMING SOON...</p>
 </ProductPanel>
-    
+*/    
 <KachhiBadla settings={settings} />
  <ContactButtons />
  <InstallPWAButton />               
@@ -620,9 +616,9 @@ productToggle: {
   background: "transparent",
   color: "#f3d98b",
   padding: "15px 18px",
-  fontSize: 20,
-  fontWeight: 350,
-  letterSpacing: "0.3em",
+  fontSize: 18,
+  fontWeight: 450,
+  letterSpacing: "0.22em",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
