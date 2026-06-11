@@ -369,24 +369,27 @@ Date.now() < volatilityUntil ? (
 
 {openProduct === "silver99" ? (
   <section style={styles.mainCard}>
+    <div style={styles.cardTop}>
+          <h2 style={styles.contract}>SILVER 99 [SA Indore]</h2>
+        </div>
     <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Buy</p>
             <h2 style={styles.mcxPrice}>
-              ₹{formatPrice(quote.mcxBuyPrice)}
+              ₹ {formatPrice(quote.mcxBuyPrice)}
               <span style={styles.unit}> / kg</span>
             </h2>
 
           {settings.showPremium ? (
             <div style={styles.premiumBox}>
-              <span>Buying Premium</span>
+              <span>Buying Premium :</span>
               <strong>{formatPremium(buyingPremium)}</strong>
             </div>
             ) : null}
 
             <p style={styles.finalLabel}>We Buy at :</p>
             <h1 style={styles.finalPrice}>
-              ₹{formatPrice(finalBuying)}
+              ₹ {formatPrice(finalBuying)}
               <span style={styles.unit}> / kg</span>
             </h1>
           </div>
@@ -394,20 +397,20 @@ Date.now() < volatilityUntil ? (
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Sell</p>
             <h2 style={styles.mcxPrice}>
-              ₹{formatPrice(quote.mcxSellPrice)}
+              ₹ {formatPrice(quote.mcxSellPrice)}
               <span style={styles.unit}> / kg</span>
             </h2>
 
             {settings.showPremium ? (
                 <div style={styles.premiumBox}>
-              <span>Selling Premium</span>
+              <span>Selling Premium :</span>
               <strong>{formatPremium(sellingPremium)}</strong>
             </div>
             ) : null}
 
             <p style={styles.finalLabel}>We Sell at :</p>
             <h1 style={styles.finalPrice}>
-              ₹{formatPrice(finalSelling)}
+              ₹ {formatPrice(finalSelling)}
               <span style={styles.unit}> / kg</span>
             </h1>
           </div>
@@ -428,18 +431,27 @@ Date.now() < volatilityUntil ? (
     {openProduct === "silver100" ? (
       <section style={styles.mainCard}>
         <div style={styles.cardTop}>
-          <h2 style={styles.contract}>SILVER 100</h2>
+          <h2 style={styles.contract}>SILVER 100 [Peti/PetiCut]</h2>
         </div>
-
+          <p style={styles.label}>MCX Buy</p>
+            <h2 style={styles.mcxPrice}>
+              ₹ {formatPrice(quote.mcxBuyPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
         <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
             <p style={styles.finalLabel}>WE BUY AT:</p>
             <h1 style={styles.finalPrice}>
-              ₹{formatPrice(silver100Buying)}
+              ₹ {formatPrice(silver100Buying)}
               <span style={styles.unit}> /kg</span>
             </h1>
           </div>
 
+        <p style={styles.label}>MCX Sell</p>
+            <h2 style={styles.mcxPrice}>
+              ₹{formatPrice(quote.mcxSellPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
           <div style={styles.sideCard}>
             <p style={styles.finalLabel}>WE SELL AT:</p>
             <h1 style={styles.finalPrice}>
@@ -660,7 +672,7 @@ disclaimer: {
   contract: {
     margin: 0,
     color: "#f3d98b",
-    fontSize: 22,
+    fontSize: 20,
   },
 
   badge: {
@@ -727,17 +739,11 @@ disclaimer: {
     fontSize: "clamp(34px, 8vw, 54px)",
     lineHeight: 1,
   },
-
-  metaRow: {
-    marginBottom: 16,
-    borderBottom: "1px solid rgba(255,255,255,0.08)",
-    paddingBottom: 10,
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 12,
-    flexWrap: "wrap",
-    color: "#858585",
-    fontSize: 13,
+metaRow: {
+  display: "flex",
+  justifyContent: "center",
+  marginBottom: 12,
+  color: "#9f9f9f",
   },
 volatilityWarning: {
   maxWidth: 760,
