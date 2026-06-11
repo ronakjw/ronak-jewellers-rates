@@ -360,70 +360,41 @@ Date.now() < volatilityUntil ? (
     <div style={styles.metaRow}>
           <span>Last Updated: {quote.timestamp}</span>
     </div>
-       <ProductToggle id="silver99" title="SILVER 99" openProduct={openProduct} setOpenProduct={setOpenProduct}/>
-     
-    {openProduct === "silver99" ? (
-     <section style={styles.mainCard}> 
-     
-     <div style={styles.cardTop}>  
-            <h2 style={styles.contract}>{quote.contract}</h2>
-        </div>
+  <ProductToggle
+  id="silver99"
+  title="SILVER 99"
+  openProduct={openProduct}
+  setOpenProduct={setOpenProduct}
+/>
 
-        {fetchError ? (
-          <div style={styles.errorBox}>{fetchError}</div>
-        ) : null}
+{openProduct === "silver99" ? (
+  <section style={styles.mainCard}>
+    <div style={styles.contractCard}>
+      <p style={styles.smallLabel}>MCX CONTRACT</p>
+      <h2 style={styles.contract}>{quote.contract}</h2>
+    </div>
 
-       <div style={styles.rateGrid}>
-          <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Buy</p>
-            <h2 style={styles.mcxPrice}>
-              ₹{formatPrice(quote.mcxBuyPrice)}
-              <span style={styles.unit}> / kg</span>
-            </h2>
+    <div style={styles.rateGrid}>
+      <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>WE BUY AT:</p>
+        <h1 style={styles.finalPrice}>
+          ₹{formatPrice(finalBuying)}
+          <span style={styles.unit}> /kg</span>
+        </h1>
+      </div>
 
-          {settings.showPremium ? (
-            <div style={styles.premiumBox}>
-              <span>Buying Premium</span>
-              <strong>{formatPremium(buyingPremium)}</strong>
-            </div>
-            ) : null}
-
-            <p style={styles.finalLabel}>We Buy at :</p>
-            <h1 style={styles.finalPrice}>
-              ₹{formatPrice(finalBuying)}
-              <span style={styles.unit}> / kg</span>
-            </h1>
-          </div>
-
-          <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Sell</p>
-            <h2 style={styles.mcxPrice}>
-              ₹{formatPrice(quote.mcxSellPrice)}
-              <span style={styles.unit}> / kg</span>
-            </h2>
-
-            {settings.showPremium ? (
-                <div style={styles.premiumBox}>
-              <span>Selling Premium</span>
-              <strong>{formatPremium(sellingPremium)}</strong>
-            </div>
-            ) : null}
-
-            <p style={styles.finalLabel}>We Sell at :</p>
-            <h1 style={styles.finalPrice}>
-              ₹{formatPrice(finalSelling)}
-              <span style={styles.unit}> / kg</span>
-            </h1>
-          </div>
-              <div style={styles.mcxReference}>
-               <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
-                <span style={styles.referenceDivider}>|</span>
-                <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
-                </div>
-        </div>
-       </section>
-      ) : null}       
-   {settings.silver100rate ? (
+      <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>WE SELL AT:</p>
+        <h1 style={styles.finalPrice}>
+          ₹{formatPrice(finalSelling)}
+          <span style={styles.unit}> /kg</span>
+        </h1>
+      </div>
+    </div>
+  </section>
+) : null}
+  
+{settings.silver100rate ? (
   <>
     <ProductToggle
       id="silver100"
@@ -580,15 +551,15 @@ const styles = {
   width: "100%",
   maxWidth: 760,
   margin: "14px auto 10px",
-  border: "1px solid rgba(214,180,92,0.35)",
+  border: "2px solid rgba(214,180,92,0.35)",
   background:
     "linear-gradient(145deg, rgba(214,180,92,0.14), rgba(35,35,35,0.92))",
   color: "#f3d98b",
-  borderRadius: 16,
+  borderRadius: 5,
   padding: "15px 18px",
-  fontSize: 17,
-  fontWeight: 900,
-  letterSpacing: "0.08em",
+  fontSize: 19,
+  fontWeight: 300,
+  letterSpacing: "0.18em",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
