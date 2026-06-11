@@ -62,17 +62,46 @@ function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
 function roundToNearest500(value) {
   return Math.floor((value + 249) / 500) * 500;
 }
-function ProductToggle({ id, title, openProduct, setOpenProduct }) {
-  const isOpen = openProduct === id;
+
+function ProductPanel({
+  id,
+  title,
+  openProducts,
+  setOpenProducts,
+  children,
+}) {
+  const isOpen = openProducts[id];
+
   return (
-    <button
-      type="button"
-      style={styles.productToggle}
-      onClick={() => setOpenProduct(isOpen ? "" : id)}>
-      <span>{title}</span>
-      <span>{isOpen ? "−" : "+"}</span>
-    </button>
-  );}
+    <section style={styles.productPanel}>
+      <button
+        type="button"
+        style={{
+          ...styles.productToggle,
+          borderBottom: isOpen
+            ? "1px solid rgba(214,180,92,0.22)"
+            : "none",
+          borderRadius: isOpen ? "16px 16px 0 0" : 16,
+        }}
+        onClick={() =>
+          setOpenProducts((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+          }))
+        }
+      >
+        <span>{title}</span>
+        <span>{isOpen ? "−" : "+"}</span>
+      </button>
+
+      {isOpen ? (
+        <div style={styles.productPanelBody}>
+          {children}
+        </div>
+      ) : null}
+    </section>
+  );
+}
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
@@ -360,15 +389,12 @@ Date.now() < volatilityUntil ? (
   <span>Last Updated: {quote.timestamp}</span>
 </div>
 
-<ProductToggle
+<ProductPanel
   id="silver99"
   title="SILVER 99"
-  openProduct={openProduct}
-  setOpenProduct={setOpenProduct}
-/>
-
-{openProduct === "silver99" ? (
-  <section style={styles.mainCard}>
+  openProducts={openProducts}
+  setOpenProducts={setOpenProducts}
+>
     <div style={styles.cardTop}>
           <h2 style={styles.contract}>SILVER 99 [SA Indore]</h2>
         </div>
@@ -415,21 +441,16 @@ Date.now() < volatilityUntil ? (
             </h1>
           </div>
         </div>
-         
-  </section>
-) : null}
+</ProductPanel>
 
 {settings.silver100rate ? (
   <>
-    <ProductToggle
-      id="silver100"
-      title="SILVER 100"
-      openProduct={openProduct}
-      setOpenProduct={setOpenProduct}
-    />
-
-    {openProduct === "silver100" ? (
-     <section style={styles.mainCard}>
+   <ProductPanel
+  id="silver99"
+  title="SILVER 99"
+  openProducts={openProducts}
+  setOpenProducts={setOpenProducts}
+>
   <div style={styles.cardTop}>
     <h2 style={styles.contract}>SILVER 100 [Peti / PetiCut]</h2>
   </div>
@@ -467,23 +488,17 @@ Date.now() < volatilityUntil ? (
       </h1>
     </div>
   </div>
-</section>
-    ) : null}
+</ProductPanel>
   </>
 ) : null}
 
-<ProductToggle
-  id="gold995"
-  title="GOLD 995"
-  openProduct={openProduct}
-  setOpenProduct={setOpenProduct}
-/>
-
-{openProduct === "gold995" ? (
-  <section style={styles.mainCard}>
-    <p style={styles.finalLabel}>Gold 995 rates coming soon.</p>
-  </section>
-) : null}
+<ProductPanel
+  id="silver99"
+  title="SILVER 99"
+  openProducts={openProducts}
+  setOpenProducts={setOpenProducts}>
+    <p style={styles.metaRows}>GOLD 995 RATES COMING SOON...</p>
+</ProductPanel>
     
 <KachhiBadla settings={settings} />
  <ContactButtons />
@@ -580,23 +595,32 @@ const styles = {
     color: "#f3d98b",
     textShadow: "0 0 22px rgba(214,180,92,0.16)",
   },
-  productToggle: {
+productPanel: {
   width: "100%",
   maxWidth: 760,
-  margin: "14px auto 10px",
-  border: "2px solid rgba(214,180,92,0.35)",
+  margin: "14px auto",
+  border: "1px solid rgba(214,180,92,0.35)",
+  borderRadius: 16,
+  overflow: "hidden",
   background:
-    "linear-gradient(145deg, rgba(214,180,92,0.14), rgba(35,35,35,0.92))",
+    "linear-gradient(145deg, rgba(214,180,92,0.10), rgba(20,20,20,0.94))",
+},
+productToggle: {
+  width: "100%",
+  border: "none",
+  background: "transparent",
   color: "#f3d98b",
-  borderRadius: 5,
   padding: "15px 18px",
-  fontSize: 19,
-  fontWeight: 300,
-  letterSpacing: "0.18em",
+  fontSize: 17,
+  fontWeight: 900,
+  letterSpacing: "0.08em",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   cursor: "pointer",
+},
+productPanelBody: {
+  padding: 14,
 },
   kachhiBox: {
   margin: "28px auto 0",
