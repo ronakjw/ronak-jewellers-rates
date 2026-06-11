@@ -460,7 +460,7 @@ Date.now() < volatilityUntil ? (
   <>
   <ProductPanel
   id="silver100"
-  title="SILVER 100 [Peti / PetiCut]"
+  title="SILVER 100 [PetiCut]"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
@@ -717,14 +717,6 @@ disclaimer: {
     letterSpacing: "0.11em",
     textTransform: "uppercase",
   },
-
-  contract: {
-    margin: 0,
-    color: "#f3d98b",
-    fontSize: 20,
-    textAlign: "center",
-  },
-
   badge: {
     border: "1px solid rgba(214,180,92,0.34)",
     background: "rgba(214,180,92,0.08)",
