@@ -496,7 +496,7 @@ Date.now() < volatilityUntil ? (
 </ProductPanel>
   </>
 ) : null}
-/*
+ {/*
 <ProductPanel
   id="gold995"
   title="GOLD 995"
@@ -504,7 +504,7 @@ Date.now() < volatilityUntil ? (
   setOpenProducts={setOpenProducts}>
     <p style={styles.metaRows}>GOLD 995 RATES COMING SOON...</p>
 </ProductPanel>
-*/    
+*/}    
 <KachhiBadla settings={settings} />
  <ContactButtons />
  <InstallPWAButton />               
@@ -605,7 +605,7 @@ productPanel: {
   maxWidth: 760,
   margin: "14px auto",
   border: "2px solid rgba(214,180,92,0.35)",
-  borderRadius: 10,
+  borderRadius: 12,
   overflow: "hidden",
   background:
     "linear-gradient(145deg, rgba(214,180,92,0.10), rgba(20,20,20,0.94))",
@@ -615,10 +615,10 @@ productToggle: {
   border: "none",
   background: "transparent",
   color: "#f3d98b",
-  padding: "15px 18px",
-  fontSize: 18,
+  padding: "12px 15px",
+  fontSize: 17,
   fontWeight: 450,
-  letterSpacing: "0.22em",
+  letterSpacing: "0.18em",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
