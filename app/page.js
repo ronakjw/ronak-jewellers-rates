@@ -415,6 +415,11 @@ Date.now() < volatilityUntil ? (
               <span style={styles.unit}> / kg</span>
             </h1>
           </div>
+              <div style={styles.mcxReference}>
+               <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
+                <span style={styles.referenceDivider}>|</span>
+                <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
+                </div>
         </div>
        </section>
       ) : null}       
@@ -448,6 +453,11 @@ Date.now() < volatilityUntil ? (
           <span style={styles.unit}> / kg</span>
         </h1>
       </div>
+              <div style={styles.mcxReference}>
+              <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
+              <span style={styles.referenceDivider}>|</span>
+              <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
+              </div>
     </div> 
         }
       </section>
@@ -455,11 +465,6 @@ Date.now() < volatilityUntil ? (
   </>
 ) : null}
 
-  <div style={styles.mcxReference}>
-  <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
-  <span style={styles.referenceDivider}>|</span>
-  <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
-  </div>
 
 <ProductToggle
   id="gold995"
