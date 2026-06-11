@@ -433,12 +433,13 @@ Date.now() < volatilityUntil ? (
         <div style={styles.cardTop}>
           <h2 style={styles.contract}>SILVER 100 [Peti/PetiCut]</h2>
         </div>
-          <p style={styles.label}>MCX Buy</p>
+         <div style={styles.rateGrid}>    
+           <p style={styles.label}>MCX Buy</p>
             <h2 style={styles.mcxPrice}>
               ₹ {formatPrice(quote.mcxBuyPrice)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h2>
-        <div style={styles.rateGrid}>
+        
           <div style={styles.sideCard}>
             <p style={styles.finalLabel}>WE BUY AT:</p>
             <h1 style={styles.finalPrice}>
@@ -449,13 +450,13 @@ Date.now() < volatilityUntil ? (
 
         <p style={styles.label}>MCX Sell</p>
             <h2 style={styles.mcxPrice}>
-              ₹{formatPrice(quote.mcxSellPrice)}
-              <span style={styles.unit}> / kg</span>
+              ₹ {formatPrice(quote.mcxSellPrice)}
+              <span style={styles.unit}> /kg</span>
             </h2>
           <div style={styles.sideCard}>
             <p style={styles.finalLabel}>WE SELL AT:</p>
             <h1 style={styles.finalPrice}>
-              ₹{formatPrice(silver100Selling)}
+              ₹ {formatPrice(silver100Selling)}
               <span style={styles.unit}> /kg</span>
             </h1>
           </div>
