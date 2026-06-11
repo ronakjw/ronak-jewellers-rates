@@ -431,8 +431,7 @@ Date.now() < volatilityUntil ? (
     {openProduct === "silver100" ? (
      <section style={styles.mainCard}>
   <div style={styles.cardTop}>
-    <h2 style={styles.contract}>SILVER 100</h2>
-    <p style={styles.smallLabel}>Peti / PetiCut</p>
+    <h2 style={styles.contract}>SILVER 100 [Peti / PetiCut]</h2>
   </div>
 
   <div style={styles.rateGrid}>
@@ -443,10 +442,7 @@ Date.now() < volatilityUntil ? (
         <span style={styles.unit}> /kg</span>
       </h2>
 
-      <div style={styles.premiumRow}>
-        <span>Buy Premium</span>
-        <strong>{formatPremium(settings.silver100buy || 0)}</strong>
-      </div>
+      
 
       <p style={styles.finalLabel}>WE BUY AT:</p>
       <h1 style={styles.finalPrice}>
@@ -462,10 +458,7 @@ Date.now() < volatilityUntil ? (
         <span style={styles.unit}> /kg</span>
       </h2>
 
-      <div style={styles.premiumRow}>
-        <span>Sell Premium</span>
-        <strong>{formatPremium(settings.silver100sell || 0)}</strong>
-      </div>
+     
 
       <p style={styles.finalLabel}>WE SELL AT:</p>
       <h1 style={styles.finalPrice}>
@@ -687,6 +680,7 @@ disclaimer: {
     margin: 0,
     color: "#f3d98b",
     fontSize: 20,
+    textAlign: "center",
   },
 
   badge: {
