@@ -126,7 +126,21 @@ export default function Home() {
   silver100: false,
   gold995: false,
 });
-  
+  const [wakeLock, setWakeLock] = useState(null);
+
+  async function requestWakeLock() {
+  try {
+    if ("wakeLock" in navigator) {
+      const lock = await navigator.wakeLock.request("screen");
+      setWakeLock(lock);
+
+      lock.addEventListener("release", () => {
+        setWakeLock(null);
+      });
+    }
+  } catch (err) {
+    console.error("Wake Lock failed:", err);
+  } }
 function CustomNotice({ message }) {
   if (!message?.trim()) {
     return null;
@@ -149,6 +163,39 @@ function CustomNotice({ message }) {
 
     return () => unsub();
   }, []);
+
+useEffect(() => {
+  const isPWA =
+    window.matchMedia("(display-mode: standalone)").matches;
+
+  if (isPWA) {
+    requestWakeLock();
+  }
+
+  const handleVisibilityChange = () => {
+    const isPWA =
+      window.matchMedia("(display-mode: standalone)").matches;
+
+    if (
+      isPWA &&
+      document.visibilityState === "visible"
+    ) {
+      requestWakeLock();
+    }
+  };
+
+  document.addEventListener(
+    "visibilitychange",
+    handleVisibilityChange
+  );
+
+  return () => {
+    document.removeEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+  };
+}, []);
 
   useEffect(() => {
     const clock = setInterval(() => {
