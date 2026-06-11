@@ -5,7 +5,7 @@ import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import InstallPWAButton from "./components/InstallPWAButton";
-//import "./globals.css";
+import "./global.css";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
