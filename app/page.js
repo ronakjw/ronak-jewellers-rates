@@ -5,6 +5,7 @@ import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import InstallPWAButton from "./components/InstallPWAButton";
+import "./globals.css";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -73,8 +74,8 @@ function ProductPanel({
   const isOpen = openProducts[id];
 
   return (
-    <section style={styles.productPanel}>
-      <button
+<section style={styles.productPanel}>
+   <button
         type="button"
         style={{
           ...styles.productToggle,
@@ -90,6 +91,7 @@ function ProductPanel({
           }))
         }
       >
+           <span>{title}</span>
 <span
   style={{
     transition: "transform 0.25s ease",
@@ -97,7 +99,7 @@ function ProductPanel({
   }}>
   {isOpen ? "−" : "+"}
 </span>
-      </button>
+</button>
 
  <div
   style={{
@@ -280,6 +282,7 @@ if (currentBuyPrice) {
       <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
+    
             <p style={styles.finalLabel}>Final Buying Rate</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(settings.holidayBuyingRate)}
@@ -382,7 +385,7 @@ return (
         <h2 style={styles.brandName}>- Ronak Jewellers -</h2>
 
         <div style={styles.statusRow}>
-          <span style={styles.liveDoot} />
+          <span style={styles.live} />
           <span>LIVE MCX SILVER FUTURES</span>
         </div>
      <p>  <CustomNotice message={settings.noticeMessage} /> </p>
@@ -661,7 +664,7 @@ statusRow: {
   justifyContent: "center",
   gap: 8,
 },
-liveDoot: {
+live: {
   width: 8,
   height: 8,
   borderRadius: "50%",
