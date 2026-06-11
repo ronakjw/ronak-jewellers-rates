@@ -62,6 +62,18 @@ function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
 function roundToNearest500(value) {
   return Math.floor((value + 249) / 500) * 500;
 }
+function ProductToggle({ id, title, openProduct, setOpenProduct }) {
+  const isOpen = openProduct === id;
+  return (
+    <button
+      type="button"
+      style={styles.productToggle}
+      onClick={() => setOpenProduct(isOpen ? "" : id)}>
+      <span>{title}</span>
+      <span>{isOpen ? "−" : "+"}</span>
+    </button>
+  );}
+
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -69,6 +81,8 @@ export default function Home() {
   const [now, setNow] = useState(new Date());
   const [priceHistory, setPriceHistory] = useState([]);
   const [volatilityUntil, setVolatilityUntil] = useState(null);
+  const [openProduct, setOpenProduct] = useState("silver99");
+  
 function CustomNotice({ message }) {
   if (!message?.trim()) {
     return null;
@@ -312,6 +326,11 @@ const finalSelling = settings.showPremium
   ? rawFinalSelling
   : roundToNearest500(rawFinalSelling);
 
+const silver100BuyPremium = Number(settings.silver100buy || 0);
+const silver100SellPremium = Number(settings.silver100sell || 0);
+
+const silver100Buying = finalBuying + silver100BuyPremium;
+const silver100Selling = finalSelling + silver100SellPremium;
   
 return (
     <main style={styles.page}>
@@ -341,7 +360,12 @@ Date.now() < volatilityUntil ? (
     <div style={styles.metaRow}>
           <span>Last Updated: {quote.timestamp}</span>
     </div>
-        <div style={styles.cardTop}>  
+       <ProductToggle id="silver99" title="SILVER 99" openProduct={openProduct} setOpenProduct={setOpenProduct}/>
+     
+    {openProduct === "silver99" ? (
+     <section style={styles.mainCard}> 
+     
+     <div style={styles.cardTop}>  
             <h2 style={styles.contract}>{quote.contract}</h2>
         </div>
 
@@ -349,7 +373,7 @@ Date.now() < volatilityUntil ? (
           <div style={styles.errorBox}>{fetchError}</div>
         ) : null}
 
-        <div style={styles.rateGrid}>
+       <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Buy</p>
             <h2 style={styles.mcxPrice}>
@@ -392,17 +416,65 @@ Date.now() < volatilityUntil ? (
             </h1>
           </div>
         </div>
-                
+       </section>
+      ) : null}       
+   {settings.silver100rate ? (
+  <>
+    <ProductToggle
+      id="silver100"
+      title="SILVER 100"
+      openProduct={openProduct}
+      setOpenProduct={setOpenProduct}
+    />
+
+    {openProduct === "silver100" ? (
+      <section style={styles.mainCard}>
+        {
+         <section style={styles.mainCard}>
+        <p style={styles.sectionLabel}>Silver999 Rates</p>
+
+       <div style={styles.rateGrid}>
+         <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>WE BUY AT:</p>
+        <h1 style={styles.finalPrice}>
+          ₹{formatPrice(silver100Buying)}
+          <span style={styles.unit}> / kg</span>
+        </h1>
+      </div>
+      <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>WE SELL AT:</p>
+        <h1 style={styles.finalPrice}>
+          ₹{formatPrice(silver100Selling)}
+          <span style={styles.unit}> / kg</span>
+        </h1>
+      </div>
+    </div>
+  </section> 
+        }
+      </section>
+    ) : null}
+  </>
+) : null}
+
   <div style={styles.mcxReference}>
-  <span>Opening: {formatPrice(quote.mcxOpeningRate)} 
-  </span>
-
+  <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
   <span style={styles.referenceDivider}>|</span>
-
-  <span>Closing: {formatPrice(quote.mcxClosingRate)}
-  </span>
+  <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
   </div>
-        
+
+<ProductToggle
+  id="gold995"
+  title="GOLD 995"
+  openProduct={openProduct}
+  setOpenProduct={setOpenProduct}
+/>
+
+{openProduct === "gold995" ? (
+  <section style={styles.mainCard}>
+    <p style={styles.finalLabel}>Gold 995 rates coming soon.</p>
+  </section>
+) : null}
+    
       </section>
 
 <KachhiBadla settings={settings} />
@@ -500,8 +572,24 @@ const styles = {
     color: "#f3d98b",
     textShadow: "0 0 22px rgba(214,180,92,0.16)",
   },
-
-  
+  productToggle: {
+  width: "100%",
+  maxWidth: 760,
+  margin: "14px auto 10px",
+  border: "1px solid rgba(214,180,92,0.35)",
+  background:
+    "linear-gradient(145deg, rgba(214,180,92,0.14), rgba(35,35,35,0.92))",
+  color: "#f3d98b",
+  borderRadius: 16,
+  padding: "15px 18px",
+  fontSize: 17,
+  fontWeight: 900,
+  letterSpacing: "0.08em",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  cursor: "pointer",
+},
   kachhiBox: {
   margin: "28px auto 0",
   maxWidth: 520,
