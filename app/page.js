@@ -356,11 +356,11 @@ Date.now() < volatilityUntil ? (
   </div>
 ) : null}
 
-      <section style={styles.mainCard}>
-    <div style={styles.metaRow}>
-          <span>Last Updated: {quote.timestamp}</span>
-    </div>
-  <ProductToggle
+<div style={styles.metaRow}>
+  <span>Last Updated: {quote.timestamp}</span>
+</div>
+
+<ProductToggle
   id="silver99"
   title="SILVER 99"
   openProduct={openProduct}
@@ -393,7 +393,7 @@ Date.now() < volatilityUntil ? (
     </div>
   </section>
 ) : null}
-  
+
 {settings.silver100rate ? (
   <>
     <ProductToggle
@@ -405,37 +405,31 @@ Date.now() < volatilityUntil ? (
 
     {openProduct === "silver100" ? (
       <section style={styles.mainCard}>
-        {
-         <div style={styles.cardTop}>  
-            <h2 style={styles.contract}>{quote.contract}</h2>
+        <div style={styles.cardTop}>
+          <h2 style={styles.contract}>SILVER 100</h2>
         </div>
-       <div style={styles.rateGrid}>
-         <div style={styles.sideCard}>
-        <p style={styles.finalLabel}>WE BUY AT:</p>
-        <h1 style={styles.finalPrice}>
-          ₹{formatPrice(silver100Buying)}
-          <span style={styles.unit}> / kg</span>
-        </h1>
-      </div>
-      <div style={styles.sideCard}>
-        <p style={styles.finalLabel}>WE SELL AT:</p>
-        <h1 style={styles.finalPrice}>
-          ₹{formatPrice(silver100Selling)}
-          <span style={styles.unit}> / kg</span>
-        </h1>
-      </div>
-              <div style={styles.mcxReference}>
-              <span>Opening: {formatPrice(quote.mcxOpeningRate)}</span>
-              <span style={styles.referenceDivider}>|</span>
-              <span>Closing: {formatPrice(quote.mcxClosingRate)}</span>
-              </div>
-    </div> 
-        }
+
+        <div style={styles.rateGrid}>
+          <div style={styles.sideCard}>
+            <p style={styles.finalLabel}>WE BUY AT:</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(silver100Buying)}
+              <span style={styles.unit}> /kg</span>
+            </h1>
+          </div>
+
+          <div style={styles.sideCard}>
+            <p style={styles.finalLabel}>WE SELL AT:</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(silver100Selling)}
+              <span style={styles.unit}> /kg</span>
+            </h1>
+          </div>
+        </div>
       </section>
     ) : null}
   </>
 ) : null}
-
 
 <ProductToggle
   id="gold995"
@@ -450,8 +444,6 @@ Date.now() < volatilityUntil ? (
   </section>
 ) : null}
     
-      </section>
-
 <KachhiBadla settings={settings} />
  <ContactButtons />
  <InstallPWAButton />               
