@@ -369,28 +369,50 @@ Date.now() < volatilityUntil ? (
 
 {openProduct === "silver99" ? (
   <section style={styles.mainCard}>
-    <div style={styles.contractCard}>
-      <p style={styles.smallLabel}>MCX CONTRACT</p>
-      <h2 style={styles.contract}>{quote.contract}</h2>
-    </div>
-
     <div style={styles.rateGrid}>
-      <div style={styles.sideCard}>
-        <p style={styles.finalLabel}>WE BUY AT:</p>
-        <h1 style={styles.finalPrice}>
-          ₹{formatPrice(finalBuying)}
-          <span style={styles.unit}> /kg</span>
-        </h1>
-      </div>
+          <div style={styles.sideCard}>
+            <p style={styles.label}>MCX Buy</p>
+            <h2 style={styles.mcxPrice}>
+              ₹{formatPrice(quote.mcxBuyPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
 
-      <div style={styles.sideCard}>
-        <p style={styles.finalLabel}>WE SELL AT:</p>
-        <h1 style={styles.finalPrice}>
-          ₹{formatPrice(finalSelling)}
-          <span style={styles.unit}> /kg</span>
-        </h1>
-      </div>
-    </div>
+          {settings.showPremium ? (
+            <div style={styles.premiumBox}>
+              <span>Buying Premium</span>
+              <strong>{formatPremium(buyingPremium)}</strong>
+            </div>
+            ) : null}
+
+            <p style={styles.finalLabel}>We Buy at :</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(finalBuying)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
+
+          <div style={styles.sideCard}>
+            <p style={styles.label}>MCX Sell</p>
+            <h2 style={styles.mcxPrice}>
+              ₹{formatPrice(quote.mcxSellPrice)}
+              <span style={styles.unit}> / kg</span>
+            </h2>
+
+            {settings.showPremium ? (
+                <div style={styles.premiumBox}>
+              <span>Selling Premium</span>
+              <strong>{formatPremium(sellingPremium)}</strong>
+            </div>
+            ) : null}
+
+            <p style={styles.finalLabel}>We Sell at :</p>
+            <h1 style={styles.finalPrice}>
+              ₹{formatPrice(finalSelling)}
+              <span style={styles.unit}> / kg</span>
+            </h1>
+          </div>
+        </div>
+         
   </section>
 ) : null}
 
