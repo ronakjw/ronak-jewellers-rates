@@ -110,7 +110,11 @@ export default function Home() {
   const [now, setNow] = useState(new Date());
   const [priceHistory, setPriceHistory] = useState([]);
   const [volatilityUntil, setVolatilityUntil] = useState(null);
-  const [openProduct, setOpenProduct] = useState("silver99");
+ const [openProducts, setOpenProducts] = useState({
+  silver99: true,
+  silver100: false,
+  gold995: false,
+});
   
 function CustomNotice({ message }) {
   if (!message?.trim()) {
@@ -445,9 +449,9 @@ Date.now() < volatilityUntil ? (
 
 {settings.silver100rate ? (
   <>
-   <ProductPanel
-  id="silver99"
-  title="SILVER 99"
+  <ProductPanel
+  id="silver100"
+  title="SILVER 100"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
@@ -493,8 +497,8 @@ Date.now() < volatilityUntil ? (
 ) : null}
 
 <ProductPanel
-  id="silver99"
-  title="SILVER 99"
+  id="gold995"
+  title="GOLD 995"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}>
     <p style={styles.metaRows}>GOLD 995 RATES COMING SOON...</p>
