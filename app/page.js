@@ -407,13 +407,10 @@ Date.now() < volatilityUntil ? (
 
 <ProductPanel
   id="silver99"
-  title="SILVER 99"
+  title="SILVER 99 [SA Chorsa]"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
-    <div style={styles.cardTop}>
-          <h2 style={styles.contract}>SILVER 99 [SA Indore]</h2>
-        </div>
     <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Buy</p>
@@ -463,14 +460,10 @@ Date.now() < volatilityUntil ? (
   <>
   <ProductPanel
   id="silver100"
-  title="SILVER 100"
+  title="SILVER 100 [Peti / PetiCut]"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
-  <div style={styles.cardTop}>
-    <h2 style={styles.contract}>SILVER 100 [Peti / PetiCut]</h2>
-  </div>
-
   <div style={styles.rateGrid}>
     <div style={styles.sideCard}>
       <p style={styles.label}>MCX Buy</p>
@@ -615,8 +608,8 @@ productPanel: {
   width: "100%",
   maxWidth: 760,
   margin: "14px auto",
-  border: "1px solid rgba(214,180,92,0.35)",
-  borderRadius: 16,
+  border: "2px solid rgba(214,180,92,0.35)",
+  borderRadius: 10,
   overflow: "hidden",
   background:
     "linear-gradient(145deg, rgba(214,180,92,0.10), rgba(20,20,20,0.94))",
@@ -627,9 +620,9 @@ productToggle: {
   background: "transparent",
   color: "#f3d98b",
   padding: "15px 18px",
-  fontSize: 17,
-  fontWeight: 900,
-  letterSpacing: "0.08em",
+  fontSize: 20,
+  fontWeight: 350,
+  letterSpacing: "0.3em",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
