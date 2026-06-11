@@ -429,39 +429,52 @@ Date.now() < volatilityUntil ? (
     />
 
     {openProduct === "silver100" ? (
-      <section style={styles.mainCard}>
-        <div style={styles.cardTop}>
-          <h2 style={styles.contract}>SILVER 100 [Peti/PetiCut]</h2>
-        </div>
-         <div style={styles.rateGrid}>    
-           <p style={styles.label}>MCX Buy</p>
-            <h2 style={styles.mcxPrice}>
-              ₹ {formatPrice(quote.mcxBuyPrice)}
-              <span style={styles.unit}> /kg</span>
-            </h2>
-        
-          <div style={styles.sideCard}>
-            <p style={styles.finalLabel}>WE BUY AT:</p>
-            <h1 style={styles.finalPrice}>
-              ₹ {formatPrice(silver100Buying)}
-              <span style={styles.unit}> /kg</span>
-            </h1>
-          </div>
+     <section style={styles.mainCard}>
+  <div style={styles.cardTop}>
+    <h2 style={styles.contract}>SILVER 100</h2>
+    <p style={styles.smallLabel}>Peti / PetiCut</p>
+  </div>
 
-        <p style={styles.label}>MCX Sell</p>
-            <h2 style={styles.mcxPrice}>
-              ₹ {formatPrice(quote.mcxSellPrice)}
-              <span style={styles.unit}> /kg</span>
-            </h2>
-          <div style={styles.sideCard}>
-            <p style={styles.finalLabel}>WE SELL AT:</p>
-            <h1 style={styles.finalPrice}>
-              ₹ {formatPrice(silver100Selling)}
-              <span style={styles.unit}> /kg</span>
-            </h1>
-          </div>
-        </div>
-      </section>
+  <div style={styles.rateGrid}>
+    <div style={styles.sideCard}>
+      <p style={styles.label}>MCX Buy</p>
+      <h2 style={styles.mcxPrice}>
+        ₹{formatPrice(quote.mcxBuyPrice)}
+        <span style={styles.unit}> /kg</span>
+      </h2>
+
+      <div style={styles.premiumRow}>
+        <span>Buy Premium</span>
+        <strong>{formatPremium(settings.silver100buy || 0)}</strong>
+      </div>
+
+      <p style={styles.finalLabel}>WE BUY AT:</p>
+      <h1 style={styles.finalPrice}>
+        ₹{formatPrice(silver100Buying)}
+        <span style={styles.unit}> /kg</span>
+      </h1>
+    </div>
+
+    <div style={styles.sideCard}>
+      <p style={styles.label}>MCX Sell</p>
+      <h2 style={styles.mcxPrice}>
+        ₹{formatPrice(quote.mcxSellPrice)}
+        <span style={styles.unit}> /kg</span>
+      </h2>
+
+      <div style={styles.premiumRow}>
+        <span>Sell Premium</span>
+        <strong>{formatPremium(settings.silver100sell || 0)}</strong>
+      </div>
+
+      <p style={styles.finalLabel}>WE SELL AT:</p>
+      <h1 style={styles.finalPrice}>
+        ₹{formatPrice(silver100Selling)}
+        <span style={styles.unit}> /kg</span>
+      </h1>
+    </div>
+  </div>
+</section>
     ) : null}
   </>
 ) : null}
