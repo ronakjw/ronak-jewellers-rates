@@ -267,7 +267,7 @@ if (currentBuyPrice) {
       <section style={styles.hero}>
         <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 12 }} />
 
-        <h1 style={styles.brandName}>◇Ronak Jewellers◇</h1>
+        <h1 style={styles.brandName}>•Ronak Jewellers•</h1>
 
    {settings.noticeMessage?.trim() ? (
   <div style={styles.statusRow}>
@@ -382,7 +382,7 @@ return (
       <section style={styles.hero}>
         <Image   src="/logo.png"   alt="Ronak Jewellers"   width={250}   height={250}   style={{     marginBottom: 12,   }} />
 
-        <h2 style={styles.brandName}>◇Ronak Jewellers◇</h2>
+        <h2 style={styles.brandName}>•Ronak Jewellers•</h2>
 
         <div style={styles.statusRow}>
           <span style={styles.live} />
@@ -401,7 +401,7 @@ Date.now() < volatilityUntil ? (
   </div>
 ) : null}
 
-<div style={styles.metaRow}>
+<div style={styles.disclaimer}>
   <span>Last Updated: {quote.timestamp}</span>
 </div>
 
@@ -437,7 +437,7 @@ Date.now() < volatilityUntil ? (
             <p style={styles.label}>MCX Sell</p>
             <h2 style={styles.mcxPrice}>
               ₹ {formatPrice(quote.mcxSellPrice)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h2>
 
             {settings.showPremium ? (
@@ -450,7 +450,7 @@ Date.now() < volatilityUntil ? (
             <p style={styles.finalLabel}>We Sell at :</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(finalSelling)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h1>
           </div>
         </div>
@@ -468,13 +468,13 @@ Date.now() < volatilityUntil ? (
     <div style={styles.sideCard}>
       <p style={styles.label}>MCX Buy</p>
       <h2 style={styles.mcxPrice}>
-        ₹{formatPrice(quote.mcxBuyPrice)}
+        ₹ {formatPrice(quote.mcxBuyPrice)}
         <span style={styles.unit}> /kg</span>
       </h2>   
 
       <p style={styles.finalLabel}>WE BUY AT:</p>
       <h1 style={styles.finalPrice}>
-        ₹{formatPrice(silver100Buying)}
+        ₹ {formatPrice(silver100Buying)}
         <span style={styles.unit}> /kg</span>
       </h1>
     </div>
@@ -482,13 +482,13 @@ Date.now() < volatilityUntil ? (
     <div style={styles.sideCard}>
       <p style={styles.label}>MCX Sell</p>
       <h2 style={styles.mcxPrice}>
-        ₹{formatPrice(quote.mcxSellPrice)}
+        ₹ {formatPrice(quote.mcxSellPrice)}
         <span style={styles.unit}> /kg</span>
       </h2>
 
       <p style={styles.finalLabel}>WE SELL AT:</p>
       <h1 style={styles.finalPrice}>
-        ₹{formatPrice(silver100Selling)}
+        ₹ {formatPrice(silver100Selling)}
         <span style={styles.unit}> /kg</span>
       </h1>
     </div>
