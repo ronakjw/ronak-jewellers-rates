@@ -144,19 +144,15 @@ function ProductPanel({
   );
 }
 
-function MarketMeta({ opening, closing, unit }) {
+function MarketMeta({ opening, closing}) {
   return (
     <div style={styles.metaGrid}>
       <div style={styles.metaItem}>
-        <span>Opening</span>
-        <strong>₹ {formatPrice(opening)}</strong>
-        <small>{unit}</small>
+        <span>Opening : {formatPrice(opening)} </span>        
       </div>
 
       <div style={styles.metaItem}>
-        <span>Closing</span>
-        <strong>₹ {formatPrice(closing)}</strong>
-        <small>{unit}</small>
+        <span>Closing : {formatPrice(closing)} </span>
       </div>
     </div>
   );
@@ -486,11 +482,6 @@ Date.now() < volatilityUntil ? (
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
-    <MarketMeta
-      opening={quote.mcxOpeningRate}
-      closing={quote.mcxClosingRate}
-      unit="/ kg"
-    />
     <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Buy</p>
@@ -534,6 +525,10 @@ Date.now() < volatilityUntil ? (
             </h1>
           </div>
         </div>
+    <MarketMeta
+      opening={quote.mcxOpeningRate}
+      closing={quote.mcxClosingRate}
+    />
 </ProductPanel>
 
 {settings.silver100rate ? (
@@ -544,11 +539,6 @@ Date.now() < volatilityUntil ? (
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
-  <MarketMeta
-    opening={quote.mcxOpeningRate}
-    closing={quote.mcxClosingRate}
-    unit="/ kg"
-  />
   <div style={styles.rateGrid}>
     <div style={styles.sideCard}>
       <p style={styles.label}>MCX Buy</p>
@@ -578,6 +568,10 @@ Date.now() < volatilityUntil ? (
       </h1>
     </div>
   </div>
+  <MarketMeta
+    opening={quote.mcxOpeningRate}
+    closing={quote.mcxClosingRate}
+  />
 </ProductPanel>
   </>
 ) : null}
@@ -594,11 +588,6 @@ Date.now() < volatilityUntil ? (
     </p>
   ) : (
     <>
-    <MarketMeta
-      opening={quote.goldOpeningRate}
-      closing={quote.goldClosingRate}
-      unit="/ 10 gm"
-    />
     <div style={styles.rateGrid}>
       <div style={styles.sideCard}>
         <p style={styles.label}>MCX Buy</p>
@@ -644,6 +633,10 @@ Date.now() < volatilityUntil ? (
     </div>
     </>
   )}
+    <MarketMeta
+      opening={quote.goldOpeningRate}
+      closing={quote.goldClosingRate}
+    />
 </ProductPanel>
 ) : null}    
 <KachhiBadla settings={settings} />
