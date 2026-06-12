@@ -916,9 +916,8 @@ metaRow: {
   },
  
 metaItem: {
-  margintop: 10,
+ padding: 6px,
   color: "#cfcfcf",
-  gap: 4,
   fontSize: 12,
   textTransform: "uppercase",
   textAlign: "center",
