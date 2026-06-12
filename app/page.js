@@ -916,13 +916,8 @@ metaRow: {
   },
  
 metaItem: {
-  border: "1px solid rgba(214,180,92,0.22)",
-  background: "rgba(214,180,92,0.055)",
-  borderRadius: 10,
-  padding: "10px 12px",
+  padding: "8px 10px",
   color: "#cfcfcf",
-  display: "flex",
-  flexDirection: "column",
   gap: 4,
   fontSize: 12,
   textTransform: "uppercase",
