@@ -462,13 +462,15 @@ return (
   <span>Last Updated: {formatCurrentTime(now)}</span>
 </div>
 
-{settings.volatilityWarningEnabled && volatilityUntil && Date.now() < volatilityUntil ? (
+{settings.volatilityWarningEnabled &&
+volatilityUntil &&
+Date.now() < volatilityUntil ? (
   <div style={styles.volatilityWarning}>
     <strong>⚠️  MARKET VOLATILITY ALERT!  ⚠️ </strong>
     <br />
     Please call us before making any Trade.
-  </div>  
-  ) : null}
+  </div>
+) : null}
 
 <ProductPanel
   id="silver99"
