@@ -148,7 +148,7 @@ function MarketMeta({ opening, closing}) {
   return (
    
       <div style={styles.metaItem}>
-        <p>Opening : {formatPrice(opening)} | Closing : {formatPrice(closing)} </p>
+        <p>OPEN:{formatPrice(opening)} | CLOSE:{formatPrice(closing)} </p>
       </div>
    
   );
@@ -916,12 +916,11 @@ metaRow: {
   },
  
 metaItem: {
-  padding: "8px 10px",
+  margintop: 10,
   color: "#cfcfcf",
   gap: 4,
   fontSize: 12,
   textTransform: "uppercase",
-  letterSpacing: "0.08em",
   textAlign: "center",
 },
 volatilityWarning: {
