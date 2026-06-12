@@ -146,15 +146,11 @@ function ProductPanel({
 
 function MarketMeta({ opening, closing}) {
   return (
-    <div style={styles.metaGrid}>
+   
       <div style={styles.metaItem}>
-        <span>Opening : {formatPrice(opening)} </span>        
+        <span>Opening : {formatPrice(opening)} </span>| <span>Closing : {formatPrice(closing)} </span>
       </div>
-
-      <div style={styles.metaItem}>
-        <span>Closing : {formatPrice(closing)} </span>
-      </div>
-    </div>
+   
   );
 }
 
@@ -918,7 +914,7 @@ metaRow: {
   marginBottom: 12,
   color: "#9f9f9f",
   },
-metaGrid: {
+ metaGrid: {
   display: "grid",
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   gap: 10,
@@ -936,6 +932,7 @@ metaItem: {
   fontSize: 12,
   textTransform: "uppercase",
   letterSpacing: "0.08em",
+  textAlign: "center",
 },
 volatilityWarning: {
   maxWidth: 760,
