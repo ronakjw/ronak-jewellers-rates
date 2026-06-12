@@ -745,7 +745,7 @@ productToggle: {
   border: "none",
   background: "transparent",
   color: "#f3d98b",
-  padding: "12px 15px",
+  padding: "12px 10px",
   fontSize: 17,
   fontWeight: 450,
   letterSpacing: "0.18em",
