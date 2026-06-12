@@ -916,7 +916,7 @@ metaRow: {
   },
  
 metaItem: {
- padding: 8px,
+ padding: "8px",
   color: "#cfcfcf",
   fontSize: 12,
   textAlign: "center",
