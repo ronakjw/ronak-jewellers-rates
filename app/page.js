@@ -148,7 +148,7 @@ function MarketMeta({ opening, closing}) {
   return (
    
       <div style={styles.metaItem}>
-        <p>OPEN:{formatPrice(opening)} | CLOSE:{formatPrice(closing)} </p>
+        <p>OPEN:{formatPrice(opening)}  |  CLOSE:{formatPrice(closing)} </p>
       </div>
    
   );
@@ -457,20 +457,18 @@ return (
         </div>
      <p>  <CustomNotice message={settings.noticeMessage} /> </p>
     </section>
+  
+<div style={styles.disclaimer}>
+  <span>Last Updated: {formatCurrentTime(now)}</span>
+</div>
 
-{settings.volatilityWarningEnabled &&
-volatilityUntil &&
-Date.now() < volatilityUntil ? (
+{settings.volatilityWarningEnabled && volatilityUntil && Date.now() < volatilityUntil ? (
   <div style={styles.volatilityWarning}>
     <strong>⚠️  MARKET VOLATILITY ALERT!  ⚠️ </strong>
     <br />
     Please call us before making any Trade.
-  </div>
-) : null}
-
-<div style={styles.disclaimer}>
-  <span>Last Updated: {formatCurrentTime(now)}</span>
-</div>
+  </div>  
+  ) : null}
 
 <ProductPanel
   id="silver99"
@@ -916,10 +914,9 @@ metaRow: {
   },
  
 metaItem: {
- padding: 6px,
+ padding: 8px,
   color: "#cfcfcf",
   fontSize: 12,
-  textTransform: "uppercase",
   textAlign: "center",
 },
 volatilityWarning: {
