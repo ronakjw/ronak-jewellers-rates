@@ -858,16 +858,17 @@ liveDot: {
   mainCard: {
     width: "100%",
     maxWidth: 920,
-    marginBottom: 19,
+    margin: "0 auto",
     background: "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
     border: "1px solid rgba(214,180,92,0.32)",
-    borderRadius: 19,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 5,
+    borderRadius: 26,
     padding: "7px",
     boxShadow: "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
     boxSizing: "border-box",
+
+  
+  
+  
   },
   
 disclaimer: {
