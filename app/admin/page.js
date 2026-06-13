@@ -720,34 +720,7 @@ function ToggleRow({ label, checked, onChange }) {
     value={settings.silver100sell || 0}
     onChange={(e) => updateField("silver100sell", e.target.value)}
   />
-</div>
-</div> 
-    <div> 
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Manual Silver Contract</label>
-            <input
-              style={styles.input}
-              value={settings.manualContract || ""}
-              onChange={(e) =>
-                updateField("manualContract", e.target.value.toUpperCase())
-              }
-              placeholder="SILVER26JULFUT"
-            />
-          </div>
-
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Manual Gold Contract</label>
-            <input
-              style={styles.input}
-              value={settings.GoldManualContract || ""}
-              onChange={(e) =>
-                updateField("GoldManualContract", e.target.value.toUpperCase())
-              }
-              placeholder="Leave blank for auto / GOLD26AUGFUT"
-            />
-          </div>
-    </div> 
-   <div>              
+</div>        
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold Buy Prem.</label>
   <input
@@ -766,52 +739,9 @@ function ToggleRow({ label, checked, onChange }) {
     onChange={(e) => updateField("GoldSellPrem", e.target.value)}
   />
 </div>
+    
 </div> 
-<div>     
-<div style={styles.controlCard}>
-  <label style={styles.label}> Gold MCX Step Size
-  </label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.GoldPremiumStepSize || 100}
-    onChange={(e) =>
-      updateField(
-        "GoldPremiumStepSize",
-        e.target.value
-      )
-    }
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>  Gold Premium Adj.
-  </label>
-  <input
-    style={styles.input}
-    type="number"
-    value={ settings.GoldPremiumStepAdjustment || 50 }
-    onChange={(e) =>
-      updateField(
-        "GoldPremiumStepAdjustment",
-        e.target.value
-      )
-    }
-  />
-</div>
-<div style={styles.controlCard}>
-  <label style={styles.label}>Gold Roundoff Multiple</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.GoldRoundoffMultiple || 100}
-    onChange={(e) =>
-      updateField("GoldRoundoffMultiple", e.target.value)
-    }
-  />
-</div>
- </div>    
-<div>
+ <div>
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold Holiday Buy</label>
   <input
@@ -859,6 +789,114 @@ function ToggleRow({ label, checked, onChange }) {
   />
 </div>
  </div>
+    <div> 
+    <div style={styles.controlCard}>
+  <label style={styles.label}>Kachhi Badla Value</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.kachhiBadlaValue || 0}
+    onChange={(e) =>
+      updateField("kachhiBadlaValue", e.target.value)
+    }
+  />
+</div>
+
+          <div style={styles.controlCard}>
+            <label style={styles.label}>Manual Silver Contract</label>
+            <input
+              style={styles.input}
+              value={settings.manualContract || ""}
+              onChange={(e) =>
+                updateField("manualContract", e.target.value.toUpperCase())
+              }
+              placeholder="SILVER26JULFUT"
+            />
+          </div>
+
+          <div style={styles.controlCard}>
+            <label style={styles.label}>Manual Gold Contract</label>
+            <input
+              style={styles.input}
+              value={settings.GoldManualContract || ""}
+              onChange={(e) =>
+                updateField("GoldManualContract", e.target.value.toUpperCase())
+              }
+              placeholder="Leave blank for auto / GOLD26AUGFUT"
+            />
+          </div>
+    </div> 
+
+<div> 
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver MCX Step Size</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.premiumStepSize || 1000}
+    onChange={(e) =>
+      updateField("premiumStepSize", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver Premium Adj.</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.premiumStepAdjustment || 500}
+    onChange={(e) =>
+      updateField("premiumStepAdjustment", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}> Gold MCX Step Size
+  </label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.GoldPremiumStepSize || 100}
+    onChange={(e) =>
+      updateField(
+        "GoldPremiumStepSize",
+        e.target.value
+      )
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>  Gold Premium Adj.
+  </label>
+  <input
+    style={styles.input}
+    type="number"
+    value={ settings.GoldPremiumStepAdjustment || 50 }
+    onChange={(e) =>
+      updateField(
+        "GoldPremiumStepAdjustment",
+        e.target.value
+      )
+    }
+  />
+</div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>Gold Roundoff Multiple</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.GoldRoundoffMultiple || 100}
+    onChange={(e) =>
+      updateField("GoldRoundoffMultiple", e.target.value)
+    }
+  />
+</div>
+ </div>    
+
     <div>
      <div style={styles.controlCard}>
             <label style={styles.label}>Market Start Hour</label>
@@ -907,43 +945,7 @@ function ToggleRow({ label, checked, onChange }) {
             />
           </div>
 </div> 
-         
-<div style={styles.controlCard}>
-  <label style={styles.label}>Kachhi Badla Value</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.kachhiBadlaValue || 0}
-    onChange={(e) =>
-      updateField("kachhiBadlaValue", e.target.value)
-    }
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Silver MCX Step Size</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.premiumStepSize || 1000}
-    onChange={(e) =>
-      updateField("premiumStepSize", e.target.value)
-    }
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Silver Premium Adj.</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.premiumStepAdjustment || 500}
-    onChange={(e) =>
-      updateField("premiumStepAdjustment", e.target.value)
-    }
-  />
-</div>
-    
+             
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
 
