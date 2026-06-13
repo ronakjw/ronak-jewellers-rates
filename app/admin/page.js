@@ -323,6 +323,9 @@ const newSettings = {
   ShowGoldPrem: Boolean(settings.ShowGoldPrem),
   GoldRoundoffMultiple,
   GoldManualContract: String(settings.GoldManualContract || "").trim().toUpperCase(),
+  goldHolidayBuyingRate: parseInt(settings.goldHolidayBuyingRate || 0, 10),
+  goldHolidaySellingRate: parseInt(settings.goldHolidaySellingRate || 0, 10),
+  showGoldHolidayRate: Boolean(settings.showGoldHolidayRate),
 };
  if (!newSettings.autoContract && !newSettings.manualContract) 
  {  setMessage("Manual contract cannot be empty.");
@@ -361,6 +364,9 @@ const previousLog = {
   ShowGoldPrem: Boolean(oldSettings.ShowGoldPrem),
   GoldRoundoffMultiple: Number(oldSettings.GoldRoundoffMultiple || 100),
   GoldManualContract: String(oldSettings.GoldManualContract || ""),
+  GoldAutoPremiumEnabled: Boolean(settings.GoldAutoPremiumEnabled),
+  GoldPremiumStepSize: parseInt(settings.GoldPremiumStepSize || 100, 10),
+  GoldPremiumStepAdjustment: parseInt(settings.GoldPremiumStepAdjustment || 50, 10),
 };
 
 const currentLog = {
@@ -590,14 +596,9 @@ function ToggleRow({ label, checked, onChange }) {
         <form onSubmit={saveSettings} style={styles.grid}>
   
   <ToggleRow
-  label="Show Premium"
+  label="Show Silver Premium"
   checked={Boolean(settings.showPremium)}
   onChange={(value) => updateField("showPremium", value)}/>
-
-  <ToggleRow
-  label="Show Gold 995 Rate"
-  checked={Boolean(settings.ShowGoldRate)}
-  onChange={(value) => updateField("ShowGoldRate", value)}/>
 
   <ToggleRow
   label="Show Gold Premium"
@@ -605,9 +606,14 @@ function ToggleRow({ label, checked, onChange }) {
   onChange={(value) => updateField("ShowGoldPrem", value)}/>
  
   <ToggleRow
-  label="Show Rates"
+  label="Show All Rates"
   checked={Boolean(settings.showRates)}
   onChange={(value) => updateField("showRates", value)}/>
+
+  <ToggleRow
+  label="Show Gold Rate"
+  checked={Boolean(settings.ShowGoldRate)}
+  onChange={(value) => updateField("ShowGoldRate", value)}/>
 
   <ToggleRow
   label="Show 999 Rates"
@@ -658,7 +664,20 @@ function ToggleRow({ label, checked, onChange }) {
   label="Volatility Warning"
   checked={Boolean(settings.volatilityWarningEnabled)}
   onChange={(value) => updateField("volatilityWarningEnabled", value)}
-/>   
+/>  
+    <ToggleRow
+  label="Show Gold Holiday Rate"
+  checked={Boolean(settings.showGoldHolidayRate)}
+  onChange={(value) => updateField("showGoldHolidayRate", value)}
+/>
+    <ToggleRow
+  label="Gold Auto Premium"
+  checked={Boolean(settings.GoldAutoPremiumEnabled)}
+  onChange={(value) =>
+    updateField("GoldAutoPremiumEnabled", value)
+  }
+/>
+
     <div style={styles.controlCard}>
             <label style={styles.label}>Buying Premium</label>
             <input
@@ -747,7 +766,44 @@ function ToggleRow({ label, checked, onChange }) {
     onChange={(e) => updateField("GoldBuyPrem", e.target.value)}
   />
 </div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>
+    Gold MCX Step Size
+  </label>
 
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.GoldPremiumStepSize || 100}
+    onChange={(e) =>
+      updateField(
+        "GoldPremiumStepSize",
+        e.target.value
+      )
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>
+    Gold Premium Adj.
+  </label>
+
+  <input
+    style={styles.input}
+    type="number"
+    value={
+      settings.GoldPremiumStepAdjustment || 50
+    }
+    onChange={(e) =>
+      updateField(
+        "GoldPremiumStepAdjustment",
+        e.target.value
+      )
+    }
+  />
+</div>
+    
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold 995 Sell Premium</label>
   <input
@@ -766,6 +822,30 @@ function ToggleRow({ label, checked, onChange }) {
     value={settings.GoldRoundoffMultiple || 100}
     onChange={(e) =>
       updateField("GoldRoundoffMultiple", e.target.value)
+    }
+  />
+</div>
+    
+<div style={styles.controlCard}>
+  <label style={styles.label}>Gold Holiday Buy</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.goldHolidayBuyingRate || 0}
+    onChange={(e) =>
+      updateField("goldHolidayBuyingRate", e.target.value)
+    }
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Gold Holiday Sell</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.goldHolidaySellingRate || 0}
+    onChange={(e) =>
+      updateField("goldHolidaySellingRate", e.target.value)
     }
   />
 </div>
