@@ -789,43 +789,6 @@ function ToggleRow({ label, checked, onChange }) {
   />
 </div>
  </div>
-    <div> 
-    <div style={styles.controlCard}>
-  <label style={styles.label}>Kachhi Badla Value</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.kachhiBadlaValue || 0}
-    onChange={(e) =>
-      updateField("kachhiBadlaValue", e.target.value)
-    }
-  />
-</div>
-
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Manual Silver Contract</label>
-            <input
-              style={styles.input}
-              value={settings.manualContract || ""}
-              onChange={(e) =>
-                updateField("manualContract", e.target.value.toUpperCase())
-              }
-              placeholder="SILVER26JULFUT"
-            />
-          </div>
-
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Manual Gold Contract</label>
-            <input
-              style={styles.input}
-              value={settings.GoldManualContract || ""}
-              onChange={(e) =>
-                updateField("GoldManualContract", e.target.value.toUpperCase())
-              }
-              placeholder="Leave blank for auto / GOLD26AUGFUT"
-            />
-          </div>
-    </div> 
 
 <div> 
 
@@ -896,6 +859,43 @@ function ToggleRow({ label, checked, onChange }) {
   />
 </div>
  </div>    
+    <div> 
+    <div style={styles.controlCard}>
+  <label style={styles.label}>Kachhi Badla Value</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.kachhiBadlaValue || 0}
+    onChange={(e) =>
+      updateField("kachhiBadlaValue", e.target.value)
+    }
+  />
+</div>
+
+          <div style={styles.controlCard}>
+            <label style={styles.label}>Manual Silver Contract</label>
+            <input
+              style={styles.input}
+              value={settings.manualContract || ""}
+              onChange={(e) =>
+                updateField("manualContract", e.target.value.toUpperCase())
+              }
+              placeholder="SILVER26JULFUT"
+            />
+          </div>
+
+          <div style={styles.controlCard}>
+            <label style={styles.label}>Manual Gold Contract</label>
+            <input
+              style={styles.input}
+              value={settings.GoldManualContract || ""}
+              onChange={(e) =>
+                updateField("GoldManualContract", e.target.value.toUpperCase())
+              }
+              placeholder="Leave blank for auto / GOLD26AUGFUT"
+            />
+          </div>
+    </div> 
 
     <div>
      <div style={styles.controlCard}>
@@ -921,7 +921,8 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-
+                </div>
+                <div>
           <div style={styles.controlCard}>
             <label style={styles.label}>Refresh Before 5:30PM</label>
             <input
