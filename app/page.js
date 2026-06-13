@@ -349,7 +349,7 @@ if (currentBuyPrice) {
       
   <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
-           <p style={styles.productToggle}>Silver 99</p>
+           <div style={styles.productToggle}>SILVER 99</div>
           <div style={styles.sideCard}>
     
             <p style={styles.finalLabel}>Buying Rate</p>
@@ -362,7 +362,7 @@ if (currentBuyPrice) {
           <div style={styles.sideCard}>
             <p style={styles.finalLabel}>Selling Rate</p>
             <h1 style={styles.finalPrice}>
-              ₹{formatPrice(settings.holidaySellingRate)}
+              ₹ {formatPrice(settings.holidaySellingRate)}
               <span style={styles.unit}> / kg</span>
             </h1>
           </div>
@@ -386,7 +386,7 @@ if (currentBuyPrice) {
   <section style={styles.mainCard}>
 
     <div style={styles.rateGrid}>
-      <p style={styles.productToggle}>Gold 995</p>
+      <div style={styles.productToggle}>GOLD 995</div>
 
       <div style={styles.sideCard}>
         <p style={styles.finalLabel}>Buying Rate</p>
