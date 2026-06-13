@@ -348,7 +348,7 @@ if (currentBuyPrice) {
     </section>
       
   <section style={styles.mainCard}>
-       <div style={{ padding : '10px 10px' }}> <h3>SILVER 99</h3></div> 
+       <div style={{ padding : '1px 10px' }}> <h3>SILVER 99</h3></div> 
          <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
     
