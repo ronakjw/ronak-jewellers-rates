@@ -348,7 +348,7 @@ if (currentBuyPrice) {
     </section>
       
   <section style={styles.mainCard}>
-       <div style={{ padding : '0px 10px' }}> <h2>S I L V E R   9 9</h2></div> 
+       <div style={{ padding : '0px 20px' }}> <h2> S I L V E R   9 9</h2></div> 
          <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
     
@@ -384,11 +384,9 @@ if (currentBuyPrice) {
 
 {settings.showGoldHolidayRate ? (
   <section style={styles.mainCard}>
-   <div style={{ padding : '0px 10px' }}> <h2>G O L D   9 9 5 </h2></div>
+   <div style={{ padding : '0px 20px' }}> <h2> G O L D   9 9 5 </h2> </div>
     <div style={styles.rateGrid}>
-      
-
-      <div style={styles.sideCard}>
+       <div style={styles.sideCard}>
         <p style={styles.finalLabel}>Buying Rate</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(settings.goldHolidayBuyingRate)}
@@ -1056,7 +1054,7 @@ holidayClosingBox: {
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(214,180,92,0.32)",
   borderRadius: 35,
-  padding: 20,
+  padding: 10,
   textAlign: "center",
   boxSizing: "border-box",
 },
