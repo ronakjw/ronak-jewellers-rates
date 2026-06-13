@@ -1049,12 +1049,13 @@ referenceDivider: {
 
 holidayClosingBox: {
   margin: "22px auto 0",
+  marginBottom: 11,
   width: "100%",
   maxWidth: 500,
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(214,180,92,0.32)",
-  borderRadius: 22,
+  borderRadius: 35,
   padding: 20,
   textAlign: "center",
   boxSizing: "border-box",
