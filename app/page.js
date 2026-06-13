@@ -863,6 +863,8 @@ liveDot: {
     border: "1px solid rgba(214,180,92,0.32)",
     borderRadius: 19,
     alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
     gap: 5,
     padding: "7px",
     boxShadow: "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
