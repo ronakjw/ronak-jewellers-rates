@@ -1454,7 +1454,7 @@ toggleKnob: {
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+    gridTemplateRows: "repeat(auto-fit, minmax(240px, 1fr))",
     gap: 16,
   },
 
