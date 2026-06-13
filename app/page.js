@@ -348,7 +348,7 @@ if (currentBuyPrice) {
     </section>
       
   <section style={styles.mainCard}>
-       <div style={{ padding : '1px 10px' }}> <h3>SILVER 99</h3></div> 
+       <div style={{ padding : '0px 10px' }}> <h2>S I L V E R   9 9</h2></div> 
          <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
     
@@ -384,7 +384,7 @@ if (currentBuyPrice) {
 
 {settings.showGoldHolidayRate ? (
   <section style={styles.mainCard}>
-   <div style={styles.productToggle}>GOLD 995</div>
+   <div style={{ padding : '0px 10px' }}> <h2>G O L D   9 9 5 </h3></div>
     <div style={styles.rateGrid}>
       
 
@@ -858,11 +858,12 @@ liveDot: {
   mainCard: {
     width: "100%",
     maxWidth: 920,
-    marginBottom: 11,
+    marginBottom: 19,
     background: "linear-gradient(145deg, rgba(31,31,31,0.96), rgba(10,10,10,0.96))",
     border: "1px solid rgba(214,180,92,0.32)",
-    borderRadius: 22,
-    padding: "10px",
+    borderRadius: 19,
+    verticalAlign: "middle",
+    padding: "7px",
     boxShadow: "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
     boxSizing: "border-box",
   },
