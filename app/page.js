@@ -383,7 +383,7 @@ if (currentBuyPrice) {
   </section>
 
 {settings.showGoldHolidayRate ? (
-  <section style={styles.}>
+  <section style={styles.mainCard}>
    <div style={styles.productToggle}>GOLD 995</div>
     <div style={styles.rateGrid}>
       
