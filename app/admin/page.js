@@ -656,7 +656,7 @@ function ToggleRow({ label, checked, onChange }) {
 />
 
   <ToggleRow
-  label="Auto Premium"
+  label="Silver Auto Premium"
   checked={Boolean(settings.autoPremiumEnabled)}
   onChange={(value) => updateField("autoPremiumEnabled", value)}
   />
@@ -677,7 +677,7 @@ function ToggleRow({ label, checked, onChange }) {
     updateField("GoldAutoPremiumEnabled", value)
   }
 />
-
+<div>
     <div style={styles.controlCard}>
             <label style={styles.label}>Silver99 Buy Prem.</label>
             <input
@@ -700,7 +700,7 @@ function ToggleRow({ label, checked, onChange }) {
                 updateField("sellingPremium", e.target.value)
               }
             />
-          </div>
+          </div>          
 <div style={styles.controlCard}>
   <label style={styles.label}>Silver100 BuyPrem.</label>
   <input
@@ -720,7 +720,8 @@ function ToggleRow({ label, checked, onChange }) {
     onChange={(e) => updateField("silver100sell", e.target.value)}
   />
 </div>
-
+</div> 
+    <div> 
           <div style={styles.controlCard}>
             <label style={styles.label}>Manual Silver Contract</label>
             <input
@@ -744,7 +745,8 @@ function ToggleRow({ label, checked, onChange }) {
               placeholder="Leave blank for auto / GOLD26AUGFUT"
             />
           </div>
-
+    </div> 
+   <div>              
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold Buy Prem.</label>
   <input
@@ -763,7 +765,8 @@ function ToggleRow({ label, checked, onChange }) {
     onChange={(e) => updateField("GoldSellPrem", e.target.value)}
   />
 </div>
-    
+</div> 
+<div>     
 <div style={styles.controlCard}>
   <label style={styles.label}> Gold MCX Step Size
   </label>
@@ -795,7 +798,6 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
-
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold Roundoff Multiple</label>
   <input
@@ -807,7 +809,8 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
-    
+ </div>    
+<div>
 <div style={styles.controlCard}>
   <label style={styles.label}>Gold Holiday Buy</label>
   <input
@@ -831,7 +834,31 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver Holiday Buy</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.holidayBuyingRate || 0}
+    onChange={(e) =>
+      updateField("holidayBuyingRate", e.target.value)
+    }
+  />
+</div>
 
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver Holiday Sell</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.holidaySellingRate || 0}
+    onChange={(e) =>
+      updateField("holidaySellingRate", e.target.value)
+    }
+  />
+</div>
+ </div>
+    <div>
      <div style={styles.controlCard}>
             <label style={styles.label}>Market Start Hour</label>
             <input
@@ -843,7 +870,7 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-                
+               
           <div style={styles.controlCard}>
             <label style={styles.label}>Market End Hour</label>
             <input
@@ -878,30 +905,7 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Silver Holiday Buy</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.holidayBuyingRate || 0}
-    onChange={(e) =>
-      updateField("holidayBuyingRate", e.target.value)
-    }
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Silver Holiday Sell</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.holidaySellingRate || 0}
-    onChange={(e) =>
-      updateField("holidaySellingRate", e.target.value)
-    }
-  />
-</div>
+</div> 
          
 <div style={styles.controlCard}>
   <label style={styles.label}>Kachhi Badla Value</label>
