@@ -865,10 +865,7 @@ liveDot: {
     padding: "7px",
     boxShadow: "0 26px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
     boxSizing: "border-box",
-
-  
-  
-  
+    marginBottom : 15,
   },
   
 disclaimer: {
