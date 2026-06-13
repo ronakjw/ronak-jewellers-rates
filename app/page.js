@@ -382,37 +382,41 @@ if (currentBuyPrice) {
 ) : null}
   </section>
 
- {settings.showGoldHolidayRate ? (
+{settings.showGoldHolidayRate ? (
   <section style={styles.mainCard}>
-   
-      <div style={styles.rateGrid}>
-        <p style={styles.productToggle}>Gold 995</p>
-         <div style={styles.sideCard}>
-          <p style={styles.finalLabel}>Buying Rate</p>
-          <h1 style={styles.finalPrice}>
-            ₹ {formatPrice(settings.goldHolidayBuyingRate)}
-            <span style={styles.unit}> /10gm</span>
-          </h1>
-        </div>
 
-        <div style={styles.sideCard}>
-          <p style={styles.finalLabel}>Selling Rate</p>
-          <h1 style={styles.finalPrice}>
-            ₹ {formatPrice(settings.goldHolidaySellingRate)}
-            <span style={styles.unit}> /10gm</span>
-          </h1>
-        </div>
+    <div style={styles.rateGrid}>
+      <p style={styles.productToggle}>Gold 995</p>
+
+      <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>Buying Rate</p>
+        <h1 style={styles.finalPrice}>
+          ₹ {formatPrice(settings.goldHolidayBuyingRate)}
+          <span style={styles.unit}> /10gm</span>
+        </h1>
       </div>
 
-   {quote?.goldClosingRate ? (
-  <div style={styles.holidayClosingBox}>
-    <p style={styles.finalLabel}>
-      Previous Closing
-    </p>
-   <h2 style={styles.mcxPrice}>
-      ₹ {formatPrice(quote.goldClosingRate)}
-      <span style={styles.unit}> /10gm</span>
-    </h2></div>
+      <div style={styles.sideCard}>
+        <p style={styles.finalLabel}>Selling Rate</p>
+        <h1 style={styles.finalPrice}>
+          ₹ {formatPrice(settings.goldHolidaySellingRate)}
+          <span style={styles.unit}> /10gm</span>
+        </h1>
+      </div>
+    </div>
+
+    {quote?.goldClosingRate ? (
+      <div style={styles.holidayClosingBox}>
+        <p style={styles.finalLabel}>
+          Previous Closing
+        </p>
+
+        <h2 style={styles.mcxPrice}>
+          ₹ {formatPrice(quote.goldClosingRate)}
+          <span style={styles.unit}> /10gm</span>
+        </h2>
+      </div>
+    ) : null}
   </section>
 ) : null}
 
