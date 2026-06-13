@@ -68,6 +68,36 @@ function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
   const steps = Math.trunc(difference / stepSize);
   return Number(basePremium || 0) - steps * adjustment;
 }
+function getGoldAutoPremium(
+  basePremium,
+  currentMcx,
+  openingMcx,
+  settings
+) {
+  if (!settings.GoldAutoPremiumEnabled) {
+    return Number(basePremium || 0);
+  }
+
+  const stepSize = Number(
+    settings.GoldPremiumStepSize || 100
+  );
+
+  const adjustment = Number(
+    settings.GoldPremiumStepAdjustment || 50
+  );
+
+  const difference =
+    currentMcx - openingMcx;
+
+  const steps = Math.trunc(
+    difference / stepSize
+  );
+
+  return (
+    Number(basePremium || 0) -
+    steps * adjustment
+  );
+}
 function roundToNearest500(value) {
   return Math.floor((value + 249) / 500) * 500;
 }
@@ -306,7 +336,6 @@ if (currentBuyPrice) {
     <main style={styles.page}>
       <section style={styles.hero}>
         <Image src="/logo.png"  alt="Ronak Jewellers"   width={250}  height={250}  style={{ marginBottom: 12 }} />
-
         <h1 style={styles.brandName}>•Ronak Jewellers•</h1>
 
    {settings.noticeMessage?.trim() ? (
@@ -317,13 +346,13 @@ if (currentBuyPrice) {
 ) : null}
 
     </section>
-
-
-      <section style={styles.mainCard}>
+      
+  <section style={styles.mainCard}>
         <div style={styles.rateGrid}>
+           <p style={styles.productToggle}>Silver 99</p>
           <div style={styles.sideCard}>
     
-            <p style={styles.finalLabel}>Final Buying Rate</p>
+            <p style={styles.finalLabel}>Buying Rate</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(settings.holidayBuyingRate)}
               <span style={styles.unit}> / kg</span>
@@ -331,7 +360,7 @@ if (currentBuyPrice) {
           </div>
 
           <div style={styles.sideCard}>
-            <p style={styles.finalLabel}>Final Selling Rate</p>
+            <p style={styles.finalLabel}>Selling Rate</p>
             <h1 style={styles.finalPrice}>
               ₹{formatPrice(settings.holidaySellingRate)}
               <span style={styles.unit}> / kg</span>
@@ -346,12 +375,47 @@ if (currentBuyPrice) {
     </p>
 
     <h2 style={styles.mcxPrice}>
-      ₹{formatPrice(quote.mcxClosingRate)}
-      <span style={styles.unit}>/kg</span>
+      ₹ {formatPrice(quote.mcxClosingRate)}
+      <span style={styles.unit}> /kg</span>
     </h2>
   </div>
 ) : null}
   </section>
+
+ {settings.showGoldHolidayRate ? (
+  <section style={styles.mainCard}>
+   
+      <div style={styles.rateGrid}>
+        <p style={styles.productToggle}>Gold 995</p>
+         <div style={styles.sideCard}>
+          <p style={styles.finalLabel}>Buying Rate</p>
+          <h1 style={styles.finalPrice}>
+            ₹{formatPrice(settings.goldHolidayBuyingRate)}
+            <span style={styles.unit}> / 10gm</span>
+          </h1>
+        </div>
+
+        <div style={styles.sideCard}>
+          <p style={styles.finalLabel}>Selling Rate</p>
+          <h1 style={styles.finalPrice}>
+            ₹{formatPrice(settings.goldHolidaySellingRate)}
+            <span style={styles.unit}> / 10gm</span>
+          </h1>
+        </div>
+      </div>
+
+   {quote?.goldClosingRate ? (
+  <div style={styles.holidayClosingBox}>
+    <p style={styles.finalLabel}>
+      Previous Closing
+    </p>
+   <h2 style={styles.mcxPrice}>
+      ₹ {formatPrice(quote.goldClosingRate)}
+      <span style={styles.unit}> /10gm</span>
+    </h2>
+  </section>
+) : null}
+
 <KachhiBadla settings={settings} />
 <ContactButtons />
 <InstallPWAButton />
@@ -417,33 +481,18 @@ const silver100SellPremium = Number(settings.silver100sell || 0);
 const silver100Buying = finalBuying + silver100BuyPremium;
 const silver100Selling = finalSelling + silver100SellPremium;
 
-const goldBuyPremium = Number(settings.GoldBuyPrem || 0);
-const goldSellPremium = Number(settings.GoldSellPrem || 0);
-const goldRoundoffMultiple = Math.max(
-  1,
-  Number(settings.GoldRoundoffMultiple || 100)
-);
-
-const rawGoldFinalBuying =
-  quote.goldMcxBuyPrice === null || quote.goldMcxBuyPrice === undefined
+const goldBuyPremium = getGoldAutoPremium( settings.GoldBuyPrem, quote.goldMcxBuyPrice, quote.goldOpeningRate, settings);
+const goldSellPremium = getGoldAutoPremium(settings.GoldSellPrem, quote.goldMcxSellPrice, quote.goldOpeningRate, settings);
+const goldRoundoffMultiple = Math.max(1, Number(settings.GoldRoundoffMultiple || 100));
+const rawGoldFinalBuying = quote.goldMcxBuyPrice === null || quote.goldMcxBuyPrice === undefined
     ? null
     : Number(quote.goldMcxBuyPrice) + goldBuyPremium;
-
-const rawGoldFinalSelling =
-  quote.goldMcxSellPrice === null || quote.goldMcxSellPrice === undefined
+const rawGoldFinalSelling = quote.goldMcxSellPrice === null || quote.goldMcxSellPrice === undefined
     ? null
     : Number(quote.goldMcxSellPrice) + goldSellPremium;
+const goldFinalBuying = roundDownToMultiple(rawGoldFinalBuying, goldRoundoffMultiple);
+const goldFinalSelling = roundUpToMultiple(rawGoldFinalSelling, goldRoundoffMultiple);
 
-const goldFinalBuying = roundDownToMultiple(
-  rawGoldFinalBuying,
-  goldRoundoffMultiple
-);
-
-const goldFinalSelling = roundUpToMultiple(
-  rawGoldFinalSelling,
-  goldRoundoffMultiple
-);
-  
 return (
     <main style={styles.page}>
       <section style={styles.hero}>
