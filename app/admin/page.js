@@ -594,7 +594,7 @@ function ToggleRow({ label, checked, onChange }) {
         ) : null}
 
         <form onSubmit={saveSettings} style={styles.grid}>
-  
+  <div>
   <ToggleRow
   label="Show Silver Premium"
   checked={Boolean(settings.showPremium)}
@@ -677,6 +677,7 @@ function ToggleRow({ label, checked, onChange }) {
     updateField("GoldAutoPremiumEnabled", value)
   }
 />
+    </div>    
 <div>
     <div style={styles.controlCard}>
             <label style={styles.label}>Silver99 Buy Prem.</label>
@@ -1454,7 +1455,7 @@ toggleKnob: {
 
   grid: {
     display: "grid",
-    gridTemplateRows: "repeat(auto-fit, minmax(240px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
     gap: 16,
   },
 
