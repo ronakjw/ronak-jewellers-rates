@@ -390,16 +390,16 @@ if (currentBuyPrice) {
          <div style={styles.sideCard}>
           <p style={styles.finalLabel}>Buying Rate</p>
           <h1 style={styles.finalPrice}>
-            ₹{formatPrice(settings.goldHolidayBuyingRate)}
-            <span style={styles.unit}> / 10gm</span>
+            ₹ {formatPrice(settings.goldHolidayBuyingRate)}
+            <span style={styles.unit}> /10gm</span>
           </h1>
         </div>
 
         <div style={styles.sideCard}>
           <p style={styles.finalLabel}>Selling Rate</p>
           <h1 style={styles.finalPrice}>
-            ₹{formatPrice(settings.goldHolidaySellingRate)}
-            <span style={styles.unit}> / 10gm</span>
+            ₹ {formatPrice(settings.goldHolidaySellingRate)}
+            <span style={styles.unit}> /10gm</span>
           </h1>
         </div>
       </div>
@@ -412,7 +412,7 @@ if (currentBuyPrice) {
    <h2 style={styles.mcxPrice}>
       ₹ {formatPrice(quote.goldClosingRate)}
       <span style={styles.unit}> /10gm</span>
-    </h2>
+    </h2></div>
   </section>
 ) : null}
 
