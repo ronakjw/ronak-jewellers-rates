@@ -679,7 +679,7 @@ function ToggleRow({ label, checked, onChange }) {
 />
 
     <div style={styles.controlCard}>
-            <label style={styles.label}>Buying Premium</label>
+            <label style={styles.label}>Silver99 Buy Prem.</label>
             <input
               style={styles.input}
               type="number"
@@ -691,7 +691,7 @@ function ToggleRow({ label, checked, onChange }) {
           </div>
 
           <div style={styles.controlCard}>
-            <label style={styles.label}>Selling Premium</label>
+            <label style={styles.label}>Silver99 Sell Prem.</label>
             <input
               style={styles.input}
               type="number"
@@ -701,6 +701,25 @@ function ToggleRow({ label, checked, onChange }) {
               }
             />
           </div>
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver100 BuyPrem.</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.silver100buy || 0}
+    onChange={(e) => updateField("silver100buy", e.target.value)}
+  />
+</div>
+
+<div style={styles.controlCard}>
+  <label style={styles.label}>Silver100 SellPrem.</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.silver100sell || 0}
+    onChange={(e) => updateField("silver100sell", e.target.value)}
+  />
+</div>
 
           <div style={styles.controlCard}>
             <label style={styles.label}>Manual Silver Contract</label>
@@ -726,39 +745,8 @@ function ToggleRow({ label, checked, onChange }) {
             />
           </div>
 
-          <div style={styles.controlCard}>
-            <label style={styles.label}>Market Start Hour</label>
-            <input
-              style={styles.input}
-              type="number"
-              value={settings.marketStartHour}
-              onChange={(e) =>
-                updateField("marketStartHour", e.target.value)
-              }
-            />
-          </div>
 <div style={styles.controlCard}>
-  <label style={styles.label}>Silver100 BuyPremium</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.silver100buy || 0}
-    onChange={(e) => updateField("silver100buy", e.target.value)}
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Silver100 SellPremium</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.silver100sell || 0}
-    onChange={(e) => updateField("silver100sell", e.target.value)}
-  />
-</div>
-
-<div style={styles.controlCard}>
-  <label style={styles.label}>Gold 995 Buy Premium</label>
+  <label style={styles.label}>Gold Buy Prem.</label>
   <input
     style={styles.input}
     type="number"
@@ -767,10 +755,18 @@ function ToggleRow({ label, checked, onChange }) {
   />
 </div>
 <div style={styles.controlCard}>
-  <label style={styles.label}>
-    Gold MCX Step Size
+  <label style={styles.label}>Gold Sell Prem.</label>
+  <input
+    style={styles.input}
+    type="number"
+    value={settings.GoldSellPrem || 0}
+    onChange={(e) => updateField("GoldSellPrem", e.target.value)}
+  />
+</div>
+    
+<div style={styles.controlCard}>
+  <label style={styles.label}> Gold MCX Step Size
   </label>
-
   <input
     style={styles.input}
     type="number"
@@ -785,32 +781,18 @@ function ToggleRow({ label, checked, onChange }) {
 </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>
-    Gold Premium Adj.
+  <label style={styles.label}>  Gold Premium Adj.
   </label>
-
   <input
     style={styles.input}
     type="number"
-    value={
-      settings.GoldPremiumStepAdjustment || 50
-    }
+    value={ settings.GoldPremiumStepAdjustment || 50 }
     onChange={(e) =>
       updateField(
         "GoldPremiumStepAdjustment",
         e.target.value
       )
     }
-  />
-</div>
-    
-<div style={styles.controlCard}>
-  <label style={styles.label}>Gold 995 Sell Premium</label>
-  <input
-    style={styles.input}
-    type="number"
-    value={settings.GoldSellPrem || 0}
-    onChange={(e) => updateField("GoldSellPrem", e.target.value)}
   />
 </div>
 
@@ -849,6 +831,19 @@ function ToggleRow({ label, checked, onChange }) {
     }
   />
 </div>
+
+     <div style={styles.controlCard}>
+            <label style={styles.label}>Market Start Hour</label>
+            <input
+              style={styles.input}
+              type="number"
+              value={settings.marketStartHour}
+              onChange={(e) =>
+                updateField("marketStartHour", e.target.value)
+              }
+            />
+          </div>
+                
           <div style={styles.controlCard}>
             <label style={styles.label}>Market End Hour</label>
             <input
@@ -885,7 +880,7 @@ function ToggleRow({ label, checked, onChange }) {
           </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>Holiday Buying Rate</label>
+  <label style={styles.label}>Silver Holiday Buy</label>
   <input
     style={styles.input}
     type="number"
@@ -897,7 +892,7 @@ function ToggleRow({ label, checked, onChange }) {
 </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>Holiday Selling Rate</label>
+  <label style={styles.label}>Silver Holiday Sell</label>
   <input
     style={styles.input}
     type="number"
@@ -921,7 +916,7 @@ function ToggleRow({ label, checked, onChange }) {
 </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>MCX Step Size</label>
+  <label style={styles.label}>Silver MCX Step Size</label>
   <input
     style={styles.input}
     type="number"
@@ -933,7 +928,7 @@ function ToggleRow({ label, checked, onChange }) {
 </div>
 
 <div style={styles.controlCard}>
-  <label style={styles.label}>Premium Adj.</label>
+  <label style={styles.label}>Silver Premium Adj.</label>
   <input
     style={styles.input}
     type="number"
