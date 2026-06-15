@@ -338,8 +338,14 @@ const newSettings = {
      await updateDoc(doc(db, "settings", "bullion"), newSettings);
 setSavedSettings(newSettings);
 const previousLog = {
-  buyingPremium: Number(oldSettings.buyingPremium || 0),
-  sellingPremium: Number(oldSettings.sellingPremium || 0),
+  buyingPremium:
+  settings.buyingPremium === ""
+    ? 0
+    : parseInt(settings.buyingPremium || 0, 10),
+  sellingPremium:
+  settings.sellingPremium === ""
+    ? 0
+    : parseInt(settings.sellingPremium || 0, 10),
   showRates: Boolean(oldSettings.showRates),
   autoContract: Boolean(oldSettings.autoContract),
   manualContract: String(oldSettings.manualContract || ""),
@@ -358,15 +364,28 @@ const previousLog = {
   silver100rate: Boolean(oldSettings.silver100rate),
   silver100buy: Number(oldSettings.silver100buy || 0),
   silver100sell: Number(oldSettings.silver100sell || 0),
-  GoldBuyPrem: Number(oldSettings.GoldBuyPrem || 0),
-  GoldSellPrem: Number(oldSettings.GoldSellPrem || 0),
+  GoldBuyPrem:
+  settings.GoldBuyPrem === ""
+    ? 0
+    : parseInt(settings.GoldBuyPrem || 0, 10),
+
+  GoldSellPrem:
+  settings.GoldSellPrem === ""
+    ? 0
+    : parseInt(settings.GoldSellPrem || 0, 10),
   ShowGoldRate: Boolean(oldSettings.ShowGoldRate),
   ShowGoldPrem: Boolean(oldSettings.ShowGoldPrem),
   GoldRoundoffMultiple: Number(oldSettings.GoldRoundoffMultiple || 100),
   GoldManualContract: String(oldSettings.GoldManualContract || ""),
   GoldAutoPremiumEnabled: Boolean(settings.GoldAutoPremiumEnabled),
-  GoldPremiumStepSize: parseInt(settings.GoldPremiumStepSize || 100, 10),
-  GoldPremiumStepAdjustment: parseInt(settings.GoldPremiumStepAdjustment || 50, 10),
+ GoldPremiumStepSize:
+  settings.GoldPremiumStepSize === ""
+    ? 100
+    : parseInt(settings.GoldPremiumStepSize || 100, 10),
+ GoldPremiumStepAdjustment:
+  settings.GoldPremiumStepAdjustment === ""
+    ? 50
+    : parseInt(settings.GoldPremiumStepAdjustment || 50, 10),
 };
 
 const currentLog = {
@@ -683,8 +702,9 @@ function ToggleRow({ label, checked, onChange }) {
             <label style={styles.label}>Silver99 Buy Prem.</label>
             <input
               style={styles.input}
-              type="number"
-              value={settings.buyingPremium}
+              type="text"
+              value={settings.buyingPremium ?? ""}
+               inputMode="decimal"
               onChange={(e) =>
                 updateField("buyingPremium", e.target.value)
               }
@@ -695,11 +715,10 @@ function ToggleRow({ label, checked, onChange }) {
             <label style={styles.label}>Silver99 Sell Prem.</label>
             <input
               style={styles.input}
-              type="number"
-              value={settings.sellingPremium}
-              onChange={(e) =>
-                updateField("sellingPremium", e.target.value)
-              }
+              type="text"
+               inputMode="decimal"
+              value={settings.sellingPremium ?? ""}
+              onChange={(e) => updateField("sellingPremium", e.target.value)}
             />
           </div>          
 <div style={styles.controlCard}>
@@ -725,8 +744,9 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Gold Buy Prem.</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.GoldBuyPrem || 0}
+    type="text"
+     inputMode="decimal"
+    value={settings.GoldBuyPrem ?? ""}
     onChange={(e) => updateField("GoldBuyPrem", e.target.value)}
   />
 </div>
@@ -734,8 +754,9 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Gold Sell Prem.</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.GoldSellPrem || 0}
+    type="text"
+     inputMode="decimal"
+    value={settings.GoldSellPrem ?? ""}
     onChange={(e) => updateField("GoldSellPrem", e.target.value)}
   />
 </div>
@@ -796,8 +817,9 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Silver MCX Step Size</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.premiumStepSize || 1000}
+    type="text"
+     inputMode="decimal"
+    value={settings.premiumStepSize ?? ""}
     onChange={(e) =>
       updateField("premiumStepSize", e.target.value)
     }
@@ -808,8 +830,9 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Silver Premium Adj.</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.premiumStepAdjustment || 500}
+    type="text"
+     inputMode="decimal"
+    value={settings.premiumStepAdjustment ?? ""}
     onChange={(e) =>
       updateField("premiumStepAdjustment", e.target.value)
     }
@@ -821,8 +844,9 @@ function ToggleRow({ label, checked, onChange }) {
   </label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.GoldPremiumStepSize || 100}
+    type="text"
+     inputMode="decimal"
+    value={settings.GoldPremiumStepSize ?? ""}
     onChange={(e) =>
       updateField(
         "GoldPremiumStepSize",
@@ -837,8 +861,9 @@ function ToggleRow({ label, checked, onChange }) {
   </label>
   <input
     style={styles.input}
-    type="number"
-    value={ settings.GoldPremiumStepAdjustment || 50 }
+    type="text"
+     inputMode="decimal"
+    value={ settings.GoldPremiumStepAdjustment ?? "" }
     onChange={(e) =>
       updateField(
         "GoldPremiumStepAdjustment",
@@ -851,8 +876,9 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Gold Roundoff Multiple</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.GoldRoundoffMultiple || 100}
+    type="text"
+     inputMode="decimal"
+    value={settings.GoldRoundoffMultiple ?? ""}
     onChange={(e) =>
       updateField("GoldRoundoffMultiple", e.target.value)
     }
@@ -864,8 +890,8 @@ function ToggleRow({ label, checked, onChange }) {
   <label style={styles.label}>Kachhi Badla Value</label>
   <input
     style={styles.input}
-    type="number"
-    value={settings.kachhiBadlaValue || 0}
+    type="decimal"
+    value={settings.kachhiBadlaValue ?? ""}
     onChange={(e) =>
       updateField("kachhiBadlaValue", e.target.value)
     }
