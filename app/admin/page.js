@@ -625,11 +625,11 @@ function ToggleRow({ label, checked, onChange }) {
   checked={Boolean(settings.holidayMode)}
   onChange={(value) => updateField("holidayMode", value)}/>
 
-  <ToggleRow
-  label="Kachhi Badla"
-  checked={Boolean(settings.kachhiBadlaEnabled)}
-  onChange={(value) => updateField("kachhiBadlaEnabled", value)} />
-
+   <ToggleRow
+  label="Show Gold Holiday Rate"
+  checked={Boolean(settings.showGoldHolidayRate)}
+  onChange={(value) => updateField("showGoldHolidayRate", value)}/>
+    
 <ToggleRow
   label={`Kachhi Badla Unit: ${
     settings.kachhiBadlaUnit === "Rs/kg"
@@ -641,25 +641,17 @@ function ToggleRow({ label, checked, onChange }) {
     updateField(
       "kachhiBadlaUnit",
       value ? "Rs/kg" : "gm/kg"
-    )
-  }
-/>
+    ) }/>
+  <ToggleRow
+  label="Kachhi Badla"
+  checked={Boolean(settings.kachhiBadlaEnabled)}
+  onChange={(value) => updateField("kachhiBadlaEnabled", value)} />
 
   <ToggleRow
   label="Silver Auto Premium"
   checked={Boolean(settings.autoPremiumEnabled)}
   onChange={(value) => updateField("autoPremiumEnabled", value)}
   />
- <ToggleRow
-  label="Volatility Warning"
-  checked={Boolean(settings.volatilityWarningEnabled)}
-  onChange={(value) => updateField("volatilityWarningEnabled", value)}
-/>  
-    <ToggleRow
-  label="Show Gold Holiday Rate"
-  checked={Boolean(settings.showGoldHolidayRate)}
-  onChange={(value) => updateField("showGoldHolidayRate", value)}
-/>
     <ToggleRow
   label="Gold Auto Premium"
   checked={Boolean(settings.GoldAutoPremiumEnabled)}
@@ -667,6 +659,11 @@ function ToggleRow({ label, checked, onChange }) {
     updateField("GoldAutoPremiumEnabled", value)
   }
 />
+    <ToggleRow
+  label="Volatility Warning"
+  checked={Boolean(settings.volatilityWarningEnabled)}
+  onChange={(value) => updateField("volatilityWarningEnabled", value)}
+    />  
     </div>    
 <div>
     <div style={styles.controlCard}>
