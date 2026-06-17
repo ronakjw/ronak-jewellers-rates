@@ -308,6 +308,7 @@ export default function Home() {
   const [priceHistory, setPriceHistory] = useState([]);
   const [volatilityUntil, setVolatilityUntil] = useState(null);
   const [theme, setTheme] = useState("dark");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
  const [openProducts, setOpenProducts] = useState({
   silver99: true,
   silver100: false,
@@ -315,6 +316,76 @@ export default function Home() {
   goldHoliday: true,
 });
   
+function SideBarMenu() {
+  return (
+    <>
+      <button
+        type="button"
+        style={theme === "light" ? styles.menuButtonLight : styles.menuButton}
+        onClick={() => setSidebarOpen(true)}
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+      {sidebarOpen ? (
+        <div
+          style={styles.sidebarOverlay}
+          onClick={() => setSidebarOpen(false)}
+        />
+      ) : null}
+
+      <aside
+        style={{
+          ...(theme === "light" ? styles.sidebarLight : styles.sidebar),
+         transform: sidebarOpen ? "translateX(0)" : "translateX(110%)",
+        }}
+      >
+        <div style={styles.sidebarHeader}>
+          <strong>Ronak Jewellers</strong>
+
+          <button
+            type="button"
+            style={theme === "light" ? styles.sidebarCloseLight : styles.sidebarClose}
+            onClick={() => setSidebarOpen(false)}
+          >
+            ×
+          </button>
+        </div>
+
+        <div style={styles.sidebarSection}>
+          <span style={theme === "light" ? styles.sidebarLabelLight : styles.sidebarLabel}>
+            Theme
+          </span>
+
+          <button
+            type="button"
+            style={theme === "light" ? styles.themeSwitchLight : styles.themeSwitch}
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            <span
+              style={{
+                ...(theme === "light"
+                  ? styles.themeSwitchKnobLight
+                  : styles.themeSwitchKnob),
+                transform:
+                  theme === "light"
+                    ? "translateX(34px)"
+                    : "translateX(0)",
+              }}
+            />
+
+            <span style={styles.themeSwitchText}>
+              {theme === "light" ? "Light" : "Dark"}
+            </span>
+          </button>
+        </div>
+      </aside>
+    </>
+  );
+}  
+
 function CustomNotice({ message }) {
   if (!message?.trim()) {
     return null;
@@ -322,7 +393,7 @@ function CustomNotice({ message }) {
   return (
     <div style={styles.statusRow}>
       {" "}
-      <span>{message.trim()}</span>
+      <span>{ message.trim() }</span>
     </div>
   );
 }
@@ -481,12 +552,11 @@ if (currentBuyPrice) {
   if (settings?.holidayMode) {
   return (
     <main style={pageStyle}>
+     <SideBarMenu />
       <section style={styles.hero}>
         <Image src={logoSrc}  alt="Ronak Jewellers"   width={250}  height={250}  style={styles.logoImage} />
         <h1 style={styles.brandName}>•Ronak Jewellers•</h1>
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-
-   {settings.noticeMessage?.trim() ? (
+    {settings.noticeMessage?.trim() ? (
   <div style={styles.statusRow}>
   <div style={{ marginTop: 16 }}>  <span style={styles.liveDot} />
      </div> <CustomNotice message={settings.noticeMessage} />
@@ -664,12 +734,11 @@ const goldFinalSelling = roundUpToMultiple(rawGoldFinalSelling, goldRoundoffMult
 
 return (
     <main style={pageStyle}>
+      <SideBarMenu />
       <section style={styles.hero}>
         <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
 
         <h2 style={styles.brandName}>•Ronak Jewellers•</h2>
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-
         <div style={styles.statusRow}>
           <span style={styles.live} />
           <span>LIVE MCX BULLION FUTURES</span>
@@ -908,6 +977,204 @@ function ClosedScreen({ theme = "dark", logoSrc = "/logo.png" }) {
   );
 }
 const styles = {
+  menuButton: {
+  position: "fixed",
+  top: 18,
+  right: 16,
+  zIndex: 1001,
+  width: 46,
+  height: 46,
+  borderRadius: 14,
+  border: "1px solid rgba(214,180,92,0.45)",
+  background: "rgba(10,10,10,0.78)",
+  color: "#f3d98b",
+  fontSize: 25,
+  fontWeight: 800,
+  cursor: "pointer",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+  transition: "all 0.25s ease",
+},
+
+menuButtonLight: {
+  position: "fixed",
+  top: 18,
+  right: 16,
+  zIndex: 1001,
+  width: 46,
+  height: 46,
+  borderRadius: 14,
+  border: "1px solid rgba(105,75,20,0.35)",
+  background: "rgba(255,234,190,0.88)",
+  color: "#3b2a08",
+  fontSize: 25,
+  fontWeight: 800,
+  cursor: "pointer",
+  boxShadow: "0 10px 28px rgba(120,85,20,0.22)",
+  transition: "all 0.25s ease",
+},
+
+sidebarOverlay: {
+  position: "fixed",
+  inset: 0,
+  background: "rgba(0,0,0,0.45)",
+  zIndex: 1002,
+},
+
+sidebar: {
+  position: "fixed",
+  top: 0,
+  right: 0,
+  width: "min(82vw, 330px)",
+  height: "100vh",
+  zIndex: 1003,
+  background:
+    "linear-gradient(145deg, rgba(22,22,22,0.98), rgba(5,5,5,0.98))",
+borderLeft: "1px solid rgba(214,180,92,0.35)",
+boxShadow: "-20px 0 60px rgba(0,0,0,0.55)",
+  color: "#f3d98b",
+  padding: "22px 18px",
+  boxSizing: "border-box",
+  transition: "transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)",
+ },
+
+sidebarLight: {
+  position: "fixed",
+  top: 0,
+  right: 0,
+  width: "min(82vw, 330px)",
+  height: "100vh",
+  zIndex: 1003,
+  background:
+    "linear-gradient(145deg, #FFEABE, #fff5d8)",
+  color: "#3b2a08",
+  padding: "22px 18px",
+  boxSizing: "border-box",
+  transition: "transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)",
+ right: 0,
+borderLeft: "1px solid rgba(105,75,20,0.28)",
+boxShadow: "-20px 0 60px rgba(120,85,20,0.24)",
+},
+
+sidebarHeader: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  fontSize: 20,
+  letterSpacing: "0.05em",
+  marginBottom: 28,
+},
+
+sidebarClose: {
+  border: "none",
+  background: "rgba(255,255,255,0.08)",
+  color: "#f3d98b",
+  width: 38,
+  height: 38,
+  borderRadius: 12,
+  fontSize: 26,
+  cursor: "pointer",
+},
+
+sidebarCloseLight: {
+  border: "none",
+  background: "rgba(80,50,10,0.08)",
+  color: "#3b2a08",
+  width: 38,
+  height: 38,
+  borderRadius: 12,
+  fontSize: 26,
+  cursor: "pointer",
+},
+
+sidebarSection: {
+  padding: "16px 0",
+  borderTop: "1px solid rgba(214,180,92,0.18)",
+},
+
+sidebarLabel: {
+  display: "block",
+  color: "#aaa",
+  fontSize: 13,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  marginBottom: 12,
+},
+
+sidebarLabelLight: {
+  display: "block",
+  color: "#6d521c",
+  fontSize: 13,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  marginBottom: 12,
+},
+
+themeSwitch: {
+  position: "relative",
+  width: 96,
+  height: 44,
+  borderRadius: 999,
+  border: "1px solid rgba(214,180,92,0.45)",
+  background: "rgba(214,180,92,0.12)",
+  color: "#f3d98b",
+  cursor: "pointer",
+  padding: 4,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+  transition: "all 0.3s ease",
+},
+
+themeSwitchLight: {
+  position: "relative",
+  width: 96,
+  height: 44,
+  borderRadius: 999,
+  border: "1px solid rgba(105,75,20,0.35)",
+  background: "rgba(255,255,255,0.55)",
+  color: "#3b2a08",
+  cursor: "pointer",
+  padding: 4,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+  transition: "all 0.3s ease",
+},
+
+themeSwitchKnob: {
+  position: "absolute",
+  left: 5,
+  width: 34,
+  height: 34,
+  borderRadius: "50%",
+  background: "#f3d98b",
+  transition: "transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)",
+  boxShadow: "0 4px 14px rgba(0,0,0,0.35)",
+},
+
+themeSwitchKnobLight: {
+  position: "absolute",
+  left: 5,
+  width: 34,
+  height: 34,
+  borderRadius: "50%",
+  background: "#3b2a08",
+  transition: "transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)",
+  boxShadow: "0 4px 14px rgba(120,85,20,0.28)",
+},
+
+themeSwitchText: {
+  position: "relative",
+  zIndex: 1,
+  fontSize: 13,
+  fontWeight: 800,
+  letterSpacing: "0.08em",
+},
+
+
+  
   page: {
     minHeight: "100vh",
     background: "var(--rj-page-bg)",
