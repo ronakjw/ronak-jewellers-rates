@@ -454,7 +454,7 @@ function SideBarMenu({
 
    <InstallPWAButton
   variant="sidebar"
-  style={styles.sidebarActionButton}
+  style={styles.sidebarAction}
 />
           <a href="tel:9479893898" style={styles.sidebarAction}>
             📞 Call 9479893898
