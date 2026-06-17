@@ -451,7 +451,16 @@ function SideBarMenu({
           >
             Quick Actions
           </span>
-          <InstallPWAButton />
+              <div style={styles.sidebarInstallWrap}>
+          <button
+            type="button"
+            style={styles.sidebarAction}
+            onClick={() => {
+            document.getElementById("install-app-button")?.click();
+            }}>
+  📲 Install App
+          </button>
+              </div>
           <a href="tel:9479893898" style={styles.sidebarAction}>
             📞 Call 9479893898
           </a>
@@ -460,9 +469,9 @@ function SideBarMenu({
             📞 Call 9300053012
           </a>
 
-          <div style={styles.sidebarInstallWrap}>
-            <InstallPWAButton />
-          </div>
+          
+            
+          
         </div>
 
         <div style={{ ...styles.sidebarSection, animationDelay: "0.28s" }}>
