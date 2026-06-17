@@ -417,19 +417,7 @@ function SideBarMenu({
           >
             Active Contracts
           </span>
-          
-        <div style={{ ...styles.sidebarSection, animationDelay: "0.04s" }}>
-          <span
-            style={
-              theme === "light"
-                ? styles.sidebarLabelLight
-                : styles.sidebarLabel }>
-            Theme
-          </span>
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
-        </div>
-              
-          <div style={styles.sidebarMiniGrid}>
+           <div style={styles.sidebarMiniGrid}>
             <div style={styles.statusRow}>
               <span>Silver : </span>
               <strong>{quote?.contract || "--"}</strong>
@@ -440,6 +428,17 @@ function SideBarMenu({
               <strong>{quote?.goldContract || "--"}</strong>
             </div>
           </div>
+         </div>
+              
+        <div style={{ ...styles.sidebarSection, animationDelay: "0.04s" }}>
+          <span
+            style={
+              theme === "light"
+                ? styles.sidebarLabelLight
+                : styles.sidebarLabel }>
+            Theme
+          </span>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
 
         <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
