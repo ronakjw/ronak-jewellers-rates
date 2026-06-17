@@ -372,7 +372,7 @@ function SideBarMenu({
         <div style={styles.sidebarHeader}>
           <div>
             <strong>Ronak Jewellers</strong>
-            <p style={styles.sidebarSubTitle}>Live bullion rates</p>
+            <p style={styles.sidebarSubTitle}>Live Rates</p>
           </div>
 
           <button
@@ -477,7 +477,7 @@ function SideBarMenu({
                 : styles.sidebarLabel
             }
           >
-            Info
+            Disclaimer
           </span>
 
           <p style={styles.sidebarDisclaimer}>
@@ -1107,7 +1107,7 @@ function LoadingScreen({ theme = "dark", logoSrc = "/logo.png" }) {
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
       <h1 style={styles.brandName}>Ronak Jewellers</h1>
-      <p style={styles.muted}>Loading live bullion rates...</p>
+      <p style={styles.muted}>Loading live rates...</p>
     </main>
   );
 }
