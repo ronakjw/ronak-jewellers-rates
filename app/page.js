@@ -343,12 +343,10 @@ function SideBarMenu() {
       >
         <div style={styles.sidebarHeader}>
           <strong>Ronak Jewellers</strong>
-
           <button
             type="button"
             style={theme === "light" ? styles.sidebarCloseLight : styles.sidebarClose}
-            onClick={() => setSidebarOpen(false)}
-          >
+            onClick={() => setSidebarOpen(false)}>
             ×
           </button>
         </div>
@@ -357,8 +355,8 @@ function SideBarMenu() {
           <span style={theme === "light" ? styles.sidebarLabelLight : styles.sidebarLabel}>
             Theme
           </span>
-
-          <button
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+{/*  <button
             type="button"
             style={theme === "light" ? styles.themeSwitchLight : styles.themeSwitch}
             onClick={toggleTheme}
@@ -379,7 +377,7 @@ function SideBarMenu() {
             <span style={styles.themeSwitchText}>
               {theme === "light" ? "Light" : "Dark"}
             </span>
-          </button>
+          </button> */}
         </div>
       </aside>
     </>
