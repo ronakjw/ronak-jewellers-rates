@@ -68,8 +68,7 @@ const themeTokens = {
     "--rj-panel-bg":
       "linear-gradient(145deg, rgba(255,255,255,0.58), rgba(255,234,190,0.82))",
     "--rj-panel-border": "rgba(128,81,0,0.36)",
-    "--rj-card-bg":
-      "linear-gradient(180deg, rgba(255,255,255,0.76), rgba(255,239,205,0.90))",
+    "--rj-card-bg": "#FFEDCF",
     "--rj-card-border": "rgba(128,81,0,0.15)",
     "--rj-main-card-bg":
       "linear-gradient(145deg, rgba(255,255,255,0.64), rgba(255,234,190,0.86))",
@@ -500,7 +499,7 @@ if (currentBuyPrice) {
   {fetchError ? <div style={styles.errorBox}>{fetchError}</div> : null}
       
   <section style={styles.mainCard}>
-       <div style={{ padding : '0px 20px' }}> <h2> S I L V E R   9 9</h2></div> 
+       <div style={{ padding : '0px 20px' }}> <h2> S I L V E R - 9 9</h2></div> 
          <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
     
@@ -536,7 +535,7 @@ if (currentBuyPrice) {
 
 {settings.showGoldHolidayRate ? (
   <section style={styles.mainCard}>
-   <div style={{ padding : '0px 20px' }}> <h2> G O L D   9 9 5 </h2> </div>
+   <div style={{ padding : '0px 20px' }}> <h2> G O L D - 9 9 5 </h2> </div>
     <div style={styles.rateGrid}>
        <div style={styles.sideCard}>
         <p style={styles.finalLabel}>Buying Rate</p>
