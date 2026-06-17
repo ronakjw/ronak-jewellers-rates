@@ -389,27 +389,10 @@ function SideBarMenu({
           </button>
         </div>
 
-        <div style={{ ...styles.sidebarSection, animationDelay: "0.04s" }}>
-          <span
-            style={
-              theme === "light"
-                ? styles.sidebarLabelLight
-                : styles.sidebarLabel
-            }
-          >
-            Theme
-          </span>
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
-        </div>
+
 
         <div style={{ ...styles.sidebarSection, animationDelay: "0.10s" }}>
-          <span
-            style={
-              theme === "light"
-                ? styles.sidebarLabelLight
-                : styles.sidebarLabel
-            }
-          >
+          <span style={theme === "light" ? styles.sidebarLabelLight : styles.sidebarLabel}>
             Live Status
           </span>
 
@@ -434,15 +417,26 @@ function SideBarMenu({
           >
             Active Contracts
           </span>
-
+          
+        <div style={{ ...styles.sidebarSection, animationDelay: "0.04s" }}>
+          <span
+            style={
+              theme === "light"
+                ? styles.sidebarLabelLight
+                : styles.sidebarLabel }>
+            Theme
+          </span>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
+              
           <div style={styles.sidebarMiniGrid}>
-            <div style={styles.sidebarPill}>
-              <span>Silver</span>
+            <div style={styles.statusRow}>
+              <span>Silver : </span>
               <strong>{quote?.contract || "--"}</strong>
             </div>
 
-            <div style={styles.sidebarPill}>
-              <span>Gold</span>
+            <div style={styles.statusRow}>
+              <span>Gold : </span>
               <strong>{quote?.goldContract || "--"}</strong>
             </div>
           </div>
@@ -458,7 +452,7 @@ function SideBarMenu({
           >
             Quick Actions
           </span>
-
+          <InstallPWAButton />
           <a href="tel:9479893898" style={styles.sidebarAction}>
             📞 Call 9479893898
           </a>
@@ -1308,19 +1302,6 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "1fr",
     gap: 10,
-  },
-
-  sidebarPill: {
-    display: "flex",
-    justifyContent: "space-between",
-    gap: 10,
-    alignItems: "center",
-    border: "1px solid var(--rj-panel-border)",
-    background: "var(--rj-card-bg)",
-    borderRadius: 14,
-    padding: "11px 12px",
-    color: "var(--rj-brand)",
-    fontSize: 13,
   },
 
   sidebarAction: {
