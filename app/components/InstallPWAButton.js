@@ -47,7 +47,12 @@ export default function InstallPWAButton({ variant = "floating", style = {} }) {
   const installApp = async () => {
     if (!deferredPrompt) {
       alert(
-        "Install option is not available right now. If already installed, open the app from your home screen."
+   "To install this app manually:\n\n" +
+      "Chrome / Android:\n" +
+      "Tap the ⋮ menu at the top-right of your browser, then tap 'Add to Home screen' or 'Install app'.\n\n" +
+      "iPhone / Safari:\n" +
+      "Tap the Share button, then tap 'Add to Home Screen'.\n\n" +
+      "If you already installed it, open it from your home screen."
       );
       return;
     }
@@ -101,7 +106,7 @@ export default function InstallPWAButton({ variant = "floating", style = {} }) {
         cursor: isInstalled ? "not-allowed" : "pointer",
       }}
     >
-      {isInstalled ? "✅ App Installed" : "📲 Install App"}
+      {isInstalled ? "✅ App Installed" : "📲 Install / Add to Home Screen"}
     </button>
   );
 }
