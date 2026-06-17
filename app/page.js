@@ -451,16 +451,11 @@ function SideBarMenu({
           >
             Quick Actions
           </span>
-              <div style={styles.sidebarInstallWrap}>
-          <button
-            type="button"
-            style={styles.sidebarAction}
-            onClick={() => {
-            document.getElementById("install-app-button")?.click();
-            }}>
-  📲 Install App
-          </button>
-              </div>
+
+   <InstallPWAButton
+  variant="sidebar"
+  style={styles.sidebarActionButton}
+/>
           <a href="tel:9479893898" style={styles.sidebarAction}>
             📞 Call 9479893898
           </a>
