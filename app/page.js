@@ -65,10 +65,9 @@ const themeTokens = {
     "--rj-label": "#806236",
     "--rj-price": "#2f2413",
     "--rj-final": "#946100",
-    "--rj-panel-bg":
-      "linear-gradient(145deg, rgba(255,255,255,0.58), rgba(255,234,190,0.82))",
+    "--rj-panel-bg":"#FFF6E0",
     "--rj-panel-border": "rgba(128,81,0,0.36)",
-    "--rj-card-bg": "#FFEDCF",
+    "--rj-card-bg": "linear-gradient(145deg, rgba(255,255,255,0.58), rgba(255,234,190,0.82))",
     "--rj-card-border": "rgba(128,81,0,0.15)",
     "--rj-main-card-bg":
       "linear-gradient(145deg, rgba(255,255,255,0.64), rgba(255,234,190,0.86))",
