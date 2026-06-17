@@ -38,6 +38,7 @@ export default function InstallPWAButton() {
 
   return (
     <button
+      id="install-app-button"
       onClick={installApp}
       style={{
         position: "fixed",
