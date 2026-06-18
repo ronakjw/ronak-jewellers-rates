@@ -257,13 +257,20 @@ function ProductPanel({
   );
 }
 
-function ThemeToggle({theme, onToggle, hideText = false})
+function ThemeToggle({
+  theme,
+  onToggle,
+  hideText = false,
+  leftIcon = "🌙",
+  rightIcon = "☀️",
+  thumbOffIcon = "🌙",
+  thumbOnIcon = "☀️" })
 {
   const isLight = theme === "light";
 
   return (
     <div style={styles.themeToggleWrap}>
-      <span style={styles.themeIcon}>🌙</span>
+     <span style={styles.themeIcon}>{leftIcon}</span>
       <button
         type="button"
         aria-label="Change website theme"
@@ -278,10 +285,10 @@ function ThemeToggle({theme, onToggle, hideText = false})
               : "translateX(0) rotate(0deg)",
           }}
         >
-          {isLight ? "☀️" : "🌙"}
+        {isLight ? thumbOnIcon : thumbOffIcon}
         </span>
       </button>
-      <span style={styles.themeIcon}>☀️</span>
+      <span style={styles.themeIcon}>{rightIcon}</span>
       {!hideText && (
   <span style={styles.themeToggleText}>
     {isLight ? "Light" : "Dark"}
@@ -457,12 +464,15 @@ function SideBarMenu({
     }}
   >
     <span>Keep Screen On</span>
-
-    <ThemeToggle
-      theme={screenAwake ? "light" : "dark"}
-      onToggle={toggleScreenAwake}
-      hideText
-    />
+<ThemeToggle
+  theme={screenAwake ? "light" : "dark"}
+  onToggle={toggleScreenAwake}
+  hideText
+  leftIcon="🔒"
+  rightIcon="🔓"
+  thumbOffIcon="💤"
+  thumbOnIcon="📱"
+/>
   </div>
 </div>
         <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
@@ -486,11 +496,7 @@ function SideBarMenu({
 
           <a href="tel:9300053012" style={styles.sidebarAction}>
             📞 Call 9300053012
-          </a>
-
-          
-            
-          
+          </a>                      
         </div>
 
         <div style={{ ...styles.sidebarSection, animationDelay: "0.28s" }}>
