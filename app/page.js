@@ -333,6 +333,8 @@ function SideBarMenu({
   sidebarOpen,
   setSidebarOpen,
   toggleTheme,
+  screenAwake,
+  toggleScreenAwake,
   now,
   quote,
   settings,
@@ -430,7 +432,7 @@ function SideBarMenu({
             </div>
           </div>
          </div>
-<div style={styles.sidebarSection}>
+<div style={{ ...styles.sidebarSection, animationDelay: "0.19s" }}>
   <span
     style={
       theme === "light"
@@ -765,16 +767,18 @@ if (currentBuyPrice) {
   if (settings?.holidayMode) {
   return (
     <main style={pageStyle}>
-     <SideBarMenu
-        theme={theme}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        toggleTheme={toggleTheme}
-        now={now}
-        quote={quote}
-        settings={settings}
-        marketState={marketState}
-      />
+<SideBarMenu
+  theme={theme}
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+  toggleTheme={toggleTheme}
+  screenAwake={screenAwake}
+  toggleScreenAwake={toggleScreenAwake}
+  now={now}
+  quote={quote}
+  settings={settings}
+  marketState={marketState}
+/>
       <section style={styles.hero}>
         <Image src={logoSrc}  alt="Ronak Jewellers"   width={250}  height={250}  style={styles.logoImage} />
         <h1 style={styles.brandName}>•Ronak Jewellers•</h1>
@@ -872,16 +876,18 @@ if (currentBuyPrice) {
   if (!marketState.shouldShowRates) {
     return (
     <ClosedScreen theme={theme} logoSrc={logoSrc}>
-      <SideBarMenu
-        theme={theme}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        toggleTheme={toggleTheme}
-        now={now}
-        quote={quote}
-        settings={settings}
-        marketState={marketState}
-      />
+<SideBarMenu
+  theme={theme}
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+  toggleTheme={toggleTheme}
+  screenAwake={screenAwake}
+  toggleScreenAwake={toggleScreenAwake}
+  now={now}
+  quote={quote}
+  settings={settings}
+  marketState={marketState}
+/>
     </ClosedScreen>
   );
   }
@@ -969,16 +975,18 @@ const goldFinalSelling = roundUpToMultiple(rawGoldFinalSelling, goldRoundoffMult
 
 return (
     <main style={pageStyle}>
-      <SideBarMenu
-        theme={theme}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        toggleTheme={toggleTheme}
-        now={now}
-        quote={quote}
-        settings={settings}
-        marketState={marketState}
-      />
+<SideBarMenu
+  theme={theme}
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+  toggleTheme={toggleTheme}
+  screenAwake={screenAwake}
+  toggleScreenAwake={toggleScreenAwake}
+  now={now}
+  quote={quote}
+  settings={settings}
+  marketState={marketState}
+/>
       <section style={styles.hero}>
         <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
 
