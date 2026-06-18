@@ -65,7 +65,7 @@ const themeTokens = {
     "--rj-final": "#946100",
     "--rj-panel-bg":"#FFF6E0",
     "--rj-panel-border": "rgba(128,81,0,0.36)",
-    "--rj-card-bg": "linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,225,170,0.89))",
+    "--rj-card-bg": "linear-gradient(145deg, rgba(255,255,255), rgba(255,225,170,0.89))",
     "--rj-card-border": "rgba(128,81,0,0.15)",
     "--rj-main-card-bg":
       "linear-gradient(145deg, rgba(255,255,255,0.64), rgba(255,234,190,0.86))",
