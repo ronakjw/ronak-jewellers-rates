@@ -259,7 +259,12 @@ function ProductPanel({
   );
 }
 
-function ThemeToggle({ theme, onToggle }) {
+function ThemeToggle({
+  theme,
+  onToggle,
+  hideText = false,
+})
+{
   const isLight = theme === "light";
 
   return (
@@ -283,10 +288,12 @@ function ThemeToggle({ theme, onToggle }) {
         </span>
       </button>
       <span style={styles.themeIcon}>☀️</span>
-      <span style={styles.themeToggleText}>
-        {isLight ? "Light" : "Dark"}
-      </span>
-    </div>
+      {!hideText && (
+  <span style={styles.themeToggleText}>
+    {isLight ? "Light" : "Dark"}
+  </span>
+)}
+  </div>
   );
 }
 
@@ -429,18 +436,39 @@ function SideBarMenu({
             </div>
           </div>
          </div>
-              
-        <div style={{ ...styles.sidebarSection, animationDelay: "0.04s" }}>
-          <span
-            style={
-              theme === "light"
-                ? styles.sidebarLabelLight
-                : styles.sidebarLabel }>
-            Theme
-          </span>
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
-        </div>
+<div style={styles.sidebarSection}>
+  <span
+    style={
+      theme === "light"
+        ? styles.sidebarLabelLight
+        : styles.sidebarLabel
+    }
+  >
+    Utilities
+  </span>
 
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}} >
+    <span>Theme</span>
+
+    <ThemeToggle theme={theme} onToggle={toggleTheme} hideText />
+  </div>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}
+  >
+    <span>Keep Screen On</span>
+
+    <ThemeToggle
+      theme={screenAwake ? "light" : "dark"}
+      onToggle={toggleScreenAwake}
+      hideText
+    />
+  </div>
+</div>
         <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
           <span
             style={
@@ -499,14 +527,56 @@ export default function Home() {
   const [volatilityUntil, setVolatilityUntil] = useState(null);
   const [theme, setTheme] = useState("dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
- const [openProducts, setOpenProducts] = useState({
-  silver99: true,
-  silver100: false,
-  gold995: false,
-  goldHoliday: true,
+  const [screenAwake, setScreenAwake] = useState(false);
+  const [wakeLock, setWakeLock] = useState(null);
+  const [openProducts, setOpenProducts] = useState({
+   silver99: true,
+   silver100: false,
+   gold995: false,
+   goldHoliday: true,
 });
   
+async function enableScreenAwake() {
+  try {
+    if (!("wakeLock" in navigator)) {
+      alert("Screen Awake is not supported on this device.");
+      return;
+    }
 
+    const lock = await navigator.wakeLock.request("screen");
+
+    setWakeLock(lock);
+    setScreenAwake(true);
+
+    lock.addEventListener("release", () => {
+      setScreenAwake(false);
+      setWakeLock(null);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function disableScreenAwake() {
+  try {
+    if (wakeLock) {
+      await wakeLock.release();
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  setWakeLock(null);
+  setScreenAwake(false);
+}
+
+function toggleScreenAwake() {
+  if (screenAwake) {
+    disableScreenAwake();
+  } else {
+    enableScreenAwake();
+  }
+}
 
 function CustomNotice({ message }) {
   if (!message?.trim()) {
@@ -527,7 +597,34 @@ function CustomNotice({ message }) {
       setTheme(savedTheme);
     }
   }, []);
+useEffect(() => {
+  const handleVisibility = async () => {
+    if (
+      document.visibilityState === "visible" &&
+      screenAwake &&
+      !wakeLock &&
+      "wakeLock" in navigator
+    ) {
+      try {
+        const lock =
+          await navigator.wakeLock.request("screen");
 
+        setWakeLock(lock);
+      } catch {}
+    }
+  };
+
+  document.addEventListener(
+    "visibilitychange",
+    handleVisibility
+  );
+
+  return () =>
+    document.removeEventListener(
+      "visibilitychange",
+      handleVisibility
+    );
+}, [screenAwake, wakeLock]);
   useEffect(() => {
     document.documentElement.style.colorScheme =
       theme === "light" ? "light" : "dark";
