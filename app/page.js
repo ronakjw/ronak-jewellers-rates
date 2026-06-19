@@ -1007,7 +1007,7 @@ return (
 <div style={styles.disclaimer}>
   <span>Last Updated: {formatCurrentTime(now)}</span>
 </div>
-
+<br />
 {fetchError ? <div style={styles.errorBox}>{fetchError}</div> : null}
 
 {settings.volatilityWarningEnabled &&
