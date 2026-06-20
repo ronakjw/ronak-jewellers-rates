@@ -22,13 +22,9 @@ function parseCsvLine(line) {
 
 async function getSettings() {
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const url =
-    `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/settings/bullion`;
+  const url = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/settings/bullion`;
 
-  const response = await fetch(url, {
-    cache: "no-store",
-  });
-
+  const response = await fetch(url, { cache: "no-store" });
   const data = await response.json();
   const fields = data.fields || {};
   const contractMode = fields.contractMode?.stringValue;
@@ -40,23 +36,16 @@ async function getSettings() {
         : contractMode === "manual"
         ? false
         : fields.autoContract?.booleanValue ?? true,
-    manualContract:
-      fields.manualContract?.stringValue || "",
-    GoldManualContract:
-      fields.GoldManualContract?.stringValue || "",
+    manualContract: fields.manualContract?.stringValue || "",
+    GoldManualContract: fields.GoldManualContract?.stringValue || "",
   };
 }
 
 async function getMcxRows() {
-  const response = await fetch(
-    "https://api.kite.trade/instruments/MCX",
-    {
-      headers: {
-        "X-Kite-Version": "3",
-      },
-      cache: "no-store",
-    }
-  );
+  const response = await fetch("https://api.kite.trade/instruments/MCX", {
+    headers: { "X-Kite-Version": "3" },
+    cache: "no-store",
+  });
 
   const csv = await response.text();
   const lines = csv.trim().split("\n");
@@ -72,7 +61,7 @@ async function getMcxRows() {
   });
 }
 
-function getActiveContract(rows, commodityName) {
+function getActiveContractRow(rows, commodityName) {
   const today = new Date();
 
   const futures = rows
@@ -94,14 +83,76 @@ function getActiveContract(rows, commodityName) {
     throw new Error(`No active ${commodityName} futures contract found`);
   }
 
-  return active.tradingsymbol;
+  return active;
+}
+
+function getContractRowBySymbol(rows, symbol) {
+  if (!symbol) return null;
+
+  return (
+    rows.find(
+      (row) =>
+        row.exchange === "MCX" &&
+        row.segment === "MCX-FUT" &&
+        row.instrument_type === "FUT" &&
+        row.tradingsymbol === symbol
+    ) || null
+  );
 }
 
 function getBestPrices(quote) {
   return {
-    buy: quote?.depth?.buy?.[0]?.price ?? quote?.last_price ?? null,
-    sell: quote?.depth?.sell?.[0]?.price ?? quote?.last_price ?? null,
+    buy: quote?.depth?.buy?.[0]?.price || quote?.last_price || null,
+    sell: quote?.depth?.sell?.[0]?.price || quote?.last_price || null,
   };
+}
+
+async function getLatestHistoricalClose(instrumentToken, apiKey, accessToken) {
+  if (!instrumentToken) return null;
+
+  const to = new Date();
+  const from = new Date();
+
+  // Covers weekends and exchange holidays
+  from.setDate(to.getDate() - 10);
+
+  const fromDate = from.toISOString().slice(0, 10);
+  const toDate = to.toISOString().slice(0, 10);
+
+  const url =
+    `https://api.kite.trade/instruments/historical/${instrumentToken}/day` +
+    `?from=${fromDate}&to=${toDate}&oi=1`;
+
+  const response = await fetch(url, {
+    headers: {
+      "X-Kite-Version": "3",
+      Authorization: `token ${apiKey}:${accessToken}`,
+    },
+    cache: "no-store",
+  });
+
+  const data = await response.json();
+  const candles = data?.data?.candles || [];
+
+  if (!candles.length) return null;
+
+  const latestCandle = candles[candles.length - 1];
+
+  // [timestamp, open, high, low, close, volume, oi]
+  return latestCandle[4] ?? null;
+}
+
+function formatDateTime(value) {
+  if (!value) return null;
+
+  try {
+    return new Date(value).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour12: false,
+    });
+  } catch {
+    return value;
+  }
 }
 
 export async function GET() {
@@ -111,31 +162,55 @@ export async function GET() {
     kiteDoc.data()?.accessToken || process.env.KITE_ACCESS_TOKEN;
 
   try {
+    if (!apiKey || !accessToken) {
+      return Response.json({
+        success: false,
+        message: "Kite API key or access token missing",
+      });
+    }
+
     const settings = await getSettings();
     const rows = await getMcxRows();
 
-    const contract = settings.autoContract
-      ? getActiveContract(rows, "SILVER")
-      : settings.manualContract;
+    const silverRow = settings.autoContract
+      ? getActiveContractRow(rows, "SILVER")
+      : getContractRowBySymbol(
+          rows,
+          String(settings.manualContract || "").trim().toUpperCase()
+        );
+
+    const contract = silverRow?.tradingsymbol;
 
     if (!contract) {
       return Response.json({
         success: false,
-        message: "No silver contract selected",
+        message: "No valid silver contract selected",
       });
     }
 
-    let goldContract = String(settings.GoldManualContract || "").trim();
-    let goldError = "";
-    const goldMode = goldContract ? "manual" : "auto";
+    const goldManualContract = String(settings.GoldManualContract || "")
+      .trim()
+      .toUpperCase();
 
-    if (!goldContract) {
-      try {
-        goldContract = getActiveContract(rows, "GOLD");
-      } catch (err) {
-        goldError = err.message || "No active GOLD futures contract found";
+    let goldRow = null;
+    let goldError = "";
+    const goldMode = goldManualContract ? "manual" : "auto";
+
+    try {
+      goldRow = goldManualContract
+        ? getContractRowBySymbol(rows, goldManualContract)
+        : getActiveContractRow(rows, "GOLD");
+
+      if (!goldRow) {
+        goldError = goldManualContract
+          ? `Manual gold contract not found: ${goldManualContract}`
+          : "No active GOLD futures contract found";
       }
+    } catch (err) {
+      goldError = err.message || "Gold contract error";
     }
+
+    const goldContract = goldRow?.tradingsymbol || "";
 
     const instruments = [`MCX:${contract}`];
 
@@ -147,16 +222,13 @@ export async function GET() {
       .map((instrument) => `i=${encodeURIComponent(instrument)}`)
       .join("&");
 
-    const response = await fetch(
-      `https://api.kite.trade/quote?${query}`,
-      {
-        headers: {
-          "X-Kite-Version": "3",
-          Authorization: `token ${apiKey}:${accessToken}`,
-        },
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`https://api.kite.trade/quote?${query}`, {
+      headers: {
+        "X-Kite-Version": "3",
+        Authorization: `token ${apiKey}:${accessToken}`,
+      },
+      cache: "no-store",
+    });
 
     const data = await response.json();
 
@@ -175,12 +247,19 @@ export async function GET() {
       });
     }
 
-    const silverPrices = getBestPrices(quote);
-    const goldPrices = getBestPrices(goldQuote);
-
     if (goldContract && !goldQuote) {
       goldError = "Gold quote not found";
     }
+
+    const [silverHistoricalClose, goldHistoricalClose] = await Promise.all([
+      getLatestHistoricalClose(silverRow?.instrument_token, apiKey, accessToken),
+      goldRow
+        ? getLatestHistoricalClose(goldRow?.instrument_token, apiKey, accessToken)
+        : Promise.resolve(null),
+    ]);
+
+    const silverPrices = getBestPrices(quote);
+    const goldPrices = getBestPrices(goldQuote);
 
     return Response.json({
       success: true,
@@ -191,7 +270,7 @@ export async function GET() {
       mcxSellPrice: silverPrices.sell,
       lastPrice: quote.last_price,
       mcxOpeningRate: quote.ohlc?.open ?? null,
-      mcxClosingRate: quote.ohlc?.close ?? null,
+      mcxClosingRate: silverHistoricalClose ?? quote.ohlc?.close ?? null,
 
       goldContract,
       goldMode,
@@ -200,10 +279,16 @@ export async function GET() {
       goldMcxSellPrice: goldPrices.sell,
       goldLastPrice: goldQuote?.last_price ?? null,
       goldOpeningRate: goldQuote?.ohlc?.open ?? null,
-      goldClosingRate: goldQuote?.ohlc?.close ?? null,
+      goldClosingRate: goldHistoricalClose ?? goldQuote?.ohlc?.close ?? null,
 
-      timestamp: quote.timestamp,
-      lastTradeTime: quote.last_trade_time,
+      timestamp: formatDateTime(quote.timestamp) || quote.timestamp,
+      lastTradeTime:
+        formatDateTime(quote.last_trade_time) || quote.last_trade_time,
+
+      closingSource: {
+        silver: silverHistoricalClose ? "historical_day_candle" : "quote_ohlc",
+        gold: goldHistoricalClose ? "historical_day_candle" : "quote_ohlc",
+      },
     });
   } catch (err) {
     return Response.json({
