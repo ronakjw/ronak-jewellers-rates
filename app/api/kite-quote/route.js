@@ -1,5 +1,10 @@
 import { adminDb } from "../../../lib/firebaseAdmin";
 
+let cachedMcxRows = null;
+let cachedMcxRowsAt = 0;
+
+const MCX_ROWS_CACHE_MS = 6 * 60 * 60 * 1000; // 6 hours
+
 function parseCsvLine(line) {
   const result = [];
   let current = "";
@@ -40,10 +45,21 @@ async function getSettings() {
     GoldManualContract: fields.GoldManualContract?.stringValue || "",
   };
 }
-
 async function getMcxRows() {
+  const now = Date.now();
+
+  if (
+    cachedMcxRows &&
+    cachedMcxRowsAt &&
+    now - cachedMcxRowsAt < MCX_ROWS_CACHE_MS
+  ) {
+    return cachedMcxRows;
+  }
+
   const response = await fetch("https://api.kite.trade/instruments/MCX", {
-    headers: { "X-Kite-Version": "3" },
+    headers: {
+      "X-Kite-Version": "3",
+    },
     cache: "no-store",
   });
 
@@ -51,7 +67,7 @@ async function getMcxRows() {
   const lines = csv.trim().split("\n");
   const headers = lines[0].split(",");
 
-  return lines.slice(1).map((line) => {
+  const rows = lines.slice(1).map((line) => {
     const values = parseCsvLine(line);
 
     return headers.reduce((obj, key, index) => {
@@ -59,6 +75,11 @@ async function getMcxRows() {
       return obj;
     }, {});
   });
+
+  cachedMcxRows = rows;
+  cachedMcxRowsAt = now;
+
+  return rows;
 }
 
 function getActiveContractRow(rows, commodityName) {
@@ -251,13 +272,9 @@ export async function GET() {
       goldError = "Gold quote not found";
     }
 
-    const [silverHistoricalClose, goldHistoricalClose] = await Promise.all([
-      getLatestHistoricalClose(silverRow?.instrument_token, apiKey, accessToken),
-      goldRow
-        ? getLatestHistoricalClose(goldRow?.instrument_token, apiKey, accessToken)
-        : Promise.resolve(null),
-    ]);
-
+    const silverHistoricalClose = null;
+    const goldHistoricalClose = null;
+    
     const silverPrices = getBestPrices(quote);
     const goldPrices = getBestPrices(goldQuote);
 
