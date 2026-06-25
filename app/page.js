@@ -519,6 +519,9 @@ function SideBarMenu({
     </>
   );
 }
+const VOLATILITY_MOVE_AMOUNT = 550;
+const VOLATILITY_WINDOW_MS = 40 * 1000;
+const VOLATILITY_WARNING_DURATION_MS = 10 * 60 * 1000;
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
@@ -752,19 +755,18 @@ if (currentBuyPrice) {
         price: currentBuyPrice,
         time: now,
       },
-    ].filter((item) => now - item.time <= 40000);
+    ].filter((item) => now - item.time <= VOLATILITY_WINDOW_MS);
 
     if (updated.length > 1) {
       const prices = updated.map((item) => item.price);
 
       const highest = Math.max(...prices);
       const lowest = Math.min(...prices);
+       const isVolatile = highest - lowest >= VOLATILITY_MOVE_AMOUNT;
 
-      const isVolatile = highest - lowest >= 500;
-
-      if (isVolatile) {
-        setVolatilityUntil(now + 10 * 60 * 1000);
-      }
+       if (isVolatile && settings?.volatilityWarningEnabled) {
+         setVolatilityUntil(now + VOLATILITY_WARNING_DURATION_MS);
+       }
     }
 
     return updated;
