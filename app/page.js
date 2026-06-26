@@ -519,9 +519,6 @@ function SideBarMenu({
     </>
   );
 }
-const VOLATILITY_MOVE_AMOUNT = 550;
-const VOLATILITY_WINDOW_MS = 40 * 1000;
-const VOLATILITY_WARNING_DURATION_MS = 10 * 60 * 1000;
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
