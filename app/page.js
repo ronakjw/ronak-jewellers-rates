@@ -738,40 +738,38 @@ useEffect(() => {
 
         setQuote(data);
 
-        const currentBuyPrice = Number(data.mcxBuyPrice);
+       const currentBuyPrice = Number(data.mcxBuyPrice);
 
-        if (Number.isFinite(currentBuyPrice) && currentBuyPrice > 0) {
-          setPriceHistory((prev) => {
-            const nowMs = Date.now();
-            const safePrev = Array.isArray(prev) ? prev : [];
+if (Number.isFinite(currentBuyPrice) && currentBuyPrice > 0) {
+  setPriceHistory((prev) => {
+    const nowMs = Date.now();
+    const safePrev = Array.isArray(prev) ? prev : [];
 
-            const updated = [
-              ...safePrev,
-              {
-                price: currentBuyPrice,
-                time: nowMs,
-              },
-            ].filter((item) => nowMs - item.time <= VOLATILITY_WINDOW_MS);
+    const updated = [
+      ...safePrev,
+      {
+        price: currentBuyPrice,
+        time: nowMs,
+      },
+    ].filter((item) => nowMs - item.time <= 40 * 1000);
 
-            if (updated.length > 1) {
-              const prices = updated.map((item) => item.price);
-              const highest = Math.max(...prices);
-              const lowest = Math.min(...prices);
-              const movement = highest - lowest;
+    if (updated.length > 1) {
+      const prices = updated.map((item) => item.price);
+      const highest = Math.max(...prices);
+      const lowest = Math.min(...prices);
+      const movement = highest - lowest;
 
-              if (
-                movement >= VOLATILITY_MOVE_AMOUNT &&
-                settings?.volatilityWarningEnabled
-              ) {
-                setVolatilityUntil(
-                  nowMs + VOLATILITY_WARNING_DURATION_MS
-                );
-              }
-            }
+      if (
+        movement >= 550 &&
+        settings?.volatilityWarningEnabled
+      ) {
+        setVolatilityUntil(nowMs + 10 * 60 * 1000);
+      }
+    }
 
-            return updated;
-          });
-        }
+    return updated;
+  });
+}
       } 
       catch (err) {
         setFetchError(
