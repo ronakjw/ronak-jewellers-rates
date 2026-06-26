@@ -519,10 +519,6 @@ function SideBarMenu({
     </>
   );
 }
-const VOLATILITY_MOVE_AMOUNT = 550;
-const VOLATILITY_WINDOW_MS = 40 * 1000;
-const VOLATILITY_WARNING_DURATION_MS = 10 * 60 * 1000;
-
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -687,26 +683,20 @@ useEffect(() => {
     const startMinutes = (settings.marketStartHour ?? 12) * 60;
     const endMinutes = (settings.marketEndHour ?? 21) * 60;
 
-    const baseRefreshSeconds = Math.max(
-      1,
-      Number(
-        settings.refreshRate ??
-          settings.refreshAfter530 ??
-          settings.refreshBefore530 ??
-          5
-      )
-    );
-
-    return {
-      withinMarketHours:
-        currentMinutes >= startMinutes &&
-        currentMinutes < endMinutes,
-      shouldShowRates:
-        Boolean(settings.showRates) &&
-        currentMinutes >= startMinutes &&
-        currentMinutes < endMinutes,
-      refreshMs: baseRefreshSeconds * 1000,
-    };
+  const baseRefreshSeconds = Math.max(
+  1,
+  Number(settings.refreshrate || 5)
+);
+   return {
+  withinMarketHours:
+    currentMinutes >= startMinutes &&
+    currentMinutes < endMinutes,
+  shouldShowRates:
+    Boolean(settings.showRates) &&
+    currentMinutes >= startMinutes &&
+    currentMinutes < endMinutes,
+  refreshMs: baseRefreshSeconds * 1000,
+};
   }, [settings, now]);
 
   const isVolatilityActive =
@@ -714,13 +704,13 @@ useEffect(() => {
     volatilityUntil &&
     Date.now() < volatilityUntil;
 
-  const effectiveRefreshMs = settings?.holidayMode
-    ? 900 * 1000
-    : isVolatilityActive
-    ? 1 * 1000
-    : marketState.shouldShowRates
-    ? marketState.refreshMs
-    : 900 * 1000;
+ const effectiveRefreshMs = settings?.holidayMode
+  ? 900 * 1000
+  : isVolatilityActive
+  ? 1 * 1000
+  : marketState.shouldShowRates
+  ? marketState.refreshMs
+  : 900 * 1000;
 
   useEffect(() => {
     if (!settings) {
@@ -755,20 +745,19 @@ if (currentBuyPrice) {
         price: currentBuyPrice,
         time: now,
       },
-    ].filter((item) => now - item.time <= VOLATILITY_WINDOW_MS);
+    ].filter((item) => now - item.time <= 40 * 1000);
 
     if (updated.length > 1) {
       const prices = updated.map((item) => item.price);
 
       const highest = Math.max(...prices);
       const lowest = Math.min(...prices);
-       const isVolatile = highest - lowest >= VOLATILITY_MOVE_AMOUNT;
+      const isVolatile = highest - lowest >= 550;
 
-       if (isVolatile && settings?.volatilityWarningEnabled) {
-         setVolatilityUntil(now + VOLATILITY_WARNING_DURATION_MS);
-       }
-    }
-
+     if (isVolatile && settings?.volatilityWarningEnabled) {
+      setVolatilityUntil(now + 10 * 60 * 1000);
+      } 
+      
     return updated;
   });
 }
