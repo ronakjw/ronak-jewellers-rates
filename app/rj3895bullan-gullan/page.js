@@ -991,6 +991,11 @@ function ToggleRow({ label, checked, onChange }) {
   </div>
 
   <div style={styles.logChangesCol}>
+  {log.eventType === "volatility" ? 
+  (  <p style={styles.logText}>
+    ⚠️ Volatility ON : Silver moved ₹{formatLogValue("movement", log.movement)} in 40 seconds.
+  </p>   
+    ) : null}  
   {Object.entries({
     buyingPremium: "Buying Premium",
     sellingPremium: "Selling Premium",
