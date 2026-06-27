@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
@@ -519,7 +519,20 @@ function SideBarMenu({
     </>
   );
 }
-
+async function logVolatilityTrigger(payload) {
+  try {
+    await fetch("/api/volatility-log", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+    });
+  } catch (err) {
+    console.error("Volatility log failed", err);
+  }
+}
 export default function Home() {
   const [settings, setSettings] = useState(null);
   const [quote, setQuote] = useState(null);
@@ -527,6 +540,8 @@ export default function Home() {
   const [now, setNow] = useState(new Date());
   const [priceHistory, setPriceHistory] = useState([]);
   const [volatilityUntil, setVolatilityUntil] = useState(null);
+  const volatilityUntilRef = useRef(null);
+  const volatilityLogInProgressRef = useRef(false);
   const [theme, setTheme] = useState("dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [screenAwake, setScreenAwake] = useState(false);
@@ -599,6 +614,11 @@ function CustomNotice({ message }) {
       setTheme(savedTheme);
     }
   }, []);
+
+useEffect(() => {
+  volatilityUntilRef.current = volatilityUntil;
+}, [volatilityUntil]);
+
 useEffect(() => {
   const handleVisibility = async () => {
     if (
@@ -735,7 +755,7 @@ useEffect(() => {
 
         setQuote(data);
 
-       const currentBuyPrice = Number(data.mcxBuyPrice);
+const currentBuyPrice = Number(data.mcxBuyPrice);
 
 if (Number.isFinite(currentBuyPrice) && currentBuyPrice > 0) {
   setPriceHistory((prev) => {
@@ -752,15 +772,40 @@ if (Number.isFinite(currentBuyPrice) && currentBuyPrice > 0) {
 
     if (updated.length > 1) {
       const prices = updated.map((item) => item.price);
+
       const highest = Math.max(...prices);
       const lowest = Math.min(...prices);
       const movement = highest - lowest;
+
+      const alreadyActive =
+        volatilityUntilRef.current &&
+        nowMs < volatilityUntilRef.current;
 
       if (
         movement >= 550 &&
         settings?.volatilityWarningEnabled
       ) {
-        setVolatilityUntil(nowMs + 10 * 60 * 1000);
+        const warningUntil = nowMs + 10 * 60 * 1000;
+
+        volatilityUntilRef.current = warningUntil;
+        setVolatilityUntil(warningUntil);
+
+        if (
+          !alreadyActive &&
+          !volatilityLogInProgressRef.current
+        ) {
+          volatilityLogInProgressRef.current = true;
+
+          logVolatilityTrigger({
+            contract: data.contract,
+            currentPrice: currentBuyPrice,
+            highest,
+            lowest,
+            movement,
+          }).finally(() => {
+            volatilityLogInProgressRef.current = false;
+          });
+        }
       }
     }
 
