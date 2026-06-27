@@ -1,10 +1,19 @@
 import { adminDb } from "../../../../lib/firebaseAdmin";
+import allowedUsers from "../../../../data/allowed-users.json";
 
 function normalizeIndianMobile(value) {
   let digits = String(value || "").replace(/\D/g, "");
 
+  if (digits.length === 14 && digits.startsWith("0091")) {
+    digits = digits.slice(4);
+  }
+
   if (digits.length === 12 && digits.startsWith("91")) {
     digits = digits.slice(2);
+  }
+
+  if (digits.length === 11 && digits.startsWith("0")) {
+    digits = digits.slice(1);
   }
 
   if (digits.length > 10) {
@@ -18,41 +27,23 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const phone = normalizeIndianMobile(body.phone);
+    const profile = allowedUsers[phone];
 
-    if (!phone) {
-      return Response.json({
-        success: false,
-        message: "Invalid mobile number",
-      });
-    }
-
-    const userRef = adminDb.collection("allowedUsers").doc(phone);
-    const userSnap = await userRef.get();
-
-    if (!userSnap.exists || userSnap.data()?.active === false) {
+    if (!phone || !profile) {
       return Response.json({
         success: false,
         message: "User not allowed",
       });
     }
 
-    const currentCount = Number(userSnap.data()?.totalLogins || 0);
-
     await adminDb.collection("loginLogs").add({
       createdAt: new Date(),
       phone,
-      uid: String(body.uid || ""),
+      name: profile.name || "",
+      firstName: profile.firstName || "",
+      role: profile.role || "Dealer",
       userAgent: request.headers.get("user-agent") || "",
     });
-
-    await userRef.set(
-      {
-        lastLoginAt: new Date(),
-        lastSeenAt: new Date(),
-        totalLogins: currentCount + 1,
-      },
-      { merge: true }
-    );
 
     return Response.json({
       success: true,
