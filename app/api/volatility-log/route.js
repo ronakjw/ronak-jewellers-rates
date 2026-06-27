@@ -4,7 +4,7 @@ export async function POST(request) {
   try {
     const body = await request.json();
 
-    const now = Date.now();
+    const nowMs = Date.now();
     const cooldownMs = 10 * 60 * 1000;
 
     const stateRef = adminDb.collection("system").doc("volatility");
@@ -13,7 +13,7 @@ export async function POST(request) {
     const lastLoggedAt =
       stateSnap.data()?.lastLoggedAt?.toDate?.()?.getTime?.() || 0;
 
-    if (now - lastLoggedAt < cooldownMs) {
+    if (nowMs - lastLoggedAt < cooldownMs) {
       return Response.json({
         success: true,
         skipped: true,
