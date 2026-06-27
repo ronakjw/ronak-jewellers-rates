@@ -377,9 +377,10 @@ export default function DealerAccessGate({
           height={210}
           style={styles.logo}
         />
-        <h1 style={styles.brand}>Dealer Access</h1>
+        <h2 style={styles.brand}>Ronak Jewellers</h2>
+          <h3 style={styles.brand}>DEALER ACCESS</h3>
         <p style={styles.muted}>
-          Enter your registered mobile number to view live bullion rates.
+          Please enter your mobile number
         </p>
 
         {!otpSent ? (
@@ -458,7 +459,7 @@ export default function DealerAccessGate({
         )}
 
         {message ? <p style={styles.message}>{message}</p> : null}
-        <p style={styles.note}>Access stays active until the end of the day.</p>
+        <p style={styles.note}>Access for authorized users only.</p>
         <div id="rj-recaptcha-container" />
       </section>
     </main>
