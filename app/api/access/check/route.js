@@ -1,10 +1,18 @@
-import { adminDb } from "../../../../lib/firebaseAdmin";
+import allowedUsers from "../../../../data/allowed-users.json";
 
 function normalizeIndianMobile(value) {
   let digits = String(value || "").replace(/\D/g, "");
 
+  if (digits.length === 14 && digits.startsWith("0091")) {
+    digits = digits.slice(4);
+  }
+
   if (digits.length === 12 && digits.startsWith("91")) {
     digits = digits.slice(2);
+  }
+
+  if (digits.length === 11 && digits.startsWith("0")) {
+    digits = digits.slice(1);
   }
 
   if (digits.length > 10) {
@@ -27,40 +35,23 @@ export async function POST(request) {
       });
     }
 
-    const snap = await adminDb.collection("allowedUsers").doc(phone).get();
+    const profile = allowedUsers[phone];
 
-    if (!snap.exists) {
+    if (!profile) {
       return Response.json({
         success: true,
         allowed: false,
       });
     }
-
-    const data = snap.data() || {};
-
-    if (data.active === false) {
-      return Response.json({
-        success: true,
-        allowed: false,
-      });
-    }
-
-    await adminDb.collection("allowedUsers").doc(phone).set(
-      {
-        lastSeenAt: new Date(),
-      },
-      { merge: true }
-    );
 
     return Response.json({
       success: true,
       allowed: true,
       profile: {
         phone,
-        name: data.name || "",
-        firm: data.firm || "",
-        city: data.city || "",
-        role: data.role || "Dealer",
+        name: profile.name || "",
+        firstName: profile.firstName || profile.name || "Guest",
+        role: profile.role || "Dealer",
       },
     });
   } catch (err) {
