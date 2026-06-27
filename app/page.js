@@ -1991,12 +1991,13 @@ const styles = {
 
   welcomeToast: {
     position: "fixed",
-    top: 18,
+    top: 72,
+    right: 16,
     left: "50%",
     transform: "translateX(-50%)",
-    zIndex: 65,
-    width: "calc(100% - 32px)",
-    maxWidth: 480,
+    zIndex: 900,
+    maxWidth: 340,
+    width: "90%",
     background: "rgba(20, 20, 20, 0.48)",
     backdropFilter: "blur(16px)",
     WebkitBackdropFilter: "blur(16px)",
