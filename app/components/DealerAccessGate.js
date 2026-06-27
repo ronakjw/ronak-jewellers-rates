@@ -378,14 +378,13 @@ export default function DealerAccessGate({
           style={styles.logo}
         />
         <h2 style={styles.brand}>Ronak Jewellers</h2>
-          <h3 style={styles.brand}>DEALER ACCESS</h3>
         <p style={styles.muted}>
-          Please enter your mobile number
+          DEALER ACCESS LOGIN PAGE
         </p>
 
         {!otpSent ? (
           <>
-            <label style={styles.label}>Mobile Number</label>
+            <label style={styles.label}>Enter your Mobile Number</label>
             <input
               style={styles.input}
               value={mobile}
@@ -532,13 +531,14 @@ const styles = {
     maxWidth: 360,
     marginLeft: "auto",
     marginRight: "auto",
+    fontWeight: 700,
   },
   label: {
     display: "block",
     color: "var(--gate-muted)",
     textAlign: "left",
     margin: "20px 0 8px",
-    fontWeight: 700,
+    
   },
   input: {
     width: "100%",
