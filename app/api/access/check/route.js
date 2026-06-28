@@ -72,6 +72,10 @@ async function logAccessRecord({
   loginMethod,
 }) {
   try {
+    
+    const shouldWriteLoginLog =
+  body?.action === "login" || body?.isManualLogin === true;
+   if (shouldWriteLoginLog) {
     await adminDb.collection("loginLogs").add({
       createdAt: new Date(),
       phone: phone || "",
@@ -86,7 +90,7 @@ async function logAccessRecord({
       loginMethod: loginMethod || "access_check",
       ip: ip || "",
       userAgent: userAgent || "",
-    });
+    });}
   } catch (err) {
     console.error("Unable to write access record", err);
   }
