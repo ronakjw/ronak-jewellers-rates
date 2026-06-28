@@ -2021,8 +2021,8 @@ const styles = {
     width: "min(500px, calc(100vw - 32px))",
     margin: "0 auto",
     background:
-      "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)), radial-gradient(circle at top left, rgba(243,217,139,0.25), transparent 44%), rgba(18, 17, 13, 0.74)",
-    backdropFilter: "blur(20px) saturate(145%)",
+      "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)), radial-gradient(circle at top left, rgba(243,217,139,0.25), transparent 77%), rgba(18, 17, 13, 0.74)",
+    backdropFilter: "blur(10px) saturate(145%)",
     WebkitBackdropFilter: "blur(20px) saturate(145%)",
     border: "1px solid rgba(243, 217, 139, 0.46)",
     boxShadow:
