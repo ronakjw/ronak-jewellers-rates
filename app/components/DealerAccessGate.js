@@ -161,7 +161,7 @@ export default function DealerAccessGate({
           setMessage(
             access.requiresOtp
               ? "This number is being used on a new device. Please verify again."
-              : "Your access is not active. Please contact Ronak Jewellers."
+              : "Your access is not active. Please contact us for authorization."
           );
           setMobile(phone);
           setChecking(false);
@@ -259,7 +259,7 @@ export default function DealerAccessGate({
         clearSession();
         setMessage(
           access.message ||
-            "This number is not authorized to view live rates."
+            "This number is not authorized!"
         );
         return;
       }
@@ -383,20 +383,19 @@ export default function DealerAccessGate({
           height={210}
           style={styles.logo}
         />
-        <h1 style={styles.brand}>Dealer Access</h1>
-        <p style={styles.muted}>
-          Enter your registered mobile number to view live bullion rates.
+        <h1 style={styles.brand}>Ronak Jewellers</h1>
+        <p style={styles.label}>
+          DEALER ACCESS LOGIN
         </p>
 
         {!otpSent ? (
           <>
-            <label style={styles.label}>Mobile Number</label>
             <input
               style={styles.input}
               value={mobile}
               inputMode="numeric"
               maxLength={14}
-              placeholder="10-digit mobile number"
+              placeholder="Enter 10-digit mobile number"
               onChange={(e) => setMobile(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -464,7 +463,7 @@ export default function DealerAccessGate({
         )}
 
         {message ? <p style={styles.message}>{message}</p> : null}
-        <p style={styles.note}>Access stays active until the end of the day.</p>
+        <p style={styles.note}>Access for authorized users only.</p>
         <div id="rj-recaptcha-container" />
       </section>
     </main>
@@ -539,13 +538,7 @@ const styles = {
     color: "var(--gate-brand)",
     fontSize: "clamp(30px, 7vw, 46px)",
   },
-  muted: {
-    color: "var(--gate-muted)",
-    lineHeight: 1.6,
-    maxWidth: 360,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
+  
   label: {
     display: "block",
     color: "var(--gate-muted)",
@@ -560,7 +553,7 @@ const styles = {
     border: "1px solid var(--gate-border)",
     background: "var(--gate-input)",
     color: "var(--gate-text)",
-    fontSize: 18,
+    fontSize: 12,
     outline: "none",
     boxSizing: "border-box",
   },
