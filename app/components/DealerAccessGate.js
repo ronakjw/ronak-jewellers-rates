@@ -250,7 +250,7 @@ export default function DealerAccessGate({
 
       if (!access.allowed) {
         clearSession();
-        setMessage("This number is not authorized to view live rates.");
+        setMessage("Unauthorized number. Please contact us for authorization");
         return;
       }
 
@@ -384,13 +384,12 @@ export default function DealerAccessGate({
 
         {!otpSent ? (
           <>
-            <label style={styles.label}>Enter your Mobile Number</label>
             <input
               style={styles.input}
               value={mobile}
               inputMode="numeric"
               maxLength={14}
-              placeholder="10-digit mobile number"
+              placeholder="Enter 10-digit mobile no."
               onChange={(e) => setMobile(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -532,13 +531,6 @@ const styles = {
     marginLeft: "auto",
     marginRight: "auto",
     fontWeight: 700,
-  },
-  label: {
-    display: "block",
-    color: "var(--gate-muted)",
-    textAlign: "left",
-    margin: "20px 0 8px",
-    
   },
   input: {
     width: "100%",
