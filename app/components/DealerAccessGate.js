@@ -395,7 +395,7 @@ export default function DealerAccessGate({
               value={mobile}
               inputMode="numeric"
               maxLength={14}
-              placeholder="Enter 10-digit mobile number"
+              placeholder="Enter your 10-digit Mobile Number"
               onChange={(e) => setMobile(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -542,18 +542,18 @@ const styles = {
   label: {
     display: "block",
     color: "var(--gate-muted)",
-    textAlign: "left",
     margin: "20px 0 8px",
     fontWeight: 700,
+    marginBottom: "15px",
   },
   input: {
     width: "100%",
     padding: "15px 16px",
-    borderRadius: 16,
+    borderRadius: 6,
     border: "1px solid var(--gate-border)",
     background: "var(--gate-input)",
     color: "var(--gate-text)",
-    fontSize: 12,
+    fontSize: 14,
     outline: "none",
     boxSizing: "border-box",
   },
