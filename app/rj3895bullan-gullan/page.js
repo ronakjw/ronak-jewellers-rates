@@ -575,16 +575,10 @@ function ToggleRow({ label, checked, onChange }) {
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
           <div style={styles.headerBrand}>
-          <Image
-  src="/logoo.png"
-  alt="Ronak Jewellers"
-  width={150}
-  height={150}
-  style={styles.logoCenter}/>
-            <div>
+            
               <h1>RJ - Admin Panel</h1>
               <p style={styles.subtitle}>Premium-Rate Setting Page</p>
-            </div>
+           
           </div>
 
  <div style={styles.adminButtonRow}>
@@ -1032,8 +1026,10 @@ function ToggleRow({ label, checked, onChange }) {
         </form>
 
         {message ? <p style={styles.message}>{message}</p> : null}
-<div style={{display:"flex", gap:11, marginTop: 11, marginBottom: 11}}>        
- <div style={styles.logSection}>
+
+<div style=style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
+ 
+<div style={styles.logSection}>
   <button
     type="button"
     style={styles.logToggle}
@@ -1772,7 +1768,7 @@ logToggle: {
   border: "1px solid rgba(214,180,92,0.35)",
   background: "rgba(214,180,92,0.08)",
   color: "#f3d98b",
-  borderRadius: 14,
+  borderRadius: 10,
   padding: "13px 16px",
   fontSize: 16,
   fontWeight: 800,
