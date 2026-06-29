@@ -354,13 +354,9 @@ export default function DealerAccessGate({
         }}
       >
         <section style={{ ...styles.card, ...styles.checkingCard }}>
-          <Image
-            src={logoSrc}
-            alt="Ronak Jewellers"
-            width={190}
-            height={190}
-            style={styles.logo}
-          />
+
+  <Image src={logoSrc}  alt="Ronak Jewellers"   width={200}  height={200}  style={styles.logoImage} />
+   
           <h1 style={styles.brand}>Ronak Jewellers</h1>
           <p style={styles.muted}>Checking access...</p>
         </section>
