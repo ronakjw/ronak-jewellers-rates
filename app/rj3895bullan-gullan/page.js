@@ -1163,19 +1163,17 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? "Alert!"
+            ? ""
             : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
           return (
-            <div
-              key={record.id}
-              style={
+            <div key={record.id}
+               style={
                 isUnauthorized
                   ? styles.loginRecordUnauthorized
                   : styles.loginRecordCard
-              }
-            >
+              }>
               <div style={styles.logDateCol}>
                 {record.createdAt?.toDate
                   ? record.createdAt.toDate().toLocaleString("en-IN")
