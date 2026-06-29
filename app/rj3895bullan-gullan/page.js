@@ -1062,8 +1062,7 @@ function ToggleRow({ label, checked, onChange }) {
   <div style={styles.logChangesCol}>
   {log.eventType === "volatility" ? (
     <p style={styles.logText}>
-      ⚠️ Volatility triggered: Silver MCX Buy moved ₹
-      {formatLogValue("movement", log.movement)} in 40 seconds.
+      ⚠️ Volatility triggered: Silver {formatLogValue("movement", log.movement)} in 40 seconds.
     </p>
   ) : null}
   {Object.entries({
@@ -1140,7 +1139,7 @@ function ToggleRow({ label, checked, onChange }) {
   {showLoginRecords ? (
     <>
       <h2>Login Records</h2>
-        <div style={styles.loginRecordCard}>
+        <div style={styles.loginSummaryCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
           <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> || <span style={styles.loginSummaryLabel}>Unauthorized :</span>
           <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
@@ -1153,7 +1152,7 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? "Alert!"
+            ? ""
             : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
@@ -1171,7 +1170,9 @@ function ToggleRow({ label, checked, onChange }) {
               </div>
 
               <div style={styles.loginRecordInfo}>
+              { displayName ?
                 <strong>{displayName}</strong>
+              : null }
                 <span> {displayPhone}</span>
                 {isUnauthorized ? (
                   <span style={styles.unauthorizedText}>Unauthorized</span>
@@ -1372,12 +1373,12 @@ logCardNew: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 16,
-  padding: 11,
+  borderRadius: 6,
+  padding: 5,
   marginBottom: 8,
   display: "grid",
   gridTemplateColumns: "180px 1fr",
-  gap: 11,
+  gap: 5,
 },
 logDateCol: {
   color: "#9f9f9f",
@@ -1785,11 +1786,11 @@ loginRecordCard: {
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
   borderRadius: 2,
-  padding: 4,
+  padding: 2,
   marginBottom: 8,
   display: "grid",
-  gridTemplateColumns: "180px 1fr",
-  gap: 11,
+  gridTemplateColumns: "110px 1fr",
+  gap: 1,
 },
 loginRecordUnauthorized: {
   background:
