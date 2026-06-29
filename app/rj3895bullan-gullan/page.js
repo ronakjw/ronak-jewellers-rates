@@ -1139,7 +1139,7 @@ function ToggleRow({ label, checked, onChange }) {
       <div style={styles.loginSummaryGrid}>
         <div style={styles.loginSummaryCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
-          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> || <span style={styles.loginSummaryLabel}>Unauthorized :</span>
+          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> ● <span style={styles.loginSummaryLabel}>Unauthorized :</span>
           <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
       </div>
