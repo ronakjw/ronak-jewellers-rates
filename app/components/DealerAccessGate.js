@@ -259,7 +259,7 @@ export default function DealerAccessGate({
         clearSession();
         setMessage(
           access.message ||
-            "This number is Unauthorized! Please contact us for authorization."
+            "Unauthorized number! Please contact us for authorization."
         );
         return;
       }
