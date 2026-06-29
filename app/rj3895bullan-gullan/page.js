@@ -62,6 +62,9 @@ export default function AdminPage() {
   const [assistantMode, setAssistantMode] = useState("command");
   const [assistantAdvice, setAssistantAdvice] = useState("");
   const [savedSettings, setSavedSettings] = useState(null);
+ 
+  const isMobile =
+  typeof window !== "undefined" && window.innerWidth < 700;
   
     useEffect(() => {
   if (!user) return;
