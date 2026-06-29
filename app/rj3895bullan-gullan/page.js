@@ -1159,7 +1159,7 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? ""
+            ? "Alert!"
             : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
