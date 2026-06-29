@@ -1033,7 +1033,7 @@ function ToggleRow({ label, checked, onChange }) {
 
         {message ? <p style={styles.message}>{message}</p> : null}
 <div style={{display:"flex", gap:11, marginTop: 11, marginBottom: 11}}>        
-
+ <div style={styles.logSection}>
   <button
     type="button"
     style={styles.logToggle}
@@ -1041,22 +1041,7 @@ function ToggleRow({ label, checked, onChange }) {
   >
     {showLogs ? "Hide Change Log" : "Show Change Log"}
   </button>
- 
-  <button
-    type="button"
-    style={styles.logToggle}
-    onClick={() => setShowLoginRecords(!showLoginRecords)}
-  >
-    {showLoginRecords
-      ? "Hide Login Records"
-      : `Show Login Records${
-          unauthorizedTodayCount
-            ? ` (${unauthorizedTodayCount} unauthorized today)`
-            : ""
-        }`}
-  </button>
-    </div>
-<div style={styles.logSection}>
+
   {showLogs ? (
     <>
       <h2> Change Log</h2>
@@ -1135,10 +1120,22 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div> 
-
-<div style={styles.logSection}>
-
-
+ 
+  <div style={styles.logSection}>   
+  <button
+    type="button"
+    style={styles.logToggle}
+    onClick={() => setShowLoginRecords(!showLoginRecords)}
+  >
+    {showLoginRecords
+      ? "Hide Login Records"
+      : `Show Login Records${
+          unauthorizedTodayCount
+            ? ` (${unauthorizedTodayCount} unauthorized today)`
+            : ""
+        }`}
+  </button>
+    
   {showLoginRecords ? (
     <>
       <h2>Login Records</h2>
@@ -1188,6 +1185,8 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div>
+    </div>
+    
   {assistantOpen && (
   <div style={styles.assistantPopup}>
     <h3 style={styles.assistantTitle}>
