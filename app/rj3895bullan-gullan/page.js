@@ -1789,7 +1789,7 @@ loginRecordCard: {
   padding: 2,
   marginBottom: 8,
   display: "grid",
-  gridTemplateColumns: "110px 1fr",
+  gridTemplateColumns: "140px 1fr",
   gap: 1,
 },
 loginRecordUnauthorized: {
@@ -1800,7 +1800,7 @@ loginRecordUnauthorized: {
   padding: 2,
   marginBottom: 8,
   display: "grid",
-  gridTemplateColumns: "180px 1fr",
+  gridTemplateColumns: "140px 1fr",
   gap: 1,
 },
 loginRecordInfo: {
