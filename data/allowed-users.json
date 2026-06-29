@@ -6,20 +6,9 @@
     "role": "Dealer"
   },
 
-  "8103700267": {
-  "phone": "8103700267",
-    "name": "Navin Sahu",
-    "firstName": "Navin",
-    "role": "Dealer"
-  },
+  "8103700267": { "phone": "8103700267", "name": "Navin Sahu", "firstName": "Navin", "role": "Dealer" },
 
-  "9893222541": {
-  "phone": "9893222541",
-    "name": "Ashish Laddha [sobapur]",
-    "firstName": "Ashish",
-    "role": "Dealer"
-  },
-
+  "9893222541": { "phone": "9893222541", "name": "Ashish Laddha [Sobapur]", "firstName": "Ashish", "role": "Dealer" },
 
   "9669666037": {
   "phone": "9669666037",
@@ -30,7 +19,7 @@
   "9412238622": {
   "phone": "9412238622",
     "name": "Mr. Rajesh",
-    "firstName": "Rajesh Agrawal",
+    "firstName": "Rajesh Agrawal [Mathura]",
     "role": "Dealer"
   },
 
@@ -785,12 +774,7 @@
     "firstName": "Ankit",
     "role": "Dealer"
   },
-  "9146239075": {
-    "phone": "9146239075",
-    "name": "Kartik Imitation Aurangabad",
-    "firstName": "Kartik",
-    "role": "Dealer"
-  },
+ 
   "9153333326": {
     "phone": "9153333326",
     "name": "Arpit Doshi",
@@ -809,25 +793,14 @@
     "firstName": "Mr. Raju",
     "role": "Dealer"
   },
-  "9165513000": {
-    "phone": "9165513000",
-    "name": "Jaspreet",
-    "firstName": "Jaspreet",
-    "role": "Dealer"
-  },
+
   "9165759383": {
     "phone": "9165759383",
     "name": "Ontesh Mittal Ji",
     "firstName": "Mr. Ontesh",
     "role": "Dealer"
   },
-  
-  "9168833044": {
-    "phone": "9168833044",
-    "name": "Kanchan Di",
-    "firstName": "Kanchan",
-    "role": "Dealer"
-  },
+
   "9168898223": {
     "phone": "9168898223",
     "name": "Sagar Amt",
@@ -837,7 +810,7 @@
   
   "9179315759": {
     "phone": "9179315759",
-    "name": "Piyush Majriya Lal",
+    "name": "Piyush ji [Jobat]",
     "firstName": "Piyush",
     "role": "Dealer"
   },
@@ -892,7 +865,7 @@
   
   "9302476611": {
     "phone": "9302476611",
-    "name": "Shyam Gappu Bhaiya",
+    "name": "Shyam Bhaiya",
     "firstName": "Shyam",
     "role": "Dealer"
   },
@@ -954,12 +927,7 @@
     "firstName": "Aditya",
     "role": "Dealer"
   },
-  "9407138815": {
-    "phone": "9407138815",
-    "name": "Gaurav Ji VN",
-    "firstName": "Gaurav",
-    "role": "Dealer"
-  },
+ 
   "9407140201": {
     "phone": "9407140201",
     "name": "R R Ujjain",
@@ -979,24 +947,7 @@
     "firstName": "Chintu",
     "role": "Dealer"
   },
-  "9414844001": {
-    "phone": "9414844001",
-    "name": "Bade Fufaji",
-    "firstName": "Bade",
-    "role": "Dealer"
-  },
-  "9421958233": {
-    "phone": "9421958233",
-    "name": "Nitu Masi",
-    "firstName": "Nitu",
-    "role": "Dealer"
-  },
-  "9423279010": {
-    "phone": "9423279010",
-    "name": "Vijay Masaji",
-    "firstName": "Vijay",
-    "role": "Dealer"
-  },
+
   "9424000934": {
     "phone": "9424000934",
     "name": "Pravin Ji Agrwl",
@@ -1028,18 +979,7 @@
     "firstName": "Mukesh",
     "role": "Dealer"
   },
-  "9425052986": {
-    "phone": "9425052986",
-    "name": "Sanjay ji TN, Inverter",
-    "firstName": "Sanjay",
-    "role": "Dealer"
-  },
-  "9425055643": {
-    "phone": "9425055643",
-    "name": "N M",
-    "firstName": "N",
-    "role": "Dealer"
-  },
+
   "9425060407": {
     "phone": "9425060407",
     "name": "Nirmal Ji SA",
@@ -1054,14 +994,14 @@
   },
   "9425063848": {
     "phone": "9425063848",
-    "name": "Hemoo Bhaiya Sarafa",
+    "name": "Hemu ji Sarafa",
     "firstName": "Mr. Hemu",
     "role": "Dealer"
   },
   "9425064745": {
     "phone": "9425064745",
-    "name": "K v",
-    "firstName": "K",
+    "name": "K V",
+    "firstName": "KV",
     "role": "Dealer"
   },
   "9425065500": {
@@ -1070,16 +1010,11 @@
     "firstName": "Guddu",
     "role": "Dealer"
   },
-  "9425066716": {
-    "phone": "9425066716",
-    "name": "Raj Shri",
-    "firstName": "Raj",
-    "role": "Dealer"
-  },
+
   "9425071272": {
     "phone": "9425071272",
     "name": "S N P Pachor",
-    "firstName": "S",
+    "firstName": "Mr. Swapnil",
     "role": "Dealer"
   },
   "9425073088": {
@@ -1090,8 +1025,8 @@
   },
   "9425078191": {
     "phone": "9425078191",
-    "name": "dev jiju",
-    "firstName": "dev",
+    "name": "Devendra ji",
+    "firstName": "Dev",
     "role": "Dealer"
   },
   "9425081405": {
@@ -1109,21 +1044,16 @@
   "9425091450": {
     "phone": "9425091450",
     "name": "C B Payal Vipul Ji Jain",
-    "firstName": "C",
+    "firstName": "Vipul",
     "role": "Dealer"
   },
   "9425094774": {
     "phone": "9425094774",
     "name": "Veer Ji Sarafa",
-    "firstName": "Veer",
+    "firstName": "Veerji",
     "role": "Dealer"
   },
-  "9425095384": {
-    "phone": "9425095384",
-    "name": "Yash BadCool",
-    "firstName": "Yash",
-    "role": "Dealer"
-  },
+ 
   "9425103962": {
     "phone": "9425103962",
     "name": "Manish Ji Rtm",
@@ -1145,63 +1075,24 @@
   "9425316426": {
     "phone": "9425316426",
     "name": "Damu bhayia",
-    "firstName": "Damu",
+    "firstName": "Damu ji",
     "role": "Dealer"
   },
-  "9425316910": {
-    "phone": "9425316910",
-    "name": "Rahui Jiparvait",
-    "firstName": "Rahui",
-    "role": "Dealer"
-  },
+ 
   "9425317750": {
     "phone": "9425317750",
     "name": "Jatin Panjwani Sarafa",
     "firstName": "Jatin",
     "role": "Dealer"
   },
-  "9425321368": {
-    "phone": "9425321368",
-    "name": "Shashank",
-    "firstName": "Shashank",
-    "role": "Dealer"
-  },
+
   "9425350798": {
     "phone": "9425350798",
     "name": "Vinay SevaShri Sarafa",
     "firstName": "Vinay",
     "role": "Dealer"
   },
-  "9425351115": {
-    "phone": "9425351115",
-    "name": "Balaji",
-    "firstName": "Balaji",
-    "role": "Dealer"
-  },
-  "9425355757": {
-    "phone": "9425355757",
-    "name": "Bhawani Ji Rtm",
-    "firstName": "Bhawani",
-    "role": "Dealer"
-  },
-  "9425356397": {
-    "phone": "9425356397",
-    "name": "Vinod R T M",
-    "firstName": "Vinod",
-    "role": "Dealer"
-  },
-  "9425403099": {
-    "phone": "9425403099",
-    "name": "Pradhan Rishi",
-    "firstName": "Pradhan",
-    "role": "Dealer"
-  },
-  "9425410396": {
-    "phone": "9425410396",
-    "name": "Niraj Ji Neema",
-    "firstName": "Niraj",
-    "role": "Dealer"
-  },
+
   "9425415320": {
     "phone": "9425415320",
     "name": "Shiv Ji Bhai",
@@ -1216,52 +1107,18 @@
   },
   "9425436481": {
     "phone": "9425436481",
-    "name": "Anand Sagar 999",
+    "name": "Anand [Sagar]",
     "firstName": "Anand",
     "role": "Dealer"
   },
-  "9425494808": {
-    "phone": "9425494808",
-    "name": "Rupesh Mama",
-    "firstName": "Rupesh",
-    "role": "Dealer"
-  },
-  "9425901133": {
-    "phone": "9425901133",
-    "name": "Shalu Bhaiya",
-    "firstName": "Shalu",
-    "role": "Dealer"
-  },
-  "9425904472": {
-    "phone": "9425904472",
-    "name": "Rajendra Ji Jain",
-    "firstName": "Rajendra",
-    "role": "Dealer"
-  },
-  "9425907816": {
-    "phone": "9425907816",
-    "name": "Ashok ji Patas",
-    "firstName": "Ashok",
-    "role": "Dealer"
-  },
-  "9425951679": {
-    "phone": "9425951679",
-    "name": "Sanju burhn. pur",
-    "firstName": "Sanju",
-    "role": "Dealer"
-  },
+
   "9425961141": {
     "phone": "9425961141",
     "name": "PJ Jewelers",
-    "firstName": "PJ",
+    "firstName": "PJ Jw",
     "role": "Dealer"
   },
-  "9425964690": {
-    "phone": "9425964690",
-    "name": "Anil Cable",
-    "firstName": "Anil",
-    "role": "Dealer"
-  },
+
   "9425991110": {
     "phone": "9425991110",
     "name": "Kaka Sarang Pur",
@@ -1274,90 +1131,28 @@
     "firstName": "Kaamubhaya",
     "role": "Dealer"
   },
-  "9426240489": {
-    "phone": "9426240489",
-    "name": "Rameshwer Ji Rajkot",
-    "firstName": "Rameshwer",
-    "role": "Dealer"
-  },
-  "9431218018": {
-    "phone": "9431218018",
-    "name": "Shivam Exim Mumbai",
-    "firstName": "Shivam",
-    "role": "Dealer"
-  },
-  "9431224346": {
-    "phone": "9431224346",
-    "name": "Anil Uncle Ji Sarafa",
-    "firstName": "Anil",
-    "role": "Dealer"
-  },
-  "9441358974": {
-    "phone": "9441358974",
-    "name": "Anudeep Sai",
-    "firstName": "Anudeep",
-    "role": "Dealer"
-  },
+
   "9460003653": {
     "phone": "9460003653",
     "name": "Shitin Jipratapgard",
     "firstName": "Shitin",
     "role": "Dealer"
   },
-  "9460991727": {
-    "phone": "9460991727",
-    "name": "Buaji Sawaimadhopur",
-    "firstName": "Buaji",
-    "role": "Dealer"
-  },
+  
   "9461969288": {
     "phone": "9461969288",
     "name": "Puneet Jiju",
     "firstName": "Puneet",
     "role": "Dealer"
   },
-  "9462002335": {
-    "phone": "9462002335",
-    "name": "Nidhi Di",
-    "firstName": "Nidhi",
-    "role": "Dealer"
-  },
-  "9468904000": {
-    "phone": "9468904000",
-    "name": "Pradyum Nanu",
-    "firstName": "Pradyum",
-    "role": "Dealer"
-  },
-  "9479567776": {
-    "phone": "9479567776",
-    "name": "Upkaar Photo Studio",
-    "firstName": "Upkaar",
-    "role": "Dealer"
-  },
-  "9479717140": {
-    "phone": "9479717140",
-    "name": "Naman Indusind Bnk",
-    "firstName": "Naman",
-    "role": "Dealer"
-  },
-  "9479721383": {
-    "phone": "9479721383",
-    "name": "Eusuf",
-    "firstName": "Eusuf",
-    "role": "Dealer"
-  },
+ 
   "9479893898": {
     "phone": "9479893898",
     "name": "Rouank Soni",
     "firstName": "Rouank",
     "role": "Dealer"
   },
-  "9510574401": {
-    "phone": "9510574401",
-    "name": "Mayuri Di",
-    "firstName": "Mayuri",
-    "role": "Dealer"
-  },
+
   "9522222197": {
     "phone": "9522222197",
     "name": "Somil",
@@ -1377,132 +1172,28 @@
     "firstName": "Bhagwan",
     "role": "Dealer"
   },
-  "9610023648": {
-    "phone": "9610023648",
-    "name": "Vinod",
-    "firstName": "Vinod",
-    "role": "Dealer"
-  },
-  "9617504411": {
-    "phone": "9617504411",
-    "name": "Virendra Ji",
-    "firstName": "Virendra",
-    "role": "Dealer"
-  },
-  "9620828773": {
-    "phone": "9620828773",
-    "name": "Ghanshyam Ji",
-    "firstName": "Ghanshyam",
-    "role": "Dealer"
-  },
-  "9624982936": {
-    "phone": "9624982936",
-    "name": "Jogmaya Engg Container",
-    "firstName": "Jogmaya",
-    "role": "Dealer"
-  },
-  "9625892500": {
-    "phone": "9625892500",
-    "name": "Tirumala 925 Silver",
-    "firstName": "Tirumala",
-    "role": "Dealer"
-  },
-  "9630090911": {
-    "phone": "9630090911",
-    "name": "ICD Container Rental",
-    "firstName": "ICD",
-    "role": "Dealer"
-  },
+ 
   "9630102999": {
     "phone": "9630102999",
     "name": "Anand Bhaiya BMG",
     "firstName": "Anand",
     "role": "Dealer"
   },
-  "9630361151": {
-    "phone": "9630361151",
-    "name": "Rishab Thakur",
-    "firstName": "Rishab",
-    "role": "Dealer"
-  },
+
   "9630465699": {
     "phone": "9630465699",
     "name": "Ankit Bhaiya Sarafa",
     "firstName": "Ankit",
     "role": "Dealer"
   },
-  "9630505291": {
-    "phone": "9630505291",
-    "name": "Aman Soni",
-    "firstName": "Aman",
-    "role": "Dealer"
-  },
-  "9630699193": {
-    "phone": "9630699193",
-    "name": "Akshay Punekar",
-    "firstName": "Akshay",
-    "role": "Dealer"
-  },
+
   "9630908876": {
     "phone": "9630908876",
-    "name": "Shlok Jw",
-    "firstName": "Shlok",
+    "name": "Shlok Jewellers",
+    "firstName": "Mayank",
     "role": "Dealer"
   },
-  "9644095158": {
-    "phone": "9644095158",
-    "name": "Kanika",
-    "firstName": "Kanika",
-    "role": "Dealer"
-  },
-  "9644281966": {
-    "phone": "9644281966",
-    "name": "Parag Bakery",
-    "firstName": "Parag",
-    "role": "Dealer"
-  },
-  "9644462371": {
-    "phone": "9644462371",
-    "name": "NK",
-    "firstName": "NK",
-    "role": "Dealer"
-  },
-  "9664089901": {
-    "phone": "9664089901",
-    "name": "Hitesh Rane Jew&Gems",
-    "firstName": "Hitesh",
-    "role": "Dealer"
-  },
-  "9669008891": {
-    "phone": "9669008891",
-    "name": "Bharat Suzuki Acess",
-    "firstName": "Bharat",
-    "role": "Dealer"
-  },
-  "9669143062": {
-    "phone": "9669143062",
-    "name": "Dr Kirnesh Pandey",
-    "firstName": "Kirnesh",
-    "role": "Dealer"
-  },
-  "9669171904": {
-    "phone": "9669171904",
-    "name": "Manish Bhiya Addu",
-    "firstName": "Manish",
-    "role": "Dealer"
-  },
-  "9669399953": {
-    "phone": "9669399953",
-    "name": "Aman",
-    "firstName": "Aman",
-    "role": "Dealer"
-  },
-  "9669604466": {
-    "phone": "9669604466",
-    "name": "Mahakal MPONLINE",
-    "firstName": "Mahakal",
-    "role": "Dealer"
-  },
+
   "9669622038": {
     "phone": "9669622038",
     "name": "Shyam Sendwa",
@@ -1515,36 +1206,14 @@
     "firstName": "Manoj",
     "role": "Dealer"
   },
-  "9669921938": {
-    "phone": "9669921938",
-    "name": "Classic Tailors",
-    "firstName": "Classic",
-    "role": "Dealer"
-  },
-  "9669991113": {
-    "phone": "9669991113",
-    "name": "Sanju Rao",
-    "firstName": "Sanju",
-    "role": "Dealer"
-  },
-  "9669991114": {
-    "phone": "9669991114",
-    "name": "Sanju tanch",
-    "firstName": "Sanju",
-    "role": "Dealer"
-  },
+ 
   "9672658143": {
     "phone": "9672658143",
     "name": "Mukesh Ji Bhilwada",
     "firstName": "Mukesh",
     "role": "Dealer"
   },
-  "9685037038": {
-    "phone": "9685037038",
-    "name": "Ramshawar Ji",
-    "firstName": "Ramshawar",
-    "role": "Dealer"
-  },
+ 
   "9685522682": {
     "phone": "9685522682",
     "name": "Jugal Ji",
@@ -1563,102 +1232,42 @@
     "firstName": "Munim",
     "role": "Dealer"
   },
-  "9685768773": {
-    "phone": "9685768773",
-    "name": "Vineeta D",
-    "firstName": "Vineeta",
-    "role": "Dealer"
-  },
-  "9685811217": {
-    "phone": "9685811217",
-    "name": "Rahul Gupta",
-    "firstName": "Rahul",
-    "role": "Dealer"
-  },
-  "9685844933": {
-    "phone": "9685844933",
-    "name": "Divyanshu Bhaiya Sarafa",
-    "firstName": "Divyanshu",
-    "role": "Dealer"
-  },
+
   "9685888619": {
     "phone": "9685888619",
     "name": "AMG Tushar",
     "firstName": "AMG",
     "role": "Dealer"
   },
-  "9687977477": {
-    "phone": "9687977477",
-    "name": "Rahul Bhaiya Rtm",
-    "firstName": "Rahul",
-    "role": "Dealer"
-  },
+
   "9691299557": {
     "phone": "9691299557",
     "name": "Mohit Ji Sagar",
     "firstName": "Mohit",
     "role": "Dealer"
   },
-  "9691590006": {
-    "phone": "9691590006",
-    "name": "Prem LNCT",
-    "firstName": "Prem",
-    "role": "Dealer"
-  },
+ 
   "9691701335": {
     "phone": "9691701335",
     "name": "Sunny Ji Sarafa",
     "firstName": "Sunny",
     "role": "Dealer"
   },
-  "9691722446": {
-    "phone": "9691722446",
-    "name": "Lemon Tea Sarafa",
-    "firstName": "Lemon",
-    "role": "Dealer"
-  },
+
   "9691969850": {
     "phone": "9691969850",
     "name": "Nimesh Ji Rounak",
-    "firstName": "Nimesh",
+    "firstName": "Rounak",
     "role": "Dealer"
   },
-  "9699960742": {
-    "phone": "9699960742",
-    "name": "Dilep Bhai Bombay",
-    "firstName": "Dilep",
-    "role": "Dealer"
-  },
-  "9712913534": {
-    "phone": "9712913534",
-    "name": "Ninu Bua Banglore",
-    "firstName": "Ninu",
-    "role": "Dealer"
-  },
+ 
   "9713293235": {
     "phone": "9713293235",
     "name": "Anuradha Jw",
     "firstName": "Anuradha",
     "role": "Dealer"
   },
-  "9713328711": {
-    "phone": "9713328711",
-    "name": "Anil Ji Sarafa",
-    "firstName": "Anil",
-    "role": "Dealer"
-  },
-  "9713371352": {
-    "phone": "9713371352",
-    "name": "Navin Bhaiya",
-    "firstName": "Navin",
-    "role": "Dealer"
-  },
-  "9720134797": {
-    "phone": "9720134797",
-    "name": "Vivek Temporary",
-    "firstName": "Vivek",
-    "role": "Dealer"
-  },
+
   "9724420001": {
     "phone": "9724420001",
     "name": "Romi D",
@@ -1671,30 +1280,14 @@
     "firstName": "Nikhil",
     "role": "Dealer"
   },
-  "9752140688": {
-    "phone": "9752140688",
-    "name": "NK",
-    "firstName": "NK",
-    "role": "Dealer"
-  },
+
   "9752179390": {
     "phone": "9752179390",
     "name": "Niten Tikmgard",
     "firstName": "Niten",
     "role": "Dealer"
   },
-  "9752217222": {
-    "phone": "9752217222",
-    "name": "Romil Bhiya",
-    "firstName": "Romil",
-    "role": "Dealer"
-  },
-  "9752446125": {
-    "phone": "9752446125",
-    "name": "Shalu Bhaiya",
-    "firstName": "Shalu",
-    "role": "Dealer"
-  },
+ 
   "9752631220": {
     "phone": "9752631220",
     "name": "Pin2G Vindhyanchal",
@@ -1729,12 +1322,7 @@
     "firstName": "Guddi",
     "role": "Dealer"
   },
-  "9826023417": {
-    "phone": "9826023417",
-    "name": "Tinku Bhaiya",
-    "firstName": "Tinku",
-    "role": "Dealer"
-  },
+ 
   "9826029827": {
     "phone": "9826029827",
     "name": "Babloo Bhaiya Dinesh",
@@ -1745,7 +1333,7 @@
   "9826033943": {
     "phone": "9826033943",
     "name": "Rajat Jew Indor",
-    "firstName": "Rajat",
+    "firstName": "Rajat Jw",
     "role": "Dealer"
   },
   "9826035805": {
@@ -1760,24 +1348,7 @@
     "firstName": "Ganesh",
     "role": "Dealer"
   },
-  "9826049713": {
-    "phone": "9826049713",
-    "name": "Suresh Ji",
-    "firstName": "Suresh",
-    "role": "Dealer"
-  },
-  "9826051714": {
-    "phone": "9826051714",
-    "name": "Agrwall Jewllers",
-    "firstName": "Agrwall",
-    "role": "Dealer"
-  },
-  "9826054534": {
-    "phone": "9826054534",
-    "name": "Gopal Sarda",
-    "firstName": "Gopal",
-    "role": "Dealer"
-  },
+
   "9826055575": {
     "phone": "9826055575",
     "name": "Ankit Ji Mahw M M",
@@ -1817,46 +1388,22 @@
   },
   "9826337888": {
     "phone": "9826337888",
-    "name": "Narain Rt",
+    "name": "Narain RR",
     "firstName": "Narain",
     "role": "Dealer"
   },
-  "9826361615": {
-    "phone": "9826361615",
-    "name": "Ravish Ji R R",
-    "firstName": "Ravish",
-    "role": "Dealer"
-  },
-  "9826388773": {
-    "phone": "9826388773",
-    "name": "N R Narendraji",
-    "firstName": "",
-    "role": "Dealer"
-  },
-  "9826390990": {
-    "phone": "9826390990",
-    "name": "Sandeep gangwa",
-    "firstName": "Sandeep",
-    "role": "Dealer"
-  },
-  "9826423411": {
-    "phone": "9826423411",
-    "name": "Manish Nimza",
-    "firstName": "Manish",
-    "role": "Dealer"
-  },
+
   "9826455999": {
     "phone": "9826455999",
-    "name": "Cm ViPin Ji",
-    "firstName": "Cm",
+    "name": "ViPin Mehta",
+    "firstName": "Vipin",
     "role": "Dealer"
   },
   "9826483838": {
     "phone": "9826483838",
-    "name": "Gopal RupalSri Sarafa",
+    "name": "Gopal RupalSri Jw",
     "firstName": "Gopal",
     "role": "Dealer"
-
   },
 
   "9826813105": {
@@ -1865,31 +1412,7 @@
     "firstName": "Kamlesh",
     "role": "Dealer"
   },
-  "9826828128": {
-    "phone": "9826828128",
-    "name": "Bhagwati Jw",
-    "firstName": "Bhagwati",
-    "role": "Dealer"
-  },
-  "9826886931": {
-    "phone": "9826886931",
-    "name": "Dinesh jain",
-    "firstName": "Dinesh",
-    "role": "Dealer"
-  },
-  "9826911106": {
-    "phone": "9826911106",
-    "name": "Neteen Ji LK",
-    "firstName": "Neteen",
-    "role": "Dealer"
-  },
-  
-  "9826935840": {
-    "phone": "9826935840",
-    "name": "Aman Ji AMS",
-    "firstName": "Aman",
-    "role": "Dealer"
-  },
+
   "9826969369": {
     "phone": "9826969369",
     "name": "Badjtiye jwe",
@@ -1916,33 +1439,21 @@
   },
   "9827005075": {
     "phone": "9827005075",
-    "name": "Cm ViPin Ji",
-    "firstName": "Cm",
+    "name": "ViPin Ji CM",
+    "firstName": "Vipin",
     "role": "Dealer"
   },
   "9827015631": {
     "phone": "9827015631",
     "name": "Mookmati Jw",
-    "firstName": "Mookmati",
+    "firstName": "Mookmati Jw",
     "role": "Dealer"
   },
 
-  "9827035369": {
-    "phone": "9827035369",
-    "name": "Atul Balu S",
-    "firstName": "Atul",
-    "role": "Dealer"
-  },
   "9827035675": {
     "phone": "9827035675",
     "name": "Nihar Bhaiya DB",
     "firstName": "Nihar",
-    "role": "Dealer"
-  },
-  "9827037796": {
-    "phone": "9827037796",
-    "name": "Dinesh ji",
-    "firstName": "Dinesh",
     "role": "Dealer"
   },
   "9827047571": {
@@ -1951,18 +1462,7 @@
     "firstName": "Quality",
     "role": "Dealer"
   },
-  "9827061266": {
-    "phone": "9827061266",
-    "name": "Prateek Sharda",
-    "firstName": "Prateek",
-    "role": "Dealer"
-  },
-  "9827067638": {
-    "phone": "9827067638",
-    "name": "Amit Alankaar PS Sarafa",
-    "firstName": "Amit",
-    "role": "Dealer"
-  },
+
   "9827068604": {
     "phone": "9827068604",
     "name": "Bade Papa",
@@ -1984,7 +1484,7 @@
   },
   "9827344468": {
     "phone": "9827344468",
-    "name": "Anil Ji RamRama Sarafa",
+    "name": "Anil Ji RamRama",
     "firstName": "Anil",
     "role": "Dealer"
   },
@@ -1994,12 +1494,7 @@
     "firstName": "Sunny",
     "role": "Dealer"
   },
-  "9827392904": {
-    "phone": "9827392904",
-    "name": "Amit Jain",
-    "firstName": "Amit",
-    "role": "Dealer"
-  },
+
   "9827395611": {
     "phone": "9827395611",
     "name": "Nimesh Neema",
@@ -2016,7 +1511,7 @@
   "9827532140": {
     "phone": "9827532140",
     "name": "Shanti Lal Ji",
-    "firstName": "Shanti",
+    "firstName": "Shantilal",
     "role": "Dealer"
   },
   "9827635609": {
@@ -2031,28 +1526,12 @@
     "firstName": "Raju",
     "role": "Dealer"
   },
-  "9827726724": {
-    "phone": "9827726724",
-    "name": "Gorav Sarfa",
-    "firstName": "Gorav",
-    "role": "Dealer"
-  },
-  "9827738254": {
-    "phone": "9827738254",
-    "name": "Vishal Ji Mansour",
-    "firstName": "Vishal",
-    "role": "Dealer"
+ r"
   },
   "9827747964": {
     "phone": "9827747964",
     "name": "Nimesh Ji Rounak",
-    "firstName": "Nimesh",
-    "role": "Dealer"
-  },
-  "9827761546": {
-    "phone": "9827761546",
-    "name": "Manohar Uncle",
-    "firstName": "Manohar",
+    "firstName": "Rounak",
     "role": "Dealer"
   },
 
@@ -2220,16 +1699,11 @@
     "firstName": "Adil",
     "role": "Dealer"
   },
-  "9993185608": {
-    "phone": "9993185608",
-    "name": "Yashu",
-    "firstName": "Yashu",
-    "role": "Dealer"
-  },
+
   "9993333341": {
     "phone": "9993333341",
     "name": "B S I",
-    "firstName": "B",
+    "firstName": "BSI",
     "role": "Dealer"
   },
   
