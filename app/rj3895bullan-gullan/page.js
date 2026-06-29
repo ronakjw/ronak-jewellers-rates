@@ -1377,12 +1377,12 @@ logCardNew: {
   padding: 2,
   marginBottom: 8,
   display: "grid",
-  gridTemplateColumns: "90px 1fr",
+  gridTemplateColumns: "85px 1fr",
   gap: 3,
 },
 logDateCol: {
   color: "#9f9f9f",
-  fontSize: 9,
+  fontSize: 11,
 },
 logChangesCol: {
   color: "#f3d98b",
