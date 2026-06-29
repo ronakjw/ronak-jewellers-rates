@@ -1032,7 +1032,7 @@ function ToggleRow({ label, checked, onChange }) {
         </form>
 
         {message ? <p style={styles.message}>{message}</p> : null}
-        
+<div>        
 <div style={styles.logSection}>
   <button
     type="button"
@@ -1144,7 +1144,7 @@ function ToggleRow({ label, checked, onChange }) {
   {/* <div style={styles.loginSummaryGrid}> */}
         <div style={styles.loginSummaryCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
-          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> ● <span style={styles.loginSummaryLabel}>Unauthorized :</span>
+          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> | ● | <span style={styles.loginSummaryLabel}>Unauthorized :</span>
           <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
 
@@ -1163,7 +1163,7 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? ""
+            ? "Alert!"
             : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
@@ -1194,7 +1194,7 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div>
-
+  </div>
 {assistantOpen && (
   <div style={styles.assistantPopup}>
     <h3 style={styles.assistantTitle}>
