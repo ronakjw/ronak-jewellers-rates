@@ -1032,7 +1032,7 @@ function ToggleRow({ label, checked, onChange }) {
         </form>
 
         {message ? <p style={styles.message}>{message}</p> : null}
-<div>        
+        
 <div style={styles.logSection}>
   <button
     type="button"
@@ -1140,21 +1140,11 @@ function ToggleRow({ label, checked, onChange }) {
   {showLoginRecords ? (
     <>
       <h2>Login Records</h2>
-
-  {/* <div style={styles.loginSummaryGrid}> */}
-        <div style={styles.loginSummaryCard}>
+        <div style={styles.loginRecordCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
-          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> | ● | <span style={styles.loginSummaryLabel}>Unauthorized :</span>
+          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> || <span style={styles.loginSummaryLabel}>Unauthorized :</span>
           <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
-
-   {/*<p style={styles.subtitle}>Showing recent login records from the last 7 days.</p>*/}
-
-   {/*  {unauthorizedLoginRecords.length ? (
-        <div style={styles.unauthorizedAlert}>
-          ⚠️ Unauthorized access attempts today: {unauthorizedTodayCount}
-        </div>
-      ) : null}  */}
 
       {loginRecords.length === 0 ? (
         <p style={styles.subtitle}>No login records found yet.</p>
@@ -1194,8 +1184,7 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div>
-  </div>
-{assistantOpen && (
+  {assistantOpen && (
   <div style={styles.assistantPopup}>
     <h3 style={styles.assistantTitle}>
       🤖 Gemini Assistant
@@ -1820,15 +1809,7 @@ loginRecordInfo: {
   gap: 1,
   fontSize: 10,
 },
-unauthorizedAlert: {
-  margin: "10px 0 14px",
-  padding: 13,
-  borderRadius: 14,
-  color: "#ffd6d6",
-  background: "rgba(120,20,20,0.35)",
-  border: "1px solid rgba(255,120,120,0.25)",
-  fontWeight: 800,
-},
+
 unauthorizedText: {
   color: "#ff9b9b",
   fontWeight: 800,
