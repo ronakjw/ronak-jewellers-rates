@@ -575,16 +575,10 @@ function ToggleRow({ label, checked, onChange }) {
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
           <div style={styles.headerBrand}>
-            <Image
-              src="/logo.png"
-              alt="Ronak Jewellers"
-              width={150}
-              height={150}
-            />
-
+            <Image src={logoSrc}  alt="Ronak Jewellers"   width={150}  height={150}  style={styles.logoImage} />
             <div>
               <h1>RJ - Admin Panel</h1>
-              <p style={styles.subtitle}>Ronak Jewellers Live Rates</p>
+              <p style={styles.subtitle}>Premium-Rate Setting Page</p>
             </div>
           </div>
 
@@ -1145,12 +1139,8 @@ function ToggleRow({ label, checked, onChange }) {
       <div style={styles.loginSummaryGrid}>
         <div style={styles.loginSummaryCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
-          <strong style={styles.loginSummaryValue}>{authorizedTodayCount}</strong>
-        </div>
-
-        <div style={styles.loginSummaryCard}>
-          <span style={styles.loginSummaryLabel}>Unauthorized :</span>
-          <strong style={styles.loginSummaryValue}>{unauthorizedTodayCount}</strong>
+          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> || <span style={styles.loginSummaryLabel}>Unauthorized :</span>
+          <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
       </div>
 
@@ -1169,7 +1159,7 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? "Unauthorized Attempt"
+            ? ""
             : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
@@ -1803,7 +1793,7 @@ loginRecordCard: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 16,
+  borderRadius: 2,
   padding: 4,
   marginBottom: 8,
   display: "grid",
@@ -1814,7 +1804,7 @@ loginRecordUnauthorized: {
   background:
     "linear-gradient(180deg, rgba(155,44,44,0.20), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,120,120,0.30)",
-  borderRadius: 16,
+  borderRadius: 2,
   padding: 2,
   marginBottom: 8,
   display: "grid",
