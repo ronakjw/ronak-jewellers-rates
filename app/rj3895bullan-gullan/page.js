@@ -1136,13 +1136,12 @@ function ToggleRow({ label, checked, onChange }) {
     <>
       <h2>Login Records</h2>
 
-      <div style={styles.loginSummaryGrid}>
+  {/* <div style={styles.loginSummaryGrid}> */}
         <div style={styles.loginSummaryCard}>
           <span style={styles.loginSummaryLabel}>Authorized :</span>
           <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> ● <span style={styles.loginSummaryLabel}>Unauthorized :</span>
           <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
-      </div>
 
    {/*<p style={styles.subtitle}>Showing recent login records from the last 7 days.</p>*/}
 
