@@ -1032,8 +1032,8 @@ function ToggleRow({ label, checked, onChange }) {
         </form>
 
         {message ? <p style={styles.message}>{message}</p> : null}
-        
-<div style={styles.logSection}>
+<div style={{display:"flex", gap:11, marginTop: 11, marginBottom: 11}}>        
+
   <button
     type="button"
     style={styles.logToggle}
@@ -1041,7 +1041,22 @@ function ToggleRow({ label, checked, onChange }) {
   >
     {showLogs ? "Hide Change Log" : "Show Change Log"}
   </button>
-
+ 
+  <button
+    type="button"
+    style={styles.logToggle}
+    onClick={() => setShowLoginRecords(!showLoginRecords)}
+  >
+    {showLoginRecords
+      ? "Hide Login Records"
+      : `Show Login Records${
+          unauthorizedTodayCount
+            ? ` (${unauthorizedTodayCount} unauthorized today)`
+            : ""
+        }`}
+  </button>
+    </div>
+<div style={styles.logSection}>
   {showLogs ? (
     <>
       <h2> Change Log</h2>
@@ -1052,7 +1067,7 @@ function ToggleRow({ label, checked, onChange }) {
         </p>
       ) : (
         changeLogs.map((log) => (
-  <div key={log.id} style={styles.logCardNew}>
+<div key={log.id} style={styles.logCardNew}>
   <div style={styles.logDateCol}>
     {log.createdAt?.toDate
       ? log.createdAt.toDate().toLocaleString("en-IN")
@@ -1122,19 +1137,7 @@ function ToggleRow({ label, checked, onChange }) {
 </div> 
 
 <div style={styles.logSection}>
-  <button
-    type="button"
-    style={styles.logToggle}
-    onClick={() => setShowLoginRecords(!showLoginRecords)}
-  >
-    {showLoginRecords
-      ? "Hide Login Records"
-      : `Show Login Records${
-          unauthorizedTodayCount
-            ? ` (${unauthorizedTodayCount} unauthorized today)`
-            : ""
-        }`}
-  </button>
+
 
   {showLoginRecords ? (
     <>
