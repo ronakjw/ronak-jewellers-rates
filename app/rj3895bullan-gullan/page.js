@@ -575,14 +575,19 @@ function ToggleRow({ label, checked, onChange }) {
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
           <div style={styles.headerBrand}>
-            <Image src={logoSrc}  alt="Ronak Jewellers"   width={150}  height={150}  style={styles.logoImage} />
+          <Image
+  src="/logoo.png"
+  alt="Ronak Jewellers"
+  width={150}
+  height={150}
+  style={styles.logoCenter}/>
             <div>
               <h1>RJ - Admin Panel</h1>
               <p style={styles.subtitle}>Premium-Rate Setting Page</p>
             </div>
           </div>
 
- <div style={styles.adminButtonRows}>
+ <div style={styles.adminButtonRow}>
   <button
     type="button"
     style={styles.topButton}
