@@ -1030,7 +1030,7 @@ function ToggleRow({ label, checked, onChange }) {
 
         {message ? <p style={styles.message}>{message}</p> : null}
 
-<div style=style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
+<div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
  
 <div style={styles.logSection}>
   <button
