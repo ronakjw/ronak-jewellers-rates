@@ -1511,9 +1511,9 @@ toggleKnob: {
   headerRow: {
   display: "flex",
   flexDirection: "column",
-  gap: 18,
+  gap: 11,
   alignItems: "stretch",
-  marginBottom: 22,
+  marginBottom: 11,
 },
   headerBrand: {
   display: "flex",
