@@ -6,12 +6,11 @@
     "role": "Dealer"
   },
 
-  "8103700267": { "phone": "8103700267", "name": "Navin Sahu", "firstName": "Navin", "role": "Dealer" },
-
+  "8103700267": { "phone": "8103700267", "name": "Navin Sahu", "firstName": "Navin", "role": "Dealer" },  
   "9893222541": { "phone": "9893222541", "name": "Ashish Laddha [Sobapur]", "firstName": "Ashish", "role": "Dealer" },
 
   "9669666037": {
-  "phone": "9669666037",
+    "phone": "9669666037",
     "name": "Gopal Sarda",
     "firstName": "Gopal",
     "role": "Dealer"
@@ -31,13 +30,13 @@
   },
   
 "8319045607": {
-  "phone": "8319045607",
+    "phone": "8319045607",
     "name": "Puneet Oswal",
     "firstName": "Puneet",
     "role": "Dealer"
   },
   "8319030242": {
-  "phone": "8319030242",
+    "phone": "8319030242",
     "name": "Hina Oswal",
     "firstName": "Hina",
     "role": "Dealer"
@@ -60,12 +59,6 @@
     "phone": "6260095411",
     "name": "Yogesh Bhiya",
     "firstName": "Yogesh",
-    "role": "Dealer"
-  },
-  "6260306190": {
-    "phone": "6260306190",
-    "name": "Rakshit Bhaiya",
-    "firstName": "Rakshit",
     "role": "Dealer"
   },
 
@@ -1096,15 +1089,10 @@
   "9425415320": {
     "phone": "9425415320",
     "name": "Shiv Ji Bhai",
-    "firstName": "Shiv",
+    "firstName": "Shivji",
     "role": "Dealer"
   },
-  "9425424113": {
-    "phone": "9425424113",
-    "name": "Guddi Bua",
-    "firstName": "Guddi",
-    "role": "Dealer"
-  },
+ 
   "9425436481": {
     "phone": "9425436481",
     "name": "Anand [Sagar]",
@@ -1526,8 +1514,7 @@
     "firstName": "Raju",
     "role": "Dealer"
   },
- r"
-  },
+  
   "9827747964": {
     "phone": "9827747964",
     "name": "Nimesh Ji Rounak",
