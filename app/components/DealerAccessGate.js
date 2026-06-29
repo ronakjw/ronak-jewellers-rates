@@ -161,7 +161,7 @@ export default function DealerAccessGate({
           setMessage(
             access.requiresOtp
               ? "This number is being used on a new device. Please verify again."
-              : "Your access is not active. Please contact us for authorization."
+              : "Your access is not active."
           );
           setMobile(phone);
           setChecking(false);
@@ -259,7 +259,7 @@ export default function DealerAccessGate({
         clearSession();
         setMessage(
           access.message ||
-            "This number is not authorized!"
+            "This number is Unauthorized! Please contact us for authorization."
         );
         return;
       }
