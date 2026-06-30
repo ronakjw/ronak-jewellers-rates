@@ -30,3 +30,7 @@ There should be a separate tab/page for target rate alert system. You can create
 
 
 For hindi language support, full app including rate names, disclaimers, login page, sidebar while keeping the placement and storage recommended by you. Do not add bullion calculator. Do not show  'Alerts' options in the sidebar.
+
+
+
+add a feedback button on the sidebar. After user logout, show 'logout successful' with login again button and a feedback textbox with submit button. 
