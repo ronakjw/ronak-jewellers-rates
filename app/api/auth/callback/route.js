@@ -61,7 +61,7 @@ export async function GET(req) {
           <h1>Ronak Jewellers</h1>
           <h2>Kite reconnected successfully.</h2>
           <p>You can close this tab now.</p>
-          <a href="/admin" style="color:#f3d98b;">Go to Admin</a>
+          <a href="/rj3895bullan-gullan" style="color:#f3d98b;">Go to Admin</a>
         </body>
       </html>
     `,
