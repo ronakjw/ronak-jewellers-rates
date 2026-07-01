@@ -451,6 +451,8 @@ export default function DealerAccessGate({
               {t.loginAgain}
             </button>
           </div>
+    ) : null}
+    {logoutSuccess ? (
           <div style={styles.feedbackBox}>
             <h3 style={styles.feedbackTitle}>{t.feedbackTitle}</h3>
             <textarea
