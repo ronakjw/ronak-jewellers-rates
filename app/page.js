@@ -2474,6 +2474,7 @@ const styles = {
 
   disclaimer: {
     marginTop: 26,
+    marginBottom: 30,
     color: "var(--rj-muted)",
     fontSize: 13,
     textAlign: "center",
