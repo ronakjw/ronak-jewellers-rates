@@ -606,7 +606,7 @@ function ToggleRow({ label, checked, onChange }) {
     href="/rj3895bullan-gullan/security"
     style={styles.topButton}
   >
-    Security Tools
+    Security
   </a>
 
   <button
@@ -1522,8 +1522,8 @@ toggleKnob: {
 },
   adminButtonRow: {
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gap: 10,
+  gridTemplateColumns: "repeat(4, 1fr)",
+  gap: 5,
   width: "100%",
 },
   topButton: {
