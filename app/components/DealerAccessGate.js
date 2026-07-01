@@ -452,7 +452,7 @@ export default function DealerAccessGate({
             </button>
           </div>
         ) : null}
-  {/*
+  
         <h1 style={styles.brand}>{t.brand}</h1>
         <h2 style={styles.accessTitle}>{t.dealerAccess}</h2>
         {t.intro ? <p style={styles.muted}>{t.intro}</p> : null}
@@ -514,7 +514,7 @@ export default function DealerAccessGate({
             </button>
           </>
         )}
-  */}
+  
         {message ? <p style={styles.message}>{message}</p> : null}
         <p style={styles.note}>{t.accessNote}</p>
 
