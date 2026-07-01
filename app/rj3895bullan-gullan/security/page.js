@@ -218,7 +218,7 @@ export default function SecurityAdminPage() {
             {filteredDevices.map((item) => (
               <div key={item.phone} style={styles.deviceCard}>
                 <div>
-                  <strong style={styles.labelSmall>{item.name || "--"}</strong>
+                  <strong style={styles.labelSmall}>{item.name || "--"}</strong>
                   <p style={styles.mini}>{item.phone}</p>
                 </div>
                 <div>
