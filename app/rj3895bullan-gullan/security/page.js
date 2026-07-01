@@ -218,7 +218,7 @@ export default function SecurityAdminPage() {
               <div key={item.phone} style={styles.deviceCard}>
                 <div>
                   <strong style={styles.mini}>{item.name || "--"}</strong>
-                  <p style={styles.mini}>{item.number || "--"}</p>
+                  <p style={styles.mini}>{item.phone || "--"}</p>
                 </div>
                 <div>
                   <span style={styles.labelSmall}>Device</span>
@@ -286,7 +286,7 @@ export default function SecurityAdminPage() {
             <div key={alert.id} style={styles.rowCard}>
               <div>
                 <strong>{alert.name || alert.phone}</strong>
-                <p style={styles.mini}>📱 {alert.phone}</p>
+                <p style={styles.mini}>{alert.phone}</p>
               </div>
               <div>
                 <strong>{rateLabel(alert.rateType)} {conditionLabel(alert.condition)} ₹{formatPrice(alert.targetRate)}</strong>
@@ -304,7 +304,7 @@ export default function SecurityAdminPage() {
             <div key={item.id} style={styles.rowCard}>
               <div>
                 <strong>{item.name || "User"}</strong>
-                <p style={styles.mini}>📱 {item.phone || "--"} · {formatDate(item.createdAt)}</p>
+                <p style={styles.mini}>{item.phone || "--"} · {formatDate(item.createdAt)}</p>
               </div>
               <p style={styles.feedbackText}>{item.message}</p>
             </div>
@@ -341,7 +341,7 @@ const styles = {
   textarea: { width: "100%", minHeight: 90, boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px" },
   label: { color: "#bbb", fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em" },
   labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase" },
-  mini: { margin: "5px 0", color: "#aaa", fontSize: 12 },
+  mini: { margin: "3px 0", color: "#aaa", fontSize: 13 },
   message: { color: "#f3d98b" },
   messageBox: { padding: 12, borderRadius: 12, border: "1px solid rgba(214,180,92,.25)", marginBottom: 14, background: "rgba(214,180,92,.08)" },
   primaryButton: { border: "1px solid rgba(214,180,92,.55)", background: "rgba(214,180,92,.18)", color: "#f3d98b", borderRadius: 12, padding: "12px 14px", fontWeight: 800, cursor: "pointer" },
