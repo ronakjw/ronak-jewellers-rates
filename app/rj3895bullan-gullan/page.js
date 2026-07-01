@@ -575,12 +575,6 @@ function ToggleRow({ label, checked, onChange }) {
       <section style={styles.adminShell}>
         <div style={styles.headerRow}>
           <div style={styles.headerBrand}>
-            <Image
-              src="/logo.png"
-              alt="Ronak Jewellers"
-              width={150}
-              height={150}
-            />
 
             <div>
               <h1>RJ - Admin Panel</h1>
@@ -1185,8 +1179,8 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div>
-    </div>
-
+ </div>
+{/*
 {assistantOpen && (
   <div style={styles.assistantPopup}>
     <h3 style={styles.assistantTitle}>
@@ -1298,11 +1292,12 @@ function ToggleRow({ label, checked, onChange }) {
   }
 >
   🤖
-</button>
-      </section>
+</button> */}
+   </section>
     </main>
   );
 }
+
 function formatLogValue(key, value) {
   if (
     [
@@ -1335,6 +1330,7 @@ function formatLogValue(key, value) {
 
   return String(value);
 }
+
 function StatusItem({ label, ok, value }) {
   return (
     <div style={styles.systemItem}>
