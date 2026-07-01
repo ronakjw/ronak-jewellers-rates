@@ -1523,7 +1523,7 @@ toggleKnob: {
   adminButtonRow: {
   display: "grid",
   gridTemplateColumns: "repeat(4, 1fr)",
-  gap: 5,
+  gap: 2,
   width: "100%",
 },
   topButton: {
@@ -1531,11 +1531,11 @@ toggleKnob: {
   border: "1px solid rgba(214,180,92,0.35)",
   background: "rgba(214,180,92,0.08)",
   color: "#f3d98b",
-  borderRadius: 12,
-  padding: "12px 10px",
+  borderRadius: 7,
+  padding: "6px 5px",
   textAlign: "center",
-  fontWeight: 800,
-  fontSize: 14,
+  fontWeight: 500,
+  fontSize: 12,
   cursor: "pointer",
 },
   pageCenter: {
