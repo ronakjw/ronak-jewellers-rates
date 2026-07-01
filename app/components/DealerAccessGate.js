@@ -59,7 +59,7 @@ const gateText = {
     newDevice: "This number is being used on a new device. Please verify again.",
     logoutSuccess: "Logout successful.",
     loginAgain: "Login Again",
-    feedbackTitle: "Share feedback",
+    feedbackTitle: "Share feedback anonymously",
     feedbackPlaceholder: "Type your feedback here...",
     submitFeedback: "Submit Feedback",
     feedbackSuccess: "Thank you. Feedback submitted successfully.",
