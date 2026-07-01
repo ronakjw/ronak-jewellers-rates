@@ -451,74 +451,6 @@ export default function DealerAccessGate({
               {t.loginAgain}
             </button>
           </div>
-        ) : null}
-  {/*
-        <h1 style={styles.brand}>{t.brand}</h1>
-        <h2 style={styles.accessTitle}>{t.dealerAccess}</h2>
-        {t.intro ? <p style={styles.muted}>{t.intro}</p> : null}
-
-        {!otpSent ? (
-          <>
-            {t.mobile ? <label style={styles.label}>{t.mobile}</label> : null}
-            <input
-              style={styles.input}
-              value={mobile}
-              inputMode="numeric"
-              maxLength={14}
-              placeholder={t.placeholder}
-              onChange={(e) => setMobile(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") grantAccess();
-              }}
-            />
-
-            <button type="button" style={styles.button} onClick={grantAccess} disabled={submitting || sendingOtp}>
-              {sendingOtp ? t.sendingOtp : submitting ? t.checkingButton : t.continue}
-            </button>
-          </>
-        ) : (
-          <>
-        
-            <label style={styles.label}>{t.enterOtp}</label>
-            <input
-              style={styles.input}
-              value={otp}
-              inputMode="numeric"
-              maxLength={8}
-              placeholder={t.otpPlaceholder}
-              onChange={(e) => setOtp(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") verifyOtp();
-              }}
-            />
-
-            <button type="button" style={styles.button} onClick={verifyOtp} disabled={verifyingOtp}>
-              {verifyingOtp ? t.verifying : t.verify}
-            </button>
-
-            <button
-              type="button"
-              style={styles.secondaryButton}
-              onClick={async () => {
-                setOtpSent(false);
-                setOtp("");
-                setMessage("");
-                setPendingPhone("");
-                setPendingProfile(null);
-                try {
-                  await signOut(auth);
-                } catch {}
-              }}
-            >
-              {t.changeNumber}
-            </button>
-          </>
-        )}
-  */}
-        {message ? <p style={styles.message}>{message}</p> : null}
-        <p style={styles.note}>{t.accessNote}</p>
-
-        {logoutSuccess ? (
           <div style={styles.feedbackBox}>
             <h3 style={styles.feedbackTitle}>{t.feedbackTitle}</h3>
             <textarea
@@ -581,8 +513,8 @@ const styles = {
     maxWidth: 440,
     background: "var(--gate-card)",
     border: "1px solid var(--gate-border)",
-    borderRadius: 26,
-    padding: 24,
+    borderRadius: 20,
+    padding: 18,
     boxShadow: "0 26px 80px rgba(0,0,0,0.30)",
     boxSizing: "border-box",
   },
