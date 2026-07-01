@@ -1024,6 +1024,7 @@ function ToggleRow({ label, checked, onChange }) {
     rows={4}
   />
 </div>
+      </form>
 
 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
  
