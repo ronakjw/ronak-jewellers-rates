@@ -218,11 +218,11 @@ export default function SecurityAdminPage() {
             {filteredDevices.map((item) => (
               <div key={item.phone} style={styles.deviceCard}>
                 <div>
-                  <strong>{item.name || "--"}</strong>
-                  <p style={styles.mini}>📱 {item.phone}</p>
+                  <strong style={styles.labelSmall>{item.name || "--"}</strong>
+                  <p style={styles.mini}>{item.phone}</p>
                 </div>
                 <div>
-                  <span style={styles.labelSmall}>Registered Device</span>
+                  <span style={styles.labelSmall}>Device</span>
                   <p style={styles.mini}>{item.registeredDevice || "--"}</p>
                 </div>
                 <div>
@@ -231,11 +231,11 @@ export default function SecurityAdminPage() {
                   <p style={styles.mini}>{item.lastCity || item.lastIp || "--"}</p>
                 </div>
                 <div style={styles.actions}>
-                  <button style={styles.smallButton} onClick={() => deviceAction(item.phone, "remove_device")}>Remove Device</button>
+                  <button style={styles.smallButton} onClick={() => deviceAction(item.phone, "remove_device")}>Remv</button>
                   {item.blocked ? (
-                    <button style={styles.dangerSoftButton} onClick={() => deviceAction(item.phone, "unblock")}>Unblock Number</button>
+                    <button style={styles.dangerSoftButton} onClick={() => deviceAction(item.phone, "unblock")}>Unblok</button>
                   ) : (
-                    <button style={styles.dangerButton} onClick={() => deviceAction(item.phone, "block")}>Block Number</button>
+                    <button style={styles.dangerButton} onClick={() => deviceAction(item.phone, "block")}>Block</button>
                   )}
                 </div>
               </div>
@@ -331,15 +331,15 @@ const styles = {
   form: { marginTop: 18 },
   card: { background: "rgba(255,255,255,.045)", border: "1px solid rgba(214,180,92,.22)", borderRadius: 18, padding: 16, marginBottom: 16 },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 },
-  tableWrap: { display: "grid", gap: 10, marginTop: 14 },
-  deviceCard: { display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr auto", gap: 12, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 14, padding: 12 },
+  tableWrap: { display: "grid", gap: 4, marginTop: 14 },
+  deviceCard: { display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr auto", gap: 6, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 7, padding: 3 },
   rowCard: { display: "grid", gridTemplateColumns: "1fr 1.4fr auto", gap: 12, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 14, padding: 12, marginTop: 10 },
   actions: { display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" },
   input: { width: "100%", boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px", margin: "6px 0 12px" },
   textarea: { width: "100%", minHeight: 90, boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px" },
   label: { color: "#bbb", fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em" },
   labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase", letterSpacing: ".08em" },
-  mini: { margin: "5px 0", color: "#aaa", fontSize: 13 },
+  mini: { margin: "5px 0", color: "#aaa", fontSize: 11 },
   message: { color: "#f3d98b" },
   messageBox: { padding: 12, borderRadius: 12, border: "1px solid rgba(214,180,92,.25)", marginBottom: 14, background: "rgba(214,180,92,.08)" },
   primaryButton: { border: "1px solid rgba(214,180,92,.55)", background: "rgba(214,180,92,.18)", color: "#f3d98b", borderRadius: 12, padding: "12px 14px", fontWeight: 800, cursor: "pointer" },
