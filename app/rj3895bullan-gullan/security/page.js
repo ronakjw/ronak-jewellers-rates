@@ -226,7 +226,7 @@ export default function SecurityAdminPage() {
                 <div>
                   <span style={styles.labelSmall}>Last Login</span>
                   <p style={styles.mini}>{formatDate(item.lastLoginTime)}</p>
-                  <p style={styles.mini}>{item.lastCity || item.lastIp || "--"}</p>
+                  <p style={styles.mini}>{item.lastIp || "--"}</p>
                 </div>
                 <div style={styles.actions}>
                   <button style={styles.smallButton} onClick={() => deviceAction(item.phone, "remove_device")}>Remove</button>
@@ -339,14 +339,14 @@ const styles = {
   input: { width: "100%", boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px", margin: "6px 0 12px" },
   textarea: { width: "100%", minHeight: 90, boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px" },
   label: { color: "#bbb", fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em" },
-  labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase", letterSpacing: ".08em" },
-  mini: { margin: "5px 0", color: "#aaa", fontSize: 11 },
+  labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase" },
+  mini: { margin: "5px 0", color: "#aaa", fontSize: 12 },
   message: { color: "#f3d98b" },
   messageBox: { padding: 12, borderRadius: 12, border: "1px solid rgba(214,180,92,.25)", marginBottom: 14, background: "rgba(214,180,92,.08)" },
   primaryButton: { border: "1px solid rgba(214,180,92,.55)", background: "rgba(214,180,92,.18)", color: "#f3d98b", borderRadius: 12, padding: "12px 14px", fontWeight: 800, cursor: "pointer" },
-  smallButton: { textDecoration: "none", border: "1px solid rgba(214,180,92,.35)", background: "rgba(214,180,92,.08)", color: "#f3d98b", borderRadius: 4, padding: "5px 6px", fontWeight: 100, cursor: "pointer" },
-  dangerButton: { border: "1px solid rgba(255,120,120,.35)", background: "rgba(120,20,20,.32)", color: "#ffd6d6", borderRadius: 4, padding: "5px 6px", fontWeight: 100, cursor: "pointer" },
-  dangerSoftButton: { border: "1px solid rgba(255,210,120,.35)", background: "rgba(214,180,92,.08)", color: "#f3d98b", borderRadius: 4, padding: "5px 6px", fontWeight: 100, cursor: "pointer" },
+  smallButton: { textDecoration: "none", border: "1px solid rgba(214,180,92,.35)", background: "rgba(214,180,92,.08)", color: "#f3d98b", borderRadius: 4, padding: "3px 3px", fontWeight: 400, cursor: "pointer" },
+  dangerButton: { border: "1px solid rgba(255,120,120,.35)", background: "rgba(120,20,20,.32)", color: "#ffd6d6", borderRadius: 4, padding: "3px 3px", fontWeight: 400, cursor: "pointer" },
+  dangerSoftButton: { border: "1px solid rgba(255,210,120,.35)", background: "rgba(214,180,92,.08)", color: "#f3d98b", borderRadius: 4, padding: "3px 3px", fontWeight: 400, cursor: "pointer" },
   checkRow: { display: "flex", alignItems: "center", gap: 8, color: "#f3d98b" },
   feedbackText: { color: "#ddd", whiteSpace: "pre-wrap", lineHeight: 1.5 },
 };
