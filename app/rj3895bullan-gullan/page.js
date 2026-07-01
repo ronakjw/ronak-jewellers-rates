@@ -1030,17 +1030,9 @@ function ToggleRow({ label, checked, onChange }) {
     rows={4}
   />
 </div>
-          <button
-            style={styles.primaryButtonWide}
-            type="submit"
-            disabled={saving}
-          >
-            {saving ? "Saving..." : "Save Settings"}
-          </button>
-        </form>
 
-        {message ? <p style={styles.message}>{message}</p> : null}
-        
+<div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
+ 
 <div style={styles.logSection}>
   <button
     type="button"
@@ -1060,7 +1052,7 @@ function ToggleRow({ label, checked, onChange }) {
         </p>
       ) : (
         changeLogs.map((log) => (
-  <div key={log.id} style={styles.logCardNew}>
+<div key={log.id} style={styles.logCardNew}>
   <div style={styles.logDateCol}>
     {log.createdAt?.toDate
       ? log.createdAt.toDate().toLocaleString("en-IN")
@@ -1070,8 +1062,7 @@ function ToggleRow({ label, checked, onChange }) {
   <div style={styles.logChangesCol}>
   {log.eventType === "volatility" ? (
     <p style={styles.logText}>
-      ⚠️ Volatility triggered: Silver MCX Buy moved ₹
-      {formatLogValue("movement", log.movement)} in 40 seconds.
+      ⚠️ Volatility triggered: Silver {formatLogValue("movement", log.movement)} in 40 seconds.
     </p>
   ) : null}
   {Object.entries({
@@ -1129,8 +1120,8 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div> 
-
-<div style={styles.logSection}>
+ 
+  <div style={styles.logSection}>   
   <button
     type="button"
     style={styles.logToggle}
@@ -1144,30 +1135,15 @@ function ToggleRow({ label, checked, onChange }) {
             : ""
         }`}
   </button>
-
+    
   {showLoginRecords ? (
     <>
       <h2>Login Records</h2>
-
-      <div style={styles.loginSummaryGrid}>
         <div style={styles.loginSummaryCard}>
-          <span style={styles.loginSummaryLabel}>Authorized Today</span>
-          <strong style={styles.loginSummaryValue}>{authorizedTodayCount}</strong>
+          <span style={styles.loginSummaryLabel}>Authorized :</span>
+          <strong style={styles.loginSummaryValue}> {authorizedTodayCount}</strong> || <span style={styles.loginSummaryLabel}>Unauthorized :</span>
+          <strong style={styles.loginSummaryValue}> {unauthorizedTodayCount}</strong>
         </div>
-
-        <div style={styles.loginSummaryCard}>
-          <span style={styles.loginSummaryLabel}>Unauthorized Today</span>
-          <strong style={styles.loginSummaryValue}>{unauthorizedTodayCount}</strong>
-        </div>
-      </div>
-
-      <p style={styles.subtitle}>Showing recent login records from the last 7 days.</p>
-
-      {unauthorizedLoginRecords.length ? (
-        <div style={styles.unauthorizedAlert}>
-          ⚠️ Unauthorized access attempts today: {unauthorizedTodayCount}
-        </div>
-      ) : null}
 
       {loginRecords.length === 0 ? (
         <p style={styles.subtitle}>No login records found yet.</p>
@@ -1176,19 +1152,17 @@ function ToggleRow({ label, checked, onChange }) {
           const isUnauthorized =
             record.status === "unauthorized" || record.authorized === false;
           const displayName = isUnauthorized
-            ? "Unauthorized Attempt"
-            : record.firstName || record.name || "Authorized User";
+            ? ""
+            : record.name || "Authorized User";
           const displayPhone = record.phone || record.attemptedPhone || "--";
 
           return (
-            <div
-              key={record.id}
-              style={
+            <div key={record.id}
+               style={
                 isUnauthorized
                   ? styles.loginRecordUnauthorized
                   : styles.loginRecordCard
-              }
-            >
+              }>
               <div style={styles.logDateCol}>
                 {record.createdAt?.toDate
                   ? record.createdAt.toDate().toLocaleString("en-IN")
@@ -1196,8 +1170,10 @@ function ToggleRow({ label, checked, onChange }) {
               </div>
 
               <div style={styles.loginRecordInfo}>
+              { displayName ?
                 <strong>{displayName}</strong>
-                <span>📱 {displayPhone}</span>
+              : null }
+                <span> {displayPhone}</span>
                 {isUnauthorized ? (
                   <span style={styles.unauthorizedText}>Unauthorized</span>
                 ) : null}
@@ -1209,6 +1185,7 @@ function ToggleRow({ label, checked, onChange }) {
     </>
   ) : null}
 </div>
+    </div>
 
 {assistantOpen && (
   <div style={styles.assistantPopup}>
@@ -1398,12 +1375,12 @@ logCardNew: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 16,
-  padding: 11,
+  borderRadius: 5,
+  padding: 2,
   marginBottom: 8,
   display: "grid",
-  gridTemplateColumns: "180px 1fr",
-  gap: 11,
+  gridTemplateColumns: "85px 1fr",
+  gap: 3,
 },
 logDateCol: {
   color: "#9f9f9f",
@@ -1812,21 +1789,21 @@ loginRecordCard: {
   border: "1px solid rgba(255,255,255,0.08)",
   borderRadius: 16,
   padding: 11,
-  marginBottom: 8,
+  marginTop: 8,
   display: "grid",
-  gridTemplateColumns: "180px 1fr",
-  gap: 11,
+  gridTemplateColumns: "140px 1fr",
+  gap: 1,
 },
 loginRecordUnauthorized: {
   background:
     "linear-gradient(180deg, rgba(155,44,44,0.20), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,120,120,0.30)",
-  borderRadius: 16,
-  padding: 11,
-  marginBottom: 8,
+  borderRadius: 2,
+  padding: 2,
+  marginTop: 8,
   display: "grid",
-  gridTemplateColumns: "180px 1fr",
-  gap: 11,
+  gridTemplateColumns: "140px 1fr",
+  gap: 1,
 },
 loginRecordInfo: {
   color: "#f3d98b",
