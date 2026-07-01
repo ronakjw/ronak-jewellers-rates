@@ -202,7 +202,7 @@ export default function SecurityAdminPage() {
             <p style={styles.subtitle}>Device Manager, Notifications, Target Alerts and Feedback</p>
           </div>
           <div style={styles.headerActions}>
-            <a href="/rj-control-7392" style={styles.smallButton}>Main Admin</a>
+            <a href="/rj3895bullan-gullan" style={styles.smallButton}>Main Admin</a>
             <button style={styles.smallButton} onClick={loadAll} disabled={loading}>{loading ? "Loading..." : "Refresh"}</button>
             <button style={styles.smallButton} onClick={() => signOut(auth)}>Logout</button>
           </div>
