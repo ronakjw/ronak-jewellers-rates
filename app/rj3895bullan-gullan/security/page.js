@@ -218,6 +218,7 @@ export default function SecurityAdminPage() {
               <div key={item.phone} style={styles.deviceCard}>
                 <div>
                   <strong style={styles.mini}>{item.name || "--"}</strong>
+                  <p style={styles.mini}>{item.number || "--"}</p>
                 </div>
                 <div>
                   <span style={styles.labelSmall}>Device</span>
@@ -332,7 +333,7 @@ const styles = {
   form: { marginTop: 18 },
   card: { background: "rgba(255,255,255,.045)", border: "1px solid rgba(214,180,92,.22)", borderRadius: 8, padding: 6, marginBottom: 6 },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 },
-  tableWrap: { display: "grid", gap: 4, marginTop: 4 },
+  tableWrap: { display: "grid", gap: 8, marginTop: 2 },
   deviceCard: { display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr auto", gap: 12, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 14, padding: 12 },
   rowCard: { display: "grid", gridTemplateColumns: "1fr 1.4fr auto", gap: 12, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 14, padding: 12, marginTop: 10 },
   actions: { display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" },
