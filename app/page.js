@@ -28,8 +28,8 @@ const LOGOUT_SUCCESS_KEY = "rj-logout-success";
 
 const translations = {
   en: {
-    liveRates: "Live Rates",
-    myAlerts: "My Alerts",
+    liveRates: "LIVE RATES",
+    myAlerts: "MY ALERTS",
     liveStatus: "Live Status",
     activeContracts: "Active Contracts",
     utilities: "Utilities",
@@ -2372,6 +2372,7 @@ const styles = {
 
   disclaimer: {
     marginTop: 26,
+    marginBottom: 31,
     color: "var(--rj-muted)",
     fontSize: 13,
     textAlign: "center",
@@ -2604,15 +2605,15 @@ const styles = {
   bottomTabs: {
     position: "fixed",
     left: "50%",
-    bottom: 14,
+    bottom: 1,
     transform: "translateX(-50%)",
     width: "min(92vw, 420px)",
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: 8,
     padding: 8,
-    borderRadius: 20,
-    border: "1px solid var(--rj-panel-border)",
+    borderRadius: 1,
+    border: "3px solid var(--rj-panel-border)",
     background: "rgba(10,10,10,0.78)",
     backdropFilter: "blur(16px)",
     WebkitBackdropFilter: "blur(16px)",
