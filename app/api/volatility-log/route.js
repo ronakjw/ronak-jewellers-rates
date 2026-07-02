@@ -38,6 +38,8 @@ export async function POST(request) {
       windowSeconds: 40,
     };
 
+  await adminDb.collection("system").doc("volatility").set({active: true, movement, triggeredAt: new Date(), expiresAt: new Date(Date.now() + 10 * 60 * 1000), });
+  
     await adminDb.collection("changeLogs").add(logData);
 
     await stateRef.set(
