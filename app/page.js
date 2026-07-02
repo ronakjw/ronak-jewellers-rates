@@ -1760,7 +1760,7 @@ return (
         <WelcomeToast profile={dealerProfile} visible={showWelcomeCard} t={t} />
     </section>
   
-<div style={styles.}>
+<div style={styles.metaItem}>
   <span>Last Updated: {formatCurrentTime(now)}</span>
 </div>
 <br />
