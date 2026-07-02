@@ -81,7 +81,7 @@ const translations = {
     ratesUnavailable: "Live rates are unavailable at the moment",
     visitAgain: "Please visit again during market hours.",
     loadingRates: "Loading Rates... Please Wait...",
-    liveBullion: "LIVE MCX BULLION FUTURES",
+    liveBullion: "LIVE BULLION RATES",
     finalDisclaimer: "Rates displayed are based on market conditions and applicable premiums. Final rates may vary depending on confirmation at the time of enquiry.",
   },
 };
