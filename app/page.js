@@ -769,8 +769,8 @@ function AlertsPage({
   return (
     <main style={{ ...styles.page, ...themeTokens[theme], paddingBottom: 105 }}>
       <section style={styles.hero}>
-        <Image src={logoSrc} alt="Ronak Jewellers" width={220} height={220} style={styles.logoImage} />
-        <h2 style={styles.brandName}>•Ronak Jewellers•</h2>
+        <Image src={logoSrc} alt="Ronak Jewellers" width={250} height={250} style={styles.logoImage} />
+        <h2 style={styles.brandName}>Ronak Jewellers</h2>
       </section>
 
       <section style={styles.mainCard}>
@@ -811,7 +811,7 @@ function AlertsPage({
               inputMode="decimal"
               value={alertForm.targetRate}
               onChange={(e) => setAlertForm((prev) => ({ ...prev, targetRate: e.target.value }))}
-              placeholder="108000"
+              placeholder="target rate"
             />
           </div>
 
@@ -1362,7 +1362,7 @@ useEffect(() => {
                 nowMs < volatilityUntilRef.current;
 
               if (
-                movement >= 550 &&
+                movement >= 650 &&
                 settings?.volatilityWarningEnabled
               ) {
                 const warningUntil = nowMs + 10 * 60 * 1000;
@@ -1627,7 +1627,7 @@ useEffect(() => {
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
 
       <h1 style={styles.brandName}>
-       - Ronak Jewellers -
+       Ronak Jewellers
       </h1>
 
       
@@ -1725,7 +1725,7 @@ return (
       <section style={styles.hero}>
         <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
 
-        <h2 style={styles.brandName}>•Ronak Jewellers•</h2>
+        <h2 style={styles.brandName}>Ronak Jewellers</h2>
         <div style={styles.statusRow}>
           <span style={styles.live} />
           <span>{t.liveBullion}</span>
@@ -1735,7 +1735,7 @@ return (
         <WelcomeToast profile={dealerProfile} visible={showWelcomeCard} t={t} />
     </section>
   
-<div style={styles.disclaimer}>
+<div style={styles.metaItem}>
   <span>Last Updated: {formatCurrentTime(now)}</span>
 </div>
 <br />
