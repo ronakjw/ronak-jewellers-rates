@@ -31,8 +31,7 @@ const gateText = {
   brand: "Ronak Jewellers",
   dealerAccess: "Dealer Access",
   checking: "Checking access...",
-  intro: "Enter your registered mobile number to view live bullion rates.",
-  mobile: "Mobile Number",
+  intro: "Please enter your registered mobile number",
   placeholder: "10-digit mobile number",
   continue: "Continue",
   checkingButton: "Checking...",
@@ -52,7 +51,7 @@ const gateText = {
   differentOtp: "OTP verified for a different number. Please try again.",
   approveFailed: "Unable to approve this device. Please try again.",
   invalidOtp: "Invalid OTP or OTP expired. Please try again.",
-  accessNote: "Access stays active until the end of the day.",
+  accessNote: "Access for authorized user only.",
   inactive: "Your access is not active. Please contact Ronak Jewellers.",
   newDevice: "This number is being used on a new device. Please verify again.",
   logoutSuccess: "Logout successful.",
@@ -385,7 +384,6 @@ export default function DealerAccessGate({
 
         {!otpSent ? (
           <>
-            <label style={styles.label}>{t.mobile}</label>
             <input
               style={styles.input}
               value={mobile}
@@ -442,6 +440,7 @@ export default function DealerAccessGate({
 
         {message ? <p style={styles.message}>{message}</p> : null}
         <p style={styles.note}>{t.accessNote}</p>
+          <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number thorough your registered device only</p>
 
         {logoutSuccess ? (
           <div style={styles.feedbackBox}>
