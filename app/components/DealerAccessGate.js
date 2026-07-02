@@ -42,7 +42,7 @@ const gateText = {
   verifying: "Verifying...",
   changeNumber: "Change Number",
   validNumber: "Enter a valid 10-digit mobile number.",
-  notAuthorized: "This number is not authorized to view live rates.",
+  notAuthorized: "This number is not authorized to view.",
   unable: "Unable to verify access. Please try again.",
   otpSent: "New device detected. OTP sent to your registered number.",
   otpInactive: "OTP service is not active yet. Please contact Ronak Jewellers.",
@@ -379,7 +379,8 @@ export default function DealerAccessGate({
           </div>
         ) : null}
 
-        <h1 style={styles.brand}>{t.dealerAccess}</h1>
+        <h3 style={styles.brand}>{t.brand}</h3>
+          <h4> DEALER ACCESS </h4>
         <p style={styles.muted}>{t.intro}</p>
 
         {!otpSent ? (
@@ -440,7 +441,7 @@ export default function DealerAccessGate({
 
         {message ? <p style={styles.message}>{message}</p> : null}
         <p style={styles.note}>{t.accessNote}</p>
-          <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number thorough your registered device only</p>
+          <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number thorough your registered device only.</p>
 
         {logoutSuccess ? (
           <div style={styles.feedbackBox}>
