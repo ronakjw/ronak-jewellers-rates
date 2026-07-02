@@ -2673,6 +2673,7 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
     gap: 12,
+    padding: 12,
     marginTop: 14,
   },
   alertLabel: {
@@ -2718,7 +2719,7 @@ const styles = {
     border: "1px solid var(--rj-card-border)",
     background: "var(--rj-card-bg)",
     borderRadius: 14,
-    padding: 14,
+    padding: 24,
     marginTop: 10,
   },
   removeAlertButton: {
