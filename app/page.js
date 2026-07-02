@@ -877,6 +877,7 @@ export default function Home() {
   const [priceHistory, setPriceHistory] = useState([]);
   const [volatilityUntil, setVolatilityUntil] = useState(null);
   const volatilityUntilRef = useRef(null);
+  const [serverVolatilityUntil, setServerVolatilityUntil] = useState(null);
   const volatilityLogInProgressRef = useRef(false);
   const [accessGranted, setAccessGranted] = useState(false);
   const [dealerProfile, setDealerProfile] = useState(null);
@@ -969,6 +970,27 @@ function CustomNotice({ message }) {
       setTheme(savedTheme);
     }
   }, []);
+
+useEffect(() => {
+  if (!accessGranted) return;
+
+  const unsub = onSnapshot(doc(db, "system", "volatility"), (snapshot) => {
+    const data = snapshot.data();
+
+    if (!data?.active || !data?.expiresAt) {
+      setServerVolatilityUntil(null);
+      return;
+    }
+
+    const expiresAt =
+      data.expiresAt?.toDate ? data.expiresAt.toDate().getTime() : Number(data.expiresAt);
+
+    setServerVolatilityUntil(expiresAt);
+  });
+
+  return () => unsub();
+}, [accessGranted]);
+
 useEffect(() => {
   const handleVisibility = async () => {
     if (
@@ -1299,10 +1321,13 @@ useEffect(() => {
 };
   }, [settings, now]);
 
-  const isVolatilityActive =
-    settings?.volatilityWarningEnabled &&
-    volatilityUntil &&
-    Date.now() < volatilityUntil;
+const activeVolatilityUntil =
+  Math.max(Number(volatilityUntil || 0), Number(serverVolatilityUntil || 0));
+
+const isVolatilityActive =
+  settings?.volatilityWarningEnabled &&
+  activeVolatilityUntil &&
+  Date.now() < activeVolatilityUntil;
 
  const effectiveRefreshMs = settings?.holidayMode
   ? 900 * 1000
@@ -1741,9 +1766,7 @@ return (
 <br />
 {fetchError ? <div style={styles.errorBox}>{fetchError}</div> : null}
 
-{settings.volatilityWarningEnabled &&
-volatilityUntil &&
-Date.now() < volatilityUntil ? (
+{isVolatilityActive ? (
   <div style={styles.volatilityWarning}>
     <strong>{t.volatilityTitle}</strong>
     <br />
