@@ -29,7 +29,6 @@ const LOGOUT_SUCCESS_KEY = "rj-logout-success";
 
 const gateText = {
   brand: "Ronak Jewellers",
-  dealerAccess: "Dealer Access",
   checking: "Checking access...",
   intro: "Please enter your registered mobile number",
   placeholder: "10-digit mobile number",
