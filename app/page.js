@@ -2386,9 +2386,8 @@ const styles = {
     boxShadow: "var(--rj-soft-shadow), inset 0 1px 0 rgba(255,255,255,0.18)",
     boxSizing: "border-box",
     marginBottom: 15,
-    merginLeft: 10
-    transition:
-      "background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease",
+    merginLeft: 10,
+    transition: "background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease",
   },
 
   disclaimer: {
