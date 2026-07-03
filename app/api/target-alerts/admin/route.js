@@ -7,11 +7,43 @@ async function verifyAdmin(request) {
   const authHeader = request.headers.get("authorization") || "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
   if (!token) return false;
+
   try {
     const decoded = await getAuth().verifyIdToken(token);
     return decoded.email === ADMIN_EMAIL;
   } catch {
     return false;
+  }
+}
+
+function timestampMillis(value) {
+  if (!value) return 0;
+  if (value?.toDate) return value.toDate().getTime();
+  if (value?._seconds) return value._seconds * 1000;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
+async function loadActiveAlerts() {
+  try {
+    const snap = await adminDb
+      .collection("targetAlerts")
+      .where("active", "==", true)
+      .orderBy("createdAt", "desc")
+      .limit(100)
+      .get();
+
+    return snap.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+  } catch {
+    const snap = await adminDb
+      .collection("targetAlerts")
+      .where("active", "==", true)
+      .limit(100)
+      .get();
+
+    return snap.docs
+      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
+      .sort((a, b) => timestampMillis(b.createdAt) - timestampMillis(a.createdAt));
   }
 }
 
@@ -21,17 +53,7 @@ export async function GET(request) {
   }
 
   try {
-    const snap = await adminDb.collection("targetAlerts").limit(300).get();
-    const alerts = snap.docs
-      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
-      .filter((alert) => alert.active === true)
-      .sort((a, b) => {
-        const ad = a.createdAt?.toDate?.() || a.createdAt || new Date(0);
-        const bd = b.createdAt?.toDate?.() || b.createdAt || new Date(0);
-        return new Date(bd).getTime() - new Date(ad).getTime();
-      })
-      .slice(0, 200);
-
+    const alerts = await loadActiveAlerts();
     return Response.json({ success: true, alerts });
   } catch (err) {
     return Response.json({ success: false, message: err.message || "Unable to load target alerts" }, { status: 500 });
@@ -45,7 +67,9 @@ export async function DELETE(request) {
 
   try {
     const id = String(new URL(request.url).searchParams.get("id") || "");
-    if (!id) return Response.json({ success: false, message: "Missing alert id" }, { status: 400 });
+    if (!id) {
+      return Response.json({ success: false, message: "Missing alert id" }, { status: 400 });
+    }
 
     await adminDb.collection("targetAlerts").doc(id).delete();
     return Response.json({ success: true });
