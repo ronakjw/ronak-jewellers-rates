@@ -1113,13 +1113,62 @@ useEffect(() => {
       console.error(err);
     }
   }
+function isTargetAlreadyReached(rateType, condition, targetRate) {
+  if (!quote) return false;
+
+  const rates = getAlertRatesFromQuote(quote);
+  const currentRate = Number(rates[rateType]);
+  const target = Number(targetRate);
+
+  if (!Number.isFinite(currentRate) || currentRate <= 0) {
+    return false;
+  }
+
+  if (!Number.isFinite(target) || target <= 0) {
+    return false;
+  }
+
+  if (condition === "below_equal") {
+    return currentRate <= target;
+  }
+
+  if (condition === "above_equal") {
+    return currentRate >= target;
+  }
+
+  return false;
+}
 
   async function saveTargetAlert() {
     if (!dealerProfile?.phone || !dealerProfile?.deviceId) return;
 
     setAlertMessage("");
+    const target = Number(alertForm.targetRate);
+
+if (!Number.isFinite(target) || target <= 0) {
+  setAlertMessage("Please enter a valid target rate.");
+  return;
+}
+
+if (
+  isTargetAlreadyReached(
+    alertForm.rateType,
+    alertForm.condition,
+    alertForm.targetRate
+  )
+) {
+  const selectedRate =
+    RATE_ALERT_OPTIONS.find((item) => item.value === alertForm.rateType)?.label ||
+    "Selected rate";
+
+  setAlertMessage(
+    `${selectedRate} has already reached your target. Try changing the CONDITION`
+  );
+  return;
+}
     try {
-     const pushReady = await registerPushToken();
+     const pushReady = registerPushToken().catch((err) => {console.warn("Push notification setup failed:", err);});
+      
      if (!pushReady) { console.warn("Push notification not ready. Alert will still be saved."); }
    
       const res = await fetch("/api/target-alerts", {
