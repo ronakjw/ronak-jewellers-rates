@@ -1025,6 +1025,14 @@ function ToggleRow({ label, checked, onChange }) {
     rows={4}
   />
 </div>
+   <button
+    type="button"
+    style={styles.logToggle}
+    onClick={saveSettings}
+    disabled={saving}
+  >
+    {saving ? "Saving..." : "Save"}
+  </button>
       </form>
 
 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 9, alignItems: "start", marginTop: 11, }}>        
@@ -1058,7 +1066,7 @@ function ToggleRow({ label, checked, onChange }) {
   <div style={styles.logChangesCol}>
   {log.eventType === "volatility" ? (
     <p style={styles.logText}>
-      ⚠️ Volatility triggered: Silver {formatLogValue("movement", log.movement)} in 40 seconds.
+    ⚠️ Silver moved {formatLogValue("movement", log.movement)} in 40 seconds ⚠️
     </p>
   ) : null}
   {Object.entries({
