@@ -825,8 +825,8 @@ function AlertsPage({
         </div>
 
         {alerts.length === 0 ? (
-          <p style={styles.muted, {textAlign:"center"}}>{t.noAlerts}</p>
-        ) : (
+        <p style={{ ...styles.muted, textAlign: "center" }}>{t.noAlerts}</p>
+                  ) : (
           alerts.map((alert) => {
             const rateOption = RATE_ALERT_OPTIONS.find((option) => option.value === alert.rateType);
             return (
@@ -1119,8 +1119,9 @@ useEffect(() => {
 
     setAlertMessage("");
     try {
-      await registerPushToken();
-
+     const pushReady = await registerPushToken();
+     if (!pushReady) { console.warn("Push notification not ready. Alert will still be saved."); }
+   
       const res = await fetch("/api/target-alerts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1355,7 +1356,7 @@ const isVolatilityActive =
         }
 
         setQuote(data);
-        checkTargetAlerts(data);
+        if (targetAlerts.length > 0) {  checkTargetAlerts(data); }
 
         const currentBuyPrice = Number(data.mcxBuyPrice);
 
@@ -1432,14 +1433,15 @@ const isVolatilityActive =
     const interval = setInterval(fetchQuote, effectiveRefreshMs);
 
     return () => clearInterval(interval);
-  }, [
-    accessGranted,
-    settings,
-    marketState.shouldShowRates,
-    marketState.refreshMs,
-    settings?.holidayMode,
-    effectiveRefreshMs,
-  ]);
+ }, [
+  accessGranted,
+  settings,
+  marketState.shouldShowRates,
+  marketState.refreshMs,
+  settings?.holidayMode,
+  effectiveRefreshMs,
+  targetAlerts.length,
+]);
 
   if (!accessGranted) {
     return (
