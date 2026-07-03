@@ -1,46 +1,31 @@
-export async function GET() {
-  const config = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
-  };
 
-  const body = `
-importScripts('https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging-compat.js');
+importScripts("https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging-compat.js");
 
-firebase.initializeApp(${JSON.stringify(config)});
+firebase.initializeApp({
+  apiKey:"AIzaSyAI1-Kny1O1kMmQGLMtSTjEUUBq-VP5xF0",
+  authDomain:"ronak-jewellers-8c791.firebaseapp.com",
+  projectId:"ronak-jewellers-8c791",
+  storageBucket:"ronak-jewellers-8c791.firebasestorage.app",
+  messagingSenderId:"447664824926",
+  appId:"1:447664824926:web:8ac928928387e12cb74acf"
+});
+
 
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage((payload) => {
-  const notification = payload.notification || {};
-  const title = notification.title || 'Ronak Jewellers';
-  const options = {
-    body: notification.body || '',
-    icon: notification.icon || '/logo.png',
-    badge: notification.badge || '/logo.png',
-    data: payload.data || {},
+messaging.onBackgroundMessage(function (payload) {
+  const notificationTitle =
+    payload?.notification?.title || "Ronak Jewellers";
+
+  const notificationOptions = {
+    body:
+      payload?.notification?.body ||
+      payload?.data?.body ||
+      "New notification from Ronak Jewellers",
+    icon: "/logo.png",
+    badge: "/logo.png"
   };
 
-  self.registration.showNotification(title, options);
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  const url = event.notification?.data?.click_action || '/';
-  event.waitUntil(clients.openWindow(url));
-});
-`;
-
-  return new Response(body, {
-    headers: {
-      "Content-Type": "application/javascript; charset=utf-8",
-      "Service-Worker-Allowed": "/",
-      "Cache-Control": "no-store",
-    },
-  });
-}
