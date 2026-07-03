@@ -50,7 +50,10 @@ export async function GET(request) {
       if (docSnap.data()?.blocked !== false) blockedMap.set(docSnap.id, docSnap.data());
     });
 
-    const phones = new Set([...accessSnap.docs.map((docSnap) => docSnap.id), ...blockedMap.keys()]);
+     const phones = new Set([
+       ...Object.keys(allowedUsers).map(normalizeIndianMobile).filter(Boolean),
+       ...accessSnap.docs.map((docSnap) => docSnap.id),
+       ...blockedMap.keys(),]);   
     const rows = [];
 
     for (const phone of phones) {
@@ -78,8 +81,11 @@ export async function GET(request) {
       if (!search || haystack.includes(search)) rows.push(row);
     }
 
-    rows.sort((a, b) => String(a.name || a.phone).localeCompare(String(b.name || b.phone)));
-
+    rows.sort((a, b) => {
+       const aTime = a.lastLoginTime?.toDate ? a.lastLoginTime.toDate().getTime() : 0;
+       const bTime = b.lastLoginTime?.toDate ? b.lastLoginTime.toDate().getTime() : 0;
+       return bTime - aTime || String(a.name || a.phone).localeCompare(String(b.name || b.phone));
+        });
     return Response.json({ success: true, devices: rows });
   } catch (err) {
     return Response.json({ success: false, message: err.message || "Unable to load devices" }, { status: 500 });
