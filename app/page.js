@@ -825,7 +825,7 @@ function AlertsPage({
         </div>
 
         {alerts.length === 0 ? (
-          <p style={styles.muted}>{t.noAlerts}</p>
+          <p style={styles.muted, {textAlign:"center"}}>{t.noAlerts}</p>
         ) : (
           alerts.map((alert) => {
             const rateOption = RATE_ALERT_OPTIONS.find((option) => option.value === alert.rateType);
@@ -2475,7 +2475,7 @@ const styles = {
   },
 
   metaItem: {
-    marginBottom: -18,
+    marginBottom: -15,
     color: "var(--rj-muted)",
     fontSize: 13,
     textAlign: "center",
