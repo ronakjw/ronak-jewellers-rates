@@ -21,6 +21,14 @@ function sanitizeDeviceId(value) {
   return String(value || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 90);
 }
 
+function timestampMillis(value) {
+  if (!value) return 0;
+  if (value?.toDate) return value.toDate().getTime();
+  if (value?._seconds) return value._seconds * 1000;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
 function profileFor(phone) {
   const profile = allowedUsers[phone] || {};
   return {
@@ -41,6 +49,46 @@ async function verifyDevice(phone, deviceId) {
   return Boolean(snap.exists && snap.data()?.active !== false);
 }
 
+async function loadActiveAlertsForPhone(phone) {
+  try {
+    const snap = await adminDb
+      .collection("targetAlerts")
+      .where("phone", "==", phone)
+      .where("active", "==", true)
+      .limit(5)
+      .get();
+
+    return snap.docs
+      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
+      .sort((a, b) => timestampMillis(b.createdAt) - timestampMillis(a.createdAt))
+      .slice(0, 5);
+  } catch {
+    const snap = await adminDb.collection("targetAlerts").limit(300).get();
+    return snap.docs
+      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
+      .filter((alert) => alert.phone === phone && alert.active === true)
+      .sort((a, b) => timestampMillis(b.createdAt) - timestampMillis(a.createdAt))
+      .slice(0, 5);
+  }
+}
+
+async function countActiveAlertsForPhone(phone) {
+  try {
+    const snap = await adminDb
+      .collection("targetAlerts")
+      .where("phone", "==", phone)
+      .where("active", "==", true)
+      .limit(5)
+      .get();
+    return snap.size;
+  } catch {
+    const snap = await adminDb.collection("targetAlerts").limit(300).get();
+    return snap.docs
+      .map((docSnap) => docSnap.data())
+      .filter((alert) => alert.phone === phone && alert.active === true).length;
+  }
+}
+
 export async function GET(request) {
   try {
     const params = new URL(request.url).searchParams;
@@ -51,17 +99,7 @@ export async function GET(request) {
       return Response.json({ success: false, message: "Unauthorized" }, { status: 401 });
     }
 
-    const snap = await adminDb.collection("targetAlerts").limit(300).get();
-    const alerts = snap.docs
-      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
-      .filter((alert) => alert.phone === phone && alert.active === true)
-      .sort((a, b) => {
-        const ad = a.createdAt?.toDate?.() || a.createdAt || new Date(0);
-        const bd = b.createdAt?.toDate?.() || b.createdAt || new Date(0);
-        return new Date(bd).getTime() - new Date(ad).getTime();
-      })
-      .slice(0, 5);
-
+    const alerts = await loadActiveAlertsForPhone(phone);
     return Response.json({ success: true, alerts });
   } catch (err) {
     return Response.json({ success: false, message: err.message || "Unable to load alerts" }, { status: 500 });
@@ -86,10 +124,7 @@ export async function POST(request) {
       return Response.json({ success: false, message: "Invalid alert details" }, { status: 400 });
     }
 
-    const activeSnap = await adminDb.collection("targetAlerts").limit(300).get();
-    const activeCount = activeSnap.docs
-      .map((docSnap) => docSnap.data())
-      .filter((alert) => alert.phone === phone && alert.active === true).length;
+    const activeCount = await countActiveAlertsForPhone(phone);
 
     if (activeCount >= 5) {
       return Response.json({ success: false, message: "Maximum 5 active alerts allowed." }, { status: 400 });
@@ -140,3 +175,4 @@ export async function DELETE(request) {
     return Response.json({ success: false, message: err.message || "Unable to remove alert" }, { status: 500 });
   }
 }
+
