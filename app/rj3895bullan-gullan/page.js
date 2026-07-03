@@ -1179,7 +1179,7 @@ function ToggleRow({ label, checked, onChange }) {
               : null }
                 <span> {displayPhone}</span>
                 {isUnauthorized ? (
-                  <span style={styles.unauthorizedText}>Unauthorized</span>
+                  <span style={styles.unauthorizedText}>Unauthorized attempt</span>
                 ) : null}
               </div>
             </div>
@@ -1793,11 +1793,11 @@ loginRecordCard: {
   background:
     "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
   border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: 16,
-  padding: 11,
+  borderRadius: 4,
+  padding: 2,
   marginTop: 8,
   display: "grid",
-  gridTemplateColumns: "140px 1fr",
+  gridTemplateColumns: "90px 1fr",
   gap: 1,
 },
 loginRecordUnauthorized: {
@@ -1808,7 +1808,7 @@ loginRecordUnauthorized: {
   padding: 2,
   marginTop: 8,
   display: "grid",
-  gridTemplateColumns: "140px 1fr",
+  gridTemplateColumns: "90px 1fr",
   gap: 1,
 },
 loginRecordInfo: {
@@ -1816,7 +1816,7 @@ loginRecordInfo: {
   display: "flex",
   flexDirection: "column",
   gap: 4,
-  fontSize: 14,
+  fontSize: 12,
 },
 unauthorizedAlert: {
   margin: "10px 0 14px",
