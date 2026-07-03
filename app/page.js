@@ -48,8 +48,7 @@ const translations = {
     lastUpdated: "Last updated",
     volatilityTitle: "⚠️ MARKET VOLATILITY ALERT! ⚠️",
     volatilityBody: "Please call us before making any trade.",
-    alertsTitle: "My Rate Alerts",
-    alertsSubtitle: "Set alerts on MCX buy/sell rates. Maximum 5 active alerts.",
+    alertsTitle: "Set your Target Price alerts",
     rateType: "Rate Type",
     condition: "Condition",
     targetRate: "Target Rate",
@@ -775,8 +774,6 @@ function AlertsPage({
 
       <section style={styles.mainCard}>
         <h2>{t.alertsTitle}</h2>
-        <p style={styles.muted}>{t.alertsSubtitle}</p>
-
         <div style={styles.alertFormGrid}>
           <div>
             <label style={styles.alertLabel}>{t.rateType}</label>
@@ -2389,6 +2386,7 @@ const styles = {
     boxShadow: "var(--rj-soft-shadow), inset 0 1px 0 rgba(255,255,255,0.18)",
     boxSizing: "border-box",
     marginBottom: 15,
+    merginLeft: 10
     transition:
       "background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease",
   },
