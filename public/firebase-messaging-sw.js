@@ -10,21 +10,27 @@ firebase.initializeApp({
   appId:"1:447664824926:web:8ac928928387e12cb74acf"
 });
 
+try {
+  const messaging = firebase.messaging();
 
-const messaging = firebase.messaging();
+  messaging.onBackgroundMessage((payload) => {
+    const title =
+      payload?.notification?.title ||
+      payload?.data?.title ||
+      "Ronak Jewellers";
 
-messaging.onBackgroundMessage(function (payload) {
-  const notificationTitle =
-    payload?.notification?.title || "Ronak Jewellers";
+    const options = {
+      body:
+        payload?.notification?.body ||
+        payload?.data?.body ||
+        "New notification from Ronak Jewellers",
+      icon: "/logo.png",
+      badge: "/logo.png",
+      data: payload?.data || {},
+    };
 
-  const notificationOptions = {
-    body:
-      payload?.notification?.body ||
-      payload?.data?.body ||
-      "New notification from Ronak Jewellers",
-    icon: "/logo.png",
-    badge: "/logo.png"
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
-});
+    self.registration.showNotification(title, options);
+  });
+} catch (err) {
+  console.error("Firebase messaging service worker error:", err);
+}
