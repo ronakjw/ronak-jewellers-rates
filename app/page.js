@@ -773,7 +773,7 @@ function AlertsPage({
       </section>
 
       <section style={styles.mainCard}>
-        <h2>{t.alertsTitle}</h2>
+        <h3 style={{textAlign:"center"}}>{t.alertsTitle}</h3>
         <div style={styles.alertFormGrid}>
           <div>
             <label style={styles.alertLabel}>{t.rateType}</label>
@@ -2705,6 +2705,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: 12,
+    padding: 12,
     marginTop: 20,
     marginBottom: 10,
   },
@@ -2712,10 +2713,10 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 7,
     border: "1px solid var(--rj-card-border)",
     background: "var(--rj-card-bg)",
-    borderRadius: 14,
+    borderRadius: 8,
     padding: 24,
     marginTop: 10,
   },
@@ -2723,9 +2724,9 @@ const styles = {
     border: "1px solid rgba(255,120,120,0.35)",
     background: "rgba(120,20,20,0.18)",
     color: "#ffb4b4",
-    borderRadius: 12,
+    borderRadius: 9,
     padding: "10px 12px",
-    fontWeight: 800,
+    fontWeight: 500,
     cursor: "pointer",
   },
   smallActionButton: {
