@@ -30,8 +30,7 @@ const LOGOUT_SUCCESS_KEY = "rj-logout-success";
 const gateText = {
   brand: "Ronak Jewellers",
   checking: "Checking access...",
-  intro: "Please enter your registered mobile number",
-  placeholder: "10-digit mobile number",
+  placeholder: "Enter 10-digit mobile number",
   continue: "Continue",
   checkingButton: "Checking...",
   sendingOtp: "Sending OTP...",
@@ -378,9 +377,9 @@ export default function DealerAccessGate({
           </div>
         ) : null}
 
-        <h3 style={styles.brand}>{t.brand}</h3>
+        <h2 style={styles.brand}>{t.brand}</h2>
           <h4> DEALER ACCESS </h4>
-        <p style={styles.muted}>{t.intro}</p>
+      
 
         {!otpSent ? (
           <>
