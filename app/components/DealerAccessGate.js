@@ -339,7 +339,7 @@ export default function DealerAccessGate({
           message: text,
           source: "logout_screen",
         }),
-      });
+      }); 
       const data = await res.json();
       if (!data.success) throw new Error(data.message || t.feedbackFailed);
       setFeedback("");
@@ -440,7 +440,7 @@ export default function DealerAccessGate({
 
         {message ? <p style={styles.message}>{message}</p> : null}
         <p style={styles.note}>{t.accessNote}</p>
-          <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number thorough your registered device only.</p>
+          <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number through your registered device only.</p>
 
         {logoutSuccess ? (
           <div style={styles.feedbackBox}>
