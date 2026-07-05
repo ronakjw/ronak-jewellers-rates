@@ -362,9 +362,7 @@ export default function DealerAccessGate({
       !payload.firmName ||
       !payload.phone ||
       !payload.city ||
-      !payload.state ||
-      !payload.email ||
-      !/^\S+@\S+\.\S+$/.test(payload.email)
+      !payload.state
     ) {
       setAuthorizationMessage(t.requestInvalid);
       return;
