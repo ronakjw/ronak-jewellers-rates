@@ -28,7 +28,7 @@ export async function POST(request) {
     const state = cleanText(body.state);
     const email = cleanText(body.email, 160).toLowerCase();
 
-    if (!name || !firmName || !phone || !city || !state || !email || !isValidEmail(email)) {
+    if (!name || !firmName || !phone || !city || !state || !isValidEmail(email)) {
       return Response.json(
         { success: false, message: "Please fill all authorization details correctly." },
         { status: 400 }
