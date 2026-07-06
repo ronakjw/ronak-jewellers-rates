@@ -1730,7 +1730,7 @@ toggleKnob: {
 },
   adminButtonRow: {
   display: "grid",
-  gridTemplateColumns: "repeat(4, 1fr)",
+  gridTemplateColumns: "repeat(3, 1fr)",
   gap: 2,
   width: "100%",
 },
@@ -1856,6 +1856,14 @@ saveTopButton: {
   borderRadius: 12,
   padding: "10px 14px",
   fontWeight: 800,
+  cursor: "pointer",
+},
+  dangerButton: {
+  border: "1px solid rgba(255,120,120,.35)",
+  background: "rgba(120,20,20,.32)",
+  color: "#ffd6d6",
+  borderRadius: 12,
+  padding: "9px 13px",
   cursor: "pointer",
 },
 
