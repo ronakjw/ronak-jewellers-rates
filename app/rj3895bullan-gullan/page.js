@@ -201,7 +201,43 @@ function applyAssistantChanges() {
       setLoadingAccessRequests(false);
     }
   }
+async function removeAccessRequest(id) {
+  if (!id) return;
 
+  const confirmed = window.confirm("Remove this request?");
+  if (!confirmed) return;
+
+  setMessage("");
+
+  try {
+    const token = await auth.currentUser.getIdToken();
+
+    const res = await fetch(
+      `/api/access-request/admin?id=${encodeURIComponent(id)}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.message || "Unable to remove request");
+    }
+
+    setAccessRequests((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+
+    setMessage("Request removed.");
+  } catch (err) {
+    setMessage(err.message || "Unable to remove request");
+  }
+}
   function openNewRequests() {
     setShowNewRequests((prev) => {
       const next = !prev;
@@ -772,6 +808,13 @@ function ToggleRow({ label, checked, onChange }) {
         >
           Copy JSON
         </button>
+         <button
+            type="button"
+            style={styles.dangerButton || styles.smallButton}
+            onClick={() => removeAccessRequest(request.id)}
+          >
+            Remove Card
+          </button>   
       </div>
     );
   })}
