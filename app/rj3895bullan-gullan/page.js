@@ -1515,7 +1515,7 @@ function buildAllowedUserJson(request) {
   return `"${phone}":
 {   "phone":"${phone}",
     "name": ${JSON.stringify(fullName)},
-    "firstName": ${JSON.stringify(firstWord ? `Mr. ${firstWord}` : "")},
+    "firstName": ${JSON.stringify(firstWord ? `${firstWord}` : "")},
     "role": "Dealer"
 },`;
 }
