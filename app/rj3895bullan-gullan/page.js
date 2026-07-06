@@ -711,11 +711,7 @@ function ToggleRow({ label, checked, onChange }) {
         {showNewRequests ? (
           <div style={styles.newRequestSection}>
             <div style={styles.newRequestHeader}>
-              <div>
-                <h2 style={{ margin: 0 }}>New User Requests</h2>
-                <p style={styles.subtitle}>Authorization requests submitted from dealer access page.</p>
-              </div>
-
+                <h3> New User Requests </h3>
               <button
                 type="button"
                 style={styles.smallButton}
@@ -731,31 +727,58 @@ function ToggleRow({ label, checked, onChange }) {
                 {loadingAccessRequests ? "Loading new requests..." : "No new requests found."}
               </p>
             ) : (
+           
               <div style={styles.newRequestGrid}>
-                {accessRequests.map((request) => (
-                  <div key={request.id} style={styles.newRequestCard}>
-                    <div>
-                      <strong>{request.name || "--"}</strong>
-                      <p style={styles.logText}>{request.firmName || "--"}</p>
-                    </div>
+  {accessRequests.map((request) => {
+    const allowedUserJson = buildAllowedUserJson(request);
 
-                    <div>
-                      <p style={styles.logText}>📱 {request.phone || "--"}</p>
-                      <p style={styles.logText}>✉️ {request.email || "--"}</p>
-                    </div>
+    return (
+      <div key={request.id} style={styles.newRequestCard}>
+        <div>
+          <strong>{request.name || "--"}</strong>
+          <p style={styles.logText}>{request.firmName || "--"}</p>
+        </div>
 
-                    <div>
-                      <p style={styles.logText}>
-                        {request.city || "--"}, {request.state || "--"}
-                      </p>
-                      <p style={styles.logText}>
-                        {formatRequestDate(request.createdAt)}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+        <div>
+          <p style={styles.logText}>📱 {request.phone || "--"}</p>
+          <p style={styles.logText}>✉️ {request.email || "--"}</p>
+          <p style={styles.logText}> {request.city || "--"}, {request.state || "--"} </p>
+          <p style={styles.logText}> {formatRequestDate(request.createdAt)} </p>
+        </div>
+
+        <pre
+          style={{
+            ...styles.logText,
+            whiteSpace: "pre-wrap",
+            background: "rgba(0,0,0,0.24)",
+            border: "1px solid rgba(214,180,92,0.22)",
+            borderRadius: 12,
+            padding: 12,
+            marginTop: 12,
+            textAlign: "left",
+            overflowX: "auto",
+          }}
+        >
+          {allowedUserJson}
+        </pre>
+
+        <button
+          type="button"
+          style={styles.smallButton}
+          onClick={() => {
+            navigator.clipboard.writeText(allowedUserJson);
+            setMessage("Allowed user JSON copied.");
+          }}
+        >
+          Copy JSON
+        </button>
+      </div>
+    );
+  })}
+</div>
+                ) ) }
               </div>
-            )}
+            ) }
           </div>
         ) : null}
 
@@ -1444,7 +1467,18 @@ function formatLogValue(key, value) {
 
   return String(value);
 }
+function buildAllowedUserJson(request) {
+  const phone = String(request.phone || "").replace(/\D/g, "").slice(-10);
+  const fullName = String(request.name || "").trim();
+  const firstWord = fullName.split(/\s+/)[0] || "";
 
+  return `"${phone}":
+{   "phone":"${phone}",
+    "name": ${JSON.stringify(fullName)},
+    "firstName": ${JSON.stringify(firstWord ? `Mr. ${firstWord}` : "")},
+    "role": "Dealer"
+},`;
+}
 function formatRequestDate(value) {
   const date = value?._seconds
     ? new Date(value._seconds * 1000)
