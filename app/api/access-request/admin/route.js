@@ -23,17 +23,18 @@ export async function GET(request) {
   }
 
   try {
- const snap = await adminDb
+
+  const snap = await adminDb
   .collection("accessRequests")
-  .where("status", "==", "pending")
   .orderBy("createdAt", "desc")
   .limit(100)
   .get();
 
 const requests = snap.docs.map((docSnap) => ({
-  id: docSnap.id,
-  ...docSnap.data(),
-})).filter((item) => item.status === "pending");
+    id: docSnap.id,
+    ...docSnap.data(),
+  }))
+  .filter((item) => item.status === "pending");
 
     return Response.json({ success: true, requests });
   } catch (err) {
