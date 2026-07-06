@@ -62,7 +62,7 @@ const gateText = {
   feedbackFailed: "Unable to submit feedback. Please try again.",
   requestAuthorization: "Request for Authorization",
   requestName: "Name",
-  requestFirmName: "Firm Name",
+  requestFirmName: "Company Name",
   requestMobile: "Mobile Number",
   requestCity: "City",
   requestState: "State",
