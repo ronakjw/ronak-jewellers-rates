@@ -391,7 +391,7 @@ export default function DealerAccessGate({
         mobile: "",
         city: "",
         state: "",
-        email: "",
+     
       });
       setAuthorizationMessage(t.requestSuccess);
     } catch (err) {
