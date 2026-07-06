@@ -770,23 +770,13 @@ function ToggleRow({ label, checked, onChange }) {
       <div style={styles.newRequestGrid}>
         {accessRequests.map((request) => {
           const allowedUserJson = buildAllowedUserJson(request);
-
           return (
             <div key={request.id} style={styles.newRequestCard}>
               <div>
-                <strong>{request.name || "--"}</strong>
-                <p style={styles.logText}>{request.firmName || "--"}</p>
-              </div>
-
-              <div>
-                <p style={styles.logText}>📱 {request.phone || "--"}</p>
-                <p style={styles.logText}>✉️ {request.email || "--"}</p>
-                <p style={styles.logText}>
-                  {request.city || "--"}, {request.state || "--"}
-                </p>
-                <p style={styles.logText}>
-                  {formatRequestDate(request.createdAt)}
-                </p>
+                <strong style={styles.logText}>Firm : {request.firmName || "--"}</strong>
+                <p style={styles.logText}>{request.email || ""}</p>
+                <p style={styles.logText}>{request.city || "--"}, {request.state || "--"}</p>
+                <p style={styles.logText}>{formatRequestDate(request.createdAt)}</p>
               </div>
 
               <pre
@@ -804,7 +794,7 @@ function ToggleRow({ label, checked, onChange }) {
               >
                 {allowedUserJson}
               </pre>
-
+          <div>
               <button
                 type="button"
                 style={styles.smallButton}
@@ -813,7 +803,7 @@ function ToggleRow({ label, checked, onChange }) {
                   setMessage("Allowed user JSON copied.");
                 }}
               >
-                Copy JSON
+                Copy
               </button>
 
               <button
@@ -821,8 +811,9 @@ function ToggleRow({ label, checked, onChange }) {
                 style={styles.dangerButton || styles.smallButton}
                 onClick={() => removeAccessRequest(request.id)}
               >
-                Remove Card
+                Remove
               </button>
+                  </div>
             </div>
           );
         })}
@@ -2000,11 +1991,11 @@ openSiteButton: {
   newRequestCard: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 12,
+    gap: 5,
     alignItems: "center",
     border: "1px solid rgba(255,255,255,.08)",
     borderRadius: 14,
-    padding: 12,
+    padding: 6,
   },
   logSection: {
   marginTop: 28,
