@@ -354,7 +354,7 @@ export default function DealerAccessGate({
       phone: normalizeIndianMobile(authorizationForm.mobile || mobile),
       city: authorizationForm.city.trim(),
       state: authorizationForm.state.trim(),
-      email: authorizationForm.email.trim(),
+    
     };
 
     if (
