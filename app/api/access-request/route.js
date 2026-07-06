@@ -13,10 +13,6 @@ function cleanText(value, maxLength = 120) {
   return String(value || "").trim().replace(/\s+/g, " ").slice(0, maxLength);
 }
 
-function isValidEmail(value) {
-  return /^\S+@\S+\.\S+$/.test(String(value || "").trim());
-}
-
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -28,7 +24,7 @@ export async function POST(request) {
     const state = cleanText(body.state);
     const email = cleanText(body.email, 160).toLowerCase();
 
-    if (!name || !firmName || !phone || !city || !state || !isValidEmail(email)) {
+    if (!name || !firmName || !phone || !city || !state {
       return Response.json(
         { success: false, message: "Please fill all authorization details correctly." },
         { status: 400 }
