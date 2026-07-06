@@ -44,4 +44,39 @@ export async function GET(request) {
     );
   }
 }
+export async function DELETE(request) {
+  if (!(await verifyAdmin(request))) {
+    return Response.json(
+      { success: false, message: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const params = new URL(request.url).searchParams;
+    const id = String(params.get("id") || "").trim();
+
+    if (!id) {
+      return Response.json(
+        { success: false, message: "Missing request id" },
+        { status: 400 }
+      );
+    }
+
+    await adminDb.collection("accessRequests").doc(id).delete();
+
+    return Response.json({
+      success: true,
+      message: "Request removed",
+    });
+  } catch (err) {
+    return Response.json(
+      {
+        success: false,
+        message: err.message || "Unable to remove request",
+      },
+      { status: 500 }
+    );
+  }
+}
 
