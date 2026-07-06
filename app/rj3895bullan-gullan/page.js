@@ -743,6 +743,9 @@ function ToggleRow({ label, checked, onChange }) {
         {systemStatus?.error ? (
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
+        {message ? (
+  <p style={styles.message}>{message}</p>
+) : null}
 {showNewRequests ? (
   <div style={styles.newRequestSection}>
     <div style={styles.newRequestHeader}>
