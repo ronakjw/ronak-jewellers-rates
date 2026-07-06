@@ -743,88 +743,91 @@ function ToggleRow({ label, checked, onChange }) {
         {systemStatus?.error ? (
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
+{showNewRequests ? (
+  <div style={styles.newRequestSection}>
+    <div style={styles.newRequestHeader}>
+      <h3> New User Requests </h3>
+      <button
+        type="button"
+        style={styles.smallButton}
+        onClick={loadAccessRequests}
+        disabled={loadingAccessRequests}
+      >
+        {loadingAccessRequests ? "Loading..." : "Refresh"}
+      </button>
+    </div>
 
-        {showNewRequests ? (
-          <div style={styles.newRequestSection}>
-            <div style={styles.newRequestHeader}>
-                <h3> New User Requests </h3>
+    {accessRequests.length === 0 ? (
+      <p style={styles.subtitle}>
+        {loadingAccessRequests
+          ? "Loading new requests..."
+          : "No new requests found."}
+      </p>
+    ) : (
+      <div style={styles.newRequestGrid}>
+        {accessRequests.map((request) => {
+          const allowedUserJson = buildAllowedUserJson(request);
+
+          return (
+            <div key={request.id} style={styles.newRequestCard}>
+              <div>
+                <strong>{request.name || "--"}</strong>
+                <p style={styles.logText}>{request.firmName || "--"}</p>
+              </div>
+
+              <div>
+                <p style={styles.logText}>📱 {request.phone || "--"}</p>
+                <p style={styles.logText}>✉️ {request.email || "--"}</p>
+                <p style={styles.logText}>
+                  {request.city || "--"}, {request.state || "--"}
+                </p>
+                <p style={styles.logText}>
+                  {formatRequestDate(request.createdAt)}
+                </p>
+              </div>
+
+              <pre
+                style={{
+                  ...styles.logText,
+                  whiteSpace: "pre-wrap",
+                  background: "rgba(0,0,0,0.24)",
+                  border: "1px solid rgba(214,180,92,0.22)",
+                  borderRadius: 12,
+                  padding: 12,
+                  marginTop: 12,
+                  textAlign: "left",
+                  overflowX: "auto",
+                }}
+              >
+                {allowedUserJson}
+              </pre>
+
               <button
                 type="button"
                 style={styles.smallButton}
-                onClick={loadAccessRequests}
-                disabled={loadingAccessRequests}
+                onClick={() => {
+                  navigator.clipboard.writeText(allowedUserJson);
+                  setMessage("Allowed user JSON copied.");
+                }}
               >
-                {loadingAccessRequests ? "Loading..." : "Refresh"}
+                Copy JSON
+              </button>
+
+              <button
+                type="button"
+                style={styles.dangerButton || styles.smallButton}
+                onClick={() => removeAccessRequest(request.id)}
+              >
+                Remove Card
               </button>
             </div>
-
-            {accessRequests.length === 0 ? (
-              <p style={styles.subtitle}>
-                {loadingAccessRequests ? "Loading new requests..." : "No new requests found."}
-              </p>
-            ) : (
-           
-              <div style={styles.newRequestGrid}>
-  {accessRequests.map((request) => {
-    const allowedUserJson = buildAllowedUserJson(request);
-
-    return (
-      <div key={request.id} style={styles.newRequestCard}>
-        <div>
-          <strong>{request.name || "--"}</strong>
-          <p style={styles.logText}>{request.firmName || "--"}</p>
-        </div>
-
-        <div>
-          <p style={styles.logText}>📱 {request.phone || "--"}</p>
-          <p style={styles.logText}>✉️ {request.email || "--"}</p>
-          <p style={styles.logText}> {request.city || "--"}, {request.state || "--"} </p>
-          <p style={styles.logText}> {formatRequestDate(request.createdAt)} </p>
-        </div>
-
-        <pre
-          style={{
-            ...styles.logText,
-            whiteSpace: "pre-wrap",
-            background: "rgba(0,0,0,0.24)",
-            border: "1px solid rgba(214,180,92,0.22)",
-            borderRadius: 12,
-            padding: 12,
-            marginTop: 12,
-            textAlign: "left",
-            overflowX: "auto",
-          }}
-        >
-          {allowedUserJson}
-        </pre>
-
-        <button
-          type="button"
-          style={styles.smallButton}
-          onClick={() => {
-            navigator.clipboard.writeText(allowedUserJson);
-            setMessage("Allowed user JSON copied.");
-          }}
-        >
-          Copy JSON
-        </button>
-         <button
-            type="button"
-            style={styles.dangerButton || styles.smallButton}
-            onClick={() => removeAccessRequest(request.id)}
-          >
-            Remove Card
-          </button>   
+          );
+        })}
       </div>
-    );
-  })}
-</div>
-                ) ) }
-              </div>
-            ) }
-          </div>
-        ) : null}
-
+    )}
+  </div>
+) : null}
+  
         <form onSubmit={saveSettings} style={styles.grid}>
   <div>
   <ToggleRow
