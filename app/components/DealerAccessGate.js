@@ -584,7 +584,6 @@ export default function DealerAccessGate({
               style={styles.input}
               type="email"
               value={authorizationForm.email}
-              placeholder="Email (Optional)"
               onChange={(e) => updateAuthorizationField("email", e.target.value)}
             />
 
@@ -675,7 +674,7 @@ const styles = {
   logo: { display: "block", margin: "0 auto 14px" },
   brand: { color: "var(--gate-brand)", margin: "4px 0 8px", fontSize: "clamp(23px, 5vw, 37px)" },
   muted: { color: "var(--gate-muted)", lineHeight: 1.55, margin: "0 0 18px" },
-  label: { display: "block", textAlign: "left", color: "var(--gate-muted)", fontSize: 13, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 },
+  label: { display: "block", textAlign: "left", color: "var(--gate-muted)", fontSize: 13, fontWeight: 400, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 },
   input: { width: "100%", boxSizing: "border-box", background: "var(--gate-input)", color: "var(--gate-brand)", border: "1px solid var(--gate-border)", borderRadius: 14, padding: "15px 14px", fontSize: 17, outline: "none", marginBottom: 12 },
   button: { width: "100%", border: "1px solid var(--gate-border)", background: "linear-gradient(145deg, rgba(214,180,92,0.28), rgba(35,35,35,0.92))", color: "#f3d98b", borderRadius: 14, padding: "15px 20px", fontSize: 17, fontWeight: 800, cursor: "pointer", marginTop: 8 },
   secondaryButton: { width: "100%", border: "1px solid var(--gate-border)", background: "rgba(214,180,92,0.08)", color: "var(--gate-brand)", borderRadius: 14, padding: "13px 18px", fontSize: 15, fontWeight: 800, cursor: "pointer", marginTop: 10 },
