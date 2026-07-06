@@ -12,7 +12,9 @@ function normalizeIndianMobile(value) {
 function cleanText(value, maxLength = 120) {
   return String(value || "").trim().replace(/\s+/g, " ").slice(0, maxLength);
 }
-
+function isValidEmail(value) {
+  return /^\S+@\S+\.\S+$/.test(String(value || "").trim());
+}
 export async function POST(request) {
   try {
     const body = await request.json();
