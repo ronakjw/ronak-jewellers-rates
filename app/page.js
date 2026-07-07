@@ -2934,7 +2934,7 @@ const styles = {
   },
 
   metaItem: {
-    marginBottom: -15,
+    marginBottom: -9,
     color: "var(--rj-muted)",
     fontSize: 13,
     textAlign: "center",
