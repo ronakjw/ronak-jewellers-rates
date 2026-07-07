@@ -80,7 +80,7 @@ const translations = {
     ratesUnavailable: "Live rates are unavailable at the moment",
     visitAgain: "Please visit again during market hours.",
     loadingRates: "Loading Rates... Please Wait...",
-    liveBullion: "LIVE BULLION RATES",
+    liveBullion: "LIVE RATES",
     finalDisclaimer: "Rates displayed are based on market conditions and applicable premiums. Final rates may vary depending on confirmation at the time of enquiry.",
     activeAlerts: "Active Alerts",
     triggeredAlerts: "Triggered Alerts",
@@ -91,7 +91,7 @@ const translations = {
     compactView: "compact view",
     bigView: "LARGE VIEW",
     maintenanceTitle: "Website Under Maintenance",
-    maintenanceText: "We are upgrading live rates. Please check again shortly.",
+    maintenanceText: "We are Upgrading. Please check again shortly.",
   },
 };
 
@@ -3180,7 +3180,7 @@ const styles = {
     gap: 7,
     border: "1px solid var(--rj-card-border)",
     background: "var(--rj-card-bg)",
-    borderRadius: 8,
+    borderRadius: 18,
     padding: 24,
     marginTop: 10,
   },
