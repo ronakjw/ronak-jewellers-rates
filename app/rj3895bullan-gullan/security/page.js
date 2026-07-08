@@ -352,7 +352,7 @@ export default function SecurityAdminPage() {
                 <div>
                   <span style={styles.labelSmall}>Last Login</span>
                   <p style={styles.mini}>{formatDate(item.lastLoginTime)}</p>
-                  <p style={styles.mini}>{item.lastCity || item.lastIp || "--"}</p>
+                  <p style={styles.mini}>{item.lastIp || "--"}</p>
                 </div>
                 <div style={styles.actions}>
                   <button style={styles.smallButton} disabled={Boolean(actionLoading[`device-${item.phone}`])} onClick={() => deviceAction(item.phone, "remove_device")}>Remv</button>
