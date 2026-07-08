@@ -459,7 +459,7 @@ const styles = {
   card: { background: "rgba(255,255,255,.045)", border: "1px solid rgba(214,180,92,.22)", borderRadius: 18, padding: 16, marginBottom: 16 },
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 14 },
   tableWrap: { display: "grid", gap: 4, marginTop: 14 },
-  deviceCard: { display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr auto", gap: 9, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 7, padding: 5 },
+  deviceCard: { display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr auto", gap: 11, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 7, padding: 5 },
   rowCard: { display: "grid", gridTemplateColumns: "1fr 1.4fr auto", gap: 12, alignItems: "center", border: "1px solid rgba(255,255,255,.08)", borderRadius: 14, padding: 12, marginTop: 10 },
   actions: { display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" },
   input: { width: "100%", boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px", margin: "6px 0 12px" },
