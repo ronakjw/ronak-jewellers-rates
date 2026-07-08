@@ -1949,7 +1949,7 @@ const isVolatilityActive =
             <p style={styles.finalLabel}>Buying Rate</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(settings.holidayBuyingRate)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h1>
           </div>
 
@@ -1957,7 +1957,7 @@ const isVolatilityActive =
             <p style={styles.finalLabel}>Selling Rate</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(settings.holidaySellingRate)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h1>
           </div>
         </div>
@@ -2241,7 +2241,7 @@ return (
           <div style={styles.sideCard}>
             <p style={styles.label}>MCX Buy</p>
             <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
-              <span>₹ {formatPrice(quote.mcxBuyPrice)}<span style={styles.unit}> / kg</span></span>
+              <span>₹ {formatPrice(quote.mcxBuyPrice)}<span style={styles.unit}> /kg</span></span>
               <MovementBadge movement={rateMovements.silverMcxBuy} />
             </h2>
 
@@ -2255,7 +2255,7 @@ return (
             <p style={styles.finalLabel}>We Buy at :</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(finalBuying)}
-              <span style={styles.unit}> / kg</span>
+              <span style={styles.unit}> /kg</span>
             </h1>
           </div>
 
@@ -2347,7 +2347,7 @@ return (
       <div style={styles.sideCard}>
         <p style={styles.label}>MCX Buy</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
-          <span>₹ {formatPrice(quote.goldMcxBuyPrice)}<span style={styles.unit}>/10gm</span></span>
+          <span>₹ {formatPrice(quote.goldMcxBuyPrice)}<span style={styles.unit}> /10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxBuy} />
         </h2>
 
@@ -2361,14 +2361,14 @@ return (
         <p style={styles.finalLabel}>We Buy at :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalBuying)}
-          <span style={styles.unit}>/10gm</span>
+          <span style={styles.unit}> /10gm</span>
         </h1>
       </div>
 
       <div style={styles.sideCard}>
         <p style={styles.label}>MCX Sell</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
-          <span>₹ {formatPrice(quote.goldMcxSellPrice)}<span style={styles.unit}>/10gm</span></span>
+          <span>₹ {formatPrice(quote.goldMcxSellPrice)}<span style={styles.unit}> /10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxSell} />
         </h2>
 
@@ -2382,7 +2382,7 @@ return (
         <p style={styles.finalLabel}>We Sell at :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalSelling)}
-          <span style={styles.unit}>/10gm</span>
+          <span style={styles.unit}> /10gm</span>
         </h1>
       </div>
     </div>
@@ -2414,7 +2414,7 @@ function KachhiBadla({ settings }) {
 
       <div style={styles.kachhiValue}>
         {settings.kachhiBadlaUnit === "Rs/kg"
-          ? `₹${formatPrice(settings.kachhiBadlaValue)} / kg`
+          ? `₹${formatPrice(settings.kachhiBadlaValue)} /kg`
           : `${formatPrice(settings.kachhiBadlaValue)} gm/kg`}
       </div>
     </div>
