@@ -60,7 +60,7 @@ function parseDeviceInfo(userAgent = "") {
   return {
     os,
     browser,
-    label: `${os} / ${browser}`,
+    label: `${os} \n ${browser}`,
   };
 }
 
