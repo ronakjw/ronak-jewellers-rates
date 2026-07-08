@@ -350,7 +350,7 @@ export default function SecurityAdminPage() {
                   <p style={styles.mini}>{item.registeredDevice || "--"}</p>
                 </div>
                 <div>
-                  <span style={styles.labelSmall}>Last Login</span>
+                  <span style={styles.labelSmall}>Last-Login</span>
                   <p style={styles.mini}>{formatDate(item.lastLoginTime)}</p>
                   <p style={styles.mini}>{item.lastIp || "--"}</p>
                 </div>
@@ -465,7 +465,7 @@ const styles = {
   input: { width: "100%", boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px", margin: "6px 0 12px" },
   textarea: { width: "100%", minHeight: 90, boxSizing: "border-box", background: "#080808", border: "1px solid rgba(214,180,92,.38)", color: "#f3d98b", borderRadius: 12, padding: "12px 13px" },
   label: { color: "#bbb", fontSize: 12, textTransform: "uppercase", letterSpacing: ".08em" },
-  labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase", letterSpacing: ".08em" },
+  labelSmall: { color: "#999", fontSize: 11, textTransform: "uppercase" },
   mini: { margin: "5px 0", color: "#aaa", fontSize: 11 },
   message: { color: "#f3d98b" },
   messageBox: { padding: 12, borderRadius: 12, border: "1px solid rgba(214,180,92,.25)", marginBottom: 14, background: "rgba(214,180,92,.08)" },
