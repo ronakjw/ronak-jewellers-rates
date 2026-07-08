@@ -2347,7 +2347,7 @@ return (
       <div style={styles.sideCard}>
         <p style={styles.label}>MCX Buy</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
-          <span>₹ {formatPrice(quote.goldMcxBuyPrice)}<span style={styles.unit}> / 10 gm</span></span>
+          <span>₹ {formatPrice(quote.goldMcxBuyPrice)}<span style={styles.unit}>/10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxBuy} />
         </h2>
 
@@ -2361,14 +2361,14 @@ return (
         <p style={styles.finalLabel}>We Buy at :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalBuying)}
-          <span style={styles.unit}> / 10 gm</span>
+          <span style={styles.unit}>/10gm</span>
         </h1>
       </div>
 
       <div style={styles.sideCard}>
         <p style={styles.label}>MCX Sell</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
-          <span>₹ {formatPrice(quote.goldMcxSellPrice)}<span style={styles.unit}> / 10 gm</span></span>
+          <span>₹ {formatPrice(quote.goldMcxSellPrice)}<span style={styles.unit}>/10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxSell} />
         </h2>
 
@@ -2382,7 +2382,7 @@ return (
         <p style={styles.finalLabel}>We Sell at :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalSelling)}
-          <span style={styles.unit}> / 10 gm</span>
+          <span style={styles.unit}>/10gm</span>
         </h1>
       </div>
     </div>
@@ -3272,12 +3272,11 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: 3,
-    marginLeft: 8,
-    padding: "3px 7px",
-    borderRadius: 999,
+    marginLeft: 5,
+    padding: "2px 5px",
+    borderRadius: 4,
     fontSize: 10,
-    fontWeight: 900,
-    letterSpacing: "0.02em",
+    fontWeight: 600,
     lineHeight: 1.1,
     whiteSpace: "nowrap",
   },
