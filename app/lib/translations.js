@@ -2,16 +2,16 @@ export const translations = {
   en: {
     liveRates: "LIVE RATES",
     myAlerts: "MY ALERTS",
-    activeContracts: "Active Contracts",
-    utilities: "Utilities",
+    activeContracts: "A c t i v e  C o n t r a c t s",
+    utilities: "U t i l i t i e s",
     theme: "Theme",
     keepScreenOn: "Keep Screen On",
-    quickActions: "Quick Actions",
+    quickActions: "Q u i c k  A c t i o n s",
     enableNotifications: "Enable Notifications",
     feedback: "Feedback",
-    account: "Account",
+    account: "A c c o u n t",
     logout: "Logout",
-    disclaimerTitle: "Disclaimer",
+    disclaimerTitle: "D i s c l a i m e r",
     disclaimerText: "Rates are indicative and may vary depending on confirmation at the time of enquiry.",
     marketOpen: "Market Open",
     marketClosed: "Market Closed",
@@ -63,6 +63,7 @@ export const translations = {
     bigView: "LARGE VIEW",
     maintenanceTitle: "Website Under Maintenance",
     maintenanceText: "We are Upgrading. Please check again shortly.",
+    contact: "C o n t a c t  U s
   },
   hi: {
     liveRates: "लाइव रेट्स",
@@ -128,6 +129,7 @@ export const translations = {
     bigView: "बड़ा दृश्य",
     maintenanceTitle: "वेबसाइट अभी मेंटेनेंस के कार्य में है",
     maintenanceText: "हम वेबसाइट अपग्रेड कर रहे हैं। कृपया थोड़ी देर बाद पुनः पधारें।",
+    contact:"हमसे संपर्क करें",
   },
 };
 
