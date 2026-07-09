@@ -824,14 +824,9 @@ function SideBarMenu({
   variant="sidebar"
   style={styles.sidebarAction}
 />
-          <a href="tel:9479893898" style={styles.sidebarAction}>
-            📞 Call 9479893898
+          <a href="tel:07312503012" style={styles.sidebarAction}>
+            ☎️ 0731-250<strong>3012</strong>
           </a>
-
-          <a href="tel:9300053012" style={styles.sidebarAction}>
-            📞 Call 9300053012
-          </a>                      
-        </div>
 
         {dealerProfile ? (
           <div style={{ ...styles.sidebarSection, animationDelay: "0.25s" }}>
