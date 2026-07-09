@@ -90,9 +90,15 @@ export default function DealerAccessGate({
   theme = "dark",
   logoSrc = "/logo.png",
   language = "en",
+  onLanguageChange,
   onAccessGranted,
 }) {
   const t = gateText[language] || gateText.en;
+  function changeLanguage(value) {
+  if (onLanguageChange) {
+    onLanguageChange(value);
+  }
+}
   const [checking, setChecking] = useState(true);
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
@@ -403,7 +409,16 @@ export default function DealerAccessGate({
   return (
     <main style={{ ...styles.page, ...(theme === "light" ? styles.lightVars : styles.darkVars) }}>
       <section style={styles.card}>
-
+  <div style={styles.languageRow}>
+    <select
+      style={styles.languageSelect}
+      value={language}
+      onChange={(e) => changeLanguage(e.target.value)}
+    >
+      <option value="en">EN 🇬🇧</option>
+      <option value="hi">हि 🇮🇳</option>
+    </select>
+  </div>
         <Image src={logoSrc} alt="Ronak Jewellers" width={210} height={210} style={styles.logo} />
 
         {logoutSuccess ? (
