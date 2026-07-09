@@ -797,7 +797,6 @@ function SideBarMenu({
   </div>
 
   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-    <span>{t.bigView} / {t.compactView}</span>
     <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} t={t} />
   </div>
 </div>
@@ -824,10 +823,28 @@ function SideBarMenu({
   variant="sidebar"
   style={styles.sidebarAction}
 />
-          <a href="tel:07312503012" style={styles.sidebarAction}>
+         
+  </div>
+
+ <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
+          <span
+            style={
+              theme === "light"
+                ? styles.sidebarLabelLight
+                : styles.sidebarLabel
+            }
+          >
+            Contact us
+          </span>
+ <a href="tel:07312503012" style={styles.sidebarAction}>
             ☎️ 0731-250<strong>3012</strong>
           </a>
+<a href="mailto:admin@ronakjewellers.co.in," style={styles.sidebarAction}>
+  📧 admin@ronakjewellers.co.in
+</a>
 
+              
+       </div>
         {dealerProfile ? (
           <div style={{ ...styles.sidebarSection, animationDelay: "0.25s" }}>
             <span
