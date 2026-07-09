@@ -768,11 +768,11 @@ function SideBarMenu({
           >
             Contact us
           </span>
- <a href="tel:07312503012" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, padding: "16px 0", borderTop: "1px solid rgba(214,180,92,0.18)"}}>
-            ☎️ 0731-250 <strong>3012</strong>
+ <a href="tel:07312503012" style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
+☎️ 0731-250 3012 
           </a>
-<a href="mailto:admin@ronakjewellers.co.in" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, padding: "16px 0", borderTop: "1px solid rgba(214,180,92,0.18)"}}>
-  📧 admin@ronakjewellers.co.in
+<a href="mailto:admin@ronakjewellers.co.in" style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
+    📧 admin@ronakjewellers.co.in
 </a>
 
               
@@ -2554,7 +2554,6 @@ const styles = {
     display: "block",
     color: "#aaa",
     fontSize: 13,
-    letterSpacing: "0.12em",
     textTransform: "uppercase",
     marginBottom: 12,
   },
@@ -2563,7 +2562,6 @@ const styles = {
     display: "block",
     color: "#6d521c",
     fontSize: 13,
-    letterSpacing: "0.12em",
     textTransform: "uppercase",
     marginBottom: 12,
   },
