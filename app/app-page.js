@@ -597,6 +597,8 @@ function SideBarMenu({
   onEnableNotifications,
   viewMode,
   setViewMode,
+  language,
+  setLanguage,
 }) {
   const marketStatus = settings?.holidayMode
     ? t.holidayMode
@@ -722,6 +724,13 @@ function SideBarMenu({
   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
     <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} t={t} />
   </div>
+    <button
+  type="button"
+  style={{ ...styles.sidebarAction, width: "100%", cursor: "pointer" }}
+  onClick={() => setLanguage(language === "hi" ? "en" : "hi")}
+>
+  🌐 {language === "hi" ? "English" : "हिंदी"}
+</button>
 </div>
         <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
           <span
@@ -1068,7 +1077,7 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [screenAwake, setScreenAwake] = useState(false);
   const [wakeLock, setWakeLock] = useState(null);
-  const language = "en";
+  const [language, setLanguage] = useState("en");
   const [activeTab, setActiveTab] = useState("rates");
   const [targetAlerts, setTargetAlerts] = useState([]);
   const [triggeredAlerts, setTriggeredAlerts] = useState([]);
@@ -1153,14 +1162,16 @@ function CustomNotice({ message }) {
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("rj-theme");
-
     if (savedTheme === "light" || savedTheme === "dark") {
       setTheme(savedTheme);
     }
-
     const savedViewMode = window.localStorage.getItem("rj-view-mode");
     if (savedViewMode === "compact" || savedViewMode === "big") {
       setViewMode(savedViewMode);
+    }
+    const savedLanguage = window.localStorage.getItem("rj-language");
+    if (savedLanguage === "hi" || savedLanguage === "en") {
+    setLanguage(savedLanguage);
     }
   }, []);
 
@@ -1217,7 +1228,16 @@ useEffect(() => {
       theme === "light" ? "light" : "dark";
   }, [theme]);
 
-  function toggleTheme() {
+function changeLanguage(value) {
+  const nextLanguage = value === "hi" ? "hi" : "en";
+  setLanguage(nextLanguage);
+
+  try {
+    window.localStorage.setItem("rj-language", nextLanguage);
+  } catch {}
+}
+
+function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     window.localStorage.setItem("rj-theme", nextTheme);
@@ -1745,12 +1765,13 @@ const isVolatilityActive =
 
   if (!accessGranted) {
     return (
-      <DealerAccessGate
-        theme={theme}
-        logoSrc={logoSrc}
-        language={language}
-        onAccessGranted={handleAccessGranted}
-      />
+     <DealerAccessGate
+     theme={theme}
+     logoSrc={logoSrc}
+     language={language}
+     onLanguageChange={changeLanguage}
+     onAccessGranted={handleAccessGranted}
+    />
     );
   }
 
@@ -1761,7 +1782,9 @@ const isVolatilityActive =
   if (settings?.maintenanceMode) {
     return (
       <MaintenanceScreen theme={theme} logoSrc={logoSrc} t={t} settings={settings}>
-        <SideBarMenu
+        <SideBarMenu 
+          language={language} 
+          setLanguage={changeLanguage}
           theme={theme}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -1787,7 +1810,9 @@ const isVolatilityActive =
   if (activeTab === "alerts") {
     return (
       <div style={themeTokens[theme]}>
-        <SideBarMenu
+        <SideBarMenu 
+          language={language} 
+          setLanguage={changeLanguage}
           theme={theme}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -1843,7 +1868,9 @@ const isVolatilityActive =
   if (settings?.holidayMode) {
   return (
     <main style={pageStyle}>
-<SideBarMenu
+<SideBarMenu 
+  language={language} 
+  setLanguage={changeLanguage}
   theme={theme}
   sidebarOpen={sidebarOpen}
   setSidebarOpen={setSidebarOpen}
@@ -1962,6 +1989,8 @@ const isVolatilityActive =
     return (
     <ClosedScreen theme={theme} logoSrc={logoSrc} t={t}>
 <SideBarMenu
+  language={language} 
+  setLanguage={changeLanguage}
   theme={theme}
   sidebarOpen={sidebarOpen}
   setSidebarOpen={setSidebarOpen}
@@ -2119,6 +2148,8 @@ const compactRateRows = [
 return (
     <main style={pageStyle}>
 <SideBarMenu
+  language={language} 
+  setLanguage={changeLanguage}
   theme={theme}
   sidebarOpen={sidebarOpen}
   setSidebarOpen={setSidebarOpen}
