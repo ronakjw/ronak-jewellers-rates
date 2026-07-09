@@ -768,10 +768,10 @@ function SideBarMenu({
           >
             {t.contact}
           </span>
- <a href="tel:07312503012" style={{ ...styles.sidebarAction, width: "70%", cursor: "pointer" }}>
+ <a href="tel:07312503012" style={{ ...styles.sidebarAction, width: "95%", cursor: "pointer" }}>
 ☎️ 0731-250 3012 
           </a>
-<a href="mailto:admin@ronakjewellers.co.in" style={{ ...styles.sidebarAction, width: "70%", cursor: "pointer" }}>
+<a href="mailto:admin@ronakjewellers.co.in" style={{ ...styles.sidebarAction, width: "95%", cursor: "pointer" }}>
     📧 admin@ronakjewellers.co.in
 </a>
 
@@ -2602,10 +2602,10 @@ const styles = {
     border: "1px solid var(--rj-panel-border)",
     background: "var(--rj-call-bg)",
     boxShadow: "var(--rj-call-shadow)",
-    borderRadius: 14,
+    borderRadius: 12,
     padding: "12px 14px",
     marginBottom: 10,
-    fontWeight: 800,
+    fontWeight: 650,
     letterSpacing: "0.03em",
   },
 
