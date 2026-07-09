@@ -330,15 +330,15 @@ function CompactRatesTable({ rows }) {
     <section style={styles.compactTableWrap}>
       <table style={styles.compactTable}>
         <colgroup>
-          <col style={{ width: "24%" }} />
-          <col style={{ width: "12%" }} />
-          <col style={{ width: "22%" }} />
+          <col style={{ width: "21%" }} />
+          <col style={{ width: "11%" }} />
+          <col style={{ width: "25%" }} />
           <col style={{ width: "18%" }} />
-          <col style={{ width: "24%" }} />
+          <col style={{ width: "25%" }} />
         </colgroup>
         <thead>
           <tr>
-            <th style={styles.compactTh}></th>
+            <th style={styles.compactTh}>Product</th>
             <th style={styles.compactTh}></th>
             <th style={styles.compactTh}>MCX rate</th>
             <th style={styles.compactTh}>Premium</th>
@@ -3362,11 +3362,11 @@ const styles = {
     letterSpacing: "0.01em",
   },
   compactTd: {
-    padding: "7px 3px",
+    padding: "5px 1px",
     borderBottom: "1px solid var(--rj-card-border)",
     borderLeft: "1px solid var(--rj-card-border)",
-    fontSize: "clamp(11px, 2.9vw, 14px)",
-    fontWeight: 650,
+    fontSize: "clamp(12px, 3vw, 15px)",
+    fontWeight: 550,
     whiteSpace: "nowrap",
     textAlign: "center",
     lineHeight: 1.1,
@@ -3385,7 +3385,7 @@ const styles = {
     padding: "7px 3px",
     borderBottom: "1px solid var(--rj-card-border)",
     borderLeft: "1px solid var(--rj-card-border)",
-    fontSize: "clamp(11px, 2.9vw, 14px)",
+    fontSize: "clamp(12px, 3vw, 15px)",
     fontWeight: 900,
     color: "var(--rj-final)",
     whiteSpace: "nowrap",
