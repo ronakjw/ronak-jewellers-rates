@@ -30,7 +30,6 @@ const translations = {
   en: {
     liveRates: "LIVE RATES",
     myAlerts: "MY ALERTS",
-    liveStatus: "Live Status",
     activeContracts: "Active Contracts",
     utilities: "Utilities",
     theme: "Theme",
@@ -701,7 +700,7 @@ function SideBarMenu({
         <div style={styles.sidebarHeader}>
           <div>
             <strong>Ronak Jewellers</strong>
-            <p style={styles.sidebarSubTitle}>Live Rates</p>
+            <p style={styles.sidebarSubTitle}>RJ - Settings tab</p>
           </div>
 
           <button
@@ -720,12 +719,8 @@ function SideBarMenu({
 
 
 
-        <div style={{ ...styles.sidebarSection, animationDelay: "0.10s" }}>
-          <span style={theme === "light" ? styles.sidebarLabelLight : styles.sidebarLabel}>
-            {t.liveStatus}
-          </span>
-
-          <div style={styles.sidebarInfoCard}>
+        <div style={{ ...styles.sidebarSection, animationDelay: "0.20s" }}>
+           <div style={styles.sidebarInfoCard}>
             <div style={styles.sidebarStatusRow}>
               <span style={styles.live} />
               <strong>{marketStatus}</strong>
@@ -777,12 +772,7 @@ function SideBarMenu({
 
 
   <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 16,
-    }}
+    style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}}
   >
     <span>{t.keepScreenOn}</span>
 <ThemeToggle
@@ -836,10 +826,10 @@ function SideBarMenu({
           >
             Contact us
           </span>
- <a href="tel:07312503012" style={styles.sidebarAction}>
-            ☎️ 0731-250<strong>3012</strong>
+ <a href="tel:07312503012" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}}>
+            ☎️ 0731-250 <strong>3012</strong>
           </a>
-<a href="mailto:admin@ronakjewellers.co.in," style={styles.sidebarAction}>
+<a href="mailto:admin@ronakjewellers.co.in" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}}>
   📧 admin@ronakjewellers.co.in
 </a>
 
