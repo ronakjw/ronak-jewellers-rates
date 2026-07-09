@@ -766,12 +766,12 @@ function SideBarMenu({
                 : styles.sidebarLabel
             }
           >
-            Contact us
+            {t.contact}
           </span>
- <a href="tel:07312503012" style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
+ <a href="tel:07312503012" style={{ ...styles.sidebarAction, width: "70%", cursor: "pointer" }}>
 ☎️ 0731-250 3012 
           </a>
-<a href="mailto:admin@ronakjewellers.co.in" style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
+<a href="mailto:admin@ronakjewellers.co.in" style={{ ...styles.sidebarAction, width: "70%", cursor: "pointer" }}>
     📧 admin@ronakjewellers.co.in
 </a>
 
