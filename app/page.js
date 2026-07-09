@@ -764,7 +764,7 @@ function SideBarMenu({
     {t.utilities}
   </span>
 
-  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}} >
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, }} >
     <span>{t.theme}</span>
 
     <ThemeToggle theme={theme} onToggle={toggleTheme} hideText />
@@ -826,10 +826,10 @@ function SideBarMenu({
           >
             Contact us
           </span>
- <a href="tel:07312503012" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}}>
+ <a href="tel:07312503012" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, padding: "16px 0", borderTop: "1px solid rgba(214,180,92,0.18)"}}>
             ☎️ 0731-250 <strong>3012</strong>
           </a>
-<a href="mailto:admin@ronakjewellers.co.in" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16,}}>
+<a href="mailto:admin@ronakjewellers.co.in" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, padding: "16px 0", borderTop: "1px solid rgba(214,180,92,0.18)"}}>
   📧 admin@ronakjewellers.co.in
 </a>
 
