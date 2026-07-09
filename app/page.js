@@ -634,8 +634,8 @@ function SideBarMenu({
       >
         <div style={styles.sidebarHeader}>
           <div>
-            <strong>Ronak Jewellers</strong>
-            <p style={styles.sidebarSubTitle}>RJ - Settings tab</p>
+            <strong>{t.braand}</strong>
+            <p style={styles.sidebarSubTitle}>Settings and Preferences</p>
           </div>
 
           <button
@@ -729,7 +729,7 @@ function SideBarMenu({
   style={{ ...styles.sidebarAction, width: "100%", cursor: "pointer" }}
   onClick={() => setLanguage(language === "hi" ? "en" : "hi")}
 >
-  🌐 {language === "hi" ? "English" : "हिंदी"}
+  🌐 {language === "hi" ? "Switch to : English" : "Switch to : हिंदी"}
 </button>
 </div>
         <div style={{ ...styles.sidebarSection, animationDelay: "0.22s" }}>
@@ -925,7 +925,7 @@ function AlertsPage({
     <main style={{ ...styles.page, ...themeTokens[theme], paddingBottom: 105 }}>
       <section style={styles.hero}>
         <Image src={logoSrc} alt="Ronak Jewellers" width={250} height={250} style={styles.logoImage} />
-        <h2 style={styles.brandName}>Ronak Jewellers</h2>
+        <h2 style={styles.brandName}>{t.braand}</h2>
       </section>
 
       <section style={styles.mainCard}>
