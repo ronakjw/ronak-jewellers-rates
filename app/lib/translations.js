@@ -63,7 +63,7 @@ export const translations = {
     bigView: "LARGE VIEW",
     maintenanceTitle: "Website Under Maintenance",
     maintenanceText: "We are Upgrading. Please check again shortly.",
-    contact: "C o n t a c t  U s
+    contact: "C o n t a c t  U s",
   },
   hi: {
     liveRates: "लाइव रेट्स",
