@@ -2098,7 +2098,7 @@ const goldFinalSelling = roundUpToMultiple(rawGoldFinalSelling, goldRoundoffMult
 const compactRateRows = [
   {
     id: "silver99",
-    title: {t.silver99},
+    title: t.silver99,
     compactTitle: "Silver 99",
     mcxBuy: quote.mcxBuyPrice,
     mcxSell: quote.mcxSellPrice,
@@ -2113,7 +2113,7 @@ const compactRateRows = [
     ? [
         {
           id: "silver100",
-          title: {t.silver100},
+          title: t.silver100,
           compactTitle: "Silver 100",
           mcxBuy: quote.mcxBuyPrice,
           mcxSell: quote.mcxSellPrice,
@@ -2130,7 +2130,7 @@ const compactRateRows = [
     ? [
         {
           id: "gold995",
-          title: {t.gold995},
+          title: t.gold995,
           compactTitle: "Gold 995",
           mcxBuy: quote.goldMcxBuyPrice,
           mcxSell: quote.goldMcxSellPrice,
