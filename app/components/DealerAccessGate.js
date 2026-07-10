@@ -522,7 +522,7 @@ export default function DealerAccessGate({
 
             {message ? <p style={styles.message}>{message}</p> : null}
             <p style={styles.note}>{t.accessNote}</p>
-            <p style={styles.note}> NOTE: To avoid OTP verification, enter your mobile number through your registered device only.</p>
+            <p style={styles.note}>{t.dnote}</p>
 
             <button
               type="button"
