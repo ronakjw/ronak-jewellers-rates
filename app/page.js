@@ -1776,7 +1776,7 @@ const isVolatilityActive =
   }
 
   if (!settings) {
-      return <LoadingScreen theme={theme} logoSrc={logoSrc} />;
+      return <LoadingScreen theme={theme} logoSrc={logoSrc} t={t}/>;
   }
 
   if (settings?.maintenanceMode) {
