@@ -2255,8 +2255,8 @@ return (
 {settings.silver100rate ? (
   <>
   <ProductPanel
-  id={t.silver100}
-  title="SILVER 100 [PetiCut]"
+  id="silver100"
+  title={t.silver100}
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
