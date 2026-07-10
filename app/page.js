@@ -635,7 +635,7 @@ function SideBarMenu({
         <div style={styles.sidebarHeader}>
           <div>
             <strong>{t.braand}</strong>
-            <p style={styles.sidebarSubTitle}>Settings and Preferences</p>
+            <p style={styles.sidebarSubTitle}>{t.snp}</p>
           </div>
 
           <button
@@ -2171,7 +2171,7 @@ return (
       <section style={styles.hero}>
         <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
 
-        <h2 style={styles.brandName}>Ronak Jewellers</h2>
+        <h2 style={styles.brandName}>{t.braand}</h2>
         <div style={styles.statusRow}>
           <span style={styles.live} />
           <span>{t.liveBullion}</span>
@@ -2182,7 +2182,7 @@ return (
     </section>
   
 <div style={styles.metaItem}>
-  <span>Last Updated: {formatCurrentTime(now)}</span>
+  <span>{t.lastUpdated}: {formatCurrentTime(now)}</span>
 </div>
 {fetchError ? <div style={styles.errorBox}>{fetchError}</div> : null}
 
@@ -2206,7 +2206,7 @@ return (
 >
     <div style={styles.rateGrid}>
           <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Buy</p>
+            <p style={styles.label}>{t.mcxBuy}</p>
             <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
               <span>₹ {formatPrice(quote.mcxBuyPrice)}<span style={styles.unit}> /kg</span></span>
               <MovementBadge movement={rateMovements.silverMcxBuy} />
@@ -2214,12 +2214,12 @@ return (
 
           {settings.showPremium ? (
             <div style={styles.premiumBox}>
-              <span>Buying Premium :</span>
+              <span>{t.prembuy} :</span>
               <strong>{formatPremium(buyingPremium)}</strong>
             </div>
             ) : null}
 
-            <p style={styles.finalLabel}>We Buy at :</p>
+            <p style={styles.finalLabel}>{t.weBuyAt} :</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(finalBuying)}
               <span style={styles.unit}> /kg</span>
@@ -2227,7 +2227,7 @@ return (
           </div>
 
           <div style={styles.sideCard}>
-            <p style={styles.label}>MCX Sell</p>
+            <p style={styles.label}>{t.mcxSell}</p>
             <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
               <span>₹ {formatPrice(quote.mcxSellPrice)}<span style={styles.unit}> /kg</span></span>
               <MovementBadge movement={rateMovements.silverMcxSell} />
@@ -2235,12 +2235,12 @@ return (
 
             {settings.showPremium ? (
                 <div style={styles.premiumBox}>
-              <span>Selling Premium :</span>
+              <span>{t.premsell} :</span>
               <strong>{formatPremium(sellingPremium)}</strong>
             </div>
             ) : null}
 
-            <p style={styles.finalLabel}>We Sell at :</p>
+            <p style={styles.finalLabel}>{t.weBuyAt} :</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(finalSelling)}
               <span style={styles.unit}> /kg</span>
