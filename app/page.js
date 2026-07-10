@@ -2387,7 +2387,7 @@ function KachhiBadla({ settings }) {
   );
 }
 
-function LoadingScreen({ theme = "dark", logoSrc = "/logo.png"  t = translations.en, }) {
+function LoadingScreen({ theme = "dark", logoSrc = "/logo.png",  t = translations.en, }) {
   return (
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
