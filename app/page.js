@@ -9,7 +9,6 @@ import InstallPWAButton from "./components/InstallPWAButton";
 import DealerAccessGate from "./components/DealerAccessGate";
 import { translations } from "./lib/translations";
 import "./global.css";
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -2388,7 +2387,7 @@ function KachhiBadla({ settings }) {
   );
 }
 
-function LoadingScreen({ theme = "dark", logoSrc = "/logo.png" }) {
+function LoadingScreen({ theme = "dark", logoSrc = "/logo.png"  t = translations.en, }) {
   return (
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
