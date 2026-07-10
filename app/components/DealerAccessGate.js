@@ -462,7 +462,7 @@ export default function DealerAccessGate({
         ) : (
           <>
             <h2 style={styles.brand}>{t.brand}</h2>
-            <h4> {t.dag} </h4>
+            <h4>{t.dag}</h4>
 
             {!otpSent ? (
               <>
