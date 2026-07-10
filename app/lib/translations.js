@@ -71,7 +71,7 @@ export const translations = {
     myAlerts: "मेरे अलर्ट",
     activeContracts: "सक्रिय कॉन्ट्रैक्ट्स",
     utilities: "यूटिलिटीज़",
-    brand: "रौनक ज्वैलर्स",
+    braand: "रौनक ज्वैलर्स",
     theme: "थीम",
     keepScreenOn: "स्क्रीन ऑन रखें",
     quickActions: "क्त्वरित क्रियाएं",
