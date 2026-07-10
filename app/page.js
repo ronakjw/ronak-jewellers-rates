@@ -2200,7 +2200,7 @@ return (
   <>
 <ProductPanel
   id="silver99"
-  title="SILVER 99 [SA Chorsa]"
+  title={t.silver99}
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
@@ -2256,20 +2256,20 @@ return (
 {settings.silver100rate ? (
   <>
   <ProductPanel
-  id="silver100"
+  id={t.silver100}
   title="SILVER 100 [PetiCut]"
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
   <div style={styles.rateGrid}>
     <div style={styles.sideCard}>
-      <p style={styles.label}>MCX Buy</p>
+      <p style={styles.label}>{t.mcxBuy}</p>
       <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
         <span>₹ {formatPrice(quote.mcxBuyPrice)}<span style={styles.unit}> /kg</span></span>
         <MovementBadge movement={rateMovements.silverMcxBuy} />
       </h2>   
 
-      <p style={styles.finalLabel}>WE BUY AT:</p>
+      <p style={styles.finalLabel}>{t.weBuyAt}:</p>
       <h1 style={styles.finalPrice}>
         ₹ {formatPrice(silver100Buying)}
         <span style={styles.unit}> /kg</span>
@@ -2277,13 +2277,13 @@ return (
     </div>
 
     <div style={styles.sideCard}>
-      <p style={styles.label}>MCX Sell</p>
+      <p style={styles.label}>{t.mcxSell}</p>
       <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
         <span>₹ {formatPrice(quote.mcxSellPrice)}<span style={styles.unit}> /kg</span></span>
         <MovementBadge movement={rateMovements.silverMcxSell} />
       </h2>
 
-      <p style={styles.finalLabel}>WE SELL AT:</p>
+      <p style={styles.finalLabel}>{t.weSellAt} :</p>
       <h1 style={styles.finalPrice}>
         ₹ {formatPrice(silver100Selling)}
         <span style={styles.unit}> /kg</span>
@@ -2300,7 +2300,7 @@ return (
 {Boolean(settings.ShowGoldRate) ? (
 <ProductPanel
   id="gold995"
-  title="GOLD 995"
+  title={t.gold995}
   openProducts={openProducts}
   setOpenProducts={setOpenProducts}
 >
@@ -2312,7 +2312,7 @@ return (
     <>
     <div style={styles.rateGrid}>
       <div style={styles.sideCard}>
-        <p style={styles.label}>MCX Buy</p>
+        <p style={styles.label}>{t.mcxBuy}</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
           <span>₹ {formatPrice(quote.goldMcxBuyPrice)}<span style={styles.unit}> /10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxBuy} />
@@ -2320,12 +2320,12 @@ return (
 
         {settings.ShowGoldPrem ? (
           <div style={styles.premiumBox}>
-            <span>Buying Premium :</span>
+            <span>{t.prembuy}</span>
             <strong>{formatPremium(goldBuyPremium)}</strong>
           </div>
         ) : null}
 
-        <p style={styles.finalLabel}>We Buy at :</p>
+        <p style={styles.finalLabel}>{t.weBuyAt} :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalBuying)}
           <span style={styles.unit}> /10gm</span>
@@ -2333,7 +2333,7 @@ return (
       </div>
 
       <div style={styles.sideCard}>
-        <p style={styles.label}>MCX Sell</p>
+        <p style={styles.label}>{t.mcxSell}</p>
         <h2 style={{ ...styles.mcxPrice, ...styles.mcxPriceWithMovement }}>
           <span>₹ {formatPrice(quote.goldMcxSellPrice)}<span style={styles.unit}> /10gm</span></span>
           <MovementBadge movement={rateMovements.goldMcxSell} />
@@ -2341,12 +2341,12 @@ return (
 
         {settings.ShowGoldPrem ? (
           <div style={styles.premiumBox}>
-            <span>Selling Premium :</span>
+            <span>{t.premsell} :</span>
             <strong>{formatPremium(goldSellPremium)}</strong>
           </div>
         ) : null}
 
-        <p style={styles.finalLabel}>We Sell at :</p>
+        <p style={styles.finalLabel}>{t.weSellAt} :</p>
         <h1 style={styles.finalPrice}>
           ₹ {formatPrice(goldFinalSelling)}
           <span style={styles.unit}> /10gm</span>
@@ -2392,8 +2392,8 @@ function LoadingScreen({ theme = "dark", logoSrc = "/logo.png" }) {
   return (
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
-      <h1 style={styles.brandName}>Ronak Jewellers</h1>
-      <p style={styles.muted}>Loading live rates...</p>
+      <h1 style={styles.brandName}>{t.braand}</h1>
+      <p style={styles.muted}>{t.loadingRates}</p>
     </main>
   );
 }
@@ -2403,7 +2403,7 @@ function ClosedScreen({ theme = "dark", logoSrc = "/logo.png", t = translations.
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       {children}
       <Image   src={logoSrc}   alt="Ronak Jewellers"   width={250}   height={250}   style={styles.logoImage} />
-      <h1 style={styles.brandName}>• Ronak Jewellers •</h1>
+      <h1 style={styles.brandName}>• {t.braand} •</h1>
       <div style={styles.closedCard}>
         <h2 style={styles.closedTitle}>
           {t.ratesUnavailable}
