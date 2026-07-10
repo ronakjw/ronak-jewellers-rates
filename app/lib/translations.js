@@ -12,6 +12,7 @@ export const translations = {
     feedback: "Feedback",
     account: "A c c o u n t",
     logout: "Logout",
+    
     disclaimerTitle: "D i s c l a i m e r",
     disclaimerText: "Rates are indicative and may vary depending on confirmation at the time of enquiry.",
     marketOpen: "Market Open",
@@ -138,6 +139,7 @@ export const translations = {
 export const gateText = {
   en: {
   brand: "Ronak Jewellers",
+  dag: "Dealer Access Gate",
   checking: "Checking access...",
   placeholder: "Enter 10-digit mobile number",
   dnote:"NOTE: To avoid OTP verification, enter your mobile number through your registered device only.",
@@ -185,6 +187,7 @@ export const gateText = {
 },
   hi: {
     brand: "रौनक ज्वैलर्स",
+    dag: "डीलर एक्सेस गेट",
     checking: "एक्सेस की जाँच हो रही है...",
     placeholder: "10 अंकों का मोबाइल नंबर दर्ज करें",
 dnote:"नोट: OTP वेरिफिकेशन से बचने के लिए, अपना मोबाइल नंबर केवल अपने रजिस्टर्ड डिवाइस से ही डालें।",
