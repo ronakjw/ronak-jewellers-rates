@@ -2240,7 +2240,7 @@ return (
             </div>
             ) : null}
 
-            <p style={styles.finalLabel}>{t.weBuyAt} :</p>
+            <p style={styles.finalLabel}>{t.weSellAt} :</p>
             <h1 style={styles.finalPrice}>
               ₹ {formatPrice(finalSelling)}
               <span style={styles.unit}> /kg</span>
