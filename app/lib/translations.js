@@ -161,7 +161,7 @@ export const gateText = {
   notAuthorized: "This number is not authorized to view.",
   unable: "Unable to verify access. Please try again.",
   otpSent: "New device detected. OTP sent to your registered number.",
-  otpInactive: "OTP service is currently active. Please contact Ronak Jewellers.",
+  otpInactive: "OTP service is currently inactive. Please contact Ronak Jewellers.",
   otpAgain: "Please request OTP again.",
   enterOtpMsg: "Enter the OTP.",
   differentOtp: "OTP verified for a different number. Please try again.",
