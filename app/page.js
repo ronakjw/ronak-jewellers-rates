@@ -2924,7 +2924,7 @@ const styles = {
 
   volatilityWarning: {
     maxWidth: 760,
-    margin: "0 auto 22px",
+    margin: "8px auto 22px",
     border: "1px solid rgba(255, 193, 7, 0.45)",
     background:
       "linear-gradient(145deg, rgba(255,193,7,0.16), rgba(35,35,35,0.92))",
