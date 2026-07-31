@@ -1,5 +1,5 @@
 
-import { adminDb } from "../../lib/firebaseAdmin";
+import { adminDb } from "../firebaseAdmin";
 import { toBool, cleanSymbol } from "./utils";
 
 export async function getSettings() {
