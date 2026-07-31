@@ -1,8 +1,8 @@
 import { adminDb } from "../../../lib/firebaseAdmin";
-import {toBool, cleanSymbol, getBestPrices, getIndiaDateString,} from "../../../lib/market/utils";
 import { getSettings } from "../../../lib/market/settings";
 import { getActiveContractRow, getContractRowBySymbol,} from "../../../lib/market/contracts";
-import { getMcxRows, parseCsvLine,} from "../../../lib/market/instruments";
+import { getBestPrices, getIndiaDateString,} from "../../../lib/market/utils";
+import { getMcxRows } from "../../../lib/market/instruments";
 
 export const dynamic = "force-dynamic";
 
@@ -13,17 +13,22 @@ async function getLatestHistoricalClose(instrumentToken, apiKey, accessToken) {
   const fromDate = getIndiaDateString(
     new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
   );
+const response = await fetch(
+  `https://api.kite.trade/instruments/historical/${instrumentToken}/day?from=${fromDate}&to=${toDate}`,
+  {
+    headers: {
+      "X-Kite-Version": "3",
+      Authorization: `token ${apiKey}:${accessToken}`,
+    },
+    cache: "no-store",
+  }
+);
 
-  const response = await fetch(
-    `https://api.kite.trade/instruments/historical/${instrumentToken}/day?from=${fromDate}&to=${toDate}`,
-    {
-      headers: {
-        "X-Kite-Version": "3",
-        Authorization: `token ${apiKey}:${accessToken}`,
-      },
-      cache: "no-store",
-    }
+if (!response.ok) {
+  throw new Error(
+    `Kite historical API failed (${response.status})`
   );
+}
 
   const data = await response.json();
   const candles = data?.data?.candles || [];
@@ -88,16 +93,21 @@ export async function GET() {
       .map((instrument) => `i=${encodeURIComponent(instrument)}`)
       .join("&");
 
-    const response = await fetch(`https://api.kite.trade/quote?${query}`, {
-      headers: {
-        "X-Kite-Version": "3",
-        Authorization: `token ${apiKey}:${accessToken}`,
-      },
-      cache: "no-store",
-    });
+  const response = await fetch(`https://api.kite.trade/quote?${query}`, {
+  headers: {
+    "X-Kite-Version": "3",
+    Authorization: `token ${apiKey}:${accessToken}`,
+  },
+  cache: "no-store",
+});
+
+if (!response.ok) {
+  throw new Error(
+    `Kite quote API failed (${response.status})`
+  );
+}
 
     const data = await response.json();
-
     const silverInstrument = `MCX:${contract}`;
     const goldInstrument = goldContract ? `MCX:${goldContract}` : "";
 
