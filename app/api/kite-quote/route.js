@@ -1,4 +1,4 @@
-import { adminDb } from "../../../lib/firebaseAdmin";
+import { adminDb } from "../../lib/firebaseAdmin";
 import { getSettings } from "../../../lib/market/settings";
 import { getActiveContractRow, getContractRowBySymbol,} from "../../../lib/market/contracts";
 import { getBestPrices, getIndiaDateString,} from "../../../lib/market/utils";
