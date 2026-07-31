@@ -1,8 +1,8 @@
 import { adminDb } from "../../lib/firebaseAdmin";
-import { getSettings } from "../../../lib/market/settings";
-import { getActiveContractRow, getContractRowBySymbol,} from "../../../lib/market/contracts";
-import { getBestPrices, getIndiaDateString,} from "../../../lib/market/utils";
-import { getMcxRows } from "../../../lib/market/instruments";
+import { getSettings } from "../../lib/market/settings";
+import { getActiveContractRow, getContractRowBySymbol,} from "../../lib/market/contracts";
+import { getBestPrices, getIndiaDateString,} from "../../lib/market/utils";
+import { getMcxRows } from "../../lib/market/instruments";
 
 export const dynamic = "force-dynamic";
 
