@@ -94,11 +94,12 @@ async function getScripRows() {
 
   return rows;
 }
-
 function isMcxCommodityRow(row, commodityName) {
   return (
     row.Exch === "M" &&
-    String(row.Name || "").toUpperCase() === commodityName &&
+    row.ExchType === "D" &&
+    row.ScripType === "XX" &&
+    String(row.SymbolRoot || "").toUpperCase() === commodityName &&
     row.Expiry
   );
 }
