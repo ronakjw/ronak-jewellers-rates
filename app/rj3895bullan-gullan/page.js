@@ -317,6 +317,7 @@ function toNumber(value, fallback = 0) {
         : Boolean(settings.autoContract);
 
     const newSettings = {
+      rateProvider: settings.rateProvider === "5paisa" ? "5paisa" : "kite",
       buyingPremium: toNumber(settings.buyingPremium, 0),
       sellingPremium: toNumber(settings.sellingPremium, 0),
       showRates: Boolean(settings.showRates),
@@ -594,6 +595,18 @@ function ToggleRow({ label, checked, onChange }) {
           />
 
           <StatusItem
+            label="5paisa"
+            ok={Boolean(systemStatus?.fivepaisa)}
+            value={systemStatus?.fivepaisa ? "Connected" : "Disconnected"}
+          />
+
+          <StatusItem
+            label="Active Provider"
+            ok={Boolean(systemStatus?.quoteOk)}
+            value={systemStatus?.activeProvider || "--"}
+          />
+
+          <StatusItem
             label="Contract"
             ok={Boolean(systemStatus?.contract)}
             value={systemStatus?.contract || "--"}
@@ -610,6 +623,30 @@ function ToggleRow({ label, checked, onChange }) {
           <a href="/api/login" style={styles.reconnectButton}>
             Reconnect Kite
           </a>
+
+          <a href="/api/5paisa/login" style={styles.reconnectButton}>
+            Reconnect 5paisa
+          </a>
+        </div>
+
+        <div style={styles.systemCard}>
+          <label style={{ color: "#f3d98b", fontWeight: 600 }}>
+            Live Rate Provider:
+          </label>
+          <select
+            value={settings?.rateProvider === "5paisa" ? "5paisa" : "kite"}
+            onChange={(e) =>
+              setSettings((prev) => ({ ...prev, rateProvider: e.target.value }))
+            }
+            style={styles.smallButton}
+          >
+            <option value="kite">Kite</option>
+            <option value="5paisa">5paisa</option>
+          </select>
+          <span style={{ color: "#999", fontSize: 13 }}>
+            If the selected provider fails, the site automatically falls back to the other one.
+            Click &quot;Save Settings&quot; below to apply.
+          </span>
         </div>
 
         {systemStatus?.error ? (

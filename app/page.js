@@ -1681,7 +1681,7 @@ const isVolatilityActive = Boolean(
       try {
         setFetchError("");
 
-        const res = await fetch("/api/kite-quote", {
+        const res = await fetch("/api/quote", {
           cache: "no-store",
         });
 
