@@ -15,7 +15,7 @@ export default function ContactPage() {
         <div className="eyebrow" style={{ marginBottom: 18 }}>Contact</div>
         <h1>Two locations, one team.</h1>
         <p className="lede" style={{ marginTop: 24 }}>
-          Trading and refining happen at separate addresses — reach out to
+          Trading, Investment and Refining happen at separate addresses — reach out to
           whichever one fits what you need.
         </p>
       </section>
@@ -23,17 +23,20 @@ export default function ContactPage() {
       <section className="section">
         <div className="container grid-2">
           <div className="card">
-            <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Jewellers — Trading Office</div>
+            <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Jewellers — Office</div>
             <h3 style={{ marginBottom: 16 }}>For buying &amp; selling bullion</h3>
             <p style={{ fontSize: 14, marginBottom: 20 }}>
-              [Add: trading office address]
+              64, Bada Sarafa, Alankar Market,
               <br />
-              [Add: city, PIN code]
+              Indore(MP) - 452002
             </p>
             <p style={{ fontSize: 14 }}>
-              Phone: <a href="tel:+91" style={{ color: "var(--gold-bright)" }}>[Add: phone number]</a>
+              Landline: <a href="tel:" style={{ color: "var(--gold-bright)" }}>0731-2503012</a>
               <br />
-              Email: <a href="mailto:" style={{ color: "var(--gold-bright)" }}>[Add: email address]</a>
+            Mobile: <a href="tel:" style={{ color: "var(--gold-bright)" }}>+91-9479893898</a> | <a href="tel:" style={{ color: "var(--gold-bright)" }}>+91-9300053012</a>
+              <br />
+            
+              Email: <a href="mailto:" style={{ color: "var(--gold-bright)" }}>admin@ronakjewellers.co.in</a>
             </p>
           </div>
 
@@ -41,14 +44,13 @@ export default function ContactPage() {
             <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Refine Cutters &amp; Melters — Refinery</div>
             <h3 style={{ marginBottom: 16 }}>For refining &amp; custom cutting</h3>
             <p style={{ fontSize: 14, marginBottom: 20 }}>
-              [Add: refinery address]
+              31 Lodhipura, near Malganj,
               <br />
-              [Add: city, PIN code]
+             Indore (MP) - 452002
             </p>
             <p style={{ fontSize: 14 }}>
-              Phone: <a href="tel:+91" style={{ color: "var(--gold-bright)" }}>[Add: phone number]</a>
-              <br />
-              Email: <a href="mailto:" style={{ color: "var(--gold-bright)" }}>[Add: email address]</a>
+              Phone: <a href="tel:+91" style={{ color: "var(--gold-bright)" }}>9893893898</a>
+             
             </p>
           </div>
         </div>
@@ -57,7 +59,8 @@ export default function ContactPage() {
       <section className="section section--tight">
         <div className="container">
           <div className="eyebrow" style={{ marginBottom: 14 }}>Hours</div>
-          <p style={{ fontSize: 14 }}>[Add: trading hours, e.g. Mon–Sat, 10:00 AM – 7:00 PM]</p>
+          <p style={{ fontSize: 14 }}>Mon–Fri, 1:00 PM – 9:00 PM</p>
+          <p style={{ fontSize: 14 }}>Sat, 2:00 PM – 8:00 PM</p>      
         </div>
       </section>
 
