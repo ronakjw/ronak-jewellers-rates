@@ -1,5 +1,6 @@
 import Link from "next/link";
-import HallmarkSeal from "./HallmarkSeal";
+import Image from "next/image";
+import ElectroRefinedMark from "./ElectroRefinedMark";
 
 export default function SiteFooter() {
   return (
@@ -17,35 +18,39 @@ export default function SiteFooter() {
           <div>
             <div
               style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
                 fontFamily: "var(--font-display)",
                 fontWeight: 800,
                 fontSize: 22,
                 marginBottom: 12,
               }}
             >
+              <Image src="/logo.png" alt="" width={30} height={30} style={{ objectFit: "contain" }} />
               RONAK <span style={{ color: "var(--gold)" }}>JEWELLERS</span>
             </div>
             <p style={{ maxWidth: 320, fontSize: 14 }}>
-              Silver & Gold bullion, traded at live rates and refined in-house
-              by Ronak Refine Cutters and Melters — marked 'Electro Refined Silver'.
+              Gold and silver bullion, traded at live rates and refined in-house
+              by Ronak Refine Cutters and Melters — marked Electro Refined Silver.
             </p>
           </div>
 
           <div>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>Office</div>
+            <div className="eyebrow" style={{ marginBottom: 12 }}>Trading Office</div>
             <p style={{ fontSize: 14 }}>
-              64, Bada Sarafa, Alankar Market, Indore(MP) - 452002
+              [Add: Ronak Jewellers trading office address]
               <br />
-              0731-2503012
+              [Add: phone number]
             </p>
           </div>
 
           <div>
             <div className="eyebrow" style={{ marginBottom: 12 }}>Refinery</div>
             <p style={{ fontSize: 14 }}>
-              31 Lodhipura, near Malganj, Indore (MP) - 452002
+              [Add: Ronak Refine Cutters and Melters address]
               <br />
-             +91-9893893898
+              [Add: phone number]
             </p>
           </div>
         </div>
@@ -68,12 +73,12 @@ export default function SiteFooter() {
             <Link href="/contact" style={{ fontSize: 13, textDecoration: "none", color: "var(--silver)" }}>Contact</Link>
             <Link href="/rates" style={{ fontSize: 13, textDecoration: "none", color: "var(--gold-bright)" }}>Live Rates</Link>
           </div>
-          <HallmarkSeal size={48} />
+          <ElectroRefinedMark size={0.45} />
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 760px) {
+        @media (max-width: 860px) {
           .footer-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>

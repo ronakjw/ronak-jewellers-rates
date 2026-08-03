@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -36,6 +37,9 @@ export default function SiteNav() {
         <Link
           href="/"
           style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
             textDecoration: "none",
             fontFamily: "var(--font-display)",
             fontWeight: 800,
@@ -44,6 +48,7 @@ export default function SiteNav() {
             color: "var(--ivory)",
           }}
         >
+          <Image src="/logo.png" alt="" width={36} height={36} style={{ objectFit: "contain" }} />
           RONAK <span style={{ color: "var(--gold)" }}>JEWELLERS</span>
         </Link>
 
@@ -129,8 +134,8 @@ export default function SiteNav() {
       )}
 
       <style>{`
-        @media (max-width: 760px) {
-          .site-nav-links { display: none; }
+        @media (max-width: 860px) {
+          .site-nav-links { display: none !important; }
           .site-nav-toggle { display: inline-flex !important; }
         }
       `}</style>
