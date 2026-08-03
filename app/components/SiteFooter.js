@@ -26,26 +26,26 @@ export default function SiteFooter() {
               RONAK <span style={{ color: "var(--gold)" }}>JEWELLERS</span>
             </div>
             <p style={{ maxWidth: 320, fontSize: 14 }}>
-              Gold and silver bullion, traded at live rates and refined in-house
-              by Ronak Refine Cutters and Melters — marked Electro Refined Silver.
+              Silver & Gold bullion, traded at live rates and refined in-house
+              by Ronak Refine Cutters and Melters — marked 'Electro Refined Silver'.
             </p>
           </div>
 
           <div>
-            <div className="eyebrow" style={{ marginBottom: 12 }}>Trading Office</div>
+            <div className="eyebrow" style={{ marginBottom: 12 }}>Office</div>
             <p style={{ fontSize: 14 }}>
-              [Add: Ronak Jewellers trading office address]
+              64, Bada Sarafa, Alankar Market, Indore(MP) - 452002
               <br />
-              [Add: phone number]
+              0731-2503012
             </p>
           </div>
 
           <div>
             <div className="eyebrow" style={{ marginBottom: 12 }}>Refinery</div>
             <p style={{ fontSize: 14 }}>
-              [Add: Ronak Refine Cutters and Melters address]
+              31 Lodhipura, near Malganj, Indore (MP) - 452002
               <br />
-              [Add: phone number]
+             +91-9893893898
             </p>
           </div>
         </div>
