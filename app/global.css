@@ -177,6 +177,10 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .section {
     padding: 64px 0;
   }

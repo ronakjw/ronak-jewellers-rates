@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
-import HallmarkSeal from "./components/HallmarkSeal";
-import PlaceholderMedia from "./components/PlaceholderMedia";
+import ElectroRefinedMark from "./components/ElectroRefinedMark";
 
 export default function HomePage() {
   return (
@@ -48,7 +48,7 @@ export default function HomePage() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <HallmarkSeal size={260} />
+            <ElectroRefinedMark size={1.4} />
           </div>
         </div>
       </section>
@@ -97,11 +97,41 @@ export default function HomePage() {
                 Check Today&apos;s Rates
               </Link>
             </div>
-            <PlaceholderMedia label="Shopfront / trading counter" ratio="5 / 4" />
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "5 / 4",
+                border: "1px solid var(--ink-line)",
+                overflow: "hidden",
+              }}
+            >
+              <Image
+                src="/shopfront.png"
+                alt="Ronak Jewellers"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 860px) 100vw, 50vw"
+              />
+            </div>
           </div>
 
           <div className="grid-2" style={{ alignItems: "center" }}>
-            <PlaceholderMedia label="Refinery floor / furnace in operation" ratio="5 / 4" className="order-first" />
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "5 / 4",
+                border: "1px solid var(--ink-line)",
+                overflow: "hidden",
+              }}
+            >
+              <Image
+                src="/refinery-furnace.jpeg"
+                alt="Ronak Refine Cutters and Melters furnace"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 860px) 100vw, 50vw"
+              />
+            </div>
             <div>
               <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Refine Cutters &amp; Melters</div>
               <h2>Refined under our own roof.</h2>
