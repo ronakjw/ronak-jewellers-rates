@@ -1,6 +1,6 @@
 import SiteNav from "../components/SiteNav";
 import SiteFooter from "../components/SiteFooter";
-import HallmarkSeal from "../components/HallmarkSeal";
+import ElectroRefinedMark from "../components/ElectroRefinedMark";
 import PlaceholderMedia from "../components/PlaceholderMedia";
 
 export const metadata = {
@@ -95,7 +95,7 @@ export default function AboutPage() {
             className="hero-grid"
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <HallmarkSeal size={200} />
+              <ElectroRefinedMark size={1.1} />
             </div>
             <div>
               <div className="eyebrow" style={{ marginBottom: 14 }}>The Mark</div>
