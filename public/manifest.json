@@ -1,0 +1,23 @@
+{
+  "name": "RJ-Rates",
+  "short_name": "RJ App",
+  "description": "Live bullion rates by Ronak Jewellers",
+  "start_url": "/rates",
+  "scope": "/rates",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#C9A227",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/baba.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/baba.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
