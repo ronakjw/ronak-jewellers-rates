@@ -21,6 +21,7 @@ export default function ElectroRefinedMark({ size = 1, className = "" }) {
           fontSize: 26 * size,
           color: "var(--gold-bright)",
           lineHeight: 1,
+          textDecoration: "underline",
         }}
       >
         Electro Refined
