@@ -24,11 +24,11 @@ export default function HomePage() {
             <div className="eyebrow" style={{ marginBottom: 18 }}>
               Gold &amp; Silver Bullion
             </div>
-            <h3>
+            <h2>
               Traded and Refined
               <br />
               under One <span style={{ color: "var(--gold)" }}>Mark.</span>
-            </h3>
+            </h2>
             <p className="lede" style={{ marginTop: 24 }}>
               Ronak Jewellers trades silver and gold and at live,
               commodity-linked* rates. Every bar we sell is refined and cut in-house
