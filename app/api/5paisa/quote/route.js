@@ -313,9 +313,10 @@ export async function GET() {
       mcxBuyPrice: silverBuy,
       mcxSellPrice: silverSell,
       lastPrice: silverFeed.LastRate ?? null,
-      mcxOpeningRate: null,
+      mcxOpeningRate: silverFeed.POpen ?? null,
       mcxClosingRate: silverFeed.PClose ?? null,
       silverClosingSource: "market_feed_pclose",
+      silverOpeningSource: "market_feed_popen",
       silverPriceSource: silverDepth?.bestBid || silverDepth?.bestAsk ? "market_depth" : "last_rate_fallback",
 
       goldContract: goldRow?.Name || "",
@@ -327,6 +328,7 @@ export async function GET() {
       goldOpeningRate: null,
       goldClosingRate: goldFeed?.PClose ?? null,
       goldClosingSource: "market_feed_pclose",
+      goldOpeningSource: "market_feed_popen",
       goldPriceSource: goldDepth?.bestBid || goldDepth?.bestAsk ? "market_depth" : "last_rate_fallback",
 
       timestamp: silverFeed.TickDt || null,
