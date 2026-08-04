@@ -24,22 +24,20 @@ export default function HomePage() {
             <div className="eyebrow" style={{ marginBottom: 18 }}>
               Gold &amp; Silver Bullion
             </div>
-            <h1>
-              Traded and
+            <h3>
+              Traded and Refined
               <br />
-              refined under
-              <br />
-              one <span style={{ color: "var(--gold)" }}>mark.</span>
-            </h1>
+              under One <span style={{ color: "var(--gold)" }}>Mark.</span>
+            </h3>
             <p className="lede" style={{ marginTop: 24 }}>
-              Ronak Jewellers trades gold and silver bullion at live,
-              MCX-linked rates. Every bar we sell is refined and cut in-house
+              Ronak Jewellers trades silver and gold and at live,
+              commodity-linked* rates. Every bar we sell is refined and cut in-house
               by Ronak Refine Cutters and Melters — that&apos;s the Electro
               Refined Silver mark you&apos;ll find engraved on it.
             </p>
             <div style={{ display: "flex", gap: 16, marginTop: 36, flexWrap: "wrap" }}>
               <Link href="/rates" className="btn btn-gold">
-                View Live Rates
+                View Rates
               </Link>
               <Link href="/about" className="btn btn-line">
                 Our Refinery
