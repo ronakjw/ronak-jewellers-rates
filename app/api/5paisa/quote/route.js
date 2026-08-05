@@ -216,6 +216,47 @@ async function fetchMarketDepth({ apiKey, accessToken, clientCode, row }) {
   };
 }
 
+// 5paisa's MarketFeed API has no "open" field (unlike Kite's OHLC data), so
+// there's no real opening price to read. As the closest practical stand-in,
+// we record the first successful price seen each IST trading day and reuse
+// it for the rest of the day. This resets automatically at IST midnight,
+// and backfills a missing side (e.g. gold) if it wasn't available on the
+// very first call of the day but shows up on a later one — without ever
+// overwriting an opening price already captured for today.
+async function getOpeningPrices({ silverPrice, goldPrice }) {
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Kolkata" }).format(new Date());
+  const ref = adminDb.collection("system").doc("fivepaisa-opening");
+
+  return adminDb.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    const data = snap.data();
+
+    if (data && data.date === today) {
+      const patch = {};
+      if (data.silverOpen == null && silverPrice != null) patch.silverOpen = silverPrice;
+      if (data.goldOpen == null && goldPrice != null) patch.goldOpen = goldPrice;
+
+      if (Object.keys(patch).length) {
+        tx.set(ref, patch, { merge: true });
+      }
+
+      return {
+        silverOpen: patch.silverOpen ?? data.silverOpen ?? null,
+        goldOpen: patch.goldOpen ?? data.goldOpen ?? null,
+      };
+    }
+
+    // New trading day (or first run ever) — this call's prices become today's opening.
+    const record = {
+      date: today,
+      silverOpen: silverPrice ?? null,
+      goldOpen: goldPrice ?? null,
+    };
+    tx.set(ref, record);
+    return { silverOpen: record.silverOpen, goldOpen: record.goldOpen };
+  });
+}
+
 export async function GET() {
   try {
     const { apiKey } = getFivePaisaCreds();
@@ -296,6 +337,11 @@ export async function GET() {
       goldError = "Gold quote not found";
     }
 
+    const openings = await getOpeningPrices({
+      silverPrice: silverFeed.LastRate ?? null,
+      goldPrice: goldFeed?.LastRate ?? null,
+    });
+
     // Bid/ask come from the MarketDepth order book. If the book is empty
     // (illiquid moment, or market closed), fall back to last traded price —
     // same fallback pattern the Kite integration used.
@@ -313,10 +359,9 @@ export async function GET() {
       mcxBuyPrice: silverBuy,
       mcxSellPrice: silverSell,
       lastPrice: silverFeed.LastRate ?? null,
-      mcxOpeningRate: silverFeed.POpen ?? null,
+      mcxOpeningRate: openings.silverOpen,
       mcxClosingRate: silverFeed.PClose ?? null,
       silverClosingSource: "market_feed_pclose",
-      silverOpeningSource: "market_feed_popen",
       silverPriceSource: silverDepth?.bestBid || silverDepth?.bestAsk ? "market_depth" : "last_rate_fallback",
 
       goldContract: goldRow?.Name || "",
@@ -325,10 +370,9 @@ export async function GET() {
       goldMcxBuyPrice: goldBuy,
       goldMcxSellPrice: goldSell,
       goldLastPrice: goldFeed?.LastRate ?? null,
-      goldOpeningRate: null,
+      goldOpeningRate: openings.goldOpen,
       goldClosingRate: goldFeed?.PClose ?? null,
       goldClosingSource: "market_feed_pclose",
-      goldOpeningSource: "market_feed_popen",
       goldPriceSource: goldDepth?.bestBid || goldDepth?.bestAsk ? "market_depth" : "last_rate_fallback",
 
       timestamp: silverFeed.TickDt || null,
