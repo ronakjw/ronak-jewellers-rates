@@ -1664,6 +1664,16 @@ const isVolatilityActive = Boolean(
   Number(volatilityUntil || 0) > now.getTime()
 );
 
+if (volatilityUntil) {
+  console.log("[VOLATILITY DEBUG] render check", {
+    volatilityUntil,
+    volatilityUntilISO: new Date(volatilityUntil).toISOString(),
+    nowISO: now.toISOString(),
+    volatilityWarningEnabled: settings?.volatilityWarningEnabled,
+    isVolatilityActive,
+  });
+}
+
  const effectiveRefreshMs = settings?.holidayMode
   ? 900 * 1000
   : isVolatilityActive
@@ -1718,6 +1728,16 @@ const isVolatilityActive = Boolean(
 
             if (movement >= 650 && settings?.volatilityWarningEnabled) {
               const warningUntil = nowMs + 10 * 60 * 1000;
+
+              console.log("[VOLATILITY DEBUG] triggered", {
+                movement,
+                warningUntil,
+                warningUntilISO: new Date(warningUntil).toISOString(),
+                holidayMode: settings?.holidayMode,
+                activeTab,
+                shouldShowRates: marketState.shouldShowRates,
+                hasQuote: Boolean(quote),
+              });
 
               // Update the banner immediately. Firestore then keeps all logged-in
               // clients synchronized with the same warning expiry.
@@ -1913,6 +1933,14 @@ const isVolatilityActive = Boolean(
     </section>
 
   {fetchError ? <div style={styles.errorBox}>{fetchError}</div> : null}
+
+  {isVolatilityActive ? (
+    <div style={styles.volatilityWarning}>
+      <strong>{t.volatilityTitle}</strong>
+      <br />
+      {t.volatilityBody}
+    </div>
+  ) : null}
       
   <section style={styles.mainCard}>
        <div style={{ padding : '0px 20px' }}> <h2> S I L V E R - 9 9</h2></div> 
