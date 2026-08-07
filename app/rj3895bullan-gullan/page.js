@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import AdminRatePreview from "../components/AdminRatePreview";
 import { initializeApp, getApps } from "firebase/app";
 import {
   getAuth,
@@ -730,7 +731,9 @@ function ToggleRow({ label, checked, onChange }) {
     )}
   </div>
 ) : null}
-  
+
+        <AdminRatePreview settings={settings} />
+
         <form onSubmit={saveSettings} style={styles.grid}>
   <div>
   <ToggleRow
