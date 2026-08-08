@@ -8,6 +8,17 @@ import Image from "next/image";
 import InstallPWAButton from "./components/InstallPWAButton";
 import DealerAccessGate from "./components/DealerAccessGate";
 import { translations } from "./lib/translations";
+import {
+  formatPrice,
+  formatPremium,
+  compactMoney,
+  compactPremium,
+  getAutoPremium,
+  getGoldAutoPremium,
+  roundToNearest500,
+  roundDownToMultiple,
+  roundUpToMultiple,
+} from "./lib/pricing";
 import "./global.css";
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -140,21 +151,6 @@ function ContactButtons() {
     </section>
   );
 }
-function formatPrice(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) {
-    return "--";
-  }
-
-  return new Intl.NumberFormat("en-IN").format(value);
-}
-function formatPremium(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) {
-    return "--";
-  }
-  const sign = value > 0 ? "+" : "";
-  return `${sign}${formatPrice(value)}`;
-}
-
 function formatCurrentTime(date) {
   return date.toLocaleTimeString("en-IN", {
     hour: "2-digit",
@@ -246,16 +242,6 @@ function ViewModeToggle({ viewMode, setViewMode, t }) {
   );
 }
 
-function compactMoney(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) return "";
-  return formatPrice(value);
-}
-
-function compactPremium(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) return "-";
-  return formatPremium(value);
-}
-
 function CompactRatesTable({ rows }) {
   return (
     <section style={styles.compactTableWrap}>
@@ -330,96 +316,7 @@ function formatAlertDate(value) {
   if (!date || Number.isNaN(date.getTime())) return "--";
   return date.toLocaleString("en-IN");
 }
-// Auto premium function starts
-function getAutoPremium(basePremium, currentMcx, openingMcx, settings) {
-  const base = Number(basePremium || 0);
-
-  if (!settings.autoPremiumEnabled) {
-    return base;
-  }
-
-  const current = Number(currentMcx);
-  const opening = Number(openingMcx);
-  const stepSize = Math.max(1, Number(settings.premiumStepSize || 1000));
-  const adjustment = Number(settings.premiumStepAdjustment || 500);
-
-  if (
-    !Number.isFinite(current) ||
-    !Number.isFinite(opening) ||
-    current <= 0 ||
-    opening <= 0
-  ) {
-    return base;
-  }
-
-  const difference = current - opening;
-  const steps = Math.trunc(difference / stepSize);
-
-  return base - steps * adjustment;
-}
-function getGoldAutoPremium(
-  basePremium,
-  currentMcx,
-  openingMcx,
-  settings
-) {
-  const base = Number(basePremium || 0);
-
-  if (!settings.GoldAutoPremiumEnabled) {
-    return base;
-  }
-
-  const current = Number(currentMcx);
-  const opening = Number(openingMcx);
-  const stepSize = Math.max(1, Number(settings.GoldPremiumStepSize || 100));
-  const adjustment = Number(settings.GoldPremiumStepAdjustment || 50);
-
-  if (
-    !Number.isFinite(current) ||
-    !Number.isFinite(opening) ||
-    current <= 0 ||
-    opening <= 0
-  ) {
-    return base;
-  }
-
-  const difference = current - opening;
-  const steps = Math.trunc(difference / stepSize);
-
-  return base - steps * adjustment;
-}
-function roundToNearest500(value) {
-  const amount = Number(value);
-
-  if (!Number.isFinite(amount) || amount <= 0) {
-    return null;
-  }
-
-  return Math.floor((amount + 249) / 500) * 500;
-}
-
-function roundDownToMultiple(value, multiple) {
-  const amount = Number(value);
-  const roundBy = Math.max(1, Number(multiple || 1));
-
-  if (!Number.isFinite(amount) || amount <= 0) {
-    return null;
-  }
-
-  return Math.floor(amount / roundBy) * roundBy;
-}
-
-function roundUpToMultiple(value, multiple) {
-  const amount = Number(value);
-  const roundBy = Math.max(1, Number(multiple || 1));
-
-  if (!Number.isFinite(amount) || amount <= 0) {
-    return null;
-  }
-
-  return Math.ceil(amount / roundBy) * roundBy;
-}
-
+// Auto premium logic now lives in ./lib/pricing.js (shared with the admin panel preview)
 function ProductPanel({
   id,
   title,
