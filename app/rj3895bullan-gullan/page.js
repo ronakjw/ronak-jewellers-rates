@@ -565,81 +565,6 @@ function toNumber(value, fallback = 0) {
   </button>
 </div>
         </div>
-
-        <div style={styles.systemCard}>
-          <StatusItem
-            label="Website"
-            ok={systemStatus?.website === "online"}
-            value={systemStatus?.website === "online" ? "Online" : "Issue"}
-          />
-
-          <StatusItem
-            label="Kite"
-            ok={Boolean(systemStatus?.kite)}
-            value={systemStatus?.kite ? "Connected" : "Disconnected"}
-          />
-
-          <StatusItem
-            label="5paisa"
-            ok={Boolean(systemStatus?.fivepaisa)}
-            value={systemStatus?.fivepaisa ? "Connected" : "Disconnected"}
-          />
-
-          <StatusItem
-            label="Active Provider"
-            ok={Boolean(systemStatus?.quoteOk)}
-            value={systemStatus?.activeProvider || "--"}
-          />
-
-          <StatusItem
-            label="Contract"
-            ok={Boolean(systemStatus?.contract)}
-            value={systemStatus?.contract || "--"}
-          />
-
-          <button
-            type="button"
-            style={styles.smallButton}
-            onClick={loadSystemStatus}
-          >
-            Refresh Status
-          </button>
-
-          <a href="/api/login" style={styles.reconnectButton}>
-            Reconnect Kite
-          </a>
-
-          <a href="/api/5paisa/login" style={styles.reconnectButton}>
-            Reconnect 5paisa
-          </a>
-        </div>
-
-        <div style={styles.systemCard}>
-          <label style={{ color: "#f3d98b", fontWeight: 600 }}>
-            Live Rate Provider:
-          </label>
-          <select
-            value={settings?.rateProvider === "5paisa" ? "5paisa" : "kite"}
-            onChange={(e) =>
-              setSettings((prev) => ({ ...prev, rateProvider: e.target.value }))
-            }
-            style={styles.smallButton}
-          >
-            <option value="kite">Kite</option>
-            <option value="5paisa">5paisa</option>
-          </select>
-          <span style={{ color: "#999", fontSize: 13 }}>
-            If the selected provider fails, the site automatically falls back to the other one.
-            Click &quot;Save Settings&quot; below to apply.
-          </span>
-        </div>
-
-        {systemStatus?.error ? (
-          <div style={styles.errorBox}>{systemStatus.error}</div>
-        ) : null}
-        {message ? (
-  <p style={styles.message}>{message}</p>
-) : null}
 {showNewRequests ? (
   <div style={styles.newRequestSection}>
     <div style={styles.newRequestHeader}>
@@ -715,10 +640,82 @@ function toNumber(value, fallback = 0) {
     )}
   </div>
 ) : null}
+        
+  <div style={styles.systemCard}>
+          <StatusItem
+            label="Website"
+            ok={systemStatus?.website === "online"}
+            value={systemStatus?.website === "online" ? "Online" : "Issue"}
+          />
+
+          <StatusItem
+            label="Kite"
+            ok={Boolean(systemStatus?.kite)}
+            value={systemStatus?.kite ? "Connected" : "Disconnected"}
+          />
+
+          <StatusItem
+            label="5paisa"
+            ok={Boolean(systemStatus?.fivepaisa)}
+            value={systemStatus?.fivepaisa ? "Connected" : "Disconnected"}
+          />
+
+          <StatusItem
+            label="Active Provider"
+            ok={Boolean(systemStatus?.quoteOk)}
+            value={systemStatus?.activeProvider || "--"}
+          />
+
+          <StatusItem
+            label="Contract"
+            ok={Boolean(systemStatus?.contract)}
+            value={systemStatus?.contract || "--"}
+          />
+
+          <button
+            type="button"
+            style={styles.smallButton}
+            onClick={loadSystemStatus}
+          >
+            Refresh
+          </button>
+
+          <a href="/api/login" style={styles.smallButton}>
+            link-kite
+          </a>
+
+          <a href="/api/5paisa/login" style={styles.smallButton}>
+           link-5psa
+          </a>
+        </div>
+
+        <div style={styles.systemCard}>
+          <label style={{ color: "#f3d98b", fontWeight: 600 }}>
+            Live Rate Provider:
+          </label>
+          <select
+            value={settings?.rateProvider === "5paisa" ? "5paisa" : "kite"}
+            onChange={(e) =>
+              setSettings((prev) => ({ ...prev, rateProvider: e.target.value }))
+            }
+            style={styles.smallButton}
+          >
+            <option value="kite">Kite</option>
+            <option value="5paisa">5paisa</option>
+          </select>
+        </div>
+
+        {systemStatus?.error ? (
+          <div style={styles.errorBox}>{systemStatus.error}</div>
+        ) : null}
+        {message ? (
+  <p style={styles.message}>{message}</p>
+) : null}
+
 
         <AdminRatePreview settings={settings} />
 
-        <form onSubmit={saveSettings} style={styles.grid}>
+  <form onSubmit={saveSettings} style={styles.grid}>
   <div>
   <ToggleRow
   label="Show Silver Premium"
@@ -805,7 +802,10 @@ function toNumber(value, fallback = 0) {
   onChange={(value) => updateField("volatilityWarningEnabled", value)}
     />  
     </div>    
-<div>
+    
+    <AdminRatePreview settings={settings} />
+
+    <div>
     <div style={styles.controlCard}>
             <label style={styles.label}>Silver99 Buy Prem.</label>
             <input
@@ -1471,10 +1471,10 @@ toggleKnob: {
   background: "rgba(214,180,92,0.08)",
   color: "#f3d98b",
   borderRadius: 7,
-  padding: "6px 5px",
+  padding: "10px 5px",
   textAlign: "center",
   fontWeight: 500,
-  fontSize: 12,
+  fontSize: 10,
   cursor: "pointer",
 },
   pageCenter: {
@@ -1669,26 +1669,6 @@ openSiteButton: {
     color: "#f3d98b",
     borderRadius: 12,
     padding: "9px 13px",
-    cursor: "pointer",
-  },
-
-  reconnectButton: {
-    textDecoration: "none",
-    border: "1px solid rgba(214,180,92,0.55)",
-    background:
-      "linear-gradient(145deg, rgba(214,180,92,0.24), rgba(35,35,35,0.92))",
-    color: "#f3d98b",
-    borderRadius: 12,
-    padding: "9px 13px",
-    fontWeight: 800,
-  },
-
-  logoutButton: {
-    border: "1px solid rgba(214,180,92,0.35)",
-    background: "rgba(214,180,92,0.08)",
-    color: "#f3d98b",
-    borderRadius: 12,
-    padding: "10px 14px",
     cursor: "pointer",
   },
 
