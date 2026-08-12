@@ -685,7 +685,7 @@ function toNumber(value, fallback = 0) {
           </a>
 
           <a href="/api/5paisa/login" style={styles.smallButton}>
-           link-5psa
+           link-5pesa
           </a>
         </div>
 
@@ -711,9 +711,6 @@ function toNumber(value, fallback = 0) {
         {message ? (
   <p style={styles.message}>{message}</p>
 ) : null}
-
-
-        <AdminRatePreview settings={settings} />
 
   <form onSubmit={saveSettings} style={styles.grid}>
   <div>
@@ -1079,7 +1076,11 @@ function toNumber(value, fallback = 0) {
             />
           </div>
 </div> 
-             
+
+              
+        <AdminRatePreview settings={settings} />
+
+              
     <div style={styles.controlCardWide}>
   <label style={styles.label}>Note / Message</label>
 
@@ -1471,10 +1472,10 @@ toggleKnob: {
   background: "rgba(214,180,92,0.08)",
   color: "#f3d98b",
   borderRadius: 7,
-  padding: "10px 5px",
+  padding: "14px 1px",
   textAlign: "center",
-  fontWeight: 500,
-  fontSize: 10,
+  fontWeight: 600,
+  fontSize: 15,
   cursor: "pointer",
 },
   pageCenter: {
