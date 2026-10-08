@@ -1,5 +1,4 @@
 import { adminDb } from "../../../../lib/firebaseAdmin";
-import { getAuth } from "firebase-admin/auth";
 import allowedUsers from "../../../../data/allowed-users.json";
 
 function normalizeIndianMobile(value) {
@@ -155,19 +154,6 @@ async function logAccessRecord({
   }
 }
 
-async function verifyFirebasePhoneToken(firebaseIdToken, phone) {
-  if (!firebaseIdToken) return false;
-
-  try {
-    const decoded = await getAuth().verifyIdToken(firebaseIdToken);
-    const tokenPhone = normalizeIndianMobile(decoded.phone_number);
-    return tokenPhone === phone;
-  } catch (err) {
-    console.error("Firebase phone token verification failed", err);
-    return false;
-  }
-}
-
 async function checkDeviceBoundToOtherNumber({ phone, deviceId }) {
   const bindingRef = adminDb.collection("deviceBindings").doc(deviceId);
   const bindingSnap = await bindingRef.get();
@@ -187,7 +173,7 @@ async function checkDeviceBoundToOtherNumber({ phone, deviceId }) {
   return { allowed: true };
 }
 
-async function registerOnlyActiveDevice({ phone, deviceId, ip, city, userAgent, firstDevice = false, otpVerified = false }) {
+async function registerOnlyActiveDevice({ phone, deviceId, ip, city, userAgent, firstDevice = false }) {
   const now = new Date();
   const deviceInfo = parseDeviceInfo(userAgent);
   const accessDocRef = adminDb.collection("accessDevices").doc(phone);
@@ -215,7 +201,6 @@ async function registerOnlyActiveDevice({ phone, deviceId, ip, city, userAgent, 
     {
       active: true,
       firstDevice,
-      otpVerified,
       createdAt: now,
       lastSeenAt: now,
       firstIp: ip || "",
@@ -268,9 +253,8 @@ export async function POST(request) {
     const body = await request.json();
     const phone = normalizeIndianMobile(body.phone);
     const deviceId = sanitizeDeviceId(body.deviceId);
-    const firebaseIdToken = body.firebaseIdToken || "";
     const action = String(body.action || "session_check");
-    const shouldWriteLoginLog = action === "login" || action === "otp_verify";
+    const shouldWriteLoginLog = action === "login";
     const userAgent = request.headers.get("user-agent") || "";
     const ip = getClientIp(request);
     const city = getClientCity(request);
@@ -372,7 +356,6 @@ export async function POST(request) {
         city,
         userAgent,
         firstDevice: Boolean(deviceSnap.data()?.firstDevice),
-        otpVerified: Boolean(deviceSnap.data()?.otpVerified),
       });
 
       if (shouldWriteLoginLog) {
@@ -387,7 +370,7 @@ export async function POST(request) {
           ip,
           city,
           userAgent,
-          loginMethod: action === "otp_verify" ? "otp_verify" : "known_device",
+          loginMethod: "known_device",
         });
       }
 
@@ -410,7 +393,6 @@ export async function POST(request) {
         city,
         userAgent,
         firstDevice: true,
-        otpVerified: false,
       });
 
       if (shouldWriteLoginLog) {
@@ -438,49 +420,30 @@ export async function POST(request) {
       });
     }
 
-    const tokenVerified = await verifyFirebasePhoneToken(firebaseIdToken, phone);
-
-    if (!tokenVerified) {
-      return Response.json({
-        success: true,
-        allowed: true,
-        requiresOtp: true,
-        message: "OTP required for new device",
-        profile: profilePayload,
-      });
-    }
-
-    await registerOnlyActiveDevice({
-      phone,
-      deviceId,
-      ip,
-      city,
-      userAgent,
-      firstDevice: false,
-      otpVerified: true,
-    });
-
+    // A different, unregistered device is trying to log in with a phone
+    // number that already has an active bound device. There is no
+    // self-service path to replace it — this is a hard rejection, reported
+    // as unauthorized. Device replacement is an admin-only action.
     await logAccessRecord({
       phone,
       attemptedPhone: String(body.phone || ""),
       profile,
       deviceId,
-      status: "success",
-      authorized: true,
-      reason: "OTP verified. Previous device replaced.",
+      status: "unauthorized",
+      authorized: false,
+      reason: "Unrecognized device for a phone number that already has a registered device.",
       ip,
       city,
       userAgent,
-      loginMethod: "otp_replace_device",
+      loginMethod: "device_mismatch",
     });
 
     return Response.json({
       success: true,
-      allowed: true,
+      allowed: false,
       requiresOtp: false,
-      registeredNewDevice: true,
-      replacedOldDevice: true,
-      otpVerified: true,
+      message:
+        "This phone number is already registered to a different device. Contact the dealer support line to have your device reset.",
       profile: profilePayload,
     });
   } catch (err) {
