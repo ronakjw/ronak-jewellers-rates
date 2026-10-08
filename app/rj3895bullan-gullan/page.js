@@ -50,6 +50,47 @@ export default function AdminPage() {
   const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("info");
+  const [presetDraft, setPresetDraft] = useState("");
+
+  function applyPreset(text) {
+    updateField("maintenanceMessage", text);
+  }
+
+  function addPreset() {
+    const text = presetDraft.trim();
+    if (!text) return;
+
+    const current = Array.isArray(settings?.messagePresets) ? settings.messagePresets : [];
+    if (current.includes(text)) {
+      setPresetDraft("");
+      return;
+    }
+
+    updateField("messagePresets", [...current, text]);
+    setPresetDraft("");
+  }
+
+  function removePreset(index) {
+    const current = Array.isArray(settings?.messagePresets) ? settings.messagePresets : [];
+    updateField("messagePresets", current.filter((_, i) => i !== index));
+  }
+
+  function messageStyle() {
+    if (messageType === "error") return styles.messageError;
+    if (messageType === "success") return styles.messageSuccess;
+    return styles.message;
+  }
+
+  function showError(text) {
+    setMessage(text);
+    setMessageType("error");
+  }
+
+  function showSuccess(text) {
+    setMessage(text);
+    setMessageType("success");
+  }
   const [saving, setSaving] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
   const [showLoginRecords, setShowLoginRecords] = useState(false);
@@ -366,6 +407,9 @@ function toNumber(value, fallback = 0) {
       volatilityWarningEnabled: Boolean(settings.volatilityWarningEnabled),
       maintenanceMode: Boolean(settings.maintenanceMode),
       maintenanceMessage: String(settings.maintenanceMessage || "").trim(),
+      messagePresets: Array.isArray(settings.messagePresets)
+        ? settings.messagePresets.filter((text) => String(text || "").trim()).map((text) => String(text).trim())
+        : [],
       silver100rate: Boolean(settings.silver100rate),
       silver100buy: toNumber(settings.silver100buy, 0),
       silver100sell: toNumber(settings.silver100sell, 0),
@@ -384,12 +428,33 @@ function toNumber(value, fallback = 0) {
     };
 
     if (!newSettings.autoContract && !newSettings.manualContract) {
-      setMessage("Manual silver contract cannot be empty.");
+      showError("Manual silver contract cannot be empty.");
+      return;
+    }
+
+    if (newSettings.buyingPremium >= newSettings.sellingPremium) {
+      showError("Silver buying premium must be less than selling premium.");
+      return;
+    }
+
+    if (newSettings.GoldBuyPrem >= newSettings.GoldSellPrem) {
+      showError("Gold buying premium must be less than selling premium.");
+      return;
+    }
+
+    if (newSettings.holidayBuyingRate >= newSettings.holidaySellingRate) {
+      showError("Silver holiday buying rate must be less than selling rate.");
+      return;
+    }
+
+    if (newSettings.goldHolidayBuyingRate >= newSettings.goldHolidaySellingRate) {
+      showError("Gold holiday buying rate must be less than selling rate.");
       return;
     }
 
     setSaving(true);
     setMessage("");
+    setMessageType("info");
 
     try {
       await updateDoc(doc(db, "settings", "bullion"), newSettings);
@@ -411,10 +476,10 @@ function toNumber(value, fallback = 0) {
         });
       }
 
-      setMessage("Settings saved successfully.");
+      showSuccess("Settings saved successfully.");
       loadSystemStatus();
     } catch (err) {
-      setMessage(
+      showError(
         err?.message
           ? `Save failed: ${err.message}`
           : "Save failed. Check Firestore rules."
@@ -489,7 +554,7 @@ function toNumber(value, fallback = 0) {
             </button>
           </form>
 
-          {message ? <p style={styles.message}>{message}</p> : null}
+          {message ? <p style={messageStyle()}>{message}</p> : null}
               
         </section>
       </main>
@@ -709,7 +774,7 @@ function toNumber(value, fallback = 0) {
           <div style={styles.errorBox}>{systemStatus.error}</div>
         ) : null}
         {message ? (
-  <p style={styles.message}>{message}</p>
+  <p style={messageStyle()}>{message}</p>
 ) : null}
 
   <form onSubmit={saveSettings} style={styles.grid}>
@@ -1107,6 +1172,87 @@ function toNumber(value, fallback = 0) {
     placeholder="Leave empty to show default maintenance message"
     rows={4}
   />
+
+  <div style={{ marginTop: 10 }}>
+    <label style={{ ...styles.label, fontSize: 12 }}>Quick Messages</label>
+
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 6 }}>
+      {(settings.messagePresets || []).length === 0 ? (
+        <span style={{ color: "#8a8578", fontSize: 12 }}>
+          No saved presets yet — add one below.
+        </span>
+      ) : (
+        (settings.messagePresets || []).map((text, index) => (
+          <span
+            key={`${text}-${index}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              border: "1px solid rgba(214,180,92,0.35)",
+              borderRadius: 999,
+              padding: "4px 6px 4px 12px",
+              background: "rgba(214,180,92,0.08)",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => applyPreset(text)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#f3d98b",
+                fontSize: 12,
+                cursor: "pointer",
+                maxWidth: 220,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+              title={text}
+            >
+              {text}
+            </button>
+            <button
+              type="button"
+              onClick={() => removePreset(index)}
+              aria-label="Remove preset"
+              style={{
+                background: "none",
+                border: "none",
+                color: "#ff6b6b",
+                cursor: "pointer",
+                fontSize: 13,
+                lineHeight: 1,
+                padding: "0 4px",
+              }}
+            >
+              ×
+            </button>
+          </span>
+        ))
+      )}
+    </div>
+
+    <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+      <input
+        type="text"
+        value={presetDraft}
+        onChange={(e) => setPresetDraft(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            addPreset();
+          }
+        }}
+        placeholder="Add a new quick message…"
+        style={{ ...styles.input, flex: 1 }}
+      />
+      <button type="button" style={styles.smallButton} onClick={addPreset}>
+        Add
+      </button>
+    </div>
+  </div>
 </div>
    <button
     type="button"
@@ -1677,6 +1823,20 @@ openSiteButton: {
     marginTop: 18,
     color: "#f3d98b",
     textAlign: "center",
+  },
+
+  messageError: {
+    marginTop: 18,
+    color: "#ff6b6b",
+    textAlign: "center",
+    fontWeight: 800,
+  },
+
+  messageSuccess: {
+    marginTop: 18,
+    color: "#5fd17a",
+    textAlign: "center",
+    fontWeight: 700,
   },
 
   errorBox: {
