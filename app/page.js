@@ -958,6 +958,7 @@ async function logVolatilityTrigger(payload) {
 
 export default function Home() {
   const [settings, setSettings] = useState(null);
+  const [settingsLoaded, setSettingsLoaded] = useState(false);
   const [quote, setQuote] = useState(null);
   const [fetchError, setFetchError] = useState("");
   const [now, setNow] = useState(new Date());
@@ -1173,7 +1174,6 @@ function toggleTheme() {
     setDealerProfile(null);
     setShowWelcomeCard(false);
     setAccessGranted(false);
-    setSettings(null);
     setQuote(null);
   }
 
@@ -1478,21 +1478,30 @@ if (
     ...themeTokens[theme],
   };
 
+  // Settings are subscribed to before login too, so the page knows about
+  // maintenance mode / rates-off *before* showing the dealer login screen.
   useEffect(() => {
-    if (!accessGranted) {
-      setSettings(null);
-      setQuote(null);
-      return;
-    }
-
     const unsub = onSnapshot(
       doc(db, "settings", "bullion"),
       (snapshot) => {
         setSettings(snapshot.data());
+        setSettingsLoaded(true);
+      },
+      (error) => {
+        // If settings can't be read, fail open: show the normal login
+        // screen. Maintenance mode is still enforced after login.
+        console.error("Settings listener failed", error);
+        setSettingsLoaded(true);
       }
     );
 
     return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    if (!accessGranted) {
+      setQuote(null);
+    }
   }, [accessGranted]);
 
   useEffect(() => {
@@ -1691,6 +1700,17 @@ if (volatilityUntil) {
 ]);
 
   if (!accessGranted) {
+    // Don't show a login screen to someone who can't see rates anyway.
+    if (!settingsLoaded) {
+      return <LoadingScreen theme={theme} logoSrc={logoSrc} t={t} />;
+    }
+
+    if (settings && (settings.maintenanceMode || !settings.showRates)) {
+      return (
+        <MaintenanceScreen theme={theme} logoSrc={logoSrc} t={t} settings={settings} />
+      );
+    }
+
     return (
      <DealerAccessGate
      theme={theme}
