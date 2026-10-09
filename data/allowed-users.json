@@ -285,12 +285,6 @@
     "firstName": "Vijay",
     "role": "Dealer"
   },
-  "7000906451": {
-    "phone": "7000906451",
-    "name": "Ilu D",
-    "firstName": "Ilu",
-    "role": "Dealer"
-  },
   
   "7000993499": {
     "phone": "7000993499",
@@ -340,13 +334,6 @@
     "firstName": "Kanak",
     "role": "Dealer"
   },
- 
-  "7697311138": {
-    "phone": "7697311138",
-    "name": "Janak",
-    "firstName": "Janak",
-    "role": "Dealer"
-  },
 
   "7742585111": {
     "phone": "7742585111",
@@ -365,7 +352,7 @@
   "7974445234": {
     "phone": "7974445234",
     "name": "Puja Gold BPL",
-    "firstName": "Mr. Dipesh",
+    "firstName": "Mr Dipesh",
     "role": "Dealer"
   },
 
@@ -401,13 +388,6 @@
     "firstName": "Nitin",
     "role": "Dealer"
   },
-  
-  "8219919091": {
-    "phone": "8219919091",
-    "name": "Manish Bhiya Jio",
-    "firstName": "Manish",
-    "role": "Dealer"
-  },
  
   "8319383920": {
     "phone": "8319383920",
@@ -441,24 +421,7 @@
     "firstName": "Shivji",
     "role": "Dealer"
   },
-  "8446889108": {
-    "phone": "8446889108",
-    "name": "DImple",
-    "firstName": "DImple",
-    "role": "Dealer"
-  },
-  "8458915945": {
-    "phone": "8458915945",
-    "name": "Bhavya Di",
-    "firstName": "Bhavya",
-    "role": "Dealer"
-  },
-  "8461913003": {
-    "phone": "8461913003",
-    "name": "Sachin Bhaiya",
-    "firstName": "Sachin",
-    "role": "Dealer"
-  },
+ 
   "8462815768": {
     "phone": "8462815768",
     "name": "Jagdish Ji Jirapur",
@@ -498,21 +461,13 @@
     "firstName": "Dilep",
     "role": "Dealer"
   },
-  
-  
+   
   "8839144058": {
     "phone": "8839144058",
     "name": "Arvind Ji Neema",
     "firstName": "Arvind",
     "role": "Dealer"
   },
-  "8839190890": {
-    "phone": "8839190890",
-    "name": "Goyal Ji",
-    "firstName": "Goyal",
-    "role": "Dealer"
-  },
-  
   
   "8871582409": {
     "phone": "8871582409",
@@ -520,12 +475,7 @@
     "firstName": "Shashwat",
     "role": "Dealer"
   },
-  "8871713202": {
-    "phone": "8871713202",
-    "name": "Rahamatulla Ansari",
-    "firstName": "Rahamatulla",
-    "role": "Dealer"
-  },
+
   "8871963908": {
     "phone": "8871963908",
     "name": "Sonu Ji Kochar",
@@ -580,13 +530,6 @@
     "role": "Dealer"
   },
   
-  "8989463115": {
-    "phone": "8989463115",
-    "name": "Janak",
-    "firstName": "Janak",
-    "role": "Dealer"
-  },
-  
   "8989686879": {
     "phone": "8989686879",
     "name": "Sorabh Ji Nalkheda",
@@ -631,12 +574,6 @@
     "phone": "9098647979",
     "name": "Akshat",
     "firstName": "Akshat",
-    "role": "Dealer"
-  },
-  "9099411966": {
-    "phone": "9099411966",
-    "name": "Pintooo",
-    "firstName": "Prasanna",
     "role": "Dealer"
   },
   
@@ -771,18 +708,13 @@
     "firstName": "Monu",
     "role": "Dealer"
   },
-  "9303459214": {
-    "phone": "9303459214",
-    "name": "Jay Durga BPL",
-    "firstName": "Jay Durga",
+
+"9303554460":
+{   "phone":"9303554460",
+    "name": "Aarti jw BPL",
+    "firstName": "Mr Jayesh",
     "role": "Dealer"
-  },
-  "9303554460": {
-    "phone": "9303554460",
-    "name": "Jayesh Ji BPL",
-    "firstName": "Mr. Jayesh",
-    "role": "Dealer"
-  },
+},
 
   "9329663480": {
     "phone": "9329663480",
