@@ -1,27 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { initializeApp, getApps } from "firebase/app";
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-  signOut,
-} from "firebase/auth";
+import { useEffect, useState } from "react";
 import { gateText } from "../lib/translations";
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-};
-
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const auth = getAuth(app);
 
 const SESSION_EXPIRES_KEY = "rj-dealer-session-expires-at";
 const SESSION_PROFILE_KEY = "rj-dealer-profile";
@@ -56,6 +37,27 @@ function getOrCreateDeviceId() {
   return deviceId;
 }
 
+// The server keeps its own copy of the device ID in a cookie. If this browser's
+// localStorage was wiped, the server hands back the original ID so we restore it.
+function syncDeviceId(serverDeviceId) {
+  try {
+    if (serverDeviceId && window.localStorage.getItem(DEVICE_ID_KEY) !== serverDeviceId) {
+      window.localStorage.setItem(DEVICE_ID_KEY, serverDeviceId);
+    }
+  } catch {}
+
+  return serverDeviceId || getOrCreateDeviceId();
+}
+
+// Ask the browser not to evict this site's storage when the phone is low on
+// space. Chrome decides silently; Firefox would show a prompt, so skip it there.
+function requestPersistentStorage() {
+  try {
+    if (/Firefox/i.test(navigator.userAgent)) return;
+    navigator.storage?.persist?.();
+  } catch {}
+}
+
 function saveSession(profile) {
   const expiresAt = getEndOfTodayMs();
   window.localStorage.setItem(SESSION_EXPIRES_KEY, String(expiresAt));
@@ -75,11 +77,11 @@ function readSavedProfile() {
   }
 }
 
-async function checkAccess({ phone, deviceId, firebaseIdToken, action = "session_check" }) {
+async function checkAccess({ phone, deviceId, action = "session_check" }) {
   const res = await fetch("/api/access/check", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ phone, deviceId, firebaseIdToken, action }),
+    body: JSON.stringify({ phone, deviceId, action }),
     cache: "no-store",
   });
 
@@ -94,6 +96,21 @@ export default function DealerAccessGate({
   onAccessGranted,
 }) {
   const t = gateText[language] || gateText.en;
+  const rejectionText = {
+    deviceMismatch:
+      language === "hi"
+        ? "यह मोबाइल नंबर किसी दूसरे डिवाइस से जुड़ा है। डिवाइस रीसेट के लिए कृपया रोनक ज्वेलर्स से संपर्क करें।"
+        : "This number is registered to a different device. Please contact Ronak Jewellers to reset your device.",
+    deviceBoundElsewhere:
+      language === "hi"
+        ? "यह डिवाइस किसी दूसरे मोबाइल नंबर से जुड़ा है। कृपया रोनक ज्वेलर्स से संपर्क करें।"
+        : "This device is registered with another number. Please contact Ronak Jewellers.",
+  };
+  function rejectionMessage(access, fallback) {
+    if (access.deviceMismatch) return rejectionText.deviceMismatch;
+    if (access.deviceBoundElsewhere) return rejectionText.deviceBoundElsewhere;
+    return access.message || fallback;
+  }
   function changeLanguage(value) {
   if (onLanguageChange) {
     onLanguageChange(value);
@@ -101,14 +118,8 @@ export default function DealerAccessGate({
 }
   const [checking, setChecking] = useState(true);
   const [mobile, setMobile] = useState("");
-  const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
-  const [sendingOtp, setSendingOtp] = useState(false);
-  const [verifyingOtp, setVerifyingOtp] = useState(false);
-  const [pendingProfile, setPendingProfile] = useState(null);
-  const [pendingPhone, setPendingPhone] = useState("");
   const [logoutSuccess, setLogoutSuccess] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -125,8 +136,6 @@ export default function DealerAccessGate({
   const [authorizationMessage, setAuthorizationMessage] = useState("");
   const [authorizationLoading, setAuthorizationLoading] = useState(false);
 
-  const confirmationResultRef = useRef(null);
-  const recaptchaVerifierRef = useRef(null);
 
   useEffect(() => {
     try {
@@ -138,7 +147,7 @@ export default function DealerAccessGate({
   }, []);
 
   useEffect(() => {
-    auth.useDeviceLanguage();
+    requestPersistentStorage();
 
     async function restoreSession() {
       try {
@@ -155,9 +164,9 @@ export default function DealerAccessGate({
 
         const access = await checkAccess({ phone, deviceId, action: "session_check" });
 
-        if (!access.allowed || access.requiresOtp) {
+        if (!access.allowed) {
           clearSession();
-          setMessage(access.requiresOtp ? t.newDevice : access.message || t.inactive);
+          setMessage(rejectionMessage(access, t.inactive));
           setMobile(phone);
           setChecking(false);
           return;
@@ -167,7 +176,7 @@ export default function DealerAccessGate({
           ...savedProfile,
           ...access.profile,
           phone,
-          deviceId,
+          deviceId: syncDeviceId(access.deviceId),
         };
 
         onAccessGranted(profile, { restored: true });
@@ -179,41 +188,7 @@ export default function DealerAccessGate({
     }
 
     restoreSession();
-  }, [onAccessGranted, t.inactive, t.newDevice]);
-
-  async function setupRecaptcha() {
-    if (recaptchaVerifierRef.current) return recaptchaVerifierRef.current;
-
-    recaptchaVerifierRef.current = new RecaptchaVerifier(auth, "rj-recaptcha-container", {
-      size: "invisible",
-    });
-
-    return recaptchaVerifierRef.current;
-  }
-
-  async function sendOtp(phone, profile) {
-    setSendingOtp(true);
-    setMessage("");
-
-    try {
-      const verifier = await setupRecaptcha();
-      const confirmation = await signInWithPhoneNumber(auth, `+91${phone}`, verifier);
-      confirmationResultRef.current = confirmation;
-      setPendingPhone(phone);
-      setPendingProfile(profile);
-      setOtpSent(true);
-      setMessage(t.otpSent);
-    } catch (err) {
-      console.error(err);
-      setMessage(err?.code === "auth/billing-not-enabled" ? t.otpInactive : err?.message || "Unable to send OTP. Please try again.");
-      try {
-        recaptchaVerifierRef.current?.clear?.();
-      } catch {}
-      recaptchaVerifierRef.current = null;
-    } finally {
-      setSendingOtp(false);
-    }
-  }
+  }, [onAccessGranted, t.inactive]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function grantAccess() {
     const phone = normalizeIndianMobile(mobile);
@@ -232,16 +207,11 @@ export default function DealerAccessGate({
 
       if (!access.allowed) {
         clearSession();
-        setMessage(access.message || t.notAuthorized);
+        setMessage(rejectionMessage(access, t.notAuthorized));
         return;
       }
 
-      const profile = { ...access.profile, phone, deviceId };
-
-      if (access.requiresOtp) {
-        await sendOtp(phone, profile);
-        return;
-      }
+      const profile = { ...access.profile, phone, deviceId: syncDeviceId(access.deviceId) };
 
       saveSession(profile);
       onAccessGranted(profile, { restored: false });
@@ -250,54 +220,6 @@ export default function DealerAccessGate({
       setMessage(err?.message || t.unable);
     } finally {
       setSubmitting(false);
-    }
-  }
-
-  async function verifyOtp() {
-    const code = String(otp || "").trim();
-    const phone = normalizeIndianMobile(pendingPhone || mobile);
-
-    if (code.length < 4) {
-      setMessage(t.enterOtpMsg);
-      return;
-    }
-
-    if (!confirmationResultRef.current || !phone) {
-      setMessage(t.otpAgain);
-      return;
-    }
-
-    setVerifyingOtp(true);
-    setMessage("");
-
-    try {
-      const result = await confirmationResultRef.current.confirm(code);
-      const verifiedPhone = normalizeIndianMobile(result.user.phoneNumber);
-
-      if (verifiedPhone !== phone) {
-        await signOut(auth);
-        setMessage(t.differentOtp);
-        return;
-      }
-
-      const firebaseIdToken = await result.user.getIdToken();
-      const deviceId = getOrCreateDeviceId();
-      const access = await checkAccess({ phone, deviceId, firebaseIdToken, action: "otp_verify" });
-
-      if (!access.allowed || access.requiresOtp) {
-        await signOut(auth);
-        setMessage(t.approveFailed);
-        return;
-      }
-
-      const profile = { ...(pendingProfile || {}), ...access.profile, phone, deviceId };
-      saveSession(profile);
-      onAccessGranted(profile, { restored: false });
-    } catch (err) {
-      console.error(err);
-      setMessage(t.invalidOtp);
-    } finally {
-      setVerifyingOtp(false);
     }
   }
 
@@ -457,68 +379,27 @@ export default function DealerAccessGate({
               {feedbackMessage ? <p style={styles.message}>{feedbackMessage}</p> : null}
             </div>
 
-            <div id="rj-recaptcha-container" />
           </>
         ) : (
           <>
             <h2 style={styles.brand}>{t.brand}</h2>
             <h4>{t.dag}</h4>
 
-            {!otpSent ? (
-              <>
-                <input
-                  style={styles.input}
-                  value={mobile}
-                  inputMode="numeric"
-                  maxLength={14}
-                  placeholder={t.placeholder}
-                  onChange={(e) => setMobile(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") grantAccess();
-                  }}
-                />
+            <input
+              style={styles.input}
+              value={mobile}
+              inputMode="numeric"
+              maxLength={14}
+              placeholder={t.placeholder}
+              onChange={(e) => setMobile(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") grantAccess();
+              }}
+            />
 
-                <button type="button" style={styles.button} onClick={grantAccess} disabled={submitting || sendingOtp}>
-                  {sendingOtp ? t.sendingOtp : submitting ? t.checkingButton : t.continue}
-                </button>
-              </>
-            ) : (
-              <>
-                <label style={styles.label}>{t.enterOtp}</label>
-                <input
-                  style={styles.input}
-                  value={otp}
-                  inputMode="numeric"
-                  maxLength={8}
-                  placeholder={t.otpPlaceholder}
-                  onChange={(e) => setOtp(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") verifyOtp();
-                  }}
-                />
-
-                <button type="button" style={styles.button} onClick={verifyOtp} disabled={verifyingOtp}>
-                  {verifyingOtp ? t.verifying : t.verify}
-                </button>
-
-                <button
-                  type="button"
-                  style={styles.secondaryButton}
-                  onClick={async () => {
-                    setOtpSent(false);
-                    setOtp("");
-                    setMessage("");
-                    setPendingPhone("");
-                    setPendingProfile(null);
-                    try {
-                      await signOut(auth);
-                    } catch {}
-                  }}
-                >
-                  {t.changeNumber}
-                </button>
-              </>
-            )}
+            <button type="button" style={styles.button} onClick={grantAccess} disabled={submitting}>
+              {submitting ? t.checkingButton : t.continue}
+            </button>
 
             {message ? <p style={styles.message}>{message}</p> : null}
             <p style={styles.note}>{t.accessNote}</p>
@@ -601,7 +482,6 @@ export default function DealerAccessGate({
               </div>
             ) : null}
 
-            <div id="rj-recaptcha-container" />
           </>
         )}
       </section>
