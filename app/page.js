@@ -1705,9 +1705,14 @@ if (volatilityUntil) {
       return <LoadingScreen theme={theme} logoSrc={logoSrc} t={t} />;
     }
 
-    if (settings && (settings.maintenanceMode || !settings.showRates)) {
+    if (settings?.maintenanceMode) {
       return (
         <MaintenanceScreen theme={theme} logoSrc={logoSrc} t={t} settings={settings} />
+      );
+    }  
+    if (settings && !settings.showRates)) {
+      return (
+        <ClosedScreen theme={theme} logoSrc={logoSrc} t={t} />
       );
     }
 
@@ -2353,7 +2358,8 @@ function LoadingScreen({ theme = "dark", logoSrc = "/logo.png",  t = translation
   );
 }
 
-function ClosedScreen({ theme = "dark", logoSrc = "/logo.png", t = translations.en, children }) {
+function ClosedScreen({ theme = "dark", logoSrc = "/logo.png", t = translations.en, children }) 
+{
   return (
     <main style={{ ...styles.pageCenter, ...themeTokens[theme] }}>
       {children}
