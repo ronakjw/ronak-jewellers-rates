@@ -1710,7 +1710,7 @@ if (volatilityUntil) {
         <MaintenanceScreen theme={theme} logoSrc={logoSrc} t={t} settings={settings} />
       );
     }  
-    if (settings && !settings.showRates)) {
+    if (settings && !settings.showRates) {
       return (
         <ClosedScreen theme={theme} logoSrc={logoSrc} t={t} />
       );
