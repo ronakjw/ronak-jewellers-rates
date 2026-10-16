@@ -1158,21 +1158,7 @@ function toNumber(value, fallback = 0) {
     placeholder="Leave empty to hide"
     rows={4}
   />
-</div>
-
-<div style={styles.controlCardWide}>
-  <label style={styles.label}>Maintenance Message</label>
-
-  <textarea
-    style={styles.adminTextarea}
-    value={settings.maintenanceMessage || ""}
-    onChange={(e) =>
-      updateField("maintenanceMessage", e.target.value)
-    }
-    placeholder="Leave empty to show default maintenance message"
-    rows={4}
-  />
-
+      
   <div style={{ marginTop: 10 }}>
     <label style={{ ...styles.label, fontSize: 12 }}>Quick Messages</label>
 
@@ -1253,7 +1239,23 @@ function toNumber(value, fallback = 0) {
       </button>
     </div>
   </div>
+ 
 </div>
+
+<div style={styles.controlCardWide}>
+  <label style={styles.label}>Maintenance Message</label>
+
+  <textarea
+    style={styles.adminTextarea}
+    value={settings.maintenanceMessage || ""}
+    onChange={(e) =>
+      updateField("maintenanceMessage", e.target.value)
+    }
+    placeholder="Leave empty to show default maintenance message"
+    rows={4}
+  />       
+</div>
+        
    <button
     type="button"
     style={styles.logToggle}
