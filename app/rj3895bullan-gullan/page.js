@@ -54,7 +54,7 @@ export default function AdminPage() {
   const [presetDraft, setPresetDraft] = useState("");
 
   function applyPreset(text) {
-    updateField("maintenanceMessage", text);
+    updateField("noticeMessage", text);
   }
 
   function addPreset() {
@@ -1239,7 +1239,6 @@ function toNumber(value, fallback = 0) {
       </button>
     </div>
   </div>
- 
 </div>
 
 <div style={styles.controlCardWide}>
