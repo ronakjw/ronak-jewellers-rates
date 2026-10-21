@@ -31,9 +31,10 @@ export default function HomePage() {
             </h2>
             <p className="lede" style={{ marginTop: 24 }}>
               Ronak Jewellers trades silver and gold and at live,
-              commodity-linked* rates. Every bar we sell is refined and cut in-house
-              by Ronak Refine Cutters and Melters — that&apos;s the Electro
-              Refined Silver mark you&apos;ll find engraved on it.
+              commodity-linked* rates. Every bar we sell is refined, assayed and minted
+                by our team of experts at our refinery — that&apos;s the Rounak Refined Silver mark (previously, Electro Refined Silver) you&apos;ll find engraved on each silver bar. 
+                Equipped with a team of highly committed experts and state of art refining, smelting, assaying, and minting equipment, our company is managed professionally with qualified workforce and a clear vision. 
+                We provide the best training and facilities to our highly professional and technical staff
             </p>
             <div style={{ display: "flex", gap: 16, marginTop: 36, flexWrap: "wrap" }}>
               <Link href="/rates" className="btn btn-gold">
@@ -63,10 +64,12 @@ export default function HomePage() {
           }}
         >
           {[
-            "Live MCX-linked rates",
-            "Refined & cut in-house",
-            "Electro Refined Silver hallmark",
-            "Trading + manufacturing, one roof",
+            "Refining",
+            "Smelting",
+            "Assaying",
+            "Minting",
+            "Bar Cutting",
+            "Trading and Investment",
           ].map((item) => (
             <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ width: 6, height: 6, background: "var(--gold)", display: "inline-block" }} />
@@ -136,9 +139,9 @@ export default function HomePage() {
               <p style={{ marginTop: 16, maxWidth: 46 + "ch" }}>
                 Behind Ronak Jewellers is our own refining operation — known
                 to old clients by our family initials, NR. Raw silver is
-                melted, cast, and precision-cut on site, then stamped with
-                the Electro Refined Silver mark before it ever reaches a
-                customer.
+                melted, assayed, cast, and precision-cut on site, then stamped with
+                the Rounak Refined Silver mark before it ever reaches a
+                customer. Our customer base includes all the traders, investors, jewellers, and collectors. 
               </p>
               <Link href="/about" className="btn btn-line" style={{ marginTop: 24 }}>
                 See The Process
