@@ -4,9 +4,9 @@ import ElectroRefinedMark from "../components/ElectroRefinedMark";
 import PlaceholderMedia from "../components/PlaceholderMedia";
 
 export const metadata = {
-  title: "About | Ronak Jewellers & Ronak Refine Cutters and Melters",
+  title: "About | Ronak Jewellers & Rounak Refine Cutters and Melters",
   description:
-    "Ronak Jewellers trades gold and silver bullion. Ronak Refine Cutters and Melters (NR) refines and cuts every bar in-house, marked Electro Refined Silver.",
+    "Ronak Jewellers trades gold and silver bullion. Rounak Refine Cutters and Melters (NR) refines and cuts every bar in-house, marked Electro Refined Silver.",
 };
 
 const PROCESS = [
@@ -41,7 +41,9 @@ export default function AboutPage() {
         <div className="eyebrow" style={{ marginBottom: 18 }}>About</div>
         <h1>One name clients know. Two crafts behind it.</h1>
         <p className="lede" style={{ marginTop: 24 }}>
-          Most clients know us simply as Ronak Jewellers — or by our family
+         Ronak Jewellers established in 1995 with a vision of providing the highest quality of products and services to our customers.
+           Our refining operation is done at Rounak Refine Cutters and Melters and is located in the city center of Indore. 
+           Most clients know us simply as Ronak Jewellers — or by our family
           initials, NR. What they&apos;re really dealing with is two things
           working as one: a bullion trading house, and the refinery that
           makes what it sells.
@@ -54,7 +56,7 @@ export default function AboutPage() {
             <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Jewellers</div>
             <h2>The trading house.</h2>
             <p style={{ marginTop: 16 }}>
-              Ronak Jewellers is the side of the business clients deal with
+              Ronak Jewellers is our trading office located in Bada Sarafa, Indore(MP). Here, our business clients deal with
               day to day — buying and selling gold and silver bullion at
               rates linked live to the market, with a clear, fixed premium
               on top. No surprises between the screen and the counter.
@@ -69,10 +71,10 @@ export default function AboutPage() {
           <PlaceholderMedia label="Furnace / molten silver being poured" ratio="5 / 4" />
           <div>
             <div className="eyebrow" style={{ marginBottom: 14 }}>Ronak Refine Cutters &amp; Melters</div>
-            <h2>The refinery, under our own roof.</h2>
+            <h2>The Refinery, under our own roof.</h2>
             <p style={{ marginTop: 16 }}>
               Fewer clients know this side by name, but it&apos;s where the
-              actual work happens — old-fashioned labour, done in-house.
+              actual work happens — Rounak Refine Cutters and Melters.
               Raw silver is melted, cast, and cut into bars and ingots on
               site, under the Ronak Refine Cutters and Melters name that
               carries our family&apos;s initials, NR.
@@ -99,7 +101,7 @@ export default function AboutPage() {
             </div>
             <div>
               <div className="eyebrow" style={{ marginBottom: 14 }}>The Mark</div>
-              <h2>Electro Refined Silver.</h2>
+              <h2>Rounak Refined Silver.</h2>
               <p style={{ marginTop: 16, maxWidth: "56ch" }}>
                 If you&apos;ve held one of our bars, you&apos;ve likely seen
                 it — the Electro Refined Silver mark, engraved on every piece
